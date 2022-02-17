@@ -2,6 +2,11 @@
 
 Use this Python library to manage Ping Payments resources regarding payments. 
 
+## Table of contents 
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+3. [Usage](#usage)
+
 ## Requirements 
 
 The SDK supports the following versions of Python:
