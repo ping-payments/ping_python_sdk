@@ -11,4 +11,7 @@ The SDK supports the following versions of Python:
 
 Install the latest SDK using pip:
 
-```Pip install pingSDK```
+``` 
+Pip install pingSDK              
+
+```
