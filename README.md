@@ -3,9 +3,9 @@
 Use this Python library to manage Ping Payments resources regarding payments. 
 
 ## Table of contents 
-1. [Requirements](#requirements)
-2. [Installation](#installation)
-3. [Usage](#usage)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Usage](#usage)
 
 ## Requirements 
 
