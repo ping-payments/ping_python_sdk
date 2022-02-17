@@ -13,5 +13,4 @@ Install the latest SDK using pip:
 
 ``` 
 Pip install pingSDK              
-
 ```
