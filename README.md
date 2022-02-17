@@ -1,1 +1,1 @@
-# ping_python_sdk
+# Ping payments Python SDK
