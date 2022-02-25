@@ -2,7 +2,7 @@ import requests
 import json
 
 
-class PaymentsAPI():
+class Merchants():
 
     def __init__(self):
         self.base_url = 'http://sandbox.pingpayments.com/payments'
@@ -57,8 +57,8 @@ class PaymentsAPI():
         print(parsed)
 
 
-    get_specific_merchant('df5e30b0-dd8d-44f0-b200-a734a55ce6e6')
+
     #merchant_id: df5e30b0-dd8d-44f0-b200-a734a55ce6e6
 
-p_api = PaymentsAPI()
-p_api.get_merchants()
+#p_api = PaymentsAPI()
+#p_api.get_merchants()
