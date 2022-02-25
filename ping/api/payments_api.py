@@ -20,7 +20,7 @@ def create_new_merchants():
 
 
 def get_specific_merchant(merchant_id):
-    merchant_id = 'df5e30b0-dd8d-44f0-b200-a734a55ce6e6'
+    
     url = 'http://sandbox.pingpayments.com/payments/api/v1/merchants/' + merchant_id
 
     header = {
@@ -29,6 +29,8 @@ def get_specific_merchant(merchant_id):
 
     r = requests.get(url, headers=header)
     print(r.status_code)
+
+    return r.json()
 
 
 
@@ -46,4 +48,5 @@ def get_merchants():
     print(parsed)
 
 
-get_specific_merchant()
+get_specific_merchant('df5e30b0-dd8d-44f0-b200-a734a55ce6e6')
+#merchant_id: df5e30b0-dd8d-44f0-b200-a734a55ce6e6
