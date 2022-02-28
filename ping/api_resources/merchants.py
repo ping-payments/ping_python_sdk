@@ -27,18 +27,18 @@ class Merchants():
         """
 
         #Prepare URL 
-        path = '/api/v1/merchants'
-        url = self.base_url + path
+        _path = '/api/v1/merchants'
+        _url = self.base_url + _path
 
         #Prepare header 
-        header = {
+        _header = {
             "Accept": "application/json",
             "tenant_id": self.tenant_id
         }
 
         #Prepare and execute response
-        response = requests.get(url, headers=header)
-        return response
+        _response = requests.get(_url, headers=_header)
+        return _response
 
     def create_new_merchants(self, object):
         """Does a POST request to /api/v1/merchants. 
@@ -64,18 +64,18 @@ class Merchants():
         """
 
         #Prepare URL
-        path = '/api/v1/merchants'
-        url = self.base_url + path
+        _path = '/api/v1/merchants'
+        _url = self.base_url + _path
 
         #Prepare header 
-        header = {
+        _header = {
             "Accept": "application/json",
             "tenant_id": self.tenant_id
         }
         
         #Prepare and execute response 
-        response = requests.post(url, headers=header,json=object)
-        return response
+        _response = requests.post(_url, headers=_header,json=object)
+        return _response
 
     def get_specific_merchant(self, merchant_id):
         """Does a GET request to /api/v1/merchants/{merchant_id}. 
@@ -98,15 +98,15 @@ class Merchants():
         """
 
         #Prepare URL
-        path = f'/api/v1/merchants/{merchant_id}'
-        url = self.base_url + path
+        _path = f'/api/v1/merchants/{merchant_id}'
+        _url = self.base_url + _path
 
         #Prepare header 
-        header = {
+        _header = {
             "Accept": "application/json",
             "tenant_id": self.tenant_id
         }
 
         #Prepare and execute response 
-        response = requests.get(url, headers=header)
-        return response
+        _response = requests.get(_url, headers=_header)
+        return _response
