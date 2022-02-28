@@ -7,5 +7,6 @@ merchants_api = tenant.merchants()
 
 list_of_merchants = merchants_api.get_merchants()
 print(list_of_merchants.text)
+print(list_of_merchants.status_code)
 
 
