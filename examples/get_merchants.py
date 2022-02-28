@@ -6,5 +6,6 @@ merchants = tenant_object.merchants()
 
 list_of_merchants = merchants.get_merchants()
 print(list_of_merchants.text)
+print(list_of_merchants.status_code)
 
 
