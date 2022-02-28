@@ -13,7 +13,7 @@ self.tenant_id =  tenant_id
 
 - [Get Merchants](/doc/api_resources/merchant.md#get-merchants)
 - [Create New Merchant](/doc/api_resources/merchant.md#create-new-merchant)
-- [Get Merchant by Id](/doc/api_resources/merchant.md#get-merchant-by-id)
+- [Get Specific Merchant](/doc/api_resources/merchant.md#get-specific-merchant)
 
 # Get Merchants
 
