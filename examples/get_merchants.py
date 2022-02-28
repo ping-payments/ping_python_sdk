@@ -5,6 +5,7 @@ tenant_object = Tenant(tenantId)
 merchants = tenant_object.merchants()
 
 list_of_merchants = merchants.get_merchants()
-print(list_of_merchants.text)
+create_merchant = merchants.create_new_merchants("not a object")
+print(create_merchant["errors"])
 
 
