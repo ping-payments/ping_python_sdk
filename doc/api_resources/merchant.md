@@ -1,8 +1,9 @@
 # Merchants
 
 ```python
-self.base_url = 'http://sandbox.pingpayments.com/payments'
-self.tenant_id =  tenant_id
+def __init__(self, tenant_id):
+  self.base_url = 'http://sandbox.pingpayments.com/payments'
+  self.tenant_id = tenant_id
 ```
 
 ## Class Name
