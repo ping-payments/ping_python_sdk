@@ -45,7 +45,7 @@ print(list_of_merchants.status_code)
 
 Creates a new merchant for a tenant.
 
-You need to create an Tenant-object with a tenant_id as a parameter to access the create_new_merchant()-function. The function itself requires an object containing a merchant name and an organisation number. If all parameters are correct, an object will be returned containing the merchant you created and status-code 200. If the status-code is 422, it means either that the tenant_id is wrong or that the parameter isn't an object or that the object is containing wrong datatypes.
+You need to create an Tenant-object with a tenant_id as a parameter to access the create_new_merchant()-function. The function itself requires an object containing a merchant name and an organisation number as a parameter. If all parameters are correct, an object will be returned containing the merchant you created and status-code 200. If the status-code is 422, it means either that the tenant_id is wrong or that the parameter isn't an object or that the object is containing wrong datatypes.
 
 ```python
 def create_new_merchant(self, merchant_object)
@@ -73,5 +73,36 @@ merchant_object = {
 merchants = tenant_object.merchants()
 created_merchant = merchants.create_new_merchant(merchant_object)
 print(created_merchant.text)
-print(created_mercahnt.status_code)
+print(created_merchant.status_code)
+```
+
+# Get Specific Merchant
+
+Gets a specific merchant for a tenant.
+
+You need to create an Tenant-object with a tenant_id as a parameter to access the get_specific_merchant()-function. The function itself requires a merchant_id as a parameter. If the tenant_id exists and has a merchant with the parameters merchant_id then a merchant-object containing that merchant and status_code 200 will be returned. If the tenant_id or merchant_id don't match with existing id:s, a status_code 422 will be returned instead.
+
+```python
+def get_specific_merchant(self, merchant_id)
+```
+
+| Parameter     | Type   | Containing           | Description                                        |
+| ------------- | ------ | -------------------- | -------------------------------------------------- |
+| `merchant_id` | String | merchant_id : String | A string cointaining the Id of a specific merchant |
+
+## Response Type
+
+[`Get Specific Merchant Response`] preliminär
+
+## Example Usage
+
+```python
+tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+tenant_object = Tenant(tenant_id)
+merchant_id = "xxxxxxxxxx"
+
+merchants = tenant_object.merchants()
+specific_merchant = merchants.get_specific_merchant(merchant_id)
+print(specific_merchant.text)
+print(specific_merchant.status_code)
 ```
