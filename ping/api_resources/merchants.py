@@ -98,8 +98,8 @@ class Merchants():
         """
 
         #Prepare URL
-        path = '/api/v1/merchants/'
-        url = self.base_url + path + merchant_id 
+        path = f'/api/v1/merchants/{merchant_id}'
+        url = self.base_url + path
 
         #Prepare header 
         header = {
