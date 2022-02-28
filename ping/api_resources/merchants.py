@@ -2,8 +2,8 @@ import requests
 
 class Merchants():
 
-    def __init__(self, tenant_id):
-        self.base_url = 'http://sandbox.pingpayments.com/payments'
+    def __init__(self, tenant_id, base_url):
+        self.base_url = base_url
         self.tenant_id = tenant_id
 
     def get_merchants(self):
