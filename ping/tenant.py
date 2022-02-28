@@ -10,6 +10,7 @@ merchant_id: df5e30b0-dd8d-44f0-b200-a734a55ce6e6
 class Tenant():
   def __init__(self, tenant_id):
     self.tenant_id = tenant_id
+    
   def merchants(self):
     return Merchants(self.tenant_id)
   
