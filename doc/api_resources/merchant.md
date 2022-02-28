@@ -38,6 +38,7 @@ tenant_object = Tenant(tenant_id)
 merchants = tenant_object.merchants()
 list_of_merchants = merchants.get_merchants()
 print(list_of_merchants.text)
+print(list_of_merchants.status_code)
 ```
 
 # Create New Merchant
@@ -71,6 +72,6 @@ merchant_object = {
 
 merchants = tenant_object.merchants()
 created_merchant = merchants.create_new_merchant(merchant_object)
-print(created_merchant)
+print(created_merchant.text)
 print(created_mercahnt.status_code)
 ```
