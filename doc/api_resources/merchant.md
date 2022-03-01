@@ -1,9 +1,7 @@
 # Merchants
 
 ```python
-def __init__(self, tenant_id):
-  self.base_url = 'http://sandbox.pingpayments.com/payments'
-  self.tenant_id = tenant_id
+merchant = tenant.merchants()
 ```
 
 ## Class Name
@@ -34,12 +32,11 @@ def get_merchant(self)
 
 ```python
 tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-tenant_object = Tenant(tenant_id)
+tenant = Tenant(tenant_id)
 
-merchants = tenant_object.merchants()
+merchants = tenant.merchants()
 list_of_merchants = merchants.get_merchants()
 print(list_of_merchants.text)
-print(list_of_merchants.status_code)
 ```
 
 # Create New Merchant
@@ -64,17 +61,16 @@ def create_new_merchant(self, merchant_object)
 
 ```python
 tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-tenant_object = Tenant(tenant_id)
+tenant = Tenant(tenant_id)
 
 merchant_object = {
   name: "example-name"
   organisation_number: "xxxxxxxxxx"
 }
 
-merchants = tenant_object.merchants()
+merchants = tenant.merchants()
 created_merchant = merchants.create_new_merchant(merchant_object)
 print(created_merchant.text)
-print(created_merchant.status_code)
 ```
 
 # Get Specific Merchant
@@ -99,11 +95,10 @@ def get_specific_merchant(self, merchant_id)
 
 ```python
 tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-tenant_object = Tenant(tenant_id)
+tenant = Tenant(tenant_id)
 merchant_id = "xxxxxxxxxx"
 
-merchants = tenant_object.merchants()
+merchants = tenant.merchants()
 specific_merchant = merchants.get_specific_merchant(merchant_id)
 print(specific_merchant.text)
-print(specific_merchant.status_code)
 ```
