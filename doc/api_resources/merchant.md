@@ -31,8 +31,8 @@ def get_merchant(self)
 ## Example Usage
 
 ```python
-tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-tenant = Tenant(tenant_id)
+tenant = Tenant(tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', environment = 'environment')
+
 
 merchants = tenant.merchants()
 list_of_merchants = merchants.get_merchants()
@@ -60,12 +60,11 @@ def create_new_merchant(self, merchant_object)
 ## Example Usage
 
 ```python
-tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-tenant = Tenant(tenant_id)
+tenant = Tenant(tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', environment = 'environment')
 
 merchant_object = {
-  name: "example-name"
-  organisation_number: "xxxxxxxxxx"
+  name: 'example-name'
+  organisation_number: 'xxxxxxxxxx'
 }
 
 merchants = tenant.merchants()
@@ -94,9 +93,8 @@ def get_specific_merchant(self, merchant_id)
 ## Example Usage
 
 ```python
-tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-tenant = Tenant(tenant_id)
-merchant_id = "xxxxxxxxxx"
+tenant = Tenant(tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', environment = 'environment')
+merchant_id = 'xxxxxxxxxx'
 
 merchants = tenant.merchants()
 specific_merchant = merchants.get_specific_merchant(merchant_id)
