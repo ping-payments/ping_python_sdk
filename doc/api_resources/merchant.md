@@ -1,7 +1,7 @@
 # Merchants
 
 ```python
-merchant = tenant.merchants()
+merchants = tenant.merchants()
 ```
 
 ## Class Name
