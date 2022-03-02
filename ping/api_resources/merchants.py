@@ -1,6 +1,6 @@
 import requests
 
-def get_merchants(tenant_id, base_url):
+def get_merchants(headers, base_url):
         """Does a GET request to /api/v1/merchants. 
         
         Lists merchants associated with a tenant. The merchant details
@@ -24,17 +24,12 @@ def get_merchants(tenant_id, base_url):
         _path = '/api/v1/merchants'
         _url = base_url + _path
 
-        #Prepare header 
-        _header = {
-            "Accept": "application/json",
-            "tenant_id": tenant_id
-        }
 
         #Prepare and execute response
-        _response = requests.get(_url, headers=_header)
+        _response = requests.get(_url, headers=headers)
         return _response
 
-def create_new_merchants(tenant_id, base_url, object):
+def create_new_merchants(headers, base_url, object):
         """Does a POST request to /api/v1/merchants. 
         
         Creates a new merchants for a tenant. 
@@ -61,17 +56,11 @@ def create_new_merchants(tenant_id, base_url, object):
         _path = '/api/v1/merchants'
         _url = base_url + _path
 
-        #Prepare header 
-        _header = {
-            "Accept": "application/json",
-            "tenant_id": tenant_id
-        }
-        
         #Prepare and execute response 
-        _response = requests.post(_url, headers=_header, json=object)
+        _response = requests.post(_url, headers=headers, json=object)
         return _response
 
-def get_specific_merchant(tenant_id, base_url, merchant_id):
+def get_specific_merchant(headers, base_url, merchant_id):
         """Does a GET request to /api/v1/merchants/{merchant_id}. 
         
         Provides details for a single merchant. The details include email, id,
@@ -95,12 +84,6 @@ def get_specific_merchant(tenant_id, base_url, merchant_id):
         _path = f'/api/v1/merchants/{merchant_id}'
         _url = base_url + _path
 
-        #Prepare header 
-        _header = {
-            "Accept": "application/json",
-            "tenant_id": tenant_id
-        }
-
         #Prepare and execute response 
-        _response = requests.get(_url, headers=_header)
+        _response = requests.get(_url, headers=headers)
         return _response

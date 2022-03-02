@@ -1,4 +1,4 @@
-from ping.configuration import Configuration
+from ping.configuration import get_base_url
 from ping.api_resources.merchants import get_merchants
 from ping.api_resources.merchants import create_new_merchants
 from ping.api_resources.merchants import get_specific_merchant
@@ -13,19 +13,23 @@ class Tenant():
               environment='sandbox'):
   
     self.tenant_id = tenant_id
-    self.base_url = Configuration(environment).get_base_url()
+    self.base_url = get_base_url(environment)
+    self.headers = {
+            "Accept": "application/json",
+            "tenant_id": tenant_id
+        }
   
   def get_merchants(self):
-    return get_merchants(self.tenant_id, self.base_url)
+    return get_merchants(self.headers, self.base_url)
   
   def create_new_merchants(self, obj):
-    return create_new_merchants(self.tenant_id, self.base_url, obj)
+    return create_new_merchants(self.headers, self.base_url, obj)
   
   def get_specific_merchants(self,  merchant_id):
-    return get_specific_merchant(self.tenant_id, self.base_url, merchant_id)
+    return get_specific_merchant(self.headers, self.base_url, merchant_id)
 
   def payments_orders(self):
-    return PaymentOrders(self.tenant_id, self.base_url)
+    return PaymentOrders(self.headers, self.base_url)
   
   def payments(self):
-    return Payments(self.tenant_id, self.base_url)
+    return Payments(self.headers, self.base_url)
