@@ -68,14 +68,14 @@ def create_new_merchants(tenant_id, base_url, object):
         }
         
         #Prepare and execute response 
-        _response = requests.post(_url, headers=_header,json=object)
+        _response = requests.post(_url, headers=_header, json=object)
         return _response
 
 def get_specific_merchant(tenant_id, base_url, merchant_id):
         """Does a GET request to /api/v1/merchants/{merchant_id}. 
         
-        Returns details for a single merchant. The details include email, id,
-        name, organization name, organization number, phone_number and status.
+        Provides details for a single merchant. The details include email, id,
+        name, organization name, organization number, phone number and status.
 
         Args:
             merchant_id (string). The ID of the of the merchant to retrive. 
