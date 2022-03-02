@@ -29,7 +29,7 @@ def get_merchants(headers, base_url):
         _response = requests.get(_url, headers=headers)
         return _response
 
-def create_new_merchants(headers, base_url, object):
+def create_new_merchant(headers, base_url, object):
         """Does a POST request to /api/v1/merchants. 
         
         Creates a new merchants for a tenant. 
