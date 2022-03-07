@@ -41,7 +41,7 @@ print(list_of_merchants.text)
 
 Creates a new merchant from a tenant.
 
-You need to create an Tenant-object with a tenant_id as a parameter to access the create_new_merchant()-function. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires an object containing a merchant name and an organisationobject containing the country and the organisation number. If all parameters are correct, an object will be returned containing the merchant you created and status-code 200. If the status-code is 422, it means either that the tenant_id is wrong or that the parameter isn't an object or that the object is containing incorrect datatypes.
+You need to create an Tenant-object with a tenant_id as a parameter to access the create_new_merchant()-function. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires an object containing a merchant name and an organisationobject containing the country and the organisation number. If all parameters are correct, an object will be returned containing the merchant you created and status-code 200. If the status-code is 422, it means either that the tenant_id is wrong, that the parameter isn't an object or that the object is containing incorrect datatypes.
 
 ```python
 def create_new_merchant(self, merchant_object)
