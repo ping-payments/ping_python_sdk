@@ -18,7 +18,7 @@ class Tenant():
         }
   
   def get_merchants(self):
-    return merchants.get_merchant(self.headers, self.base_url)
+    return merchants.get_merchants(self.headers, self.base_url)
   
   def create_new_merchant(self, obj):
     return merchants.create_new_merchant(self.headers, self.base_url, obj)
