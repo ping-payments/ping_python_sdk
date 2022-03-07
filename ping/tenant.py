@@ -1,9 +1,7 @@
 from ping.configuration import get_base_url
-from ping.api_resources.merchants import get_merchants
-from ping.api_resources.merchants import create_new_merchant
-from ping.api_resources.merchants import get_specific_merchant
-from ping.api_resources.paymentOrders import PaymentOrders
-from ping.api_resources.payments import Payments
+from ping.api_resources import merchants
+from ping.api_resources import PaymentOrders
+from ping.api_resources import Payments
 
 class Tenant():
   
@@ -20,13 +18,13 @@ class Tenant():
         }
   
   def get_merchants(self):
-    return get_merchants(self.headers, self.base_url)
+    return merchants.get_merchant(self.headers, self.base_url)
   
   def create_new_merchant(self, obj):
-    return create_new_merchant(self.headers, self.base_url, obj)
+    return merchants.create_new_merchant(self.headers, self.base_url, obj)
   
   def get_specific_merchant(self,  merchant_id):
-    return get_specific_merchant(self.headers, self.base_url, merchant_id)
+    return merchants.get_specific_merchant(self.headers, self.base_url, merchant_id)
 
   def payments_orders(self):
     return PaymentOrders(self.headers, self.base_url)
