@@ -1,7 +1,7 @@
 from ping.configuration import get_base_url
 from ping.api_resources import merchants
-from ping.api_resources import PaymentOrders
-from ping.api_resources import Payments
+from ping.api_resources import paymentOrders
+from ping.api_resources import payments
 
 class Tenant():
   
@@ -27,7 +27,7 @@ class Tenant():
     return merchants.get_specific_merchant(self.headers, self.base_url, merchant_id)
 
   def payments_orders(self):
-    return PaymentOrders(self.headers, self.base_url)
+    return paymentOrders.PaymentOrders(self.headers, self.base_url)
   
   def payments(self):
-    return Payments(self.headers, self.base_url)
+    return payments.Payments(self.headers, self.base_url)
