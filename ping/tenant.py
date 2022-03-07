@@ -26,7 +26,7 @@ class Tenant():
   def get_specific_merchant(self,  merchant_id):
     return merchants.get_specific_merchant(self.headers, self.base_url, merchant_id)
 
-#Payment_order endpoints
+#Payment Order endpoints
   def payments_orders(self):
     return paymentOrders.PaymentOrders(self.headers, self.base_url)
   
