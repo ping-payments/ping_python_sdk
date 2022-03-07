@@ -35,8 +35,8 @@ The gateway for the SDK. This class acts as a factory for the APIs resources and
 
 ## API Resources
 
-| Name                  | Description                                          |
-| --------------------- | ---------------------------------------------------- |
-| get_merchants         | Calls get_merchant from the merchant module          |
-| create_new_merchant   | Calls create_new_merchant from the merchant module   |
-| get_specific_merchant | Calls get_specific_merchant from the merchant module |
+| Name                  | Description                                            |
+| --------------------- | ------------------------------------------------------ |
+| get_merchants         | Calls `get_merchant` from the merchant module          |
+| create_new_merchant   | Calls `create_new_merchant` from the merchant module   |
+| get_specific_merchant | Calls `get_specific_merchant` from the merchant module |
