@@ -4,11 +4,11 @@
 merchants = tenant.merchants()
 ```
 
-## Class Name
+## Module Name
 
-`Merchants`
+`merchants`
 
-## Methods
+## Functions
 
 - [Get Merchants](/doc/api_resources/merchant.md#get-merchants)
 - [Create New Merchant](/doc/api_resources/merchant.md#create-new-merchant)
@@ -18,7 +18,7 @@ merchants = tenant.merchants()
 
 Gets and returns an object of all the merchants from a specific tenant
 
-You need to create an Tenant-object with a tenant_id as a parameter to access the get_merchant()-function. If the tenant_id exists, the function will return an object containing a list of all merchants under that specific tenant_id and a status_code of 200. Otherwise the status_code will be 422 and no merchants are returned.
+You need to create an Tenant-object with a tenant_id as a parameter to access the get_merchant()-function. You can also send in an environment parameter if you wish to test your code towards a "sandbox" environment but the default value is "production". If the tenant_id exists, the function will return an object containing a list of all merchants under that specific tenant_id and a status_code of 200. Otherwise the status_code will be 422 and no merchants are returned.
 
 ```python
 def get_merchant(self)
@@ -31,11 +31,9 @@ def get_merchant(self)
 ## Example Usage
 
 ```python
-tenant = Tenant(tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', environment = 'environment')
+tenant = Tenant(tenant_id = '55555555-5555-5555-5555-555555555555', environment = 'environment')
 
-
-merchants = tenant.merchants()
-list_of_merchants = merchants.get_merchants()
+list_of_merchants = tenant.get_merchants()
 print(list_of_merchants.text)
 ```
 
@@ -43,7 +41,7 @@ print(list_of_merchants.text)
 
 Creates a new merchant from a tenant.
 
-You need to create an Tenant-object with a tenant_id as a parameter to access the create_new_merchant()-function. The function itself requires an object containing a merchant name and an organisation number as a parameter. If all parameters are correct, an object will be returned containing the merchant you created and status-code 200. If the status-code is 422, it means either that the tenant_id is wrong or that the parameter isn't an object or that the object is containing wrong datatypes.
+You need to create an Tenant-object with a tenant_id as a parameter to access the create_new_merchant()-function. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires an object containing a merchant name and an organisationobject containing the country and the organisation number. If all parameters are correct, an object will be returned containing the merchant you created and status-code 200. If the status-code is 422, it means either that the tenant_id is wrong or that the parameter isn't an object or that the object is containing incorrect datatypes.
 
 ```python
 def create_new_merchant(self, merchant_object)
@@ -60,15 +58,16 @@ def create_new_merchant(self, merchant_object)
 ## Example Usage
 
 ```python
-tenant = Tenant(tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', environment = 'environment')
+tenant = Tenant(tenant_id = '55555555-5555-5555-5555-555555555555', environment = 'environment')
 
 merchant_object = {
-  name: 'example-name'
-  organisation_number: 'xxxxxxxxxx'
+  "name": 'example-name',
+  "organisation": {
+    "country": 'SE',
+    "se_organisation_number": '555555-5555'
+  }
 }
-
-merchants = tenant.merchants()
-created_merchant = merchants.create_new_merchant(merchant_object)
+created_merchant = tenant.create_new_merchant(merchant_object)
 print(created_merchant.text)
 ```
 
@@ -76,7 +75,7 @@ print(created_merchant.text)
 
 Gets a specific merchant from a tenant.
 
-You need to create an Tenant-object with a tenant_id as a parameter to access the get_specific_merchant()-function. The function itself requires a merchant_id as a parameter. If the tenant_id exists and has a merchant with the parameters merchant_id then a merchant-object containing that merchant and status_code 200 will be returned. If the tenant_id or merchant_id don't match with existing id:s, a status_code 422 will be returned instead.
+You need to create an Tenant-object with a tenant_id as a parameter to access the get_specific_merchant()-function. You can also send in an environment parameter if you wish to test your code towards a "sandbox" environment but the default value is "production". The function itself requires a merchant_id as a parameter. If the tenant_id exists and has a merchant with the parameters merchant_id then a merchant-object containing that merchant and status_code 200 will be returned. If the tenant_id or merchant_id don't match with existing id:s, a status_code 422 will be returned instead.
 
 ```python
 def get_specific_merchant(self, merchant_id)
@@ -93,10 +92,9 @@ def get_specific_merchant(self, merchant_id)
 ## Example Usage
 
 ```python
-tenant = Tenant(tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', environment = 'environment')
-merchant_id = 'xxxxxxxxxx'
+tenant = Tenant(tenant_id = '55555555-5555-5555-5555-555555555555', environment = 'environment')
+merchant_id = '5555555555'
 
-merchants = tenant.merchants()
-specific_merchant = merchants.get_specific_merchant(merchant_id)
+specific_merchant = tenant.get_specific_merchant(merchant_id)
 print(specific_merchant.text)
 ```

@@ -11,7 +11,7 @@ The API tenant can be initialized as follows:
 from ping.tenant import Tenant
 
 tenant = Tenant(
-  tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  tenant_id = '55555555-5555-5555-5555-555555555555',
   environment = 'sandbox'
 )
 ```
@@ -22,11 +22,10 @@ tenant = Tenant(
 from ping.tenant import Tenant
 
 tenant = Tenant(
-  tenant_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  tenant_id = '55555555-5555-5555-5555-555555555555',
   environment = 'sandbox'
 )
-merchant = tenant.merchants()
-list_of_merchants = merchants.get_merchants()
+list_of_merchants = tenant.get_merchants()
 print(list_of_merchants.text)
 ```
 
@@ -36,8 +35,8 @@ The gateway for the SDK. This class acts as a factory for the APIs resources and
 
 ## API Resources
 
-| Name           | Description                   |
-| -------------- | ----------------------------- |
-| merchants      | Gets merchants endpoints      |
-| payment_orders | Gets payment orders endpoints |
-| payments       | Gets payments endpoints       |
+| Name                  | Description                                          |
+| --------------------- | ---------------------------------------------------- |
+| get_merchants         | Calls get_merchant from the merchant module          |
+| create_new_merchant   | Calls create_new_merchant from the merchant module   |
+| get_specific_merchant | Calls get_specific_merchant from the merchant module |
