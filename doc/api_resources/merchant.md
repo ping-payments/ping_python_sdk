@@ -47,9 +47,14 @@ You need to create an Tenant-object with a tenant_id as a parameter to access th
 def create_new_merchant(self, merchant_object)
 ```
 
-| Parameter         | Type   | Containing                                                                                                          | Description                                                                                                               |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `merchant_object` | Object | merchant_name: String <br><br>organisation: Object { <br><br>country: String, organisation_number: String <br><br>} | An object containing a name for the new merchant and the organisationnumber for the organisation that merchant is part of |
+| Parameter         | Type   | Containing            | Description |
+| ----------------- | ------ | --------------------- | ----------- |
+| `merchant_object` | Object | merchant_name: String |
+
+organisation: Object {
+country: String,
+organisation_number: String
+} | An object containing a name for the new merchant and the organisationnumber for the organisation that merchant is part of |
 
 ## Response Type
 
