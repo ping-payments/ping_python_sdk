@@ -21,7 +21,7 @@ Gets and returns an object of all the merchants from a specific tenant
 You need to create a Tenant object with a `tenant_id` as a parameter to `access get_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. If the tenant_id exists, the function will return an object containing a list of all merchants under that specific `tenant_id` and a status code of 200. Otherwise the status code will be 422 and no merchants are returned.
 
 ```python
-def get_merchant(self)
+def get_merchants(self)
 ```
 
 ## Response Type
