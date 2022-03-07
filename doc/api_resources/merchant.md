@@ -1,9 +1,5 @@
 # Merchants
 
-```python
-merchants = tenant.merchants()
-```
-
 ## Module Name
 
 `merchants`
