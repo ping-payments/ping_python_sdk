@@ -1,12 +1,6 @@
 import requests
 
-class Merchants():
-
-    def __init__(self, tenant_id, base_url):
-        self.base_url = base_url
-        self.tenant_id = tenant_id
-
-    def get_merchants(self):
+def get_merchants(headers, base_url):
         """Does a GET request to /api/v1/merchants. 
         
         Lists merchants associated with a tenant. The merchant details
@@ -28,19 +22,14 @@ class Merchants():
 
         #Prepare URL 
         _path = '/api/v1/merchants'
-        _url = self.base_url + _path
+        _url = base_url + _path
 
-        #Prepare header 
-        _header = {
-            "Accept": "application/json",
-            "tenant_id": self.tenant_id
-        }
 
         #Prepare and execute response
-        _response = requests.get(_url, headers=_header)
+        _response = requests.get(_url, headers=headers)
         return _response
 
-    def create_new_merchants(self, object):
+def create_new_merchant(headers, base_url, object):
         """Does a POST request to /api/v1/merchants. 
         
         Creates a new merchants for a tenant. 
@@ -65,23 +54,17 @@ class Merchants():
 
         #Prepare URL
         _path = '/api/v1/merchants'
-        _url = self.base_url + _path
+        _url = base_url + _path
 
-        #Prepare header 
-        _header = {
-            "Accept": "application/json",
-            "tenant_id": self.tenant_id
-        }
-        
         #Prepare and execute response 
-        _response = requests.post(_url, headers=_header,json=object)
+        _response = requests.post(_url, headers=headers, json=object)
         return _response
 
-    def get_specific_merchant(self, merchant_id):
+def get_specific_merchant(headers, base_url, merchant_id):
         """Does a GET request to /api/v1/merchants/{merchant_id}. 
         
-        Returns details for a single merchant. The details include email, id,
-        name, organization name, organization number, phone_number and status.
+        Provides details for a single merchant. The details include email, id,
+        name, organization name, organization number, phone number and status.
 
         Args:
             merchant_id (string). The ID of the of the merchant to retrive. 
@@ -99,14 +82,8 @@ class Merchants():
 
         #Prepare URL
         _path = f'/api/v1/merchants/{merchant_id}'
-        _url = self.base_url + _path
-
-        #Prepare header 
-        _header = {
-            "Accept": "application/json",
-            "tenant_id": self.tenant_id
-        }
+        _url = base_url + _path
 
         #Prepare and execute response 
-        _response = requests.get(_url, headers=_header)
+        _response = requests.get(_url, headers=headers)
         return _response
