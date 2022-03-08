@@ -1,5 +1,6 @@
 import requests
-
+from ping.apiHelper.apiResponse import ApiResponse
+from ping.apiHelper.apiHelper import json_deserialize
 def get_merchants(headers, base_url):
         """Does a GET request to /api/v1/merchants. 
         
@@ -27,7 +28,13 @@ def get_merchants(headers, base_url):
 
         #Prepare and execute response
         _response = requests.get(_url, headers=headers)
-        return _response
+        decoded = json_deserialize(_response.text)
+        if type(decoded) is dict:
+            _errors = decoded.get('errors')
+        else:
+            _errors = None
+        _result = ApiResponse(_response, body=decoded, errors=_errors)
+        return _result
 
 def create_new_merchant(headers, base_url, object):
         """Does a POST request to /api/v1/merchants. 
@@ -87,3 +94,4 @@ def get_specific_merchant(headers, base_url, merchant_id):
         #Prepare and execute response 
         _response = requests.get(_url, headers=headers)
         return _response
+
