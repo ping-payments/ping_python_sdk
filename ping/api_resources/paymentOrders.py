@@ -113,8 +113,20 @@ def close_payment_order(headers, base_url, payment_order_id):
   return _response  
  
 
-def settle_payment_order(headers, base_url):
-  pass 
+def settle_payment_order(headers, base_url, payment_order_id):
 
-def split_payment_order(headers, base_url):
-  pass 
+  _path = f'/api/v1/payment_orders/{payment_order_id}/settle'
+  _url = base_url + _path
+  
+  # execute response 
+  _response = requests.put(_url, headers=headers)
+  return _response   
+
+def split_payment_order(headers, base_url, payment_order_id):
+
+  _path = f'/api/v1/payment_orders/{payment_order_id}/split'
+  _url = base_url + _path
+  
+  # execute response 
+  _response = requests.put(_url, headers=headers)
+  return _response    
