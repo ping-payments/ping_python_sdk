@@ -32,9 +32,9 @@ def initiate_payment():
     },
     "status_callback_url": "https://somesite.com/callback"
   }
-  status = tenant.initiate_payment(payment_object, payment_order_id)
-  print(status.text)
-  print(status.status_code)
+  _response = tenant.initiate_payment(payment_object, payment_order_id)
+  print(_response.text)
+  print(_response.status_code)
 
 def get_payment():
   tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
