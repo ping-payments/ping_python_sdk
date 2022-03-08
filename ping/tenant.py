@@ -11,13 +11,11 @@ class Tenant():
               environment='sandbox'):
     global base_url
     global headers
-
-
     base_url = get_base_url(environment)
     headers = {
-            "Accept": "application/json",
-            "tenant_id": tenant_id
-        }
+      "Accept": "application/json",
+      "tenant_id": tenant_id
+    }
     
   class Merchant():
   #Merchant endpoints
