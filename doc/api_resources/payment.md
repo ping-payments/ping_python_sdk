@@ -13,7 +13,7 @@
 
 Initiates a payment for a payment order.
 
-This endpoint requires that you send in a `tenant_id`, a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing a status code of 200 and data regarding the next step towards completing the payment. If something went wrong you will either get a status code of 403, 404, 422 or 500 (for more information, go to Response Types).
+You need to create a Tenant object with a `tenant_id` as a parameter to access `initiate_payment()`.This endpoint requires that you send in a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing a status code of 200 and data regarding the next step towards completing the payment. If something went wrong you will either get a status code of 403, 404, 422 or 500 (for more information, go to Response Types).
 
 ```python
 def initiate_payment(payment_object, payment_order_id)
@@ -152,4 +152,101 @@ Example:
   }
   _response = tenant.initiate_payment(payment_object, payment_order_id)
   print(_response.text)
+```
+
+# Get Payment
+
+Gets a payment from a payment order.
+
+You need to create a Tenant object with a `tenant_id` as a parameter to access `get_payment()`. This endpoint requires you to send in a `payment_order_id` and a `payment_id` that is connected to the given payment order. If everything is correct, you will be returned a json object of that payment. If something is incorrect, you will be returned an error object containing possible information about the error.
+
+```python
+def get_payment(payment_order_id, payment_id)
+```
+
+| Parameter          | Type   | Description                                             |
+| ------------------ | ------ | ------------------------------------------------------- |
+| `payment_order_id` | string | A string cointaining the Id of a specific payment order |
+| `payment_id`       | string | A string cointaining the Id of a specific payment       |
+
+## Response Type
+
+### 200
+
+Successfully initiated a payment. A json object containing information on how to procede and the payment id has been returned
+
+Example:
+
+```python
+{
+  "currency": "SEK",
+  "id": "380cad75-db1a-4aa4-b19c-7581148d7174",
+  "metadata": {
+    "delivery_id": "230955"
+  },
+  "method": "mobile",
+  "order_items": [
+    {
+      "amount": 850,
+      "name": "Utkörning, Pizza",
+      "vat_rate": 12
+    }
+  ],
+  "provider": "swish",
+  "status": "PENDING"
+}
+```
+
+### 403
+
+API Error
+
+Example:
+
+```python
+{
+  "errors": [
+    {
+      "description": "This operation cannot be completed under certain conditions",
+      "error": "operation_forbidden"
+    }
+  ]
+}
+```
+
+### 404
+
+Payment could not be found.
+
+The given `payment_id` cannot be found in the given `payment_order_id`.
+The given `payment_order_id` don't match a payment order.
+
+### 422
+
+Validation Error
+
+Example:
+
+```python
+{
+  "errors": [
+    {
+      "description": "null value where string expected",
+      "error": "null_value",
+      "property": "open_banking.success_url"
+    }
+  ]
+}
+```
+
+## Example Usage
+
+```python
+tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
+tenant = Tenant(tenant_id= tenant_id)
+paymen_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
+payment_id = "9e6333c6-a9c3-4883-98d8-1f9ef6f1955b"
+
+payment = tenant.get_payment(paymen_order_id, payment_id)
+print(payment.text)
 ```
