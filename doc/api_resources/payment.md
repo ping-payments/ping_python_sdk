@@ -13,7 +13,7 @@
 
 Initiates a payment for a payment order.
 
-You need to create a Tenant object with a `tenant_id` as a parameter to access `initiate_payment()`.This endpoint requires that you send in a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing a status code of 200 and data regarding the next step towards completing the payment. If something went wrong you will either get a status code of 403, 404, 422 or 500 (for more information, go to Response Types).
+You need to create a Tenant object with a `tenant_id` as a parameter to access `initiate_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires that you send in a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing a status code of 200 and data regarding the next step towards completing the payment. If something went wrong you will either get a status code of 403, 404, 422 or 500 (for more information, go to Response Types).
 
 ```python
 def initiate_payment(payment_object, payment_order_id)
@@ -158,7 +158,7 @@ Example:
 
 Gets a payment from a payment order.
 
-You need to create a Tenant object with a `tenant_id` as a parameter to access `get_payment()`. This endpoint requires you to send in a `payment_order_id` and a `payment_id` that is connected to the given payment order. If everything is correct, you will be returned a json object of that payment. If something is incorrect, you will be returned an error object containing possible information about the error.
+You need to create a Tenant object with a `tenant_id` as a parameter to access `get_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires you to send in a `payment_order_id` and a `payment_id` that is connected to the given payment order. If everything is correct, you will be returned a json object of that payment. If something is incorrect, you will be returned an error object containing possible information about the error.
 
 ```python
 def get_payment(payment_order_id, payment_id)
@@ -173,7 +173,7 @@ def get_payment(payment_order_id, payment_id)
 
 ### 200
 
-Successfully initiated a payment. A json object containing information on how to procede and the payment id has been returned
+Successfully returned a payment. A json object containing the payment has been returned.
 
 Example:
 
