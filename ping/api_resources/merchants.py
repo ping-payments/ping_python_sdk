@@ -2,6 +2,7 @@ import requests
 from ping.apiHelper.apiResponse import ApiResponse
 from ping.apiHelper.apiHelper import json_deserialize
 
+
 def get_merchants(headers, base_url):
         """Does a GET request to /api/v1/merchants. 
         

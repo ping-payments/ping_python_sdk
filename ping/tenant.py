@@ -1,18 +1,15 @@
-from ping.configuration import get_base_url
 from ping.api_resources import merchants
 from ping.api_resources import paymentOrders
 from ping.api_resources import payments
 
-
 class Merchant():
+  def get_merchants():
+    return merchants.get_merchants(headers, base_url)
 
-    def get_merchants():
-      return merchants.get_merchants(headers, base_url)
-
-    def create_new_merchant(obj):
-      return merchants.create_new_merchant(headers, base_url, obj)
-      
-    def get_specific_merchant(merchant_id):
+  def create_new_merchant(obj):
+        return merchants.create_new_merchant(headers, base_url, obj)
+        
+  def get_specific_merchant(merchant_id):
       return merchants.get_specific_merchant(headers, base_url, merchant_id)
 
   #Payment Order endpoints
