@@ -9,9 +9,3 @@ list_of_merchant2 = tenant2.merchant.get_merchants()
 
 print(list_of_merchant.status_code)
 print(list_of_merchant2.status_code)
-
-
-
-
-
-

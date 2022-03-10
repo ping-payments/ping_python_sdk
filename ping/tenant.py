@@ -14,40 +14,40 @@ class Tenant:
     }
     self.initializer()
     
-   
   def initializer(self):
-    self.merchant = self.Merchant(self.data)
-    self.payment_order = self.PaymentOrder(self.data)
-    self.payment = self.Payment(self.data)
+    self.merchant = Merchant(self.data)
+    self.payment_order = PaymentOrder(self.data)
+    self.payment = Payment(self.data)
 
-  class Merchant:
-    def __init__(self, data):
-      self.data = data
+#Merchant endpoints
+class Merchant(Tenant):
+  def __init__(self, data):
+    self.data = data
 
-    def get_merchants(self):
-      return merchants.get_merchants(self.data["headers"], self.data["base_url"])
+  def get_merchants(self):
+    return merchants.get_merchants(self.data["headers"], self.data["base_url"])
 
-    def create_new_merchant(self, obj):
-      return merchants.create_new_merchant(self.data["headers"], self.data["base_url"], obj)
+  def create_new_merchant(self, obj):
+    return merchants.create_new_merchant(self.data["headers"], self.data["base_url"], obj)
+    
+  def get_specific_merchant(self, merchant_id):
+    return merchants.get_specific_merchant(self.data["headers"], self.data["base_url"], merchant_id)
 
-    def get_specific_merchant(self, merchant_id):
-      return merchants.get_specific_merchant(self.data["headers"], self.data["base_url"], merchant_id)
+#Payment Order endpoints
+class PaymentOrder:
+  def __init__(self, data):
+    self.data = data
 
-    #Payment Order endpoints
-  class PaymentOrder:
-    def __init__(self, data):
-      self.data = data
+  def payments_orders(self):
+    return paymentOrders.PaymentOrders(self.data["headers"], self.data["base_url"])
 
-    def payments_orders(self):
-      return paymentOrders.PaymentOrders(self.data["headers"], self.data["base_url"])
-
-    #Payment endpoints
-  class Payment:
-    def __init__(self, data):
-      self.data = data
-
-    def initiate_payment(self, obj, payment_order_id):
-      return payments.initiate_payment(self.data["headers"], self.data["base_url"], obj, payment_order_id)
-
-    def get_payment(self, payment_order_id, payment_id):
-      return payments.get_payment(self.data["headers"], self.data["base_url"], payment_order_id, payment_id)
+#Payment endpoints
+class Payment:
+  def __init__(self, data):
+    self.data = data
+    
+  def initiate_payment(self, obj, payment_order_id):
+    return payments.initiate_payment(self.data["headers"], self.data["base_url"], obj, payment_order_id)
+    
+  def get_payment(self, payment_order_id, payment_id):
+    return payments.get_payment(self.data["headers"], self.data["base_url"], payment_order_id, payment_id)
