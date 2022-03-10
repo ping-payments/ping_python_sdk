@@ -1,30 +1,53 @@
 from ping.api_resources import merchants
 from ping.api_resources import paymentOrders
 from ping.api_resources import payments
-from ping import values
+from ping.configuration import get_base_url
 
+class Tenant:
+  def __init__(self, tenant_id="", environment="sandbox"):
+    self.data = {
+      "base_url": get_base_url(environment),
+      "headers": {
+        "Accept": "application/json",
+        "tenant_id": tenant_id
+      }
+    }
+    self.read_only()
+    
+   
+  def read_only(self):
+    self.Merchant = self.Merchant(self.data)
+    self.PaymentOrder = self.PaymentOrder(self.data)
+    self.Payment = self.Payment(self.data)
 
-class Merchant():
-  def get_merchants():
+  class Merchant():
+    def __init__(self, data):
+        self.data = data
 
-    return merchants.get_merchants(values["headers"], values["base_url"])
+    def get_merchants(self):
+      return merchants.get_merchants(self.data["headers"], self.data["base_url"])
 
-  def create_new_merchant(obj):
-        return merchants.create_new_merchant(values["headers"], values["base_url"], obj)
-        
-  def get_specific_merchant(merchant_id):
-      return merchants.get_specific_merchant(values["headers"], values["base_url"], merchant_id)
+    def create_new_merchant(self, obj):
+          return merchants.create_new_merchant(self.data["headers"], self.data["base_url"], obj)
 
-  #Payment Order endpoints
-class PaymentOrder():
+    def get_specific_merchant(self, merchant_id):
+        return merchants.get_specific_merchant(self.data["headers"], self.data["base_url"], merchant_id)
 
-    def payments_orders():
-      return paymentOrders.PaymentOrders(values["headers"], values["base_url"])
+    #Payment Order endpoints
+  class PaymentOrder():
+    def __init__(self, data):
+        self.data = data
 
-  #Payment endpoints
-class Payment():
-    def initiate_payment(obj, payment_order_id):
-      return payments.initiate_payment(values["headers"], values["base_url"], obj, payment_order_id)
+    def payments_orders(self):
+      return paymentOrders.PaymentOrders(self.data["headers"], self.data["base_url"])
 
-    def get_payment( payment_order_id, payment_id):
-      return payments.get_payment(values["headers"], values["base_url"], payment_order_id, payment_id)
+    #Payment endpoints
+  class Payment():
+    def __init__(self, data):
+        self.data = data
+
+    def initiate_payment(self, obj, payment_order_id):
+      return payments.initiate_payment(self.data["headers"], self.data["base_url"], obj, payment_order_id)
+
+    def get_payment(self, payment_order_id, payment_id):
+      return payments.get_payment(self.data["headers"], self.data["base_url"], payment_order_id, payment_id)
