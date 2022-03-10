@@ -1,4 +1,6 @@
 import requests
+from ping.apiHelper.apiResponse import ApiResponse
+from ping.apiHelper.apiHelper import json_deserialize
 
 def initiate_payment(headers, base_url, object, payment_order_id):
  #Prepare URL
@@ -7,7 +9,13 @@ def initiate_payment(headers, base_url, object, payment_order_id):
 
   #Prepare and execute response 
   _response = requests.post(_url, headers=headers, json=object)
-  return _response
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+      _errors = decoded.get('errors')
+  else:
+      _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result
 
 def get_payment(headers, base_url, payment_order_id, payment_id):
   
@@ -15,4 +23,10 @@ def get_payment(headers, base_url, payment_order_id, payment_id):
   _url = base_url + _path
 
   _response = requests.get(_url, headers=headers)
-  return _response
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+      _errors = decoded.get('errors')
+  else:
+      _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result
