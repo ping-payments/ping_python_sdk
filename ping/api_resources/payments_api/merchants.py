@@ -23,18 +23,17 @@ def get_merchants(headers, base_url):
             the request.
         """
 
-        #Prepare URL 
+         #Prepare and execute response
         _path = '/api/v1/merchants'
         _url = base_url + _path
-
-
-        #Prepare and execute response
         _response = requests.get(_url, headers=headers)
+
         decoded = json_deserialize(_response.text)
         if type(decoded) is dict:
             _errors = decoded.get('errors')
         else:
             _errors = None
+            
         _result = ApiResponse(_response, body=decoded, errors=_errors)
         return _result
 
@@ -61,13 +60,19 @@ def create_new_merchant(headers, base_url, object):
             the request.
         """
 
-        #Prepare URL
+        #Prepare and execute response 
         _path = '/api/v1/merchants'
         _url = base_url + _path
-
-        #Prepare and execute response 
         _response = requests.post(_url, headers=headers, json=object)
-        return _response
+
+        decoded = json_deserialize(_response.text)
+        if type(decoded) is dict:
+            _errors = decoded.get('errors')
+        else:
+            _errors = None
+            
+        _result = ApiResponse(_response, body=decoded, errors=_errors)
+        return _result
 
 def get_specific_merchant(headers, base_url, merchant_id):
         """Does a GET request to /api/v1/merchants/{merchant_id}. 
@@ -89,11 +94,18 @@ def get_specific_merchant(headers, base_url, merchant_id):
             the request.
         """
 
-        #Prepare URL
+         #Prepare and execute response 
         _path = f'/api/v1/merchants/{merchant_id}'
         _url = base_url + _path
-
-        #Prepare and execute response 
         _response = requests.get(_url, headers=headers)
-        return _response
+
+        decoded = json_deserialize(_response.text)
+        if type(decoded) is dict:
+            _errors = decoded.get('errors')
+        else:
+            _errors = None
+            
+        _result = ApiResponse(_response, body=decoded, errors=_errors)
+        return _result
+
 
