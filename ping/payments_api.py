@@ -3,8 +3,9 @@ from ping.api_resources.payments_api import paymentOrders
 from ping.api_resources.payments_api import payments
 from ping.configuration import get_base_url
 
+                
 class PaymentsApi():
-  def __init__(self, tenant_id, environment):
+  def __init__(self, tenant_id="", environment="sandbox"):
     self.data = {
       "base_url": get_base_url(environment),
       "headers": {
@@ -18,6 +19,7 @@ class PaymentsApi():
     self.Merchant = Merchant(self.data)
     self.PaymentOrder = PaymentOrder(self.data)
     self.Payment = Payment(self.data)
+
 
 class BaseEndpoints:
   def __init__(self, data):
@@ -33,10 +35,12 @@ class Merchant(BaseEndpoints):
 
   def get_specific_merchant(self, merchant_id):
     return merchants.get_specific_merchant(self.data["headers"], self.data["base_url"], merchant_id)
+
 #Payment Order endpoints
 class PaymentOrder(BaseEndpoints):
   def payments_orders(self):
     return paymentOrders.PaymentOrders(self.data["headers"], self.data["base_url"])
+    
 #Payment endpoints
 class Payment(BaseEndpoints):
   def initiate_payment(self, obj, payment_order_id):
