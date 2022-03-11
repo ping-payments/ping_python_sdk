@@ -1,0 +1,39 @@
+from time import perf_counter, sleep
+from threading import Thread
+import ping 
+
+start_time = perf_counter()
+
+# create and start 10 threads
+threads = []
+
+ping.set_values(tenant_id="a2a4f648-a50b-42fb-bda8-00c6e2f295e")
+
+def t1():
+    ping.set_values(tenant_id="a2a4f648-a50b-42fb-bda8-00c6e2f295e")
+    #print(ping.values["headers"]["tenant_id"])
+    result = ping.Merchant.get_merchants()
+    print(result.status_code)
+
+
+t1 = Thread(target=t1)
+
+def t2():
+    #print(ping.values["headers"]["tenant_id"])
+    result = ping.Merchant.get_merchants()
+    print(result.status_code)
+
+t2 = Thread(target=t2)
+
+threads.append(t1)
+threads.append(t2)
+t1.start()
+ping.set_values(tenant_id="")
+#t2.start()
+
+# wait for the threads to complete
+
+
+end_time = perf_counter()
+
+print(f'It took {end_time- start_time: 0.2f} second(s) to complete.')

@@ -1,4 +1,4 @@
-from ping.tenant import Tenant
+from api.payments_api.payments_api import Tenant
 def initiate_payment():
   tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
   tenant = Tenant(tenant_id= tenant_id)
