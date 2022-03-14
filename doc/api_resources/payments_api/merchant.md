@@ -220,7 +220,7 @@ elif result.is_error():
 
 Gets a specific merchant from a tenant.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_specific_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `merchant_id` as a parameter. If the `tenant_id` exists and has a merchant with the parameters `merchant_id` then a merchant object containing that merchant will be returned. Otherwise an error object is returned.
+You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_specific_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `merchant_id` as a parameter. If the `tenant_id` exists and has a merchant with the given `merchant_id` then a merchant object containing that specific merchant will be returned. Otherwise an error object is returned.
 
 ```python
 def get_specific_merchant(merchant_id)
