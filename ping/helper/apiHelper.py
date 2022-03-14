@@ -1,4 +1,5 @@
 import jsonpickle
+from ping.helper.apiResponse import ApiResponse
 
 def json_deserialize(json, unboxing_function=None, as_dict=False):
         """JSON Deserialization of a given string.
@@ -27,4 +28,10 @@ def json_deserialize(json, unboxing_function=None, as_dict=False):
             return unboxing_function(decoded)
 
 
-
+def check_errors(response, decoded):
+    if type(decoded) is dict:
+        _errors = decoded.get('errors')
+    else:
+        _errors = None
+    _result = ApiResponse(response, body=decoded, errors=_errors)
+    return _result
