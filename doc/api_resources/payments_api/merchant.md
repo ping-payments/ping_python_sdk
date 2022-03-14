@@ -33,6 +33,11 @@ def get_merchants()
 
 ## Response Type
 
+```python
+  result = payments_api.merchant.get_merchants()
+  print(result.status_code)
+```
+
 ### 200
 
 Successfully got merchants. A json object containing an array of all the merchants for the given tenant has been returned.
@@ -131,6 +136,11 @@ def create_new_merchant(merchant_object)
 
 ## Response Type
 
+```python
+  result = payments_api.merchant.create_new_merchant(merchant_object)
+  print(result.status_code)
+```
+
 ### 200
 
 Successfully created a merchant. A json object containing that merchants has been returned.
@@ -221,6 +231,11 @@ def get_specific_merchant(merchant_id)
 | `merchant_id` | `string` | A string containing the ID of a specific merchant |
 
 ## Response Type
+
+```python
+  result = payments_api.merchant.get_specific_merchant(merchant_id)
+  print(result.status_code)
+```
 
 ### 200
 

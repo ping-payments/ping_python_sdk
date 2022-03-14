@@ -1,5 +1,15 @@
 # Payments
 
+```python
+from ping.payments_api import PaymentsApi
+payments_api = PaymentsApi(
+  tenant_id = '55555555-5555-5555-5555-555555555555',
+  environment = 'sandbox'
+)
+payments_api.payment.initiate_payment()
+payments_api.payment.get_payment()
+```
+
 ## Module Name
 
 `payments`
@@ -13,7 +23,7 @@
 
 Initiates a payment for a payment order.
 
-You need to create a Tenant object with a `tenant_id` as a parameter to access `initiate_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires that you send in a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing a status code of 200 and data regarding the next step towards completing the payment. If something went wrong you will either get a status code of 403, 404, 422 or 500 (for more information, go to Response Types).
+You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `initiate_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires that you send in a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing data regarding the next step towards completing the payment. If something went wrong you will be returned an error object).
 
 ```python
 def initiate_payment(payment_object, payment_order_id)
@@ -40,8 +50,8 @@ def initiate_payment(payment_object, payment_order_id)
 ## Response Type
 
 ```python
-  _response = tenant.initiate_payment(payment_object, payment_order_id)
-  print(_response.status_code)
+  result = payments_api.payment.initiate_payment(payment_object, payment_order_id)
+  print(result.status_code)
 ```
 
 ### 200
@@ -118,14 +128,16 @@ Example:
 ## Example Usage
 
 ```python
- tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
-  tenant = Tenant(tenant_id= tenant_id)
-  payment_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
+  payments_api = PaymentsApi(
+    tenant_id = '55555555-5555-5555-5555-555555555555',
+    environment = 'sandbox'
+  )
+  payment_order_id = "55555555-5555-5555-5555-555555555555"
 
   payment_object = {
     "currency": "SEK",
     "merchant_amounts": {
-      "075b5c3c-3f17-435d-ab84-0bc57d8e67d4": 9400,
+      "55555555-5555-5555-5555-555555555555": 9400,
     },
     "metadata": {
       "delivery_id": "368745"
@@ -150,15 +162,20 @@ Example:
     },
     "status_callback_url": "https://somesite.com/callback"
   }
-  _response = tenant.initiate_payment(payment_object, payment_order_id)
-  print(_response.text)
+
+  result = payments_api.payment.initiate_payment(payment_object, payment_order_id)
+  if result.is_success():
+    print(result.body)
+    print("success")
+  elif result.is_error():
+    print(result.errors)
 ```
 
 # Get Payment
 
 Gets a payment from a payment order.
 
-You need to create a Tenant object with a `tenant_id` as a parameter to access `get_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires you to send in a `payment_order_id` and a `payment_id` that is connected to the given payment order. If everything is correct, you will be returned a json object of that payment. If something is incorrect, you will be returned an error object containing possible information about the error.
+You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires you to send in a `payment_order_id` and a `payment_id` that is connected to the given payment order. If everything is correct, you will be returned a json object of that payment. If something is incorrect, you will be returned an error object containing possible information about the error.
 
 ```python
 def get_payment(payment_order_id, payment_id)
@@ -171,6 +188,11 @@ def get_payment(payment_order_id, payment_id)
 
 ## Response Type
 
+```python
+  result = payments_api.payment.get_payment(payment_order_id, payment_id)
+  print(result.status_code)
+```
+
 ### 200
 
 Successfully returned a payment. A json object containing the payment has been returned.
@@ -180,7 +202,7 @@ Example:
 ```python
 {
   "currency": "SEK",
-  "id": "380cad75-db1a-4aa4-b19c-7581148d7174",
+  "id": "55555555-5555-5555-5555-555555555555",
   "metadata": {
     "delivery_id": "230955"
   },
@@ -242,11 +264,17 @@ Example:
 ## Example Usage
 
 ```python
-tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
-tenant = Tenant(tenant_id= tenant_id)
-paymen_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
-payment_id = "9e6333c6-a9c3-4883-98d8-1f9ef6f1955b"
+  payments_api = PaymentsApi(
+    tenant_id = '55555555-5555-5555-5555-555555555555',
+    environment = 'sandbox'
+  )
+  paymen_order_id = "55555555-5555-5555-5555-555555555555"
+  payment_id = "55555555-5555-5555-5555-555555555555"
 
-payment = tenant.get_payment(paymen_order_id, payment_id)
-print(payment.text)
+  result = payments_api.payment.get_payment(paymen_order_id, payment_id)
+  if result.is_success():
+    print(result.body)
+    print("success")
+  elif result.is_error():
+    print(result.errors)
 ```
