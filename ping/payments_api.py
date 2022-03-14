@@ -12,7 +12,7 @@ class PaymentsApi:
         "Accept": "application/json",
         "tenant_id": tenant_id
         }
-  
+
   @property
   def merchant(self):
     return Merchant(self.headers, self.base_url)
