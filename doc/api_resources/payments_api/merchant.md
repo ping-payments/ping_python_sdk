@@ -216,9 +216,9 @@ You need to create a PaymentsApi object with a `tenant_id` as a parameter to acc
 def get_specific_merchant(merchant_id)
 ```
 
-| Parameter     | Type     | Description                                        |
-| ------------- | -------- | -------------------------------------------------- |
-| `merchant_id` | `string` | A string cointaining the ID of a specific merchant |
+| Parameter     | Type     | Description                                       |
+| ------------- | -------- | ------------------------------------------------- |
+| `merchant_id` | `string` | A string containing the ID of a specific merchant |
 
 ## Response Type
 
