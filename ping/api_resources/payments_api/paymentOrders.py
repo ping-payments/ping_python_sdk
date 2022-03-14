@@ -1,6 +1,5 @@
 import requests
-from ping.helper.apiHelper import json_deserialize
-from ping.helper.apiHelper import check_errors
+from ping.helper.apiHelper import json_deserialize, check_errors
 
 def get_payment_orders(headers, base_url, date_from, date_to):
 
@@ -70,7 +69,7 @@ def create_payment_order(headers, base_url, split_tree_id):
   
 
 def get_payment_order(headers, base_url, payment_order_id):
-  """Does a GET request to /api/v1/payment_orders. 
+  """Does a GET request to /api/v1/payment_orders/{payment_order_id}. 
           
     Retrives a specific payment order. 
     Args (provided by the tenant):
@@ -95,7 +94,7 @@ def get_payment_order(headers, base_url, payment_order_id):
   return _result
 
 def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
-  """Does a PUT request to /api/v1/payment_orders. 
+  """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/update. 
           
     Updates the split tree of a specific payment order. 
     Args (provided by the tenant):
@@ -110,7 +109,7 @@ def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
       the request.
   """
   
-  _path = f'/api/v1/payment_orders/{payment_order_id}'
+  _path = f'/api/v1/payment_orders/{payment_order_id}/update'
   _url = base_url + _path
   _payload = {
     "split_tree_id": split_tree_id
@@ -123,7 +122,7 @@ def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
   return _result
 
 def close_payment_order(headers, base_url, payment_order_id):
-  """Does a PUT request to /api/v1/payment_orders. 
+  """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/close'. 
           
     Closes a specific payment order. 
     Args (provided by the tenant):
@@ -149,7 +148,7 @@ def close_payment_order(headers, base_url, payment_order_id):
  
 
 def settle_payment_order(headers, base_url, payment_order_id):
-  """Does a PUT request to /api/v1/payment_orders. 
+  """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/settle'. 
           
     Settle a specific payment order. 
     Args (provided by the tenant):
@@ -174,7 +173,7 @@ def settle_payment_order(headers, base_url, payment_order_id):
   return _result 
 
 def split_payment_order(headers, base_url, payment_order_id):
-  """Does a PUT request to /api/v1/payment_orders. 
+  """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/split. 
           
     Split a specific payment order. 
     Args (provided by the tenant):

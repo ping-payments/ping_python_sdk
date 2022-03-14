@@ -1,9 +1,10 @@
 from unittest import result
-import ping
+from ping.payments_api import PaymentsApi
+
 def initiate_payment():
   tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
-  ping_pay_api = ping.payments_api(tenant_id=tenant_id)
-  payment_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
+  payments_api = PaymentsApi(tenant_id=tenant_id)
+  payment_order_id = "de4fbdde-a1df-40a1-942c-c26c70d837ee"
 
   payment_object = {
      "currency": "SEK",
@@ -33,7 +34,7 @@ def initiate_payment():
     },
     "status_callback_url": "https://somesite.com/callback"
   }
-  result = ping_pay_api.Payment.initiate_payment(payment_object, payment_order_id)
+  result = payments_api.Payment.initiate_payment(payment_object, payment_order_id)
   if result.is_success():
     print(result.body)
     print("success")
@@ -42,12 +43,12 @@ def initiate_payment():
 
 def get_payment():
   tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
-  ping_pay_api = ping.payments_api(tenant_id=tenant_id)
+  payments_api = PaymentsApi(tenant_id=tenant_id)
   
   paymen_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
   payment_id = "9e6333c6-a9c3-4883-98d8-1f9ef6f1955b"
 
-  result = ping_pay_api.Payment.get_payment(paymen_order_id, payment_id)
+  result = payments_api.payment.get_payment(paymen_order_id, payment_id)
   if result.is_success():
     print(result.body)
     print("success")

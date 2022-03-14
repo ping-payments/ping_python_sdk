@@ -30,8 +30,8 @@ def json_deserialize(json, unboxing_function=None, as_dict=False):
 
 def check_errors(response, decoded):
     if type(decoded) is dict:
-        _errors = decoded.get('errors')
+        errors = decoded.get('errors')
     else:
-        _errors = None
-    _result = ApiResponse(response, body=decoded, errors=_errors)
-    return _result
+        errors = None
+    result = ApiResponse(response, body=decoded, errors=errors)
+    return result
