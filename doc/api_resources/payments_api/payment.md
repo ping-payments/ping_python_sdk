@@ -16,8 +16,8 @@ payments_api.payment.get_payment()
 
 ## Functions
 
-- [Initiate Payment](/doc/api_resources/merchant.md#initiate-payment)
-- [Get Payment](/doc/api_resources/merchant.md#get-payment)
+- [Initiate Payment](/doc/api_resources/payments_api/payment.md#initiate-payment)
+- [Get Payment](/doc/api_resources/payments_api/payment.md#get-payment)
 
 # Initiate Payment
 

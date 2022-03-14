@@ -17,9 +17,9 @@ payments_api.merchant.get_specific_merchant()
 
 ## Functions
 
-- [Get Merchants](/doc/api_resources/merchant.md#get-merchants)
-- [Create New Merchant](/doc/api_resources/merchant.md#create-new-merchant)
-- [Get Specific Merchant](/doc/api_resources/merchant.md#get-specific-merchant)
+- [Get Merchants](/doc/api_resources/payments_api/merchant.md#get-merchants)
+- [Create New Merchant](/doc/api_resources/payments_api/merchant.md#create-new-merchant)
+- [Get Specific Merchant](/doc/api_resources/payments_api/merchant.md#get-specific-merchant)
 
 # Get Merchants
 
