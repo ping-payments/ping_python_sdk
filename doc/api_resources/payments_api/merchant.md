@@ -1,5 +1,16 @@
 # Merchants
 
+```python
+from ping.payments_api import PaymentsApi
+payments_api = PaymentsApi(
+  tenant_id = '55555555-5555-5555-5555-555555555555',
+  environment = 'sandbox'
+)
+payments_api.merchant.get_merchants()
+payments_api.merchant.create_new_merchant()
+payments_api.merchant.get_specific_merchant()
+```
+
 ## Module Name
 
 `merchants`
@@ -14,10 +25,10 @@
 
 Gets and returns an object of all the merchants from a specific tenant
 
-You need to create a Tenant object with a `tenant_id` as a parameter to access `get_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. If the tenant_id exists, the function will return an object containing a list of all merchants under that specific `tenant_id` and a status code of 200. Otherwise the status code will be 422 and no merchants are returned.
+You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. If the tenant_id exists, the function will return an object containing a list of all merchants under that specific `tenant_id` and a status code of 200. Otherwise the status code will be 422 and no merchants are returned.
 
 ```python
-def get_merchants(self)
+def get_merchants()
 ```
 
 ## Response Type
@@ -91,20 +102,27 @@ Example:
 ## Example Usage
 
 ```python
-tenant = Tenant(tenant_id = '55555555-5555-5555-5555-555555555555', environment = 'environment')
+payments_api = PaymentsApi(
+  tenant_id = '55555555-5555-5555-5555-555555555555',
+  environment = 'sandbox'
+)
 
-list_of_merchants = tenant.get_merchants()
-print(list_of_merchants.text)
+result = payments_api.merchant.get_merchants()
+if result.is_success():
+    print(result.body)
+    print("success")
+elif result.is_error():
+    print(result.errors)
 ```
 
 # Create New Merchant
 
 Creates a new merchant for a tenant.
 
-You need to create a Tenant object with a `tenant_id` as a parameter to access `create_new_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires an object containing a merchant name and an organisation object containing the `country` and the `organisation_number`. If all parameters are correct, an object will be returned containing the merchant you created and status code 200. If the status code is 422, it either means that the `tenant_id` is wrong, that the parameter isn't an object or that the object is containing incorrect datatypes.
+You need to create a PaymentApi object with a `tenant_id` as a parameter to access `create_new_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires an object containing a merchant name and an organisation object containing the `country` and the `organisation_number`. If all parameters are correct, an object will be returned containing an object of the merchant you created and status code 200. If the status code is 422, it either means that the `tenant_id` is wrong, that the parameter isn't an object or that the object is containing incorrect datatypes.
 
 ```python
-def create_new_merchant(self, merchant_object)
+def create_new_merchant(merchant_object)
 ```
 
 | Parameter         | Type     | Containing                                      | Description                                                                                                                                                                             |
@@ -113,12 +131,64 @@ def create_new_merchant(self, merchant_object)
 
 ## Response Type
 
-[`Create New Merchant Response`] preliminär
+### 200
+
+Successfully created a merchant. A json object containing that merchants has been returned.
+
+Example:
+
+```python
+{
+  "name": "Merchant",
+  "organization": {
+    "country": "SE",
+    "se_organization_number": "555555-5555"
+  }
+}
+```
+
+### 403
+
+API Error
+
+Example:
+
+```python
+{
+  "errors": [
+    {
+      "description": "This operation cannot be completed under certain conditions",
+      "error": "operation_forbidden"
+    }
+  ]
+}
+```
+
+### 422
+
+Validation Error
+
+Example:
+
+```python
+{
+  "errors": [
+    {
+      "description": "null value where string expected",
+      "error": "null_value",
+      "property": "open_banking.success_url"
+    }
+  ]
+}
+```
 
 ## Example Usage
 
 ```python
-tenant = Tenant(tenant_id = '55555555-5555-5555-5555-555555555555', environment = 'environment')
+payments_api = PaymentsApi(
+  tenant_id = '55555555-5555-5555-5555-555555555555',
+  environment = 'sandbox'
+)
 
 merchant_object = {
   "name": 'example-name',
@@ -127,23 +197,28 @@ merchant_object = {
     "se_organisation_number": '555555-5555'
   }
 }
-created_merchant = tenant.create_new_merchant(merchant_object)
-print(created_merchant.text)
+
+result = payemnts_api.merchant.create_new_merchant(merchant_object)
+if result.is_success():
+    print(result.body)
+    print("success")
+elif result.is_error():
+    print(result.errors)
 ```
 
 # Get Specific Merchant
 
 Gets a specific merchant from a tenant.
 
-You need to create a Tenant object with a `tenant_id` as a parameter to access `get_specific_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `merchant_id` as a parameter. If the `tenant_id` exists and has a merchant with the parameters `merchant_id` then a merchant object containing that merchant and status code 200 will be returned. If the `tenant_id` or `merchant_id` don't match with existing id:s, a status code 422 will be returned instead.
+You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_specific_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `merchant_id` as a parameter. If the `tenant_id` exists and has a merchant with the parameters `merchant_id` then a merchant object containing that merchant will be returned. If the `tenant_id` or `merchant_id` don't match with existing id:s, an error object will be returned instead.
 
 ```python
-def get_specific_merchant(self, merchant_id)
+def get_specific_merchant(merchant_id)
 ```
 
-| Parameter     | Type   | Containing           | Description                                        |
-| ------------- | ------ | -------------------- | -------------------------------------------------- |
-| `merchant_id` | String | merchant_id : String | A string cointaining the Id of a specific merchant |
+| Parameter     | Type     | Description                                        |
+| ------------- | -------- | -------------------------------------------------- |
+| `merchant_id` | `string` | A string cointaining the ID of a specific merchant |
 
 ## Response Type
 
@@ -185,7 +260,7 @@ Example:
 
 ### 404
 
-Merchants could not be found.
+Merchant could not be found.
 
 The given `merchant_id` could not be found.
 
@@ -210,9 +285,16 @@ Example:
 ## Example Usage
 
 ```python
-tenant = Tenant(tenant_id = '55555555-5555-5555-5555-555555555555', environment = 'environment')
+payments_api = PaymentsApi(
+  tenant_id = '55555555-5555-5555-5555-555555555555',
+  environment = 'sandbox'
+)
 merchant_id = '5555555555'
 
-specific_merchant = tenant.get_specific_merchant(merchant_id)
-print(specific_merchant.text)
+result = payments_api.merchant.get_specific_merchant(merchant_id)
+if result.is_success():
+    print(result.body)
+    print("success")
+elif result.is_error():
+    print(result.errors)
 ```
