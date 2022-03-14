@@ -1,6 +1,6 @@
 import requests
-from ping.apiHelper.apiResponse import ApiResponse
-from ping.apiHelper.apiHelper import json_deserialize
+from ping.helper.apiResponse import ApiResponse
+from ping.helper.apiHelper import json_deserialize
 
 def initiate_payment(headers, base_url, object, payment_order_id):
  #Prepare URL

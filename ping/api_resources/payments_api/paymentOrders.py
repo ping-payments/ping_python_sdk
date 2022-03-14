@@ -1,6 +1,8 @@
 import requests
+from ping.helper.apiResponse import ApiResponse
+from ping.helper.apiHelper import json_deserialize
 
-def get_payment_orders(headers, base_url, date_from=None, date_to=None):
+def get_payment_orders(headers, base_url, date_from, date_to):
 
   """Does a GET request to /api/v1/payment_orders. 
           
@@ -31,10 +33,16 @@ def get_payment_orders(headers, base_url, date_from=None, date_to=None):
     _path = _path + f'?from={date_from}&to={date_to}'
   
   _url = base_url + _path
-
-  # execute response 
   _response = requests.get(_url, headers=headers)
-  return _response
+
+  #deserialize 
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+    _errors = decoded.get('errors')
+  else:
+    _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result
 
 def create_payment_order(headers, base_url, split_tree_id):
   """Does a POST request to /api/v1/payment_orders. 
@@ -43,7 +51,6 @@ def create_payment_order(headers, base_url, split_tree_id):
     Args:
       split_tree_id (object, required): An object including the key: "split_tree_id" and a 
       value: with a valid split tree id in String. 
-         
     Returns:
       Response: An object with the response value as well as other
       useful information such as status codes and headers.  
@@ -56,10 +63,17 @@ def create_payment_order(headers, base_url, split_tree_id):
   
   _path = '/api/v1/payment_orders'
   _url = base_url + _path
-
-  # execute response 
   _response = requests.post(_url, headers=headers, json=split_tree_id)
-  return _response
+
+  #deserialize 
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+    _errors = decoded.get('errors')
+  else:
+    _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result
+  
 
 def get_payment_order(headers, base_url, payment_order_id):
   """Does a GET request to /api/v1/payment_orders. 
@@ -79,10 +93,16 @@ def get_payment_order(headers, base_url, payment_order_id):
   """
   _path = f'/api/v1/payment_orders/{payment_order_id}'
   _url = base_url + _path
-
-  # execute response 
   _response = requests.get(_url, headers=headers)
-  return _response 
+
+  #deserialize 
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+    _errors = decoded.get('errors')
+  else:
+    _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result
 
 def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
   
@@ -91,35 +111,59 @@ def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
   _payload = {
     "split_tree_id": split_tree_id
   }
-
-  # execute response 
   _response = requests.put(_url, headers=headers, json=_payload)
-  return _response  
+
+  #deserialize 
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+    _errors = decoded.get('errors')
+  else:
+    _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result
 
 def close_payment_order(headers, base_url, payment_order_id):
 
   _path = f'/api/v1/payment_orders/{payment_order_id}/close'
   _url = base_url + _path
-  
-  # execute response 
   _response = requests.put(_url, headers=headers)
-  return _response  
+
+  #deserialize 
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+    _errors = decoded.get('errors')
+  else:
+    _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result
  
 
 def settle_payment_order(headers, base_url, payment_order_id):
 
   _path = f'/api/v1/payment_orders/{payment_order_id}/settle'
   _url = base_url + _path
-  
-  # execute response 
   _response = requests.put(_url, headers=headers)
-  return _response   
+
+  #deserialize 
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+    _errors = decoded.get('errors')
+  else:
+    _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result 
 
 def split_payment_order(headers, base_url, payment_order_id):
 
   _path = f'/api/v1/payment_orders/{payment_order_id}/split'
-  _url = base_url + _path
-  
-  # execute response 
+  _url = base_url + _path 
   _response = requests.put(_url, headers=headers)
-  return _response    
+
+  #deserialize 
+  decoded = json_deserialize(_response.text)
+  if type(decoded) is dict:
+    _errors = decoded.get('errors')
+  else:
+    _errors = None
+  _result = ApiResponse(_response, body=decoded, errors=_errors)
+  return _result  
