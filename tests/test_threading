@@ -1,18 +1,18 @@
 from time import perf_counter, sleep
 from threading import Thread
-import ping 
+from ping.payments_api import PaymentsApi
 
 start_time = perf_counter()
 
 # create and start 10 threads
 threads = []
 
-ping.set_values(tenant_id="a2a4f648-a50b-42fb-bda8-00c6e2f295e")
+
 
 def t1():
-    ping.set_values(tenant_id="a2a4f648-a50b-42fb-bda8-00c6e2f295e")
+    payments_api = PaymentsApi(tenant_id="a2a4f648-a50b-42fb-bda8-00c6e2f295ea")
     #print(ping.values["headers"]["tenant_id"])
-    result = ping.Merchant.get_merchants()
+    result = payments_api.merchant.get_merchants()
     print(result.status_code)
 
 
@@ -20,7 +20,8 @@ t1 = Thread(target=t1)
 
 def t2():
     #print(ping.values["headers"]["tenant_id"])
-    result = ping.Merchant.get_merchants()
+    payments_api = PaymentsApi(tenant_id="")
+    result = payments_api.merchant.get_merchants()
     print(result.status_code)
 
 t2 = Thread(target=t2)
@@ -28,8 +29,7 @@ t2 = Thread(target=t2)
 threads.append(t1)
 threads.append(t2)
 t1.start()
-ping.set_values(tenant_id="")
-#t2.start()
+t2.start()
 
 # wait for the threads to complete
 
