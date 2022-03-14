@@ -12,22 +12,18 @@ class PaymentsApi:
         "Accept": "application/json",
         "tenant_id": tenant_id
         }
-
-    self._merchant = Merchant(self.headers, self.base_url)
-    self._paymentOrder = PaymentOrder(self.headers, self.base_url)
-    self._payment = Payment(self.headers, self.base_url)
   
   @property
   def merchant(self):
-    return self._merchant
+    return Merchant(self.headers, self.base_url)
   
   @property
   def paymentOrder(self):
-      return self._paymentOrder
+      return PaymentOrder(self.headers, self.base_url)
   
   @property
   def payment(self):
-    return self._payment
+    return Payment(self.headers, self.base_url)
 
 class BaseEndpoints:
   def __init__(self, headers, base_url):
