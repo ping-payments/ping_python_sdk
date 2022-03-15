@@ -30,7 +30,7 @@ pip install pingSDK
 
 ```
 
-## Payments%20API
+## Payments API
 
 ### [Payments API]
 
