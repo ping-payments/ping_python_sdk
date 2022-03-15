@@ -1,11 +1,8 @@
 
 # Ping Payments Python SDK
 
-  
 
 Use this Python library to manage Ping Payments resources regarding payments.
-
-  
 
 ## Table of contents
 
@@ -13,27 +10,19 @@ Use this Python library to manage Ping Payments resources regarding payments.
 
 * [Installation](#installation)
 
-* [API](#API)
+* [Payments API](#PaymentsAPI)
 
-  
 
 ## Requirements
 
-  
 
 The SDK supports the following versions of Python:
 
 - Python 3
 
-  
-
 ## Installation
 
-  
-
 Install the latest SDK using pip:
-
-  
 
 ```
 
@@ -41,15 +30,13 @@ pip install pingSDK
 
 ```
 
-## API
-
-  
+## Payments API
 
 ### [Payments API]
 
 * [Merchant]
 
-* [Payment Ordes]
+* [Payment Orders]
 
 * [Payment]
 
@@ -119,7 +106,6 @@ API calls return an ApiResponse object that contains properties that describe bo
 if result.is_success():
 # Display the response as text
 print({result.text})
-
 # Call the error method to see if the call failed
 elif result.is_error():
 print(f"Errors: {result.errors}")
@@ -132,6 +118,6 @@ print(f"Errors: {result.errors}")
 
 [Merchant]: doc/api_resources/payments_api/merchant.md
 
-[Payment Ordes]: doc/api_resources/payments_api/payment_order.md 
+[Payment Orders]: doc/api_resources/payments_api/payment_order.md 
 
 [Payment]: doc/api_resources/payments_api/payment.md 
