@@ -34,7 +34,7 @@ def initiate_payment(payment_object, payment_order_id)
 | `payment_object`   | `object` | An obejct containing all information needed to initiate a payment |
 | `payment_order_id` | `string` | An ID of a specific Payment Order                                 |
 
-## Payment Object
+## payment_object
 
 | Containing                   | Type               | Required | Description                                                                                                                                                                                                                |
 | ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -47,7 +47,7 @@ def initiate_payment(payment_object, payment_order_id)
 | `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                     |
 | `status_callback_url`        | `string`           | Yes      | The URL where you want you callback status updates on the payment                                                                                                                                                          |
 
-## Provider_method_parameters
+## provider_method_parameters
 
 The diffrent `provider_method_parameters` needed for each provider. Remember to write these as objects
 
