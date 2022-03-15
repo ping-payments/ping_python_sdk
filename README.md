@@ -10,7 +10,7 @@ Use this Python library to manage Ping Payments resources regarding payments.
 
 * [Installation](#installation)
 
-* [Payments API](#Payments%20API)
+* [Payments API](#payments-api)
 
 
 ## Requirements
@@ -51,7 +51,7 @@ To use the Payments API to manage the resources you need to get a tenant ID. A t
 When you call the Payments API, you call it using a tenant ID. A tenant ID has specific permissions to resources.
 **Important:** Make sure you store and access the tenant ID securely.
 
-To use the Paymnets API, you import the PaymentsAPI class, instantiate a PaymentsAPI object, and initialize it with the appropriate tenant ID and environment. Here’s how:
+To use the Payments API, you import the PaymentsAPI class, instantiate a PaymentsAPI object, and initialize it with the appropriate tenant ID and environment. Here’s how:
 
 1. Import the PaymentsApi class from the Ping Python SDK module so you can call the Payments API:
 
@@ -60,7 +60,7 @@ To use the Paymnets API, you import the PaymentsAPI class, instantiate a Payment
 from ping.payments_api import PaymentsApi
 
 ```
-2. Instantiate a PaymentsApi object and initialize it with the teanat ID and the environment that you want to use.
+2. Instantiate a PaymentsApi object and initialize it with the tenant ID and the environment that you want to use.
 
 To access sandbox resources, initialize the PaymentsApi with environment set to sandbox:
 
