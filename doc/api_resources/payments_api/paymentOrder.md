@@ -25,7 +25,7 @@ payments_api.payment_order.split_payment_order()
 - [Create New Paymkent Order](/doc/api_resources/payments_api//paymentOrder.md#create-new-payment-order)
 - [Get Specific Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-specific-payment-order)
 - [Update Payment Order](/doc/api_resources/payments_api//paymentOrder.md#update-payment-order)
-- [Close Payment Order](/doc/api_resources/payments_api//paymentOrder.md#clsoe-payment-order)
+- [Close Payment Order](/doc/api_resources/payments_api//paymentOrder.md#close-payment-order)
 - [Settle Payment Order](/doc/api_resources/payments_api//paymentOrder.md#settle-payment-order)
 - [Split Payment Order](/doc/api_resources/payments_api//paymentOrder.md#split-payment-order)
 
