@@ -10,7 +10,7 @@ Use this Python library to manage Ping Payments resources regarding payments.
 
 * [Installation](#installation)
 
-* [Payments API](#PaymentsAPI)
+* [Payments API](#Payments%20API)
 
 
 ## Requirements
@@ -114,7 +114,7 @@ print(f"Errors: {result.errors}")
 
 [//]: #  "Link anchor definitions"
 
-[Payments API]: doc/api_resources/payments_api.md
+[Payments API]: doc/payments_api.md
 
 [Merchant]: doc/api_resources/payments_api/merchant.md
 
