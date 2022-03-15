@@ -30,7 +30,7 @@ pip install pingSDK
 
 ```
 
-## Payments API
+## Payments%20API
 
 ### [Payments API]
 
@@ -49,7 +49,7 @@ First time using Payments API? Here’s how to get started:
 To use the Payments API to manage the resources you need to get a tenant ID. A tenant ID is provided to you by Ping Payments.
 
 When you call the Payments API, you call it using a tenant ID. A tenant ID has specific permissions to resources.
-**Important** Make sure you store and access the tenant ID securely.
+**Important:** Make sure you store and access the tenant ID securely.
 
 To use the Paymnets API, you import the PaymentsAPI class, instantiate a PaymentsAPI object, and initialize it with the appropriate tenant ID and environment. Here’s how:
 
