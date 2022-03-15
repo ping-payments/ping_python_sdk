@@ -21,13 +21,13 @@ payments_api.payment_order.split_payment_order()
 
 ## Functions
 
-- [Get Payment Order](/doc/api_resources/paymentOrder.md#get-payment-order)
-- [Create New Paymkent Order](/doc/api_resources/paymentOrder.md#create-new-payment-order)
-- [Get Specific Payment Order](/doc/api_resources/paymentOrder.md#get-specific-payment-order)
-- [Update Payment Order](/doc/api_resources/paymentOrder.md#update-payment-order)
-- [Close Payment Order](/doc/api_resources/paymentOrder.md#clsoe-payment-order)
-- [Settle Payment Order](/doc/api_resources/paymentOrder.md#settle-payment-order)
-- [Split Payment Order](/doc/api_resources/paymentOrder.md#split-payment-order)
+- [Get Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-payment-order)
+- [Create New Paymkent Order](/doc/api_resources/payments_api//paymentOrder.md#create-new-payment-order)
+- [Get Specific Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-specific-payment-order)
+- [Update Payment Order](/doc/api_resources/payments_api//paymentOrder.md#update-payment-order)
+- [Close Payment Order](/doc/api_resources/payments_api//paymentOrder.md#clsoe-payment-order)
+- [Settle Payment Order](/doc/api_resources/payments_api//paymentOrder.md#settle-payment-order)
+- [Split Payment Order](/doc/api_resources/payments_api//paymentOrder.md#split-payment-order)
 
 # Get Payment Order
 
