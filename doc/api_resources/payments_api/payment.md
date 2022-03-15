@@ -34,7 +34,7 @@ def initiate_payment(payment_object, payment_order_id)
 | `payment_object`   | `object` | An obejct containing all information needed to initiate a payment |
 | `payment_order_id` | `string` | An ID of a specific Payment Order                                 |
 
-## Payment Object
+## payment_object
 
 | Containing                   | Type               | Required | Description                                                                                                                                                                                                                |
 | ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -46,6 +46,58 @@ def initiate_payment(payment_object, payment_order_id)
 | `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot` <br>The payment method provider                                                                                                                             |
 | `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                     |
 | `status_callback_url`        | `string`           | Yes      | The URL where you want you callback status updates on the payment                                                                                                                                                          |
+
+## provider_method_parameters
+
+The diffrent `provider_method_parameters` needed for each provider. Remember to write these as objects
+
+### Swish
+
+| Containing     | Type     | Required | Description                               |
+| -------------- | -------- | -------- | ----------------------------------------- |
+| `message`      | `string` | Yes      | A message associated with the payment.    |
+| `phone_number` | `string` | Yes      | A swish connected phone number of a payer |
+
+### Open Banking
+
+| Containing    | Type     | Required | Description                                                                |
+| ------------- | -------- | -------- | -------------------------------------------------------------------------- |
+| `cancel_url`  | `string` | Yes      | An URL to which the user is directed to if the payment gets canceled       |
+| `error_url`   | `string` | Yes      | An URL to which the user is directed to if the payment fails               |
+| `reference`   | `string` | Yes      | Reference visible in the payers and payees bank account log                |
+| `success_url` | `string` | Yes      | An URL to which the user is directed to at the end of a successful payment |
+
+### Verifone
+
+| Containing    | Type     | Required | Description                                                                     |
+| ------------- | -------- | -------- | ------------------------------------------------------------------------------- |
+| `cancel_url`  | `string` | Yes      | An URL which the payer is directed to when a payment gets canceled              |
+| `email`       | `string` | Yes      | The email address of a payer                                                    |
+| `first_name`  | `string` | Yes      | The first name of a payer                                                       |
+| `last_name`   | `string` | Yes      | The last name of a payer                                                        |
+| `success_url` | `string` | Yes      | An URL to which the payer is directed to when successfully completing a payment |
+
+### Billmate
+
+| Containing            | Type      | Required | Description                                                      |
+| --------------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `care_of`             | `string`  | No       | The payers care of (C/O) address                                 |
+| `country`             | `string`  | Yes      | The payers country of residence                                  |
+| `customer_reference`  | `string`  | Yes      | The customer reference                                           |
+| `email`               | `string`  | Yes      | The email address of a payer                                     |
+| `first_name`          | `string`  | Yes      | The first name of a payer                                        |
+| `free_text`           | `string`  | No       | A free text on the invoice                                       |
+| `ip_address`          | `string`  | Yes      | The IP address of the device that the payment is being made from |
+| `is_company_customer` | `boolean` | Yes      | Whether or not the payer is paying as a company                  |
+| `last_name`           | `string`  | Yes      | The last name of a payer                                         |
+| `national_id_number`  | `string`  | Yes      | The payers national ID number                                    |
+| `phone_number`        | `string`  | Yes      | The payers phone number                                          |
+
+### Bankgirot
+
+| Containing   | Type     | Required | Description                       |
+| ------------ | -------- | -------- | --------------------------------- |
+| `mandate_id` | `string` | Yes      | Ping Payments Autogiro mandate ID |
 
 ## Response Type
 
