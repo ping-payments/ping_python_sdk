@@ -338,7 +338,7 @@ elif result.is_error():
 
 # Update Payment Order
 
-Updates a payment orders body with a different split tree
+Updates a PaymentOrder. Used for updating which split tree to use when splitting.
 
 You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `update_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function can also requires a `payment_order_id` of the payment order you want to update and a new `split_tree_id` as a parameter. If the tenant_id exists and there is a split tree with the given `split_tree_id`, this function will return a successfull response. Otherwise an error object is returned.
 
