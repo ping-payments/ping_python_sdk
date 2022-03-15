@@ -1,7 +1,7 @@
 from ping.api_resources.payments_api import merchants
 from ping.api_resources.payments_api import paymentOrders
 from ping.api_resources.payments_api import payments
-from ping.helper.configuration import get_base_url
+from ping.helper.apiHelper import get_base_url
 
 class PaymentsApi:
   def __init__(self, tenant_id="", environment="sandbox"):
