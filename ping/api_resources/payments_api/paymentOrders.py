@@ -94,7 +94,7 @@ def get_payment_order(headers, base_url, payment_order_id):
   return _result
 
 def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
-  """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/update. 
+  """Does a PUT request to /api/v1/payment_orders/{payment_order_id}. 
           
     Updates the split tree of a specific payment order. 
     Args (provided by the tenant):
@@ -109,7 +109,7 @@ def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
       the request.
   """
   
-  _path = f'/api/v1/payment_orders/{payment_order_id}/update'
+  _path = f'/api/v1/payment_orders/{payment_order_id}'
   _url = base_url + _path
   _payload = {
     "split_tree_id": split_tree_id
