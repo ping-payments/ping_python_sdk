@@ -10,7 +10,6 @@ class TestPaymentOrder(unittest.TestCase):
         cls.payment_order_id ="bd3e750f-2213-45c5-9d02-0dbeb2178675"
 
     def test_get(self):
-        
         date_from = "2019-10-12"
         date_to = "2020-10-12"
 
