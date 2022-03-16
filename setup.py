@@ -14,5 +14,9 @@ setup(
     author='Ping Payments developer team',
     author_email='developers@pingpayments.com',
     url='https://www.pingpayments.com/',
-    packages=find_packages()
+    packages=find_packages(),
+    install_requires=[
+        'jsonpickle~=1.4, >= 1.4.1',
+        'requests~=2.25',
+    ],
 )
