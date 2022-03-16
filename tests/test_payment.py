@@ -6,8 +6,9 @@ import unittest
 
 class TestPayment(unittest.TestCase):
     
-    def setUp(self):
-        self.payments_api = PaymentsApi("a2a4f648-a50b-42fb-bda8-00c6e2f295ea")
+    @classmethod
+    def setUpClass(cls):
+        cls.payments_api = PaymentsApi("a2a4f648-a50b-42fb-bda8-00c6e2f295ea")
         
 
     def test_get_specific(self):
