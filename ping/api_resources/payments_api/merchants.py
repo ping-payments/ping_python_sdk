@@ -85,7 +85,7 @@ def get_specific_merchant(headers, base_url, merchant_id):
         the request.
     """
 
-     #Prepare and execute response 
+    #Prepare and execute response 
     _path = f'/api/v1/merchants/{merchant_id}'
     _url = base_url + _path
     response = requests.get(_url, headers=headers)

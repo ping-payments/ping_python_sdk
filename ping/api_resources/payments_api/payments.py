@@ -18,6 +18,7 @@ def initiate_payment(headers, base_url, payment_object, payment_order_id):
       the request.
     """
 
+    #Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/payments'
     _url = base_url + _path
     response = requests.post(_url, headers=headers, json=payment_object)
@@ -44,6 +45,7 @@ def get_payment(headers, base_url, payment_order_id, payment_id):
       the request.
   """
   
+    #Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/payments/{payment_id}'
     _url = base_url + _path
     response = requests.get(_url, headers=headers)

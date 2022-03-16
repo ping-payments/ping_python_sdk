@@ -54,6 +54,7 @@ def create_payment_order(headers, base_url, split_tree_id):
         the request.
     """
     
+    #Prepare and execute response
     _path = '/api/v1/payment_orders'
     _url = base_url + _path
     _payload = {
@@ -82,7 +83,8 @@ def get_payment_order(headers, base_url, payment_order_id):
         code, an error message, and the HTTP body that was received in
         the request.
     """
-  
+
+    #Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}'
     _url = base_url + _path
     response = requests.get(_url, headers=headers)
@@ -108,6 +110,7 @@ def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
         the request.
     """
     
+    #Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}'
     _url = base_url + _path
     _payload = {
@@ -135,7 +138,8 @@ def close_payment_order(headers, base_url, payment_order_id):
         code, an error message, and the HTTP body that was received in
         the request.
     """
-  
+
+     #Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/close'
     _url = base_url + _path
     response = requests.put(_url, headers=headers)
@@ -161,7 +165,8 @@ def settle_payment_order(headers, base_url, payment_order_id):
         code, an error message, and the HTTP body that was received in
         the request.
     """
-  
+
+     #Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/settle'
     _url = base_url + _path
     response = requests.put(_url, headers=headers)
@@ -186,7 +191,8 @@ def split_payment_order(headers, base_url, payment_order_id):
         code, an error message, and the HTTP body that was received in
         the request.
     """
-  
+
+    #Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/split'
     _url = base_url + _path 
     response = requests.put(_url, headers=headers)
