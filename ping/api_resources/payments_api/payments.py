@@ -3,15 +3,15 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def initiate_payment(headers, base_url, payment_object, payment_order_id):
-    """Does a POST request to '/api/v1/payment_orders/{payment_order_id}/payments. 
+    """Does a POST request to '/api/v1/payment_orders/{payment_order_id}/payments.
 
-    Initiates a payment for a payment order. 
+    Initiates a payment for a payment order.
     Args (provided by the tenant):
-      payment_object (object, required): An object containing all information needed to initiate a payment   
-      payment_order_id (string, required): An ID of a specific Payment Order 
+      payment_object (object, required): An object containing all information needed to initiate a payment
+      payment_order_id (string, required): An ID of a specific Payment Order
     Returns:
       Response: An object with the response value as well as other
-      useful information such as status codes and headers.  
+      useful information such as status codes and headers.
     Raises:
       APIException: When an error occurs while fetching the data from
       the remote API. This exception includes the HTTP Response
@@ -24,22 +24,22 @@ def initiate_payment(headers, base_url, payment_object, payment_order_id):
     _url = base_url + _path
     response = requests.post(_url, headers=headers, json=payment_object)
 
-    # deserialize and check errors  
+    # deserialize and check errors
     decoded = json_deserialize(response.text)
     _result = check_errors(response, decoded)
     return _result
 
 
 def get_payment(headers, base_url, payment_order_id, payment_id):
-    """Does a GET request to /api/v1/payment_orders/{payment_order_id}/payments/{payment_id}. 
+    """Does a GET request to /api/v1/payment_orders/{payment_order_id}/payments/{payment_id}.
 
     Retrieves a payment from a payment order
     Args (provided by the tenant):
-      payment_order_id (string, required): A string cointaining the ID of a specific payment order 
+      payment_order_id (string, required): A string cointaining the ID of a specific payment order
       payment_id (string, required): A string cointaining the ID of a specific payment
     Returns:
       Response: An object with the response value as well as other
-      useful information such as status codes and headers.  
+      useful information such as status codes and headers.
     Raises:
       APIException: When an error occurs while fetching the data from
       the remote API. This exception includes the HTTP Response
@@ -52,7 +52,7 @@ def get_payment(headers, base_url, payment_order_id, payment_id):
     _url = base_url + _path
     response = requests.get(_url, headers=headers)
 
-    # deserialize and check errors  
+    # deserialize and check errors
     decoded = json_deserialize(response.text)
     _result = check_errors(response, decoded)
     return _result
