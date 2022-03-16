@@ -4,7 +4,7 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 def get_merchants(headers, base_url):
     """Does a GET request to /api/v1/merchants. 
-        
+
     Lists merchants associated with a tenant. The merchant details
     include email, id, name, organization number and phone number. 
 
@@ -22,19 +22,20 @@ def get_merchants(headers, base_url):
         the request.
     """
 
-    #Prepare and execute response
+    # Prepare and execute response
     _path = '/api/v1/merchants'
     _url = base_url + _path
     response = requests.get(_url, headers=headers)
 
-    #deserialize and check errors 
+    # deserialize and check errors 
     decoded = json_deserialize(response.text)
     _result = check_errors(response, decoded)
     return _result
 
+
 def create_new_merchant(headers, base_url, merchant_object):
     """Does a POST request to /api/v1/merchants. 
-    
+
     Creates a new merchants for a tenant. 
     You must provide a object with the following values:
     - "name"
@@ -55,19 +56,20 @@ def create_new_merchant(headers, base_url, merchant_object):
         the request.
     """
 
-    #Prepare and execute response 
+    # Prepare and execute response 
     _path = '/api/v1/merchants'
     _url = base_url + _path
     response = requests.post(_url, headers=headers, json=merchant_object)
-    
-    #deserialize and check errors 
+
+    # deserialize and check errors 
     decoded = json_deserialize(response.text)
     _result = check_errors(response, decoded)
     return _result
 
+
 def get_specific_merchant(headers, base_url, merchant_id):
     """Does a GET request to /api/v1/merchants/{merchant_id}. 
-    
+
     Provides details for a single merchant. The details include email, id,
     name, organization name, organization number, phone number and status.
 
@@ -85,14 +87,12 @@ def get_specific_merchant(headers, base_url, merchant_id):
         the request.
     """
 
-    #Prepare and execute response 
+    # Prepare and execute response 
     _path = f'/api/v1/merchants/{merchant_id}'
     _url = base_url + _path
     response = requests.get(_url, headers=headers)
 
-    #deserialize and check errors 
+    # deserialize and check errors 
     decoded = json_deserialize(response.text)
     _result = check_errors(response, decoded)
     return _result
-    
-
