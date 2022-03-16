@@ -46,4 +46,3 @@ class ApiResponse:
 
     def __repr__(self):
         return '<ApiResponse [%s]>' % (self.text)
-

@@ -1,6 +1,5 @@
 import requests
-from ping.helper.apiResponse import ApiResponse
-from ping.helper.apiHelper import json_deserialize
+from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def get_merchants(headers, base_url):
@@ -26,18 +25,14 @@ def get_merchants(headers, base_url):
     #Prepare and execute response
     _path = '/api/v1/merchants'
     _url = base_url + _path
-    _response = requests.get(_url, headers=headers)
+    response = requests.get(_url, headers=headers)
 
-    #deserialize 
-    decoded = json_deserialize(_response.text)
-    if type(decoded) is dict:
-        _errors = decoded.get('errors')
-    else:
-        _errors = None
-    _result = ApiResponse(_response, body=decoded, errors=_errors)
+    #deserialize and check errors 
+    decoded = json_deserialize(response.text)
+    _result = check_errors(response, decoded)
     return _result
 
-def create_new_merchant(headers, base_url, object):
+def create_new_merchant(headers, base_url, merchant_object):
     """Does a POST request to /api/v1/merchants. 
     
     Creates a new merchants for a tenant. 
@@ -63,15 +58,11 @@ def create_new_merchant(headers, base_url, object):
     #Prepare and execute response 
     _path = '/api/v1/merchants'
     _url = base_url + _path
-    _response = requests.post(_url, headers=headers, json=object)
-
-    #deserialize 
-    decoded = json_deserialize(_response.text)
-    if type(decoded) is dict:
-        _errors = decoded.get('errors')
-    else:
-        _errors = None
-    _result = ApiResponse(_response, body=decoded, errors=_errors)
+    response = requests.post(_url, headers=headers, json=merchant_object)
+    
+    #deserialize and check errors 
+    decoded = json_deserialize(response.text)
+    _result = check_errors(response, decoded)
     return _result
 
 def get_specific_merchant(headers, base_url, merchant_id):
@@ -94,17 +85,14 @@ def get_specific_merchant(headers, base_url, merchant_id):
         the request.
     """
 
-     #Prepare and execute response 
+    #Prepare and execute response 
     _path = f'/api/v1/merchants/{merchant_id}'
     _url = base_url + _path
-    _response = requests.get(_url, headers=headers)
+    response = requests.get(_url, headers=headers)
 
-    #deserialize 
-    decoded = json_deserialize(_response.text)
-    if type(decoded) is dict:
-        _errors = decoded.get('errors')
-    else:
-        _errors = None
-    _result = ApiResponse(_response, body=decoded, errors=_errors)
+    #deserialize and check errors 
+    decoded = json_deserialize(response.text)
+    _result = check_errors(response, decoded)
     return _result
+    
 

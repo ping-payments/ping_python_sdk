@@ -4,6 +4,7 @@ from ping.api_resources.payments_api import payments
 from ping.helper.apiHelper import get_base_url
 
 class PaymentsApi:
+    """A controller to access all endpoints in the API."""
     def __init__(self, tenant_id="", environment="sandbox"):
         self.tenant_id = tenant_id
         self.environment = environment
@@ -15,20 +16,23 @@ class PaymentsApi:
     @property
     def merchant(self):
         return Merchant(self.headers, self.base_url)
+
     @property
     def paymentOrder(self):
         return PaymentOrder(self.headers, self.base_url)
+
     @property
     def payment(self):
         return Payment(self.headers, self.base_url)
   
 class BaseEndpoints:
+    """Endpoint classes inherit from this base class"""
     def __init__(self, headers, base_url):
         self.headers = headers
         self.base_url = base_url
 
-#Merchant endpoints
 class Merchant(BaseEndpoints):
+    """Endpoint class for merchant endpoints"""
     def get_merchants(self):
         return merchants.get_merchants(self.headers, self.base_url)
   
@@ -38,8 +42,8 @@ class Merchant(BaseEndpoints):
     def get_specific_merchant(self, merchant_id):
         return merchants.get_specific_merchant(self.headers, self.base_url, merchant_id)
      
-#Payment Order endpoints
 class PaymentOrder(BaseEndpoints):
+    """Endpoint class for payment order endpoints"""
     def get_payments_orders(self, date_from=None, date_to=None):
         return paymentOrders.get_payment_orders(self.headers, self.base_url, date_from, date_to)
     
@@ -61,8 +65,8 @@ class PaymentOrder(BaseEndpoints):
     def split_payment_order(self, payment_order_id):
         return paymentOrders.split_payment_order(self.headers, self.base_url, payment_order_id)
    
-#Payment endpoints
 class Payment(BaseEndpoints):
+    """Endpoint class for payment endpoints"""
     def initiate_payment(self, obj, payment_order_id):
         return payments.initiate_payment(self.headers, self.base_url, obj, payment_order_id)
   
