@@ -16,6 +16,7 @@ class TestMerchant(unittest.TestCase):
         self.assertTrue(response.is_success())
         self.assertFalse(response.is_error())
         self.assertIsNotNone(response.body)
+        self.assertIsNone(response.errors)
 
     def test_create_new_merchant(self):
         response = self.payments_api.merchant.create_new_merchant(
@@ -33,6 +34,7 @@ class TestMerchant(unittest.TestCase):
         self.assertTrue(response.is_success())
         self.assertFalse(response.is_error())
         self.assertIsNotNone(response.body)
+        self.assertIsNone(response.errors)
 
     def test_get_specific_merchant(self):
         response = self.payments_api.merchant.get_specific_merchant("612f2128-e26f-4cb1-80b6-2895af31f8b4")
@@ -42,6 +44,7 @@ class TestMerchant(unittest.TestCase):
         self.assertTrue(response.is_success())
         self.assertFalse(response.is_error())
         self.assertIsNotNone(response.body)
+        self.assertIsNone(response.errors)
 
 
 if __name__ == '__main__':
