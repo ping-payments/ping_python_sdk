@@ -10,13 +10,8 @@ def initiate_payment(headers, base_url, payment_object, payment_order_id):
       payment_object (object, required): An object containing all information needed to initiate a payment
       payment_order_id (string, required): An ID of a specific Payment Order
     Returns:
-      Response: An object with the response value as well as other
-      useful information such as status codes and headers.
-    Raises:
-      APIException: When an error occurs while fetching the data from
-      the remote API. This exception includes the HTTP Response
-      code, an error message, and the HTTP body that was received in
-      the request.
+      Response: A json object with the response value as well as other
+      useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
@@ -38,14 +33,9 @@ def get_payment(headers, base_url, payment_order_id, payment_id):
       payment_order_id (string, required): A string cointaining the ID of a specific payment order
       payment_id (string, required): A string cointaining the ID of a specific payment
     Returns:
-      Response: An object with the response value as well as other
-      useful information such as status codes and headers.
-    Raises:
-      APIException: When an error occurs while fetching the data from
-      the remote API. This exception includes the HTTP Response
-      code, an error message, and the HTTP body that was received in
-      the request.
-  """
+      Response: A json object with the response value as well as other
+      useful information such as status codes, headers and a potention error.
+    """
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/payments/{payment_id}'

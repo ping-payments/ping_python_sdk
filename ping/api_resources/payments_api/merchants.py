@@ -11,13 +11,8 @@ def get_merchants(headers, base_url):
     Args:
         None arguments.
     Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-    Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+        Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
@@ -38,19 +33,11 @@ def create_new_merchant(headers, base_url, merchant_object):
     You must provide a object with the following values:
     - "name"
     - "organization_number"
-
-    Args:
-        Body: An object containing the fields to
-        POST for the request.
-
+    Args(provided by the tenant):
+       merchant_object (object, required): An object containing required merchant data.
     Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-    Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+        Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
@@ -71,15 +58,10 @@ def get_specific_merchant(headers, base_url, merchant_id):
     name, organization name, organization number, phone number and status.
 
     Args:
-        merchant_id (string). The ID of the of the merchant to retrive.
+        merchant_id (string, required). The ID of the of the merchant to retrive.
     Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-    Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+        Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response

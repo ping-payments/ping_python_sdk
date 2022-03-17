@@ -5,20 +5,15 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 def get_payment_orders(headers, base_url, date_from, date_to):
     """Does a GET request to /api/v1/payment_orders.
 
-      Retrieves a list of payment orders.
-      Args (provided by the tenant):
-        date_from (string, optional): The timestamp for the beginning of
-          the reporting period, in RFC 3339 format. Default: None
-        date_to (string, optional): The timestamp for the end of
-          the reporting period, RFC 3339 format. Default: None
-      Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-      Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+    Retrieves a list of payment orders.
+    Args (provided by the tenant):
+      date_from (string, optional): The timestamp for the beginning of
+        the reporting period, in RFC 3339 format. Default: None
+      date_to (string, optional): The timestamp for the end of
+        the reporting period, RFC 3339 format. Default: None
+    Returns:
+      Response: A json object with the response value as well as other
+      useful information such as status codes, headers and a potention error.
     """
 
     _path = '/api/v1/payment_orders'
@@ -43,24 +38,19 @@ def get_payment_orders(headers, base_url, date_from, date_to):
 def create_payment_order(headers, base_url, split_tree_id):
     """Does a POST request to /api/v1/payment_orders.
 
-      Creates a new payment order.
-      Args (provided by the tenant):
+    Creates a new payment order.
+    Args (provided by the tenant):
         split_tree_id (string, required): An string with a valid split tree ID.
-      Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-      Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+    Returns:
+        Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
     _path = '/api/v1/payment_orders'
     _url = base_url + _path
     _payload = {
-      "split_tree_id": split_tree_id
+        "split_tree_id": split_tree_id
     }
     response = requests.post(_url, headers=headers, json=_payload)
 
@@ -73,17 +63,11 @@ def create_payment_order(headers, base_url, split_tree_id):
 def get_payment_order(headers, base_url, payment_order_id):
     """Does a GET request to /api/v1/payment_orders/{payment_order_id}.
 
-      Retrives a specific payment order.
-      Args (provided by the tenant):
+    Retrives a specific payment order.
+    Args (provided by the tenant):
         payment_order_id (String, required): The ID of the of the payment order to retrive.
-      Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-      Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+    Returns:
+        Response: A json object with the response value as well as other
     """
 
     # Prepare and execute response
@@ -100,24 +84,19 @@ def get_payment_order(headers, base_url, payment_order_id):
 def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
     """Does a PUT request to /api/v1/payment_orders/{payment_order_id}.
 
-      Updates the split tree of a specific payment order.
-      Args (provided by the tenant):
+    Updates the split tree of a specific payment order.
+    Args (provided by the tenant):
         payment_order_id (String, required): The ID of the of the payment order to update.
         split_tree_id (String, required): An string with a valid split tree ID.
-      Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-      Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+    Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}'
     _url = base_url + _path
     _payload = {
-      "split_tree_id": split_tree_id
+        "split_tree_id": split_tree_id
     }
     response = requests.put(_url, headers=headers, json=_payload)
 
@@ -130,17 +109,12 @@ def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
 def close_payment_order(headers, base_url, payment_order_id):
     """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/close'.
 
-      Closes a specific payment order.
-      Args (provided by the tenant):
-         payment_order_id (String, required): The ID of the of the payment order to close.
-      Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-      Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+    Closes a specific payment order.
+    Args (provided by the tenant):
+        payment_order_id (String, required): The ID of the of the payment order to close.
+    Returns:
+        Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
@@ -157,17 +131,12 @@ def close_payment_order(headers, base_url, payment_order_id):
 def settle_payment_order(headers, base_url, payment_order_id):
     """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/settle'.
 
-      Settle a specific payment order.
-      Args (provided by the tenant):
-         payment_order_id (String, required): The ID of the of the payment order to settle.
-      Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-      Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+    Settle a specific payment order.
+    Args (provided by the tenant):
+        payment_order_id (String, required): The ID of the of the payment order to settle.
+    Returns:
+        Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
@@ -184,17 +153,12 @@ def settle_payment_order(headers, base_url, payment_order_id):
 def split_payment_order(headers, base_url, payment_order_id):
     """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/split.
 
-      Split a specific payment order.
-      Args (provided by the tenant):
-         payment_order_id (String, required): The ID of the of the payment order to split.
-      Returns:
-        Response: An object with the response value as well as other
-        useful information such as status codes and headers.
-      Raises:
-        APIException: When an error occurs while fetching the data from
-        the remote API. This exception includes the HTTP Response
-        code, an error message, and the HTTP body that was received in
-        the request.
+    Split a specific payment order.
+    Args (provided by the tenant):
+        payment_order_id (String, required): The ID of the of the payment order to split.
+    Returns:
+        Response: A json object with the response value as well as other
+        useful information such as status codes, headers and a potention error.
     """
 
     # Prepare and execute response
