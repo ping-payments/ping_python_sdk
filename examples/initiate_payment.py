@@ -12,7 +12,7 @@ payment_object = {
   "metadata": {
     "delivery_id": "368745"
   },
-  "method": "mobile",
+  "method": "dummy",
   "order_items": [
     {
       "amount": 2500,
@@ -25,11 +25,8 @@ payment_object = {
       "vat_rate": 12
     }
   ],
-  "provider": "swish",
-  "provider_method_parameters": {
-    "message": "Marios Pasta from Pasta La Vista",
-    "phone_number": "0700000000"
-  },
+  "provider": "dummy",
+  "provider_method_parameters": {},
   "status_callback_url": "https://somesite.com/callback"
 }
 
@@ -39,5 +36,6 @@ if result.is_success():
     print(result.body)
     print("success")
 elif result.is_error():
+    print(result.status_code)
     print(result.errors)
     print("error")
