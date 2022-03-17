@@ -15,40 +15,18 @@ class TestPaymentOrder(unittest.TestCase):
         response = self.payments_api.paymentOrder.get_payments_orders()
 
         # tests with start-end date
-        self.assertIsNotNone(response)
-        self.assertEqual(response_date.status_code, 200)
-        self.assertTrue(response_date.is_success())
-        self.assertFalse(response_date.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response_date)
 
         # tests without date
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response)
 
     def test_create_payment_order(self):
         response = self.payments_api.paymentOrder.create_payment_order(self.split_tree_id)
-
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response)
 
     def test_get_payment_order(self):
         response = self.payments_api.paymentOrder.get_payment_order(self.payment_order_id)
-
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response)
 
     def test_update_payment_order(self):
         '''
@@ -56,42 +34,26 @@ class TestPaymentOrder(unittest.TestCase):
             self.payment_order_id,
             self.split_tree_id
         )
-
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 204)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response, 204)
         '''
 
     def test_close_payment_order(self):
         response = self.payments_api.paymentOrder.close_payment_order(self.payment_order_id)
-
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 204)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response, 204)
 
     def test_settle_payment_order(self):
         response = self.payments_api.paymentOrder.settle_payment_order(self.payment_order_id)
-
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 204)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response, 204)
 
     def test_split_payment_order(self):
         response = self.payments_api.paymentOrder.split_payment_order(self.payment_order_id)
+        self.run_tests(response, 204)
 
+    def run_tests(self, response, status=200):
         self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 204)
-        self.assertTrue(response.is_success())
+        self.assertEqual(response.status_code, status)
         self.assertFalse(response.is_error())
+        self.assertTrue(response.is_success())
         self.assertIsNotNone(response.body)
         self.assertIsNone(response.errors)
 

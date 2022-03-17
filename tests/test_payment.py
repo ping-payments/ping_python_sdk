@@ -14,12 +14,7 @@ class TestPayment(unittest.TestCase):
         payment_id = "c498dba8-bf28-4252-a16a-7c6192c05bc9"
 
         response = self.payments_api.payment.get_payment(payment_order_id, payment_id)
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse(response.is_error())
-        self.assertTrue(response.is_success())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response)
 
     def test_initiate_payment(self):
 
@@ -51,6 +46,9 @@ class TestPayment(unittest.TestCase):
         }
 
         response = self.payments_api.payment.initiate_payment(dummy_body, payment_order_id)
+        self.run_tests(response)
+
+    def run_tests(self, response):
         self.assertIsNotNone(response)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.is_error())

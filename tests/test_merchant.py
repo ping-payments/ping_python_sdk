@@ -10,13 +10,7 @@ class TestMerchant(unittest.TestCase):
 
     def test_get_merchants(self):
         response = self.payments_api.merchant.get_merchants()
-
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response)
 
     def test_create_new_merchant(self):
         response = self.payments_api.merchant.create_new_merchant(
@@ -28,21 +22,17 @@ class TestMerchant(unittest.TestCase):
                 }
             }
         )
-
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.is_success())
-        self.assertFalse(response.is_error())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+        self.run_tests(response)
 
     def test_get_specific_merchant(self):
         response = self.payments_api.merchant.get_specific_merchant("612f2128-e26f-4cb1-80b6-2895af31f8b4")
+        self.run_tests(response)
 
+    def run_tests(self, response):
         self.assertIsNotNone(response)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.is_success())
         self.assertFalse(response.is_error())
+        self.assertTrue(response.is_success())
         self.assertIsNotNone(response.body)
         self.assertIsNone(response.errors)
 
