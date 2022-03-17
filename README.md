@@ -24,9 +24,8 @@ The SDK supports the following versions of Python:
 
 Install the latest SDK using pip:
 
-```
+```sh
 pip install pingSDK
-
 ```
 
 ## Payments API
