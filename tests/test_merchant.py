@@ -32,15 +32,7 @@ class TestMerchant(unittest.TestCase):
     
     # creates a merchant with incorrect values inside merchant object (status code 422)
     def test_create_new_merchant_422(self):
-        response = self.payments_api.merchant.create_new_merchant(
-            {
-                "name": 0,
-                "organization": {
-                    "country": "SE",
-                    "se_organization_number": "555555-5555"
-                }
-            }
-        )
+        response = self.payments_api.merchant.create_new_merchant({})
         self.test_helper.run_tests(self, response, 422)
 
 # Get Specific Merchant Tests
