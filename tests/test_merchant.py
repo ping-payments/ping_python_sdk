@@ -1,18 +1,24 @@
 from ping.payments_api import PaymentsApi
 import unittest
-
+from test_helper import testHelper
+import uuid
 
 class TestMerchant(unittest.TestCase):
 
     @classmethod
-    def setUpClass(clf):
-        clf.payments_api = PaymentsApi("a2a4f648-a50b-42fb-bda8-00c6e2f295ea")
+    def setUpClass(cls):
+        cls.payments_api = PaymentsApi("a2a4f648-a50b-42fb-bda8-00c6e2f295ea")
+        cls.test_helper = testHelper
 
-    def test_get_merchants(self):
+# Get Merchants Tests
+    # gets merchants successfully
+    def test_get_merchants_200(self):
         response = self.payments_api.merchant.get_merchants()
-        self.run_tests(response)
+        self.test_helper.run_tests(self, response)
 
-    def test_create_new_merchant(self):
+# Create New Merchant Tests
+    # creates a merchant correctly (status code 200)
+    def test_create_new_merchant_200(self):
         response = self.payments_api.merchant.create_new_merchant(
             {
                 "name": "Tomten",
@@ -22,19 +28,28 @@ class TestMerchant(unittest.TestCase):
                 }
             }
         )
-        self.run_tests(response)
+        self.test_helper.run_tests(self, response)
+    
+    # creates a merchant with incorrect values inside merchant object (status code 422)
+    def test_create_new_merchant_422(self):
+        response = self.payments_api.merchant.create_new_merchant({})
+        self.test_helper.run_tests(self, response, 422)
 
-    def test_get_specific_merchant(self):
-        response = self.payments_api.merchant.get_specific_merchant("612f2128-e26f-4cb1-80b6-2895af31f8b4")
-        self.run_tests(response)
+# Get Specific Merchant Tests
+    # get a specific merchant correctly (status code 200)
+    def test_get_specific_merchant_200(self):
+        response = self.payments_api.merchant.get_specific_merchant("70166bfa-2b5f-42f8-abe1-a614e32ad1b2")
+        self.test_helper.run_tests(self, response)
 
-    def run_tests(self, response):
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse(response.is_error())
-        self.assertTrue(response.is_success())
-        self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)
+    # get a specific merchant with wrong id format (status code 422)
+    def test_get_specific_merchant_422(self):
+        response = self.payments_api.merchant.get_specific_merchant(0)
+        self.test_helper.run_tests(self, response, 422)
+    
+    # get a specific merchant with a non-existing id (status code 404)
+    def test_get_specific_merchant_404(self):
+        response = self.payments_api.merchant.get_specific_merchant(uuid.uuid4())
+        self.test_helper.run_tests(self, response, 404)
 
 
 if __name__ == '__main__':

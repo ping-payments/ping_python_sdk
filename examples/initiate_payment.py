@@ -6,28 +6,30 @@ payments_api = PaymentsApi(tenant_id=tenant_id)
 payment_order_id = "8a6a4586-e082-49fe-b408-b92e9dc746ec"
 payment_object = {
   "currency": "SEK",
-  "merchant_amounts": {
-    "075b5c3c-3f17-435d-ab84-0bc57d8e67d4": 9400,
- },
   "metadata": {
     "delivery_id": "368745"
   },
+  "total_amount": 9400,
   "method": "dummy",
   "order_items": [
-    {
-      "amount": 2500,
-      "name": "Delivery, Marios Pasta (Pasta La Vista)",
-      "vat_rate": 12
+        {
+            "amount": 2500,
+            "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
+            "name": "Delivery, Marios Pasta (Pasta La Vista)",
+            "vat_rate": 12
+        },
+        {
+            "amount": 6900,
+            "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
+            "name": "Marios Pasta (Pasta La Vista)",
+            "vat_rate": 12
+        }
+    ],
+    "provider": "dummy",
+    "provider_method_parameters": {
+        "desired_payment_status": "COMPLETED"
     },
-    {
-      "amount": 6900,
-      "name": "Marios Pasta (Pasta La Vista)",
-      "vat_rate": 12
-    }
-  ],
-  "provider": "dummy",
-  "provider_method_parameters": {},
-  "status_callback_url": "https://somesite.com/callback"
+    "status_callback_url": "https://somesite.com/callback"
 }
 
 result = payments_api.payment.initiate_payment(payment_object, payment_order_id)

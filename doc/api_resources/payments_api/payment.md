@@ -36,16 +36,16 @@ def initiate_payment(payment_object, payment_order_id)
 
 ## payment_object
 
-| Containing                   | Type               | Required | Description                                                                                                                                                                                                                |
-| ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                              |
-| `merchant_amounts`           | `object`           | Yes      | An object mapping a `merchant_id` to the amount of the payment intended for them. The values are written in cents of the given currency. The total sum of the values must be equal as the total sum of all the order items |
-| `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the Payment                                                                                                                                                |
-| `method`                     | `string`           | Yes      | Enum: `mobile`, `pis`,`card`,`invoice`,`autogiro` <br>The payment method for this payment                                                                                                                                  |
-| `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(in cents of the given currency),a `name`(name of the item) and a `vat_rate`(the vat rate of the item)                                                   |
-| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot` <br>The payment method provider                                                                                                                             |
-| `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                     |
-| `status_callback_url`        | `string`           | Yes      | The URL where you want you callback status updates on the payment                                                                                                                                                          |
+| Containing                   | Type               | Required | Description                                                                                                                                                                                                                                                                |
+| ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                              |
+| `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the Payment                                                                                                                                                                                                |
+| `total_amount`               | `integer`          | Yes      | The total sum of all the payments                                                                                                                                                                                                                                          |
+| `method`                     | `string`           | Yes      | Enum: `mobile`, `pis`,`card`,`invoice`,`autogiro` <br>The payment method for this payment                                                                                                                                                                                  |
+| `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency),a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
+| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot` <br>The payment method provider                                                                                                                                                                             |
+| `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                                                                     |
+| `status_callback_url`        | `string`           | Yes      | The URL where you want you callback status updates on the payment                                                                                                                                                                                                          |
 
 ## provider_method_parameters
 
@@ -188,21 +188,21 @@ Example:
 
   payment_object = {
     "currency": "SEK",
-    "merchant_amounts": {
-      "55555555-5555-5555-5555-555555555555": 9400,
-    },
     "metadata": {
       "delivery_id": "368745"
     },
+    "total_amount": 9400,
     "method": "mobile",
     "order_items": [
       {
         "amount": 2500,
+        "merchant_id": "55555555-5555-5555-5555-555555555555",
         "name": "Delivery, Pasta (Pasta Place)",
         "vat_rate": 12
       },
       {
         "amount": 6900,
+        "merchant_id": "55555555-5555-5555-5555-555555555555",
         "name": "Pasta (Pasta Place)",
         "vat_rate": 12
       }
