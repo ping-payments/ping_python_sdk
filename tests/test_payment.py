@@ -48,7 +48,7 @@ class TestPayment(unittest.TestCase):
         payment_id = "c498dba8-bf28-4252-a16a-7c6192c05bc9"
 
         response = self.payments_api.payment.get_payment(self.payment_order_id, payment_id)
-        self.test_helper.run_tests(self, response, 500)
+        self.test_helper.run_tests(self, response, 200)
 
     # gets payment with an incorrect id
     def test_get_payment_404(self):
