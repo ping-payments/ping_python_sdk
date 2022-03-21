@@ -14,7 +14,7 @@ class TestPaymentOrder(unittest.TestCase):
     def setUp(self):
         self.payment_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
 
-# Get Patment Orders Tests
+# Get Payment Orders Tests
     # get payment orders correclty (status code 200)
     def test_get_payment_orders_200(self):
         response_date = self.payments_api.paymentOrder.get_payments_orders("2019-10-12", "2020-10-12")
