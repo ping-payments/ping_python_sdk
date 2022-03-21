@@ -1,7 +1,6 @@
 from ping.payments_api import PaymentsApi
 import unittest
 from test_helper import testHelper
-import uuid
 
 
 class TestPayment(unittest.TestCase):
@@ -11,10 +10,9 @@ class TestPayment(unittest.TestCase):
         cls.test_helper = testHelper
         cls.payment_order_id = "8a6a4586-e082-49fe-b408-b92e9dc746ec"
         cls.payments_api = PaymentsApi(
-            tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
+            tenant_id="a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
         )
-        
-        
+
     def setUp(self):
         self.dummy_body = {
             "currency": "SEK",
@@ -26,19 +24,21 @@ class TestPayment(unittest.TestCase):
             "order_items": [
                 {
                     "amount": 2500,
-                    "merchant_id": "075b5c3c-3f17-435d-ab84-0bc57d8e67d4",
+                    "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
                     "name": "Delivery, Marios Pasta (Pasta La Vista)",
                     "vat_rate": 12
                 },
                 {
                     "amount": 6900,
-                    "merchant_id": "075b5c3c-3f17-435d-ab84-0bc57d8e67d4",
+                    "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
                     "name": "Marios Pasta (Pasta La Vista)",
                     "vat_rate": 12
                 }
             ],
             "provider": "dummy",
-            "provider_method_parameters": {},
+            "provider_method_parameters": {
+                "desired_payment_status": "COMPLETED"
+            },
             "status_callback_url": "https://somesite.com/callback"
         }
 
@@ -48,8 +48,8 @@ class TestPayment(unittest.TestCase):
         payment_id = "c498dba8-bf28-4252-a16a-7c6192c05bc9"
 
         response = self.payments_api.payment.get_payment(self.payment_order_id, payment_id)
-        self.test_helper.run_tests(self, response,500)
-    
+        self.test_helper.run_tests(self, response, 500)
+
     # gets payment with an incorrect id
     def test_get_payment_404(self):
         payment_id = ""

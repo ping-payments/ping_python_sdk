@@ -38,7 +38,7 @@ class TestMerchant(unittest.TestCase):
 # Get Specific Merchant Tests
     # get a specific merchant correctly (status code 200)
     def test_get_specific_merchant_200(self):
-        response = self.payments_api.merchant.get_specific_merchant("612f2128-e26f-4cb1-80b6-2895af31f8b4")
+        response = self.payments_api.merchant.get_specific_merchant("70166bfa-2b5f-42f8-abe1-a614e32ad1b2")
         self.test_helper.run_tests(self, response)
 
     # get a specific merchant with wrong id format (status code 422)
