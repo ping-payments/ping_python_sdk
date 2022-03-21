@@ -18,9 +18,6 @@ class TestPayment(unittest.TestCase):
     def setUp(self):
         self.dummy_body = {
             "currency": "SEK",
-            "merchant_amounts": {
-                "075b5c3c-3f17-435d-ab84-0bc57d8e67d4": 9400,
-                },
             "metadata": {
                 "delivery_id": "368745"
                 },
@@ -28,11 +25,13 @@ class TestPayment(unittest.TestCase):
             "order_items": [
                 {
                     "amount": 2500,
+                    "merchant_id": "075b5c3c-3f17-435d-ab84-0bc57d8e67d4",
                     "name": "Delivery, Marios Pasta (Pasta La Vista)",
                     "vat_rate": 12
                 },
                 {
                     "amount": 6900,
+                    "merchant_id": "075b5c3c-3f17-435d-ab84-0bc57d8e67d4",
                     "name": "Marios Pasta (Pasta La Vista)",
                     "vat_rate": 12
                 }

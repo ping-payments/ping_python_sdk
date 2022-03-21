@@ -6,21 +6,21 @@ payments_api = PaymentsApi(tenant_id=tenant_id)
 payment_order_id = "8a6a4586-e082-49fe-b408-b92e9dc746ec"
 payment_object = {
   "currency": "SEK",
-  "merchant_amounts": {
-    "075b5c3c-3f17-435d-ab84-0bc57d8e67d4": 9400,
- },
   "metadata": {
     "delivery_id": "368745"
   },
+  "total_amount": 9400,
   "method": "dummy",
   "order_items": [
     {
       "amount": 2500,
+      "merchant_id": "075b5c3c-3f17-435d-ab84-0bc57d8e67d4",
       "name": "Delivery, Marios Pasta (Pasta La Vista)",
       "vat_rate": 12
     },
     {
       "amount": 6900,
+      "merchant_id": "075b5c3c-3f17-435d-ab84-0bc57d8e67d4",
       "name": "Marios Pasta (Pasta La Vista)",
       "vat_rate": 12
     }
