@@ -40,12 +40,12 @@ def initiate_payment(payment_object, payment_order_id)
 | ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                              |
 | `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the Payment                                                                                                                                                                                                |
-| `total_amount`               | `integer`          | Yes      | The total sum of all the payments                                                                                                                                                                                                                                          |
 | `method`                     | `string`           | Yes      | Enum: `mobile`, `pis`,`card`,`invoice`,`autogiro` <br>The payment method for this payment                                                                                                                                                                                  |
 | `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency),a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
-| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot` <br>The payment method provider                                                                                                                                                                             |
+| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq` <br>The payment method provider                                                                                                                                                               |
 | `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                                                                     |
 | `status_callback_url`        | `string`           | Yes      | The URL where you want you callback status updates on the payment                                                                                                                                                                                                          |
+| `total_amount`               | `integer`          | Yes      | The total sum of all the payments                                                                                                                                                                                                                                          |
 
 ## provider_method_parameters
 
@@ -98,6 +98,13 @@ The diffrent `provider_method_parameters` needed for each provider. Remember to 
 | Containing   | Type     | Required | Description                       |
 | ------------ | -------- | -------- | --------------------------------- |
 | `mandate_id` | `string` | Yes      | Ping Payments Autogiro mandate ID |
+
+### Payment Iq
+
+| Containing    | Type     | Required | Description                                                                |
+| ------------- | -------- | -------- | -------------------------------------------------------------------------- |
+| `error_url`   | `string` | Yes      | An URL to which the user is directed to if the payment fails               |
+| `success_url` | `string` | Yes      | An URL to which the user is directed to at the end of a successful payment |
 
 ## Response Type
 

@@ -20,7 +20,6 @@ class TestPayment(unittest.TestCase):
                 "delivery_id": "368745"
                 },
             "method": "dummy",
-            "total_amount": 9400,
             "order_items": [
                 {
                     "amount": 2500,
@@ -39,7 +38,8 @@ class TestPayment(unittest.TestCase):
             "provider_method_parameters": {
                 "desired_payment_status": "COMPLETED"
             },
-            "status_callback_url": "https://somesite.com/callback"
+            "status_callback_url": "https://somesite.com/callback",
+            "total_amount": 9400
         }
 
 # Get Payments Tests
