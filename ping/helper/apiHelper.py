@@ -23,7 +23,7 @@ def json_deserialize(json, unboxing_function=None, as_dict=False):
 
     if as_dict:
         return {k: unboxing_function(v) for k, v in decoded.items()}
-    elif type(decoded, list):
+    elif isinstance(decoded, list):
         return [unboxing_function(element) for element in decoded]
     else:
         return unboxing_function(decoded)
