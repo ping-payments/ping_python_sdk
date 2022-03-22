@@ -21,7 +21,7 @@ class TestMerchant(unittest.TestCase):
     def test_create_new_merchant_200(self):
         response = self.payments_api.merchant.create_new_merchant(
             {
-                "name": "Tomten",
+                "name": "Company inc",
                 "organization": {
                     "country": "SE",
                     "se_organization_number": "555555-5555"
