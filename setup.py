@@ -21,7 +21,6 @@ setup(
         'requests~=2.25',
     ],
     tests_require=[
-         'mypy>=0.910',
          'flake8>=3.9',
          'tox>=3.24'
     ],
