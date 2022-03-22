@@ -5,8 +5,8 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setup(
-    name='ping_python_sdk',
-    version='0.1.0',
+    name='ping-sdk',
+    version='0.3.0',
     description='Use Ping Payments API to manage merchants, payment orders and payments',
     long_description=long_description,
     long_description_content_type="text/markdown",
