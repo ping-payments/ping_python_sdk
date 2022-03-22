@@ -21,7 +21,7 @@ class TestPayment(unittest.TestCase):
         self.assertIsNotNone(response.body)
         self.assertIsNone(response.errors)
 
-    """def test_initiate_payment(self):
+    def test_initiate_payment(self):
 
         payment_order_id = "8a6a4586-e082-49fe-b408-b92e9dc746ec"
         dummy_body = {
@@ -56,7 +56,7 @@ class TestPayment(unittest.TestCase):
         self.assertFalse(response.is_error())
         self.assertTrue(response.is_success())
         self.assertIsNotNone(response.body)
-        self.assertIsNone(response.errors)"""
+        self.assertIsNone(response.errors)
 
 
 if __name__ == '__main__':
