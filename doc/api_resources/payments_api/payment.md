@@ -51,14 +51,14 @@ def initiate_payment(payment_object, payment_order_id)
 
 The diffrent `provider_method_parameters` needed for each provider. Remember to write these as objects
 
-### Swish
+### Swish - method: mobile
 
 | Containing     | Type     | Required | Description                               |
 | -------------- | -------- | -------- | ----------------------------------------- |
 | `message`      | `string` | Yes      | A message associated with the payment.    |
 | `phone_number` | `string` | Yes      | A swish connected phone number of a payer |
 
-### Open Banking
+### Open Banking - method: pis
 
 | Containing    | Type     | Required | Description                                                                |
 | ------------- | -------- | -------- | -------------------------------------------------------------------------- |
@@ -67,7 +67,7 @@ The diffrent `provider_method_parameters` needed for each provider. Remember to 
 | `reference`   | `string` | Yes      | Reference visible in the payers and payees bank account log                |
 | `success_url` | `string` | Yes      | An URL to which the user is directed to at the end of a successful payment |
 
-### Verifone
+### Verifone - method: card
 
 | Containing    | Type     | Required | Description                                                                     |
 | ------------- | -------- | -------- | ------------------------------------------------------------------------------- |
@@ -77,7 +77,7 @@ The diffrent `provider_method_parameters` needed for each provider. Remember to 
 | `last_name`   | `string` | Yes      | The last name of a payer                                                        |
 | `success_url` | `string` | Yes      | An URL to which the payer is directed to when successfully completing a payment |
 
-### Billmate
+### Billmate - method: invoice
 
 | Containing            | Type      | Required | Description                                                      |
 | --------------------- | --------- | -------- | ---------------------------------------------------------------- |
@@ -93,13 +93,13 @@ The diffrent `provider_method_parameters` needed for each provider. Remember to 
 | `national_id_number`  | `string`  | Yes      | The payers national ID number                                    |
 | `phone_number`        | `string`  | Yes      | The payers phone number                                          |
 
-### Bankgirot
+### Bankgirot - method: autogiro
 
 | Containing   | Type     | Required | Description                       |
 | ------------ | -------- | -------- | --------------------------------- |
 | `mandate_id` | `string` | Yes      | Ping Payments Autogiro mandate ID |
 
-### Payment Iq
+### Payment Iq - method: card
 
 | Containing    | Type     | Required | Description                                                                |
 | ------------- | -------- | -------- | -------------------------------------------------------------------------- |
