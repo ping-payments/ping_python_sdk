@@ -26,8 +26,8 @@ t2 = Thread(target=t2)
 
 threads.append(t1)
 threads.append(t2)
-t1.start()
-t2.start()
+t1.start() # Succeed: 200
+t2.start() # Fail: 422
 
 # wait for the threads to complete
 
