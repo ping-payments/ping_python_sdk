@@ -21,7 +21,7 @@ payments_api.payment_order.split_payment_order()
 
 ## Functions
 
-- [Get Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-payment-order)
+- [Get Payment Orders](/doc/api_resources/payments_api//paymentOrder.md#get-payment-orders)
 - [Create New Paymkent Order](/doc/api_resources/payments_api//paymentOrder.md#create-new-payment-order)
 - [Get Specific Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-specific-payment-order)
 - [Update Payment Order](/doc/api_resources/payments_api//paymentOrder.md#update-payment-order)
@@ -29,7 +29,7 @@ payments_api.payment_order.split_payment_order()
 - [Settle Payment Order](/doc/api_resources/payments_api//paymentOrder.md#settle-payment-order)
 - [Split Payment Order](/doc/api_resources/payments_api//paymentOrder.md#split-payment-order)
 
-# Get Payment Order
+# Get Payment Orders
 
 Gets and returns an object of all the payment orders and optionally between dates
 
@@ -137,8 +137,8 @@ payments_api = PaymentsApi(
 )
 
 result = payments_api.payment_order.get_payment_order(
-  date_to = "2019-10-12 00:00:00.00"
-  date_from = "2020-10-12 00:00:00.00"
+  date_to = "yyyy-MM-dd"
+  date_from = "yyyy-MM-dd"
 )
 
 if result.is_success():

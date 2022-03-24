@@ -49,7 +49,7 @@ class Merchant(BaseEndpoints):
 
 class PaymentOrder(BaseEndpoints):
     """Endpoint class for payment order endpoints"""
-    def get_payments_orders(self, date_from=None, date_to=None):
+    def get_payment_orders(self, date_from=None, date_to=None):
         return paymentOrders.get_payment_orders(self.headers, self.base_url, date_from, date_to)
 
     def create_payment_order(self, split_tree_id):
