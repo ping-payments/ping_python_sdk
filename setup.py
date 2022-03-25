@@ -6,12 +6,12 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='ping-sdk',
-    version='0.3.0',
+    version='0.4.0',
     description='Use Ping Payments API to manage merchants, payment orders and payments',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='Ping Payments',
-    author_email='developers@pingpayments.com',
+    author_email='info@pingpayments.com',
     url='https://www.pingpayments.com/',
     license='MIT',
     packages=find_packages(),
