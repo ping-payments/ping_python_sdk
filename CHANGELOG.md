@@ -1,5 +1,19 @@
 # Change Log
 
+## 1.0.0-alpha (2022-03-25)
+
+- The SDK have been updated to support all endpoints of payments API.
+
+- update_payment_order() now working.
+
+- Requirements for which python versions are compatible with the SDKt have been updated and checked.
+
+  - The SDK is compatible Python 3 versions 3.7 and later.
+  
+ - Tests to ensure that the SDK works on several operating systems have been implemented.
+	  
+   - The tests include: Ubuntu, Windows and Mac OS.
+
 ## 0.3.0 (2022-03-21)
 
 An SDK update to support new API changes regarding the initialization of a payment.
