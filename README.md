@@ -20,7 +20,7 @@ Use this Python library to manage Ping Payments resources regarding payments.
 
 The SDK supports the following versions of Python:
 
-- Python 3
+- Python 3 versions 3.7 and later
 
 ## Installation
 
