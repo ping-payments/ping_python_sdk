@@ -1,7 +1,8 @@
-from ping.payments_api import PaymentsApi
 import unittest
-from test_helper import testHelper
 import uuid
+from ping.payments_api import PaymentsApi
+from test_helper import testHelper
+
 
 class TestMerchant(unittest.TestCase):
 

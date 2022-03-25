@@ -1,5 +1,5 @@
-from ping.payments_api import PaymentsApi
 import unittest
+from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
 
@@ -71,7 +71,7 @@ class TestPayment(unittest.TestCase):
         response = self.payments_api.payment.initiate_payment(self.dummy_body, payment_order_id)
         self.test_helper.run_tests(self, response, 422)
 
-    # Initiate a payment on a non-exisiting payment order (status code 404)
+    # Initiate a payment on a non-existing payment order (status code 404)
     def test_initiate_payment_404(self):
         error_payment_order_id = ""
 
