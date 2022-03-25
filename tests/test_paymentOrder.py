@@ -61,33 +61,33 @@ class TestPaymentOrder(unittest.TestCase):
 # Update Payment Order Tests
     # updates a payment order correctly (status code 204)
     def test_update_payment_order_204(self):
-        '''
+        
         response = self.payments_api.paymentOrder.update_payment_order(
             self.payment_order_id,
             self.split_tree_id
         )
         self.test_helper.run_tests(self, response, 204)
-        '''
+        
 
     # updates a payment order with incorrect id format (status code 422)
     def test_update_payment_order_422(self):
-        '''
+        
         response = self.payments_api.paymentOrder.update_payment_order(
             0,
             self.split_tree_id
         )
         self.test_helper.run_tests(self, response, 422)
-        '''
+        
 
     # updates a payment order with a non-existing id (status code 404)
     def test_update_payment_order_404(self):
-        '''
+        
         response = self.payments_api.paymentOrder.update_payment_order(
-            uuid.uuid4(),
+            "",
             self.split_tree_id
         )
         self.test_helper.run_tests(self, response, 404)
-        '''
+        
 
 # Close Payment Order Tests
     # closes a payment order correctly (status code 204)
