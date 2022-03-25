@@ -1,5 +1,5 @@
-import uuid
 import unittest
+import uuid
 from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
@@ -15,7 +15,7 @@ class TestPaymentOrder(unittest.TestCase):
         self.payment_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
 
 # Get Payment Orders Tests
-    # get payment orders correclty (status code 200)
+    # get payment orders correctly (status code 200)
     def test_get_payment_orders_200(self):
         response_date = self.payments_api.paymentOrder.get_payment_orders("2019-10-12", "2020-10-12")
         response = self.payments_api.paymentOrder.get_payment_orders()
@@ -31,7 +31,7 @@ class TestPaymentOrder(unittest.TestCase):
         response_date = self.payments_api.paymentOrder.get_payment_orders("2019-90-12", "2020-10-40")
         self.test_helper.run_tests(self, response_date, 422)
 
-# Create Payemnt Order Tests
+# Create Payment Order Tests
     # creates a payment order correctly (status code 200)
     def test_create_payment_order_200(self):
         response = self.payments_api.paymentOrder.create_payment_order(self.split_tree_id)
@@ -120,7 +120,7 @@ class TestPaymentOrder(unittest.TestCase):
         response = self.payments_api.paymentOrder.settle_payment_order(uuid.uuid4())
         self.test_helper.run_tests(self, response, 404)
 
-# Split Payemnt Order Tests
+# Split Payment Order Tests
     # splits a payment order correctly (status code 200)
     def test_split_payment_order_204(self):
         response = self.payments_api.paymentOrder.split_payment_order(self.payment_order_id)
