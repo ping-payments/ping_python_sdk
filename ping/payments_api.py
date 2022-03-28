@@ -5,7 +5,7 @@ from ping.helper.apiHelper import get_base_url
 
 
 class PaymentsApi:
-    """A controller to access all endpoints in the API."""
+    # A controller to access all endpoints in the API.
     def __init__(self, tenant_id="", environment="sandbox"):
         self.tenant_id = tenant_id
         self.environment = environment
