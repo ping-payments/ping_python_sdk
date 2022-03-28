@@ -3,18 +3,18 @@ from ping.helper.apiResponse import ApiResponse
 
 
 def json_deserialize(json, unboxing_function=None, as_dict=False):
-    """JSON Deserialization of a given string.
-    Args:
-        json (str): The JSON serialized string to deserialize.
-    Returns:
-        dict: A dictionary representing the data contained in the
-            JSON serialized string.
-    """
+    # JSON Deserialization of a given string.
+    # Args:
+    #    json (str): The JSON serialized string to deserialize.
+    # Returns:
+    #    dict: A dictionary representing the data contained in the
+    #        JSON serialized string.
+    
     if json is None:
         return None
 
     try:
-        decoded = jsonpickle.decode(json)
+        decoded = jsonpickle(json)
     except ValueError:
         return json
 
@@ -39,11 +39,9 @@ def check_errors(response, decoded):
 
 
 def get_base_url(environment):
-    base_url = "http://sandbox.pingpayments.com/payments"
 
     if environment == "sandbox":
-        base_url = "http://sandbox.pingpayments.com/payments"
+        return "http://sandbox.pingpayments.com/payments"
     elif environment == "production":
-        base_url = "http://pingpayments.com/payments"
+        return "http://pingpayments.com/payments"
 
-    return base_url

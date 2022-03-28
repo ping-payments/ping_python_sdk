@@ -3,18 +3,18 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def get_payment_orders(headers, base_url, date_from, date_to):
-    """Does a GET request to /api/v1/payment_orders.
+    #Does a GET request to /api/v1/payment_orders.
 
-    Retrieves a list of payment orders.
-    Args (provided by the tenant):
-      date_from (string, optional): The timestamp for the beginning of
-        the reporting period, in RFC 3339 format. Default: None
-      date_to (string, optional): The timestamp for the end of
-        the reporting period, RFC 3339 format. Default: None
-    Returns:
-      Response: A json object with the response value as well as other
-      useful information such as status codes, headers and a potention error.
-    """
+    #Retrieves a list of payment orders.
+    #Args (provided by the tenant):
+    #  date_from (string, optional): The timestamp for the beginning of
+    #    the reporting period, in RFC 3339 format. Default: None
+    #  date_to (string, optional): The timestamp for the end of
+    #    the reporting period, RFC 3339 format. Default: None
+    #Returns:
+    #  Response: A json object with the response value as well as other
+    #  useful information such as status codes, headers and a potention error.
+    
 
     _path = '/api/v1/payment_orders'
 
@@ -36,15 +36,15 @@ def get_payment_orders(headers, base_url, date_from, date_to):
 
 
 def create_payment_order(headers, base_url, split_tree_id):
-    """Does a POST request to /api/v1/payment_orders.
+    # Does a POST request to /api/v1/payment_orders.
 
-    Creates a new payment order.
-    Args (provided by the tenant):
-        split_tree_id (string, required): An string with a valid split tree ID.
-    Returns:
-        Response: A json object with the response value as well as other
-        useful information such as status codes, headers and a potention error.
-    """
+    # Creates a new payment order.
+    # Args (provided by the tenant):
+    #    split_tree_id (string, required): An string with a valid split tree ID.
+    # Returns:
+    #    Response: A json object with the response value as well as other
+    #    useful information such as status codes, headers and a potention error.
+    
 
     # Prepare and execute response
     _path = '/api/v1/payment_orders'
@@ -61,14 +61,14 @@ def create_payment_order(headers, base_url, split_tree_id):
 
 
 def get_payment_order(headers, base_url, payment_order_id):
-    """Does a GET request to /api/v1/payment_orders/{payment_order_id}.
+    # Does a GET request to /api/v1/payment_orders/{payment_order_id}.
 
-    Retrives a specific payment order.
-    Args (provided by the tenant):
-        payment_order_id (String, required): The ID of the of the payment order to retrive.
-    Returns:
-        Response: A json object with the response value as well as other
-    """
+    # Retrives a specific payment order.
+    # Args (provided by the tenant):
+    #    payment_order_id (String, required): The ID of the of the payment order to retrive.
+    # Returns:
+    #    Response: A json object with the response value as well as other
+    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}'
@@ -82,15 +82,15 @@ def get_payment_order(headers, base_url, payment_order_id):
 
 
 def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
-    """Does a PUT request to /api/v1/payment_orders/{payment_order_id}.
+    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}.
 
-    Updates the split tree of a specific payment order.
-    Args (provided by the tenant):
-        payment_order_id (String, required): The ID of the of the payment order to update.
-        split_tree_id (String, required): An string with a valid split tree ID.
-    Response: A json object with the response value as well as other
-        useful information such as status codes, headers and a potention error.
-    """
+    # Updates the split tree of a specific payment order.
+    # Args (provided by the tenant):
+    #    payment_order_id (String, required): The ID of the of the payment order to update.
+    #    split_tree_id (String, required): An string with a valid split tree ID.
+    # Response: A json object with the response value as well as other
+    #    useful information such as status codes, headers and a potention error.
+    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}'
@@ -107,15 +107,15 @@ def update_payment_order(headers, base_url, payment_order_id, split_tree_id):
 
 
 def close_payment_order(headers, base_url, payment_order_id):
-    """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/close'.
+    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}/close'.
 
-    Closes a specific payment order.
-    Args (provided by the tenant):
-        payment_order_id (String, required): The ID of the of the payment order to close.
-    Returns:
-        Response: A json object with the response value as well as other
-        useful information such as status codes, headers and a potention error.
-    """
+    # Closes a specific payment order.
+    # Args (provided by the tenant):
+    #    payment_order_id (String, required): The ID of the of the payment order to close.
+    # Returns:
+    #    Response: A json object with the response value as well as other
+    #    useful information such as status codes, headers and a potention error.
+    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/close'
@@ -129,15 +129,15 @@ def close_payment_order(headers, base_url, payment_order_id):
 
 
 def settle_payment_order(headers, base_url, payment_order_id):
-    """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/settle'.
+    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}/settle'.
 
-    Settle a specific payment order.
-    Args (provided by the tenant):
-        payment_order_id (String, required): The ID of the of the payment order to settle.
-    Returns:
-        Response: A json object with the response value as well as other
-        useful information such as status codes, headers and a potention error.
-    """
+    # Settle a specific payment order.
+    # Args (provided by the tenant):
+    #    payment_order_id (String, required): The ID of the of the payment order to settle.
+    # Returns:
+    #    Response: A json object with the response value as well as other
+    #    useful information such as status codes, headers and a potention error.
+    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/settle'
@@ -151,15 +151,15 @@ def settle_payment_order(headers, base_url, payment_order_id):
 
 
 def split_payment_order(headers, base_url, payment_order_id):
-    """Does a PUT request to /api/v1/payment_orders/{payment_order_id}/split.
+    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}/split.
 
-    Split a specific payment order.
-    Args (provided by the tenant):
-        payment_order_id (String, required): The ID of the of the payment order to split.
-    Returns:
-        Response: A json object with the response value as well as other
-        useful information such as status codes, headers and a potention error.
-    """
+    # Split a specific payment order.
+    # Args (provided by the tenant):
+    #    payment_order_id (String, required): The ID of the of the payment order to split.
+    # Returns:
+    #    Response: A json object with the response value as well as other
+    #    useful information such as status codes, headers and a potention error.
+    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/split'

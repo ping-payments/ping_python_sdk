@@ -29,14 +29,14 @@ class PaymentsApi:
 
 
 class BaseEndpoints:
-    """Endpoint classes inherit from this base class"""
+    # Endpoint classes inherit from this base class
     def __init__(self, headers, base_url):
         self.headers = headers
         self.base_url = base_url
 
 
 class Merchant(BaseEndpoints):
-    """Endpoint class for merchant endpoints"""
+    # Endpoint class for merchant endpoints
     def get_merchants(self):
         return merchants.get_merchants(self.headers, self.base_url)
 
@@ -48,7 +48,7 @@ class Merchant(BaseEndpoints):
 
 
 class PaymentOrder(BaseEndpoints):
-    """Endpoint class for payment order endpoints"""
+    # Endpoint class for payment order endpoints
     def get_payment_orders(self, date_from=None, date_to=None):
         return paymentOrders.get_payment_orders(self.headers, self.base_url, date_from, date_to)
 
@@ -72,7 +72,7 @@ class PaymentOrder(BaseEndpoints):
 
 
 class Payment(BaseEndpoints):
-    """Endpoint class for payment endpoints"""
+    # Endpoint class for payment endpoints
     def initiate_payment(self, obj, payment_order_id):
         return payments.initiate_payment(self.headers, self.base_url, obj, payment_order_id)
 
