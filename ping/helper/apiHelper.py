@@ -14,7 +14,7 @@ def json_deserialize(json, unboxing_function=None, as_dict=False):
         return None
 
     try:
-        decoded = jsonpickle(json)
+        decoded = jsonpickle.decode(json)
     except ValueError:
         return json
 
