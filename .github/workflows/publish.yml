@@ -13,10 +13,11 @@ on:
     types: [published]
 
 jobs:
+
   deploy:
 
     runs-on: ubuntu-latest
-
+    if: ${{ github.event.Tests.conclusion == 'success' }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
