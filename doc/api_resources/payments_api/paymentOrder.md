@@ -21,13 +21,13 @@ payments_api.payment_order.split_payment_order()
 
 ## Functions
 
-- [Get Payment Orders](/doc/api_resources/payments_api//paymentOrder.md#get-payment-orders)
-- [Create New Paymkent Order](/doc/api_resources/payments_api//paymentOrder.md#create-new-payment-order)
-- [Get Specific Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-specific-payment-order)
-- [Update Payment Order](/doc/api_resources/payments_api//paymentOrder.md#update-payment-order)
-- [Close Payment Order](/doc/api_resources/payments_api//paymentOrder.md#close-payment-order)
-- [Settle Payment Order](/doc/api_resources/payments_api//paymentOrder.md#settle-payment-order)
-- [Split Payment Order](/doc/api_resources/payments_api//paymentOrder.md#split-payment-order)
+-   [Get Payment Orders](/doc/api_resources/payments_api//paymentOrder.md#get-payment-orders)
+-   [Create New Paymkent Order](/doc/api_resources/payments_api//paymentOrder.md#create-new-payment-order)
+-   [Get Specific Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-specific-payment-order)
+-   [Update Payment Order](/doc/api_resources/payments_api//paymentOrder.md#update-payment-order)
+-   [Close Payment Order](/doc/api_resources/payments_api//paymentOrder.md#close-payment-order)
+-   [Settle Payment Order](/doc/api_resources/payments_api//paymentOrder.md#settle-payment-order)
+-   [Split Payment Order](/doc/api_resources/payments_api//paymentOrder.md#split-payment-order)
 
 # Get Payment Orders
 
@@ -39,10 +39,12 @@ You need to create a PaymentsApi object with a `tenant_id` as a parameter to acc
 def get_payment_orders(date_from=None, date_to=None)
 ```
 
-| Parameter   | Type            | Required | Format   | Description                                       |
-| ----------- | --------------- | -------- | -------- | ------------------------------------------------- |
-| `date_from` | `string($date)` | No       | RFC 3339 | Start date to find payment orders after that date |
-| `date_to`   | `string($date)` | No       | RFC 3339 | End date to find payment orders before that date  |
+The date-time parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:30Z)
+
+| Parameter   | Type                 | Required | Format   | Description                                       |
+| ----------- | -------------------- | -------- | -------- | ------------------------------------------------- |
+| `date_from` | `string($date-time)` | No       | ISO 8601 | Start date to find payment orders after that date |
+| `date_to`   | `string($date-time)` | No       | ISO 8601 | End date to find payment orders before that date  |
 
 ## Response Type
 
@@ -137,8 +139,8 @@ payments_api = PaymentsApi(
 )
 
 result = payments_api.payment_order.get_payment_order(
-  date_to = "yyyy-MM-dd"
-  date_from = "yyyy-MM-dd"
+  date_to = "2000-03-27T09:42:30Z"
+  date_from = "2022-03-27T09:42:30Z"
 )
 
 if result.is_success():
