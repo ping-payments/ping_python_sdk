@@ -16,8 +16,9 @@ class TestPaymentOrder(unittest.TestCase):
 
 # Get Payment Orders Tests
     # get payment orders correctly (status code 200)
-    def test_get_payment_orders_200(self):
-        response_date = self.payments_api.paymentOrder.get_payment_orders("2019-10-12", "2020-10-12")
+    def test_get_payment_orders_200(self): 
+    
+        response_date = self.payments_api.paymentOrder.get_payment_orders("2020-03-27T09:42:30Z", "2022-03-27T09:42:30Z")
         response = self.payments_api.paymentOrder.get_payment_orders()
 
         # tests with start-end date
@@ -28,7 +29,7 @@ class TestPaymentOrder(unittest.TestCase):
 
     # get payment orders with impossible dates (status code 422)
     def test_get_payment_orders_422(self):
-        response_date = self.payments_api.paymentOrder.get_payment_orders("2019-90-12", "2020-10-40")
+        response_date = self.payments_api.paymentOrder.get_payment_orders("12/90/2019", "40/10/2020")
         self.test_helper.run_tests(self, response_date, 422)
 
 # Create Payment Order Tests
