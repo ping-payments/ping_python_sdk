@@ -1,7 +1,6 @@
 import unittest
 import uuid
 import os
-from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
@@ -10,10 +9,9 @@ class TestPayment(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        load_dotenv()
         cls.test_helper = testHelper
-        cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
-        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
+        cls.payment_order_id = os.environ.get("PAYMENT_ORDER_ID")
+        cls.payments_api = PaymentsApi(os.environ.get("TENANT_ID"))
 
     def setUp(self):
         self.dummy_body = {
