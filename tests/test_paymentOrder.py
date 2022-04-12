@@ -1,7 +1,6 @@
 import unittest
 import uuid
 import os
-from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
@@ -9,13 +8,12 @@ class TestPaymentOrder(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        load_dotenv()
-        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        cls.split_tree_id = os.getenv("SPLIT_TREE_ID")
+        cls.payments_api = PaymentsApi(os.environ.get("TENANT_ID"))
+        cls.split_tree_id = os.environ.get("SPLIT_TREE_ID")
         cls.test_helper = testHelper
 
     def setUp(self):
-        self.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
+        self.payment_order_id = os.environ.get("PAYMENT_ORDER_ID")
 
 # Get Payment Orders Tests
     # get payment orders correctly (status code 200)
