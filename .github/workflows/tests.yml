@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ hiding-IDs ]
   pull_request:
-    branches: [ master ]
+    branches: [ hiding-IDs ]
 
 jobs:
   test:
@@ -32,4 +32,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install tox tox-gh-actions
     - name: Test with tox
+      env: 
+        TENANT_ID: ${{secrets.TENANT_ID}}
+        MERCHANT_ID: ${{secrets.MERCHANT_ID}}
+        PAYMENT_ORDER_ID: ${{secrets.PAYMENT_ORDER_ID}}
+        PAYMENT_ID: ${{secrets.PAYMENT_ID}}
+        SPLIT_TREE_ID: ${{secrets.SPLIT_TREE_ID}}
       run: tox
