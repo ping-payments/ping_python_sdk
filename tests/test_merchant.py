@@ -10,7 +10,7 @@ class TestMerchant(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
 
-        cls.payments_api = PaymentsApi(os.environ.get("TENANT_ID"))
+        cls.payments_api = PaymentsApi(os.environ['TENANT_ID'])
         cls.test_helper = testHelper
 
 # Get Merchants Tests
@@ -41,7 +41,7 @@ class TestMerchant(unittest.TestCase):
 # Get Specific Merchant Tests
     # get a specific merchant correctly (status code 200)
     def test_get_specific_merchant_200(self):
-        response = self.payments_api.merchant.get_specific_merchant(os.environ.get("MERCHANT_ID"))
+        response = self.payments_api.merchant.get_specific_merchant(os.environ['MERCHANT_ID'])
         self.test_helper.run_tests(self, response)
 
     # get a specific merchant with wrong id format (status code 422)

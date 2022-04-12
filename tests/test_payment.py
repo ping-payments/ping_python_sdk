@@ -10,8 +10,8 @@ class TestPayment(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.test_helper = testHelper
-        cls.payment_order_id = os.environ.get("PAYMENT_ORDER_ID")
-        cls.payments_api = PaymentsApi(os.environ.get("TENANT_ID"))
+        cls.payment_order_id = os.environ['PAYMENT_ORDER_ID']
+        cls.payments_api = PaymentsApi(os.environ['TENANT_ID'])
 
     def setUp(self):
         self.dummy_body = {
@@ -23,7 +23,7 @@ class TestPayment(unittest.TestCase):
             "order_items": [
                 {
                     "amount": 2500,
-                    "merchant_id": os.getenv("MERCHANT_ID"),
+                    "merchant_id": os.environ['MERCHANT_ID'],
                     "name": "Delivery, Marios Pasta (Pasta La Vista)",
                     "vat_rate": 12
                 },
@@ -39,7 +39,7 @@ class TestPayment(unittest.TestCase):
 # Get Payments Tests
     # gets payment correctly
     def test_get_payment_200(self):
-        payment_id = os.getenv("PAYMENT_ID")
+        payment_id = os.environ['PAYMENT_ID']
 
         response = self.payments_api.payment.get_payment(self.payment_order_id, payment_id)
         self.test_helper.run_tests(self, response, 200)
