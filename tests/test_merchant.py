@@ -1,5 +1,7 @@
+import os
 import unittest
 import uuid
+from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
@@ -8,7 +10,9 @@ class TestMerchant(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.payments_api = PaymentsApi("a2a4f648-a50b-42fb-bda8-00c6e2f295ea")
+        load_dotenv()
+
+        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
         cls.test_helper = testHelper
 
 # Get Merchants Tests
