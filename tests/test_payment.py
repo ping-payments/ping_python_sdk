@@ -1,4 +1,7 @@
 import unittest
+import os
+import uuid
+from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
@@ -7,11 +10,10 @@ class TestPayment(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        load_dotenv()
         cls.test_helper = testHelper
-        cls.payment_order_id = "8a6a4586-e082-49fe-b408-b92e9dc746ec"
-        cls.payments_api = PaymentsApi(
-            tenant_id="a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
-        )
+        cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
+        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
 
     def setUp(self):
         self.dummy_body = {
@@ -23,29 +25,23 @@ class TestPayment(unittest.TestCase):
             "order_items": [
                 {
                     "amount": 2500,
-                    "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
+                    "merchant_id": os.getenv("MERCHANT_ID"),
                     "name": "Delivery, Marios Pasta (Pasta La Vista)",
                     "vat_rate": 12
                 },
-                {
-                    "amount": 6900,
-                    "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
-                    "name": "Marios Pasta (Pasta La Vista)",
-                    "vat_rate": 12
-                }
             ],
             "provider": "dummy",
             "provider_method_parameters": {
                 "desired_payment_status": "COMPLETED"
             },
             "status_callback_url": "https://somesite.com/callback",
-            "total_amount": 9400
+            "total_amount": 2500
         }
 
 # Get Payments Tests
     # gets payment correctly
     def test_get_payment_200(self):
-        payment_id = "c498dba8-bf28-4252-a16a-7c6192c05bc9"
+        payment_id = os.getenv("PAYMENT_ID")
 
         response = self.payments_api.payment.get_payment(self.payment_order_id, payment_id)
         self.test_helper.run_tests(self, response, 200)
@@ -65,7 +61,7 @@ class TestPayment(unittest.TestCase):
 
     # Initiate a payment with incorrect values inside payment object (status code 422)
     def test_initiate_payment_422(self):
-        payment_order_id = "8a6a4586-e082-49fe-b408-b92e9dc746ec"
+        payment_order_id = 0
         self.dummy_body["method"] = 0
 
         response = self.payments_api.payment.initiate_payment(self.dummy_body, payment_order_id)
@@ -73,7 +69,7 @@ class TestPayment(unittest.TestCase):
 
     # Initiate a payment on a non-existing payment order (status code 404)
     def test_initiate_payment_404(self):
-        error_payment_order_id = ""
+        error_payment_order_id = uuid.uuid4()
 
         response = self.payments_api.payment.initiate_payment(self.dummy_body, error_payment_order_id)
         self.test_helper.run_tests(self, response, 404)
