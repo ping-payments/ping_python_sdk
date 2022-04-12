@@ -1,10 +1,13 @@
+import os
+from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 
-tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
+load_dotenv()
+
+tenant_id = os.getenv("TENANT_ID")
 payments_api = PaymentsApi(tenant_id)
 
 result = payments_api.merchant.get_merchants()
-
 if result.is_success():
  print(result.body)
  print("success")

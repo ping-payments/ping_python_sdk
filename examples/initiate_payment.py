@@ -1,27 +1,25 @@
+import os
+from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 
-tenant_id = "a2a4f648-a50b-42fb-bda8-00c6e2f295ea"
-payments_api = PaymentsApi(tenant_id=tenant_id)
+load_dotenv()
 
-payment_order_id = "8a6a4586-e082-49fe-b408-b92e9dc746ec"
+tenant_id = os.getenv("TENANT_ID")
+payments_api = PaymentsApi(tenant_id)
+
+payment_order_id = os.getenv("PAYMENT_ORDER_ID")
 payment_object = {
   "currency": "SEK",
   "metadata": {
     "delivery_id": "368745"
   },
-  "total_amount": 9400,
+  "total_amount": 2500,
   "method": "dummy",
   "order_items": [
         {
             "amount": 2500,
-            "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
+            "merchant_id": os.getenv("MERCHANT_ID"),
             "name": "Delivery, Marios Pasta (Pasta La Vista)",
-            "vat_rate": 12
-        },
-        {
-            "amount": 6900,
-            "merchant_id": "70166bfa-2b5f-42f8-abe1-a614e32ad1b2",
-            "name": "Marios Pasta (Pasta La Vista)",
             "vat_rate": 12
         }
     ],

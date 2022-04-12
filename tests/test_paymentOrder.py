@@ -1,5 +1,7 @@
 import unittest
 import uuid
+import os
+from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
@@ -7,17 +9,19 @@ class TestPaymentOrder(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.payments_api = PaymentsApi("a2a4f648-a50b-42fb-bda8-00c6e2f295ea")
-        cls.split_tree_id = "4f3a07d4-ef83-4040-bcc4-0a6e6bfab6ab"
+        load_dotenv()
+        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
+        cls.split_tree_id = os.getenv("SPLIT_TREE_ID")
         cls.test_helper = testHelper
 
     def setUp(self):
-        self.payment_order_id = "bd3e750f-2213-45c5-9d02-0dbeb2178675"
+        self.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
 
 # Get Payment Orders Tests
     # get payment orders correctly (status code 200)
-    def test_get_payment_orders_200(self):
-        response_date = self.payments_api.paymentOrder.get_payment_orders("2019-10-12", "2020-10-12")
+    def test_get_payment_orders_200(self): 
+    
+        response_date = self.payments_api.paymentOrder.get_payment_orders("2020-03-27T09:42:30Z", "2022-03-27T09:42:30Z")
         response = self.payments_api.paymentOrder.get_payment_orders()
 
         # tests with start-end date
@@ -28,7 +32,7 @@ class TestPaymentOrder(unittest.TestCase):
 
     # get payment orders with impossible dates (status code 422)
     def test_get_payment_orders_422(self):
-        response_date = self.payments_api.paymentOrder.get_payment_orders("2019-90-12", "2020-10-40")
+        response_date = self.payments_api.paymentOrder.get_payment_orders("12/90/2019", "40/10/2020")
         self.test_helper.run_tests(self, response_date, 422)
 
 # Create Payment Order Tests
