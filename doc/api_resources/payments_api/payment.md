@@ -16,8 +16,8 @@ payments_api.payment.get_payment()
 
 ## Functions
 
-- [Initiate Payment](/doc/api_resources/payments_api/payment.md#initiate-payment)
-- [Get Payment](/doc/api_resources/payments_api/payment.md#get-payment)
+-   [Initiate Payment](/doc/api_resources/payments_api/payment.md#initiate-payment)
+-   [Get Payment](/doc/api_resources/payments_api/payment.md#get-payment)
 
 # Initiate Payment
 
@@ -40,7 +40,7 @@ def initiate_payment(payment_object, payment_order_id)
 | ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                              |
 | `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the Payment                                                                                                                                                                                                |
-| `method`                     | `string`           | Yes      | Enum: `mobile`, `pis`,`card`,`invoice`,`autogiro` <br>The payment method for this payment                                                                                                                                                                                  |
+| `method`                     | `string`           | Yes      | Enum: `e-commerce`, `m-commerce`, `pis`,`card`,`invoice`,`autogiro` <br>The payment method for this payment                                                                                                                                                                |
 | `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency),a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
 | `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq` <br>The payment method provider                                                                                                                                                               |
 | `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                                                                     |
@@ -51,12 +51,22 @@ def initiate_payment(payment_object, payment_order_id)
 
 The diffrent `provider_method_parameters` needed for each provider. Remember to write these as objects
 
-### Swish - method: mobile
+### Swish - method: E-Commerce
 
 | Containing     | Type     | Required | Description                               |
 | -------------- | -------- | -------- | ----------------------------------------- |
 | `message`      | `string` | Yes      | A message associated with the payment.    |
 | `phone_number` | `string` | Yes      | A swish connected phone number of a payer |
+
+### Swish - method: M-Commerce
+
+| Containing    | Type      | Required | Description                                                                                                                            |
+| ------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `message`     | `string`  | Yes      | A message associated with the payment.                                                                                                 |
+| `qr_border`   | `integer` | no       | QR-code image border size in pixels. Default is 0                                                                                      |
+| `qr_format`   | `string`  | no       | QR code image format. Enum: `transparent_svg`, `transparent_png`, `solid_jpg`, `solid_svg`, `solid_png `. Default is `transparent_svg` |
+| `qr_size`     | `integer` | no       | QR code image size in pixels. Default is 300                                                                                           |
+| `use_qr_code` | `boolean` | no       | Generate a QR code for the Swish payment. Default is false.                                                                            |
 
 ### Open Banking - method: pis
 
