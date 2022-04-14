@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.0-alpha (2022-04-01)
+
+An SDK update to support new API changes regarding a swish payment.
+
+-   A Swish payment is now a m/e-commerce instead of mobile
+
 ## 1.1.0-alpha (2022-04-01)
 
 An SDK update to support new API changes regarding the date format of a payment order.
