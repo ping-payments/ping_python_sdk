@@ -1,6 +1,7 @@
 from ping.api_resources.payments_api import merchants
 from ping.api_resources.payments_api import paymentOrders
 from ping.api_resources.payments_api import payments
+from ping.api_resources.payments_api import payouts
 from ping.helper.apiHelper import get_base_url
 
 
@@ -26,6 +27,11 @@ class PaymentsApi:
     @property
     def payment(self):
         return Payment(self.headers, self.base_url)
+    
+    @property
+    def payout(self):
+        return Payout(self.headers, self.base_url)
+
 
 
 class BaseEndpoints:
@@ -78,3 +84,12 @@ class Payment(BaseEndpoints):
 
     def get_payment(self, payment_order_id, payment_id):
         return payments.get_payment(self.headers, self.base_url, payment_order_id, payment_id)
+
+
+class Payout(BaseEndpoints):
+    # Endpoint class for payout endpoints
+    def get_payouts(self, date_from=None, date_to=None):
+        return payouts.get_payouts(self.headers, self.base_url, date_from, date_to)
+    
+    def get_payout(self, payout_id):
+        return payouts.get_payouts(self.headers, self.base_url, payout_id)

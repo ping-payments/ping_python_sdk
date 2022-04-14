@@ -7,7 +7,7 @@ load_dotenv()
 tenant_id = os.getenv("TENANT_ID")
 payments_api = PaymentsApi(tenant_id)
 
-result = payments_api.merchant.get_merchants()
+result = payments_api.payout.get_payouts()
 if result.is_success():
  print(result.body)
  print("success")
