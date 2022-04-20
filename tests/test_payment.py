@@ -12,7 +12,7 @@ class TestPayment(unittest.TestCase):
     def setUpClass(cls):
         load_dotenv()
         cls.test_helper = testHelper
-        cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
+        cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID_OPEN")
         cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
 
     def setUp(self):
