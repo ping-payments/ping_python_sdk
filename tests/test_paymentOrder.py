@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
 from test_helper import testHelper
 
+
+@unittest.skipUnless(testHelper.api_is_connected(), "A connection to the API is needed")
 class TestPaymentOrder(unittest.TestCase):
 
     @classmethod
