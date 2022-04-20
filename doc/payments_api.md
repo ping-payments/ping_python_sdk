@@ -45,3 +45,4 @@ This class acts as a factory for the Payments APIs resources and hold the config
 | merchant      | Gets all merchant endpoints from the `merchants.py` module           |
 | payment_order | Gets all Payment Order endpoints from the `payment_orders.py` module |
 | payment       | Gets all Payment endpoints from the `payments.py` module             |
+| payout        | Gets all Payout endpoints from the `payouts.py` module               |
