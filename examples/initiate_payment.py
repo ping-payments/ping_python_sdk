@@ -7,7 +7,7 @@ load_dotenv()
 tenant_id = os.getenv("TENANT_ID")
 payments_api = PaymentsApi(tenant_id)
 
-payment_order_id = os.getenv("PAYMENT_ORDER_ID")
+payment_order_id = os.getenv("PAYMENT_ORDER_ID_2")
 payment_object = {
   "currency": "SEK",
   "metadata": {
