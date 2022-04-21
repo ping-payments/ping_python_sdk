@@ -17,10 +17,10 @@ payments_api.ping.ping_the_api()
 
 Pings the API to verify that it is reachable.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payouts()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function will return "pong" if the API is reachable.
+You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `ping_the_api()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function will return "pong" if the API is reachable.
 
 ```python
-def get_payouts(date_from=None, date_to=None)
+def ping_the_api()
 ```
 
 ## Response Type
