@@ -34,7 +34,7 @@ pip install ping-sdk
 
 -   [Merchant]
 
--   [Payment Orders](/doc/api_resources/payments_api/paymentOrder.md)
+-   [Payment Orders]
 
 -   [Payment]
 
@@ -121,5 +121,7 @@ print(f"Errors: {result.errors}")
 [//]: # "Link anchor definitions"
 [payments api]: doc/payments_api.md
 [merchant]: doc/api_resources/payments_api/merchant.md
-[payment orders]: doc/api_resources/payments_api/payment_order.md
+[payment orders]: doc/api_resources/payments_api/paymentOrder.md
 [payment]: doc/api_resources/payments_api/payment.md
+[payout]: doc/api_resources/payments_api/payout.md
+[ping]: doc/api_resources/payments_api/ping.md
