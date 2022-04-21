@@ -1,4 +1,3 @@
-
 # Ping Payments Python SDK
 
 [![Tests](https://github.com/youcal/ping_python_sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/youcal/ping_python_sdk/actions/workflows/tests.yml)
@@ -9,19 +8,17 @@ Use this Python library to manage Ping Payments resources regarding payments.
 
 ## Table of contents
 
-* [Requirements](#requirements)
+-   [Requirements](#requirements)
 
-* [Installation](#installation)
+-   [Installation](#installation)
 
-* [Payments API](#payments-api)
-
+-   [Payments API](#payments-api)
 
 ## Requirements
 
-
 The SDK supports the following versions of Python:
 
-- Python 3 versions 3.6 and later
+-   Python 3 versions 3.6 and later
 
 ## Installation
 
@@ -35,16 +32,20 @@ pip install ping-sdk
 
 ### [Payments API]
 
-* [Merchant]
+-   [Merchant]
 
-* [Payment Orders]
+-   [Payment Orders](/doc/api_resources/payments_api/paymentOrder.md)
 
-* [Payment]
+-   [Payment]
+
+-   [Payout]
+
+-   [Ping]
 
 ### Usage
-  
+
 First time using Payments API? Here’s how to get started:
-  
+
 #### Get a tenant ID
 
 To use the Payments API to manage the resources you need to get a tenant ID. A tenant ID is provided to you by Ping Payments.
@@ -61,6 +62,7 @@ To use the Payments API, you import the PaymentsAPI class, instantiate a Payment
 from ping.payments_api import PaymentsApi
 
 ```
+
 2. Instantiate a PaymentsApi object and initialize it with the tenant ID and the environment that you want to use.
 
 To access sandbox resources, initialize the PaymentsApi with environment set to sandbox:
@@ -73,6 +75,7 @@ payments_api = PaymentsApi(
 )
 
 ```
+
 To access production resources, initialize the PaymentsApi with environment set to production:
 
 ```python
@@ -83,6 +86,7 @@ payments_api = PaymentsApi(
 )
 
 ```
+
 #### Get an Instance of an API object and call its methods
 
 The API is implemented as a class. With the PaymentsApi object you work with an API by calling it's methods.
@@ -94,6 +98,7 @@ The API is implemented as a class. With the PaymentsApi object you work with an 
 result = payments_api.merchant.get_merchants()
 
 ```
+
 See the SDK documentation for the list of methods for the API class.
 
 #### Handle the response
@@ -113,12 +118,8 @@ print(f"Errors: {result.errors}")
 
 ```
 
-[//]: #  "Link anchor definitions"
-
-[Payments API]: doc/payments_api.md
-
-[Merchant]: doc/api_resources/payments_api/merchant.md
-
-[Payment Orders]: doc/api_resources/payments_api/payment_order.md 
-
-[Payment]: doc/api_resources/payments_api/payment.md 
+[//]: # "Link anchor definitions"
+[payments api]: doc/payments_api.md
+[merchant]: doc/api_resources/payments_api/merchant.md
+[payment orders]: doc/api_resources/payments_api/payment_order.md
+[payment]: doc/api_resources/payments_api/payment.md
