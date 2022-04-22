@@ -1,10 +1,12 @@
 # Change Log
 
-## 1.2.0-alpha (2022-04-01)
+## 2.0.0 (2022-04-22)
 
-An SDK update to support new API changes regarding a swish payment.
+A major update that adds two new endpoints to the SDK.
 
--   A Swish payment is now a m/e-commerce instead of mobile
+-   Payout endpoints are now implemented. You are now able to list payouts.
+
+-   Ping endpoint is now implemented. You are now able to ping the API.
 
 ## 1.1.0-alpha (2022-04-01)
 
@@ -13,6 +15,8 @@ An SDK update to support new API changes regarding the date format of a payment 
 -   Dates are now returned in ISO 8601 format
 
 -   Using `from_date` and `to_date` when getting payment orders also requires to be written in ISO 8601 format.
+
+-   A Swish payment is now a m/e-commerce instead of mobile
 
 ## 1.0.0-alpha (2022-03-25)
 
