@@ -4,19 +4,21 @@ name: CI
 
 # Controls when the workflow will run
 on:
-   workflow_run:
-     workflows: ["Readme"]
-     types: [completed] #requested
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ PyPi-publish ]
+  pull_request:
+    branches: [ PyPi-publish ]
 
 jobs:
   on-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.Readme.conclusion == 'success' }}
     steps:
       - run: echo "First workflow was a success"
 
   on-failure:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    if: ${{ github.event.Readme.conclusion == 'failure' }}
     steps:
       - run: echo "First workflow was a failure"
