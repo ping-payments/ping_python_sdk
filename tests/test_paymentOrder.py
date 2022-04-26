@@ -111,25 +111,15 @@ class TestPaymentOrder(unittest.TestCase):
         response = self.payments_api.paymentOrder.close_payment_order(uuid.uuid4())
         self.test_helper.run_tests(self, response, 404)
 
-# Settle Payment Order Tests
-    # settles a payment correctly (status code 204)
-    def test_settle_payment_order_204(self):
-        response = self.payments_api.paymentOrder.settle_payment_order(self.payment_order_id)
-        self.test_helper.run_tests(self, response, 204)
-    # settles a payment with an incorrect id format (status code 422)
-    def test_settle_payment_order_422(self):
-        response = self.payments_api.paymentOrder.settle_payment_order(0)
-        self.test_helper.run_tests(self, response, 422)
-
-    # settles a payment with a non-existing id (status code 404)
-    def test_settle_payment_order_404(self):
-        response = self.payments_api.paymentOrder.settle_payment_order(uuid.uuid4())
-        self.test_helper.run_tests(self, response, 404)
-
 # Split Payment Order Tests
-    # splits a payment order correctly (status code 200)
+    # splits a payment order correctly (status code 204)
     def test_split_payment_order_204(self):
         response = self.payments_api.paymentOrder.split_payment_order(self.payment_order_id)
+        self.test_helper.run_tests(self, response, 204)
+
+    # fast forwards and splits a payment order correctly (status code 204)
+    def test_split_payment_order_fast_forward_204(self):
+        response = self.payments_api.paymentOrder.split_payment_order(self.payment_order_id, fast_forward=True)
         self.test_helper.run_tests(self, response, 204)
 
     # splits a payment order with an incorrect id format (status code 422)
@@ -140,6 +130,27 @@ class TestPaymentOrder(unittest.TestCase):
     # splits a payment order with a non-existing id (status code 404)
     def test_split_payment_order_404(self):
         response = self.payments_api.paymentOrder.split_payment_order(uuid.uuid4())
+        self.test_helper.run_tests(self, response, 404)
+
+# Settle Payment Order Tests
+    # settles a payment correctly (status code 204)
+    def test_settle_payment_order_204(self):
+        response = self.payments_api.paymentOrder.settle_payment_order(self.payment_order_id)
+        self.test_helper.run_tests(self, response, 204)
+    
+    # fast forwards and settles a payment correctly (status code 204)
+    def test_settle_payment_order_fast_forward_204(self):
+        response = self.payments_api.paymentOrder.settle_payment_order(self.payment_order_id, fast_forward=True)
+        self.test_helper.run_tests(self, response, 204)
+
+    # settles a payment with an incorrect id format (status code 422)
+    def test_settle_payment_order_422(self):
+        response = self.payments_api.paymentOrder.settle_payment_order(0)
+        self.test_helper.run_tests(self, response, 422)
+
+    # settles a payment with a non-existing id (status code 404)
+    def test_settle_payment_order_404(self):
+        response = self.payments_api.paymentOrder.settle_payment_order(uuid.uuid4())
         self.test_helper.run_tests(self, response, 404)
 
 

@@ -340,7 +340,7 @@ elif result.is_error():
 
 # Update Payment Order
 
-Updates a PaymentOrder. Used for updating which split tree to use when splitting.
+Updates a payment order. Used for updating which split tree to use when splitting.
 
 You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `update_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function can also requires a `payment_order_id` of the payment order you want to update and a new `split_tree_id` as a parameter. If the tenant_id exists and there is a split tree with the given `split_tree_id`, this function will return a successfull response. Otherwise an error object is returned.
 
@@ -362,7 +362,7 @@ def update_payment_order(payment_order_id, split_tree_id)
 
 ### 204
 
-The PaymentOrder was successfully updated
+The payment order was successfully updated
 
 ### 403
 
@@ -383,7 +383,7 @@ Example:
 
 ### 404
 
-PaymentOrder could not be found
+Payment order could not be found
 
 `payment_order_id` or `split_tree_id` could not be found
 
@@ -433,9 +433,9 @@ You need to create a PaymentsApi object with a `tenant_id` as a parameter to acc
 def close_payment_order(payment_order_id)
 ```
 
-| Parameter          | Type     | Description                                            |
-| ------------------ | -------- | ------------------------------------------------------ |
-| `payment_order_id` | `string` | A string containing the ID of a specific payment order |
+| Parameter          | Type     | Required | Description                                            |
+| ------------------ | -------- | -------- | ------------------------------------------------------ |
+| `payment_order_id` | `string` | Yes      | A string containing the ID of a specific payment order |
 
 ## Response Type
 
@@ -446,7 +446,7 @@ def close_payment_order(payment_order_id)
 
 ### 204
 
-PaymentOrder was successfully closed
+Payment order was successfully closed
 
 ### 403
 
@@ -467,7 +467,7 @@ Example:
 
 ### 404
 
-Payment Order could not be found.
+Payment order could not be found.
 
 `payment_order_id` does not match a payment order
 
@@ -506,92 +506,9 @@ elif result.is_error():
     print(result.errors)
 ```
 
-# Settle Payment Order
-
-Settles PaymentOrder for future payout. Refunds will no longer be possible.
-
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `settle_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to settle. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
-
-```python
-def settle_payment_order(payment_order_id)
-```
-
-| Parameter          | Type     | Description                                            |
-| ------------------ | -------- | ------------------------------------------------------ |
-| `payment_order_id` | `string` | A string containing the ID of a specific payment order |
-
-## Response Type
-
-```python
-  result = payments_api.payment_order.settle_payment_order(payment_order_id)
-  print(result.status_code)
-```
-
-### 204
-
-PaymentOrder was successfully settled
-
-### 403
-
-API Error
-
-Example:
-
-```python
-{
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
-}
-```
-
-### 404
-
-Payment Order could not be found.
-
-`payment_order_id` does not match a payment order
-
-### 422
-
-Validation Error
-
-Example:
-
-```python
-{
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
-}
-```
-
-## Example Usage
-
-```python
-payments_api = PaymentsApi(
-  tenant_id = '55555555-5555-5555-5555-555555555555',
-  environment = 'sandbox'
-)
-payment_order_id = '55555555-5555-5555-5555-555555555555'
-
-result = payments_api.payment_order.settle_payment_order(payment_order_id)
-if result.is_success():
-    print(result.body)
-    print("success")
-elif result.is_error():
-    print(result.errors)
-```
-
 # Split Payment Order
 
-Executes a split of PaymentOrder. Used when services/goods have been provided/delivered. Can still be partly refunded
+Executes a split of a payment order. Used when services/goods have been provided/delivered. Can still be partly refunded
 
 You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `split_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to split. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
 
@@ -599,9 +516,10 @@ You need to create a PaymentsApi object with a `tenant_id` as a parameter to acc
 def split_payment_order(payment_order_id)
 ```
 
-| Parameter          | Type     | Description                                            |
-| ------------------ | -------- | ------------------------------------------------------ |
-| `payment_order_id` | `string` | A string containing the ID of a specific payment order |
+| Parameter          | Type      | Required | Description                                                                        |
+| ------------------ | --------- | -------- | ---------------------------------------------------------------------------------- |
+| `payment_order_id` | `string`  | Yes      | A string containing the ID of a specific payment order                             |
+| `fast_forward`     | `boolean` | No       | A boolean that closes and splits a payment order when true. Dafault value is false |
 
 ## Response Type
 
@@ -612,7 +530,7 @@ def split_payment_order(payment_order_id)
 
 ### 204
 
-PaymentOrder was successfully split
+Payment order was successfully split
 
 ### 403
 
@@ -633,7 +551,7 @@ Example:
 
 ### 404
 
-Payment Order could not be found.
+Payment order could not be found.
 
 `payment_order_id` does not match a payment order
 
@@ -665,6 +583,90 @@ payments_api = PaymentsApi(
 payment_order_id = '55555555-5555-5555-5555-555555555555'
 
 result = payments_api.payment_order.split_payment_order(payment_order_id)
+if result.is_success():
+    print(result.body)
+    print("success")
+elif result.is_error():
+    print(result.errors)
+```
+
+# Settle Payment Order
+
+Settles a payment order for future payout. Refunds will no longer be possible.
+
+You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `settle_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to settle. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
+
+```python
+def settle_payment_order(payment_order_id)
+```
+
+| Parameter          | Type      | Required | Description                                                                                                                            |
+| ------------------ | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `payment_order_id` | `string`  | Yes      | A string containing the ID of a specific payment order                                                                                 |
+| `fast_forward`     | `boolean` | No       | An object containing boolean that closes (if not already closed), splits and settles a payment order when true. Dafault value is false |
+
+## Response Type
+
+```python
+  result = payments_api.payment_order.settle_payment_order(payment_order_id)
+  print(result.status_code)
+```
+
+### 204
+
+Payment order was successfully settled
+
+### 403
+
+API Error
+
+Example:
+
+```python
+{
+  "errors": [
+    {
+      "description": "This operation cannot be completed under certain conditions",
+      "error": "operation_forbidden"
+    }
+  ]
+}
+```
+
+### 404
+
+Payment order could not be found.
+
+`payment_order_id` does not match a payment order
+
+### 422
+
+Validation Error
+
+Example:
+
+```python
+{
+  "errors": [
+    {
+      "description": "null value where string expected",
+      "error": "null_value",
+      "property": "open_banking.success_url"
+    }
+  ]
+}
+```
+
+## Example Usage
+
+```python
+payments_api = PaymentsApi(
+  tenant_id = '55555555-5555-5555-5555-555555555555',
+  environment = 'sandbox'
+)
+payment_order_id = '55555555-5555-5555-5555-555555555555'
+
+result = payments_api.payment_order.settle_payment_order(payment_order_id)
 if result.is_success():
     print(result.body)
     print("success")

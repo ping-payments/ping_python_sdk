@@ -75,11 +75,11 @@ class PaymentOrder(BaseEndpoints):
     def close_payment_order(self, payment_order_id):
         return paymentOrders.close_payment_order(self.headers, self.base_url, payment_order_id)
 
-    def settle_payment_order(self, payment_order_id):
-        return paymentOrders.settle_payment_order(self.headers, self.base_url, payment_order_id)
+    def split_payment_order(self, payment_order_id, fast_forward = False):
+        return paymentOrders.split_payment_order(self.headers, self.base_url, payment_order_id, fast_forward)
 
-    def split_payment_order(self, payment_order_id):
-        return paymentOrders.split_payment_order(self.headers, self.base_url, payment_order_id)
+    def settle_payment_order(self, payment_order_id, fast_forward = False):
+        return paymentOrders.settle_payment_order(self.headers, self.base_url, payment_order_id, fast_forward)
 
 
 class Payment(BaseEndpoints):
