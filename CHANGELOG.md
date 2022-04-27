@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.0.1 (2022-04-26)
+## 2.1.0 (2022-04-26)
 
 A small update that prevents unintentional fastforwaring through the stages of a payment order.
 
