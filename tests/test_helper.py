@@ -1,3 +1,4 @@
+from cgi import test
 import unittest
 from ping.api_resources import payments_api
 from ping.payments_api import PaymentsApi
@@ -25,3 +26,36 @@ class testHelper(unittest.TestCase):
         payments_api = PaymentsApi(os.getenv("TENANT_ID"))
         ping = payments_api.ping.ping_the_api()
         return True if ping.body == "pong" else False
+
+        #creates a payment order and a payment to that order that now is ready to get closed, split and settled
+    def prepare_payment_order_handling():
+        payments_api = PaymentsApi(os.getenv("TENANT_ID"))
+        payment_order = payments_api.paymentOrder.create_payment_order(os.getenv("SPLIT_TREE_ID"))
+        payment_order_id = payment_order.body["id"]
+        payments_api.payment.initiate_payment(testHelper.get_payment_body(), payment_order_id)
+
+        return payment_order_id
+
+    def get_payment_body():
+        dummy_body = {
+            "currency": "SEK",
+            "metadata": {
+                "delivery_id": "368745"
+                },
+            "method": "dummy",
+            "order_items": [
+                {
+                    "amount": 2500,
+                    "merchant_id": os.getenv("MERCHANT_ID"),
+                    "name": "Delivery, Marios Pasta (Pasta La Vista)",
+                    "vat_rate": 12
+                },
+            ],
+            "provider": "dummy",
+            "provider_method_parameters": {
+                "desired_payment_status": "COMPLETED"
+            },
+            "status_callback_url": "https://somesite.com/callback",
+            "total_amount": 2500
+        }
+        return dummy_body
