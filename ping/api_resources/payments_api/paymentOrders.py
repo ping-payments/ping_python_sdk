@@ -127,30 +127,7 @@ def close_payment_order(headers, base_url, payment_order_id):
     _result = check_errors(response, decoded)
     return _result
 
-
-def settle_payment_order(headers, base_url, payment_order_id):
-    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}/settle'.
-
-    # Settle a specific payment order.
-    # Args (provided by the tenant):
-    #    payment_order_id (String, required): The ID of the of the payment order to settle.
-    # Returns:
-    #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
-    
-
-    # Prepare and execute response
-    _path = f'/api/v1/payment_orders/{payment_order_id}/settle'
-    _url = base_url + _path
-    response = requests.put(_url, headers=headers)
-
-    # deserialize and check errors
-    decoded = json_deserialize(response.text)
-    _result = check_errors(response, decoded)
-    return _result
-
-
-def split_payment_order(headers, base_url, payment_order_id):
+def split_payment_order(headers, base_url, payment_order_id, fast_forward):
     # Does a PUT request to /api/v1/payment_orders/{payment_order_id}/split.
 
     # Split a specific payment order.
@@ -164,7 +141,43 @@ def split_payment_order(headers, base_url, payment_order_id):
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/split'
     _url = base_url + _path
-    response = requests.put(_url, headers=headers)
+
+    if fast_forward == True:
+        _payload = {
+            "fast_forward": fast_forward
+        }
+        response = requests.put(_url, headers=headers, json=_payload)
+    else:
+        response = requests.put(_url, headers=headers)
+
+    # deserialize and check errors
+    decoded = json_deserialize(response.text)
+    _result = check_errors(response, decoded)
+    return _result
+
+
+def settle_payment_order(headers, base_url, payment_order_id, fast_forward):
+    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}/settle'.
+
+    # Settle a specific payment order.
+    # Args (provided by the tenant):
+    #    payment_order_id (String, required): The ID of the of the payment order to settle.
+    # Returns:
+    #    Response: A json object with the response value as well as other
+    #    useful information such as status codes, headers and a potention error.
+    
+
+    # Prepare and execute response
+    _path = f'/api/v1/payment_orders/{payment_order_id}/settle'
+    _url = base_url + _path
+    
+    if fast_forward == True:
+        _payload = {
+            "fast_forward": fast_forward
+        }
+        response = requests.put(_url, headers=headers, json=_payload)
+    else:
+        response = requests.put(_url, headers=headers)
 
     # deserialize and check errors
     decoded = json_deserialize(response.text)

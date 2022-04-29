@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.0 (2022-04-26)
+
+A minor update that prevents unintentional fast-forwarding through the stages close, split settle of a payment order.
+
+-   Split and Settle a payment order now takes in an optional `fast_forward` parameter. 
+
 ## 2.0.0 (2022-04-22)
 
 A major update that adds two new endpoints to the SDK.

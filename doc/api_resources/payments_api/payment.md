@@ -209,7 +209,7 @@ Example:
       "delivery_id": "368745"
     },
     "total_amount": 9400,
-    "method": "mobile",
+    "method": "e-commerce",
     "order_items": [
       {
         "amount": 2500,

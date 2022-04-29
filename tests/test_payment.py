@@ -17,27 +17,7 @@ class TestPayment(unittest.TestCase):
         cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
 
     def setUp(self):
-        self.dummy_body = {
-            "currency": "SEK",
-            "metadata": {
-                "delivery_id": "368745"
-                },
-            "method": "dummy",
-            "order_items": [
-                {
-                    "amount": 2500,
-                    "merchant_id": os.getenv("MERCHANT_ID"),
-                    "name": "Delivery, Marios Pasta (Pasta La Vista)",
-                    "vat_rate": 12
-                },
-            ],
-            "provider": "dummy",
-            "provider_method_parameters": {
-                "desired_payment_status": "COMPLETED"
-            },
-            "status_callback_url": "https://somesite.com/callback",
-            "total_amount": 2500
-        }
+        self.dummy_body = self.test_helper.get_payment_body()
 
 # Get Payments Tests
     # gets payment correctly
