@@ -4,7 +4,7 @@
 [![PyPI version](https://badge.fury.io/py/ping-sdk.svg)](https://badge.fury.io/py/ping-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Use this Python library to manage Ping Payments API regarding merchants, payment orders, payments and payouts
+Use this Python library to manage Ping Payments API regarding merchants, payment orders, payments and payouts.
 
 ## Table of contents
 
