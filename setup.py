@@ -7,11 +7,11 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 setup(
     name='ping-sdk',
     version='2.1.0',
-    description='Use Ping Payments API to manage merchants, payment orders and payments',
+    description='Use this Python library to manage Ping Payments API regarding merchants, payment orders, payments and payouts',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='Ping Payments',
-    author_email='info@pingpayments.com',
+    author_email='tech@pingpayments.com',
     url='https://www.pingpayments.com/',
     license='MIT',
     packages=find_packages(),

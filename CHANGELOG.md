@@ -2,9 +2,9 @@
 
 ## 2.1.0 (2022-04-26)
 
-A small update that prevents unintentional fastforwaring through the stages of a payment order.
+A minor update that prevents unintentional fast-forwarding through the stages close, split settle of a payment order.
 
--   Split and Settle a payment order now takes in an optional `fast_forward` parameter that passes a paymentorder
+-   Split and Settle a payment order now takes in an optional `fast_forward` parameter. 
 
 ## 2.0.0 (2022-04-22)
 
