@@ -110,11 +110,11 @@ API calls return an ApiResponse object that contains properties that describe bo
 ```python
 
 if result.is_success():
-# Display the response as text
-print({result.text})
+	# Display the response as text
+	print(result.text)
 # Call the error method to see if the call failed
 elif result.is_error():
-print(f"Errors: {result.errors}")
+	print(f"Errors: {result.errors}")
 
 ```
 
