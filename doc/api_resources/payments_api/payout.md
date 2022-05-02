@@ -148,7 +148,7 @@ Example:
   "amount": 0,
   "completed_at": "string",
   "currency": "SEK",
-  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  "id": "55555555-5555-5555-5555-555555555555"
 }
 ```
 

@@ -139,7 +139,7 @@ Example:
 
 ```python
 {
-  "id": "555555-5555-5555-5555-555555555555"
+  "id": "55555555-5555-5555-5555-555555555555"
   "swish": {
     "swish_url": "swish://paymentrequest?token=c28a4061470f4af48973bd2a4642b4fa&callbackurl=merchant%253A%252F%252F"
   }
