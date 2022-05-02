@@ -246,7 +246,7 @@ Example:
 ```python
 {
   "email": "contact@merchant.com",
-  "id": "2d041d6d-21c9-4c65-96eb-5b9047732417",
+  "id": "55555555-5555-5555-5555-555555555555",
   "name": "Merchant",
   "organization": {
     "country": "SE",
