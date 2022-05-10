@@ -35,7 +35,7 @@ def get_payment_orders(headers, base_url, date_from, date_to):
     return _result
 
 
-def create_payment_order(headers, base_url, split_tree_id):
+def create_payment_order(headers, base_url, split_tree_id, currency):
     # Does a POST request to /api/v1/payment_orders.
 
     # Creates a new payment order.
@@ -50,7 +50,8 @@ def create_payment_order(headers, base_url, split_tree_id):
     _path = '/api/v1/payment_orders'
     _url = base_url + _path
     _payload = {
-        "split_tree_id": split_tree_id
+        "split_tree_id": split_tree_id,
+        "currency": currency
     }
     response = requests.post(_url, headers=headers, json=_payload)
 

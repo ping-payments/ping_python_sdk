@@ -40,12 +40,12 @@ class TestPaymentOrder(unittest.TestCase):
 # Create Payment Order Tests
     # creates a payment order correctly (status code 200)
     def test_create_payment_order_200(self):
-        response = self.payments_api.paymentOrder.create_payment_order(self.split_tree_id)
+        response = self.payments_api.paymentOrder.create_payment_order(self.split_tree_id, "SEK")
         self.test_helper.run_tests(self, response)
 
     # creates a payment orders with incorrect id format (status code 422)
     def test_create_payment_order_422(self):
-        response = self.payments_api.paymentOrder.create_payment_order(0)
+        response = self.payments_api.paymentOrder.create_payment_order(0, "SEK")
         self.test_helper.run_tests(self, response, 422)
 
 # Get Payment Order Tests
