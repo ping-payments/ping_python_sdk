@@ -40,7 +40,7 @@ def initiate_payment(payment_object, payment_order_id)
 | ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                              |
 | `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the Payment                                                                                                                                                                                                |
-| `method`                     | `string`           | Yes      | Enum: `e-commerce`, `m-commerce`, `pis`,`card`,`invoice`,`autogiro`, `dummy` <br>The payment method for this payment                                                                                                                                                       |
+| `method`                     | `string`           | Yes      | Enum: `ecommerce`, `mcommerce`, `pis`,`card`,`invoice`,`autogiro`, `dummy` <br>The payment method for this payment                                                                                                                                                         |
 | `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency),a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
 | `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq`, `dummy` <br>The payment method provider                                                                                                                                                      |
 | `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                                                                     |
@@ -59,14 +59,14 @@ A dummy payment is only for sandbox environment and is used to see that it is po
 | ------------------------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `desired_payment_status` | `string` | Yes      | The payment status you want to achive with the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CANCELLED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED` |
 
-### Swish - method: E-Commerce
+### Swish - method: ECommerce
 
 | Containing     | Type     | Required | Description                               |
 | -------------- | -------- | -------- | ----------------------------------------- |
 | `message`      | `string` | Yes      | A message associated with the payment.    |
 | `phone_number` | `string` | Yes      | A swish connected phone number of a payer |
 
-### Swish - method: M-Commerce
+### Swish - method: MCommerce
 
 | Containing    | Type      | Required | Description                                                                                                                            |
 | ------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -214,7 +214,7 @@ Once a payment has been initiated, it goes through different stages. The payment
       "delivery_id": "368745"
     },
     "total_amount": 9400,
-    "method": "e-commerce",
+    "method": "ecommerce",
     "order_items": [
       {
         "amount": 2500,
