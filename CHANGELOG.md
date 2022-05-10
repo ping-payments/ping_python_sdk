@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.2.0 (2022-05-10)
+## 3.0.0 (2022-05-10)
 
 A minor update that adds a parameter when you create a payment order
 
