@@ -44,7 +44,7 @@ def initiate_payment(payment_object, payment_order_id)
 | `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency),a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
 | `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq`, `dummy` <br>The payment method provider                                                                                                                                                      |
 | `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                                                                     |
-| `status_callback_url`        | `string`           | No       | The URL where you want you callback status updates on the payment                                                                                                                                                                                                          |
+| `status_callback_url`        | `string`           | No       | The URL where you want callbacks with the status updates on a payment. Read more under [Callback](/doc/api_resources/payments_api/payment.md##callback)                                                                                                                    |
 | `total_amount`               | `integer`          | Yes      | The total sum of all the payments                                                                                                                                                                                                                                          |
 
 ## provider_method_parameters
@@ -185,22 +185,19 @@ Example:
 }
 ```
 
-### 500
+## Callback
 
-Server Error
+Once a payment has been initiated, it goes through different stages. The payment status starts as `INITIATED`, then `PENDING` and at last it becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED` depending on what happens during the payment. The payment status is updated through callbacks from the chosen `callback_url` that got set when initiating a payment.
 
-Example:
-
-```python
-{
-  "errors": [
-    {
-      "description": null,
-      "error": "callback_url_not_found"
-    }
-  ]
-}
-```
+| Payment Status | Description                                                                 |
+| -------------- | --------------------------------------------------------------------------- |
+| `INITIATED`    | A payment has just been initiated and will start receiving status callbacks |
+| `PENDING`      | A payment has been initiated and is awaiting the next action                |
+| `COMPLETED`    | The payment was successfull                                                 |
+| `DECLINED`     | The payment was not proccessable                                            |
+| `ABORTED`      | The payment got canceled by the payer                                       |
+| `EXPIRED`      | The payment timed out. Next payment action took to long                     |
+| `CRASHED`      | An unexpected has error occured                                             |
 
 ## Example Usage
 
