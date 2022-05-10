@@ -87,6 +87,14 @@ payments_api = PaymentsApi(
 
 ```
 
+To test the API connection you can ping it. If a connection is established it will return `pong`.
+
+```python
+
+payments_api.ping.ping_the_api()
+
+```
+
 #### Get an Instance of an API object and call its methods
 
 The API is implemented as a class. With the PaymentsApi object you work with an API by calling it's methods.
