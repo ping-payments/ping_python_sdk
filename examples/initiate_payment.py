@@ -14,7 +14,7 @@ payment_object = {
     "delivery_id": "368745"
   },
   "total_amount": 2500,
-  "method": "m_commerce",
+  "method": "e_commerce",
   "order_items": [
         {
             "amount": 2500,
@@ -25,8 +25,8 @@ payment_object = {
     ],
     "provider": "swish",
     "provider_method_parameters": {
-        "phone_number": "0701231212",
-        "message": "hej"
+        "phone_number": "0700000000",
+        "message": "example text"
     },
     "status_callback_url": "https://somesite.com/callback"
 }
