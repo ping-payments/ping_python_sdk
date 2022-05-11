@@ -62,7 +62,7 @@ Example:
     "name": "Merchant B",
     "organization": {
       "country": "SE",
-      "se_organization_number": "678998-1234"
+      "se_organization_number": "5555555555"
     },
     "phone_number": "0739876543"
   }
@@ -152,7 +152,7 @@ Example:
   "name": "Merchant",
   "organization": {
     "country": "SE",
-    "se_organization_number": "555555-5555"
+    "se_organization_number": "5555555555"
   }
 }
 ```
@@ -204,7 +204,7 @@ merchant_object = {
   "name": 'example-name',
   "organisation": {
     "country": 'SE',
-    "se_organisation_number": '555555-5555'
+    "se_organisation_number": '5555555555'
   }
 }
 
@@ -250,7 +250,7 @@ Example:
   "name": "Merchant",
   "organization": {
     "country": "SE",
-    "se_organization_number": "555555-5555"
+    "se_organization_number": "5555555555"
   },
   "phone_number": "0705555555"
 }
@@ -304,7 +304,7 @@ payments_api = PaymentsApi(
   tenant_id = '55555555-5555-5555-5555-555555555555',
   environment = 'sandbox'
 )
-merchant_id = '5555555555'
+merchant_id = '55555555-5555-5555-5555-555555555555'
 
 result = payments_api.merchant.get_specific_merchant(merchant_id)
 if result.is_success():

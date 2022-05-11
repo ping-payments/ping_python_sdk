@@ -1,10 +1,11 @@
 # Change Log
 
-## 3.0.0 (2022-05-10)
+## 3.0.0 (2022-05-11)
 
-A minor update that adds a parameter when you create a payment order
+A major update that adds a parameter when you create a payment order
 
 -   `create_payment_order` now also requires `SEK` or `NOK` as a parameter.
+-   `se_organisation_number` changed format from `555555-5555` to `5555555555`.
 
 ## 2.1.0 (2022-04-26)
 
