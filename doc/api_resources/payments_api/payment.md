@@ -185,7 +185,7 @@ Example:
 
 ## Callback
 
-Once a payment has been initiated, it goes through different stages. The payment status starts as `INITIATED`, then `PENDING` and at last it becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `CANCELED`, `EXPIRED` or `CRASHED` depending on what happens during the payment. The payment status is updated through callbacks from the chosen `callback_url` that got set when initiating a payment.
+Once a payment has been initiated, it goes through different stages. The payment status starts as `INITIATED`, then `PENDING` and at last it becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED` depending on what happens during the payment. The payment status is updated through callbacks from the chosen `callback_url` that got set when initiating a payment.
 
 | Payment Status | Description                                                                 |
 | -------------- | --------------------------------------------------------------------------- |
@@ -194,7 +194,6 @@ Once a payment has been initiated, it goes through different stages. The payment
 | `COMPLETED`    | The payment was successfull                                                 |
 | `DECLINED`     | The payment was not proccessable                                            |
 | `ABORTED`      | The payment got canceled by the payer                                       |
-| `CANCELED`     | The payment got canceled by outside sources                                 |
 | `EXPIRED`      | The payment timed out. Next payment action took to long                     |
 | `CRASHED`      | An unexpected has error occured                                             |
 
