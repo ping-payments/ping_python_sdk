@@ -30,7 +30,7 @@ class TestMerchant(unittest.TestCase):
                 "name": "Company inc",
                 "organization": {
                     "country": "SE",
-                    "se_organization_number": "555555-5555"
+                    "se_organization_number": "5555555555"
                 }
             }
         )
