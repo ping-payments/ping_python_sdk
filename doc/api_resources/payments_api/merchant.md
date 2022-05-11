@@ -17,9 +17,9 @@ payments_api.merchant.get_specific_merchant()
 
 ## Functions
 
-- [Get Merchants](/doc/api_resources/payments_api/merchant.md#get-merchants)
-- [Create New Merchant](/doc/api_resources/payments_api/merchant.md#create-new-merchant)
-- [Get Specific Merchant](/doc/api_resources/payments_api/merchant.md#get-specific-merchant)
+-   [Get Merchants](/doc/api_resources/payments_api/merchant.md#get-merchants)
+-   [Create New Merchant](/doc/api_resources/payments_api/merchant.md#create-new-merchant)
+-   [Get Specific Merchant](/doc/api_resources/payments_api/merchant.md#get-specific-merchant)
 
 # Get Merchants
 
@@ -48,7 +48,7 @@ Example:
 [
   {
     "email": "contact@merchant.a.com",
-    "id": "2d041d6d-21c9-4c65-96eb-5b9047732417",
+    "id": "55555555-5555-5555-5555-555555555555",
     "name": "Merchant A",
     "organization": {
       "country": "NO",
@@ -58,7 +58,7 @@ Example:
   },
   {
     "email": "contact@merchant.b.com",
-    "id": "2c6fec28-9316-4aa6-86c7-d1ee019a9bfa",
+    "id": "55555555-5555-5555-5555-555555555555",
     "name": "Merchant B",
     "organization": {
       "country": "SE",
@@ -246,7 +246,7 @@ Example:
 ```python
 {
   "email": "contact@merchant.com",
-  "id": "2d041d6d-21c9-4c65-96eb-5b9047732417",
+  "id": "55555555-5555-5555-5555-555555555555",
   "name": "Merchant",
   "organization": {
     "country": "SE",

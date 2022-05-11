@@ -40,25 +40,33 @@ def initiate_payment(payment_object, payment_order_id)
 | ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                              |
 | `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the Payment                                                                                                                                                                                                |
-| `method`                     | `string`           | Yes      | Enum: `e-commerce`, `m-commerce`, `pis`,`card`,`invoice`,`autogiro` <br>The payment method for this payment                                                                                                                                                                |
+| `method`                     | `string`           | Yes      | Enum: `e_commerce`, `m_commerce`, `pis`,`card`,`invoice`,`autogiro`, `dummy` <br>The payment method for this payment                                                                                                                                                       |
 | `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency),a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
-| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq` <br>The payment method provider                                                                                                                                                               |
+| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq`, `dummy` <br>The payment method provider                                                                                                                                                      |
 | `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                                                                     |
-| `status_callback_url`        | `string`           | No       | The URL where you want you callback status updates on the payment                                                                                                                                                                                                          |
+| `status_callback_url`        | `string`           | No       | The URL where you want callbacks with the status updates on a payment. Read more under [Callback](/doc/api_resources/payments_api/payment.md##callback)                                                                                                                    |
 | `total_amount`               | `integer`          | Yes      | The total sum of all the payments                                                                                                                                                                                                                                          |
 
 ## provider_method_parameters
 
 The diffrent `provider_method_parameters` needed for each provider. Remember to write these as objects
 
-### Swish - method: E-Commerce
+### Dummy - method: Dummy
+
+A dummy payment is only for sandbox environment and is used to see that it is possible to make a payment.
+
+| Containing               | Type     | Required | Description                                                                                                                                                           |
+| ------------------------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `desired_payment_status` | `string` | Yes      | The payment status you want to achive with the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CANCELLED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED` |
+
+### Swish - method: E_Commerce
 
 | Containing     | Type     | Required | Description                               |
 | -------------- | -------- | -------- | ----------------------------------------- |
 | `message`      | `string` | Yes      | A message associated with the payment.    |
 | `phone_number` | `string` | Yes      | A swish connected phone number of a payer |
 
-### Swish - method: M-Commerce
+### Swish - method: M_Commerce
 
 | Containing    | Type      | Required | Description                                                                                                                            |
 | ------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -131,10 +139,8 @@ Example:
 
 ```python
 {
-  "id": "555555-5555-5555-5555-555555555555"
-  "swish": {
-    "swish_url": "swish://paymentrequest?token=c28a4061470f4af48973bd2a4642b4fa&callbackurl=merchant%253A%252F%252F"
-  }
+  "id": "55555555-5555-5555-5555-555555555555",
+  'provider_method_response': {}
 }
 ```
 
@@ -177,22 +183,19 @@ Example:
 }
 ```
 
-### 500
+## Callback
 
-Server Error
+Once a payment has been initiated, it goes through different stages. The payment status starts as `INITIATED`, then `PENDING` and at last it becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED` depending on what happens during the payment. The payment status is updated through callbacks from the chosen `callback_url` that got set when initiating a payment.
 
-Example:
-
-```python
-{
-  "errors": [
-    {
-      "description": null,
-      "error": "callback_url_not_found"
-    }
-  ]
-}
-```
+| Payment Status | Description                                                                 |
+| -------------- | --------------------------------------------------------------------------- |
+| `INITIATED`    | A payment has just been initiated and will start receiving status callbacks |
+| `PENDING`      | A payment has been initiated and is awaiting the next action                |
+| `COMPLETED`    | The payment was successfull                                                 |
+| `DECLINED`     | The payment was not proccessable                                            |
+| `ABORTED`      | The payment got canceled by the payer                                       |
+| `EXPIRED`      | The payment timed out. Next payment action took to long                     |
+| `CRASHED`      | An unexpected has error occured                                             |
 
 ## Example Usage
 
@@ -209,7 +212,7 @@ Example:
       "delivery_id": "368745"
     },
     "total_amount": 9400,
-    "method": "e-commerce",
+    "method": "e_commerce",
     "order_items": [
       {
         "amount": 2500,
@@ -279,7 +282,7 @@ Example:
   "order_items": [
     {
       "amount": 850,
-      "name": "Utkörning, Pizza",
+      "name": "Delivery, Pizza",
       "vat_rate": 12
     }
   ],

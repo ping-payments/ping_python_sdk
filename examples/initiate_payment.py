@@ -14,7 +14,7 @@ payment_object = {
     "delivery_id": "368745"
   },
   "total_amount": 2500,
-  "method": "dummy",
+  "method": "e_commerce",
   "order_items": [
         {
             "amount": 2500,
@@ -23,9 +23,10 @@ payment_object = {
             "vat_rate": 12
         }
     ],
-    "provider": "dummy",
+    "provider": "swish",
     "provider_method_parameters": {
-        "desired_payment_status": "COMPLETED"
+        "phone_number": "0700000000",
+        "message": "example text"
     },
     "status_callback_url": "https://somesite.com/callback"
 }

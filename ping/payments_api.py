@@ -63,8 +63,8 @@ class PaymentOrder(BaseEndpoints):
     def get_payment_orders(self, date_from=None, date_to=None):
         return paymentOrders.get_payment_orders(self.headers, self.base_url, date_from, date_to)
 
-    def create_payment_order(self, split_tree_id):
-        return paymentOrders.create_payment_order(self.headers, self.base_url, split_tree_id)
+    def create_payment_order(self, split_tree_id, currency):
+        return paymentOrders.create_payment_order(self.headers, self.base_url, split_tree_id, currency)
 
     def get_payment_order(self, payment_order_id):
         return paymentOrders.get_payment_order(self.headers, self.base_url, payment_order_id)

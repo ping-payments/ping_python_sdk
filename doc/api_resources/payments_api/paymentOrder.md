@@ -11,8 +11,8 @@ payments_api.payment_order.create_payment_order()
 payments_api.payment_order.get_payment_order()
 payments_api.payment_order.update_payment_order()
 payments_api.payment_order.close_payment_order()
-payments_api.payment_order.settle_payment_order()
 payments_api.payment_order.split_payment_order()
+payments_api.payment_order.settle_payment_order()
 ```
 
 ## Module Name
@@ -26,8 +26,8 @@ payments_api.payment_order.split_payment_order()
 -   [Get Specific Payment Order](/doc/api_resources/payments_api//paymentOrder.md#get-specific-payment-order)
 -   [Update Payment Order](/doc/api_resources/payments_api//paymentOrder.md#update-payment-order)
 -   [Close Payment Order](/doc/api_resources/payments_api//paymentOrder.md#close-payment-order)
--   [Settle Payment Order](/doc/api_resources/payments_api//paymentOrder.md#settle-payment-order)
 -   [Split Payment Order](/doc/api_resources/payments_api//paymentOrder.md#split-payment-order)
+-   [Settle Payment Order](/doc/api_resources/payments_api//paymentOrder.md#settle-payment-order)
 
 # Get Payment Orders
 
@@ -63,11 +63,11 @@ Example:
 [
   {
     "created_at": "2021-11-05T10:04:19.275000Z",
-    "id": "41a1ac26-6f67-4393-9f02-a4bd72ee3f7a",
+    "id": "55555555-5555-5555-5555-555555555555",
     "payments": [
       {
         "currency": "SEK",
-        "id": "cf3db4e3-399b-4f62-9245-db9b24b7a94d",
+        "id": "55555555-5555-5555-5555-555555555555",
         "method": "autogiro",
         "order_items": [],
         "provider": "bankgirot",
@@ -78,11 +78,11 @@ Example:
   },
   {
     "created_at": "2021-11-15T09:15:01.400000Z",
-    "id": "0350e7d2-9442-4cce-9cb5-2741df659b78",
+    "id": "55555555-5555-5555-5555-555555555555",
     "payments": [
       {
         "currency": "SEK",
-        "id": "c8318bab-ad85-4488-ba2a-1738112ded5f",
+        "id": "55555555-5555-5555-5555-555555555555",
         "metadata": {},
         "method": "mobile",
         "order_items": [],
@@ -154,15 +154,16 @@ elif result.is_error():
 
 Creates a new payment order connected to a split tree.
 
-You need to create a PaymentApi object with a `tenant_id` as a parameter to access `create_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `split_tree_id` of a specific split tree as a parameter. If all parameters are correct, an object will be returned containing a `payment_order_id`. Otherwise an error object is returned.
+You need to create a PaymentApi object with a `tenant_id` as a parameter to access `create_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `split_tree_id` of a specific split tree and `currency` that determines what type of currency this payment order can handle, as parameters. If all parameters are correct, an object will be returned containing a `payment_order_id`. Otherwise an error object is returned.
 
 ```python
 def create_payment_order(split_tree_id)
 ```
 
-| Parameter       | Type     | Description                                         |
-| --------------- | -------- | --------------------------------------------------- |
-| `split_tree_id` | `string` | A string containing the ID of a specific split tree |
+| Parameter       | Type     | Required | Description                                                                                                |
+| --------------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| `split_tree_id` | `string` | Yes      | A string containing the ID of a specific split tree                                                        |
+| `currency`      | `string` | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment order. A payments currency must be the same. |
 
 ## Response Type
 
@@ -226,8 +227,9 @@ payments_api = PaymentsApi(
   environment = 'sandbox'
 )
 split_tree_id = "55555555-5555-5555-5555-555555555555"
+currency = "SEK"
 
-result = payemnts_api.payment_order.create_payment_order(split_tree_id)
+result = payemnts_api.payment_order.create_payment_order(split_tree_id, currency)
 if result.is_success():
     print(result.body)
     print("success")
