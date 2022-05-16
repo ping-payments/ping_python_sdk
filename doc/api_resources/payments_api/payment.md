@@ -26,7 +26,7 @@ Initiates a payment for a payment order.
 Using `initiate_payment()`:
 
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access `initiate_payment()`.
--   Send in an environment parameter to test your code in a `sandbox` environment. The default value is `production`.
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 `initiate_payment()` takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. `initiate_payment()` returns an error object if the `payment_order_id` or payment object is invalid.
 
@@ -59,7 +59,7 @@ You need `provider_method_parameters` for each provider. Write `provider_method_
 
 ### Dummy - method: Dummy
 
-Use dummy payments in the sandbox environment. You can test if a payment is possible with a dummy payment.
+Use dummy payments in sandbox mode. You can test if a payment is possible with a dummy payment.
 
 | Containing               | Type     | Required | Description                                                                                                                                                           |
 | ------------------------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -260,7 +260,7 @@ Gets a payment from a payment order.
 Using `get_payment()`:
 
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payment()`
--   Send in an environment parameter to test your code in a `sandbox` environment. The default value is `production`.
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 `get_payment()` takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object. 
 `get_payment()` returns an error object if the `payment_order_id` or `payment_id` is invalid, or if the `payment_id` doesn't match any payments connected to the payment order matching the `payment_order_id`.

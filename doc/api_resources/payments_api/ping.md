@@ -15,9 +15,12 @@ payments_api.ping.ping_the_api()
 
 # Ping The API
 
-Pings the API to verify that it is reachable.
+Call `ping_the_api()` to verify that the payments API is up and can be reached.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `ping_the_api()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function will return "pong" if the API is reachable.
+Using `ping_the_api()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access `ping_the_api()`.
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 ```python
 def ping_the_api()
@@ -32,7 +35,7 @@ def ping_the_api()
 
 ### 200
 
-Successfully pinged the API. "pong" will be returned.
+A successful call. `ping_the_api()` returns a response with the text "pong".
 
 Example:
 
