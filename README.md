@@ -4,7 +4,7 @@
 [![PyPI version](https://badge.fury.io/py/ping-sdk.svg)](https://badge.fury.io/py/ping-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Use this Python library to manage Ping Payments API regarding merchants, payment orders, payments and payouts.
+This Python library manages the Ping Payments API. The Ping Payments Python SDK has endpoints for merchants, payment orders, payments and payouts.
 
 ## Table of contents
 
@@ -16,9 +16,9 @@ Use this Python library to manage Ping Payments API regarding merchants, payment
 
 ## Requirements
 
-The SDK supports the following versions of Python:
+The Ping Payments Python SDK supports the following versions of Python:
 
--   Python 3 versions 3.6 and later
+-   Python 3, versions 3.6 and later
 
 ## Installation
 
@@ -48,14 +48,21 @@ First time using Payments API? Here’s how to get started:
 
 #### Get a tenant ID
 
-To use the Payments API to manage the resources you need to get a tenant ID. A tenant ID is provided to you by Ping Payments.
+Ping Payments provides you with a tenant ID. The Payments API uses the tenant ID to manage available resources. 
 
-When you call the Payments API, you call it using a tenant ID. A tenant ID has specific permissions to resources.
+Tenant IDs connect to resource permissions.
+
 **Important:** Make sure you store and access the tenant ID securely.
 
-To use the Payments API, you import the PaymentsAPI class, instantiate a PaymentsAPI object, and initialize it with the appropriate tenant ID and environment. Here’s how:
+Using the Payments API:
 
-1. Import the PaymentsApi class from the Ping Python SDK module so you can call the Payments API:
+-   Import the PaymentsAPI class
+-   Instantiate a PaymentsAPI object
+-   Initialize the PaymentsAPI object with the appropriate tenant ID and environment
+
+Detailed instructions:
+
+1. Import the PaymentsApi class from the Ping Python SDK module:
 
 ```python
 
@@ -65,7 +72,7 @@ from ping.payments_api import PaymentsApi
 
 2. Instantiate a PaymentsApi object and initialize it with the tenant ID and the environment that you want to use.
 
-To access sandbox resources, initialize the PaymentsApi with environment set to sandbox:
+Initialize the PaymentsApi in sandbox mode:
 
 ```python
 
@@ -76,7 +83,7 @@ payments_api = PaymentsApi(
 
 ```
 
-To access production resources, initialize the PaymentsApi with environment set to production:
+Initialize the PaymentsApi in production mode:
 
 ```python
 
@@ -87,7 +94,7 @@ payments_api = PaymentsApi(
 
 ```
 
-To test the API connection you can ping it. If a connection is established it will return `pong`.
+You can ping the API connection for testing. A working connection will return `pong`.
 
 ```python
 
@@ -97,9 +104,9 @@ payments_api.ping.ping_the_api()
 
 #### Get an Instance of an API object and call its methods
 
-The API is implemented as a class. With the PaymentsApi object you work with an API by calling it's methods.
+The API is implemented as a class. You work with an API by calling methods in the PaymentsApi object.
 
-**Work with the API by calling the methods on the API object.** For example, you would call get_merchants to get a list of all merchant for the tenant:
+**Work with the API by calling the methods on the API object.** For example, you call get_merchants for a list of all merchants for a tenant:
 
 ```python
 
@@ -107,13 +114,13 @@ result = payments_api.merchant.get_merchants()
 
 ```
 
-See the SDK documentation for the list of methods for the API class.
+The SDK documentation contains a list of methods for the API class.
 
 #### Handle the response
 
-API calls return an ApiResponse object that contains properties that describe both the request (headers and request) and the response (status_code, reason_phrase, text, errors, body, and cursor). Here’s how to handle the response:
+API calls return an ApiResponse object. Properties of the ApiResponse object describe the request (headers and request) and the response (status_code, reason_phrase, text, errors, body, and cursor). Here’s how to handle the response:
 
-**Check whether the response succeeded or failed.** ApiResponse has two helper methods that enable you to easily determine the success or failure of a call:
+**Check whether the response succeeded or failed.**  Two helper methods in the ApiResponse object determine the success or failure of a call:
 
 ```python
 
