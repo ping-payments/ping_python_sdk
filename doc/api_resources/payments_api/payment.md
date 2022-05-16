@@ -26,7 +26,7 @@ Initiates a payment for a payment order.
 Using `initiate_payment()`:
 
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access `initiate_payment()`.
--   Send in an environment parameter to test your code in a `sandbox` environment. The default value is `production`
+-   Send in an environment parameter to test your code in a `sandbox` environment. The default value is `production`.
 
 `initiate_payment()` takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. `initiate_payment()` returns an error object if the `payment_order_id` or payment object is invalid.
 
@@ -128,7 +128,7 @@ Use dummy payments in the sandbox environment. You can test if a payment is poss
 | Containing    | Type     | Required | Description                                                                |
 | ------------- | -------- | -------- | -------------------------------------------------------------------------- |
 | `error_url`   | `string` | Yes      | URL to which the user is directed to after a payment failure               |
-| `success_url` | `string` | Yes      | An URL to which the user is directed to after a successful payment         |
+| `success_url` | `string` | Yes      | URL to which the user is directed to after a successful payment            |
 
 ## Response Type
 
@@ -169,7 +169,7 @@ Example:
 
 ### 404
 
-Payment Order could not be found. the given `payment_order_id` does not match a Payment Order
+Search error. `initiate_payment()` couldn't find a matching Payment order for the given `payment_order_id`.
 
 ### 422
 
@@ -191,17 +191,21 @@ Example:
 
 ## Callback
 
-A payment goes through different stages. The payment status starts as `INITIATED`, continues as `PENDING` and last becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED`. Callbacks from the chosen `callback_url` updates payment status.
+A payment goes through different stages.
+
+The payment status starts as `INITIATED`, continues as `PENDING` and last becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED`.
+
+Callbacks from the chosen `callback_url` updates payment status.
 
 | Payment Status | Description                                                                 |
 | -------------- | --------------------------------------------------------------------------- |
-| `INITIATED`    | A payment has just been initiated and will start receiving status callbacks |
-| `PENDING`      | A payment has been initiated and is awaiting the next action                |
-| `COMPLETED`    | The payment was successfull                                                 |
-| `DECLINED`     | The payment was not proccessable                                            |
-| `ABORTED`      | The payment got canceled by the payer                                       |
-| `EXPIRED`      | The payment timed out. Next payment action took to long                     |
-| `CRASHED`      | An unexpected has error occured                                             |
+| `INITIATED`    | Payment is initiated and starts receiving status callbacks                  |
+| `PENDING`      | Payment awaits the next action                                              |
+| `COMPLETED`    | Successful payment                                                          |
+| `DECLINED`     | Payment could not be processed                                              |
+| `ABORTED`      | Payment was canceled by payer                                               |
+| `EXPIRED`      | Payment timed out                                                           |
+| `CRASHED`      | Payment caused an unexpected error                                          |
 
 ## Example Usage
 
@@ -253,7 +257,13 @@ A payment goes through different stages. The payment status starts as `INITIATED
 
 Gets a payment from a payment order.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires you to send in a `payment_order_id` and a `payment_id` that is connected to the given payment order. If everything is correct, you will be returned a json object of that payment. If something is incorrect, you will be returned an error object containing possible information about the error.
+Using `get_payment()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payment()`
+-   Send in an environment parameter to test your code in a `sandbox` environment. The default value is `production`.
+
+`get_payment()` takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object. 
+`get_payment()` returns an error object if the `payment_order_id` or `payment_id` is invalid, or if the `payment_id` doesn't match any payments connected to the payment order matching the `payment_order_id`.
 
 ```python
 def get_payment(payment_order_id, payment_id)
@@ -261,8 +271,8 @@ def get_payment(payment_order_id, payment_id)
 
 | Parameter          | Type   | Description                                             |
 | ------------------ | ------ | ------------------------------------------------------- |
-| `payment_order_id` | string | A string cointaining the Id of a specific payment order |
-| `payment_id`       | string | A string cointaining the Id of a specific payment       |
+| `payment_order_id` | string | String cointaining the ID of a payment order            |
+| `payment_id`       | string | String cointaining the ID of a payment                  |
 
 ## Response Type
 
@@ -273,7 +283,7 @@ def get_payment(payment_order_id, payment_id)
 
 ### 200
 
-Successfully returned a payment. A json object containing the payment has been returned.
+A successful call. `get_payment()` returns a payment object.
 
 Example:
 
@@ -299,7 +309,7 @@ Example:
 
 ### 403
 
-API Error
+API error. The payment endpoint returned an error message.
 
 Example:
 
@@ -316,14 +326,11 @@ Example:
 
 ### 404
 
-Payment could not be found.
-
-The given `payment_id` cannot be found in the given `payment_order_id`.
-The given `payment_order_id` don't match a payment order.
+Search error. `get_payment()` couldn't match the `payment_id` to the `payment_order_id` or the `payment_order_id` is invalid.
 
 ### 422
 
-Validation Error
+Validation error. The payment endpoint returned an error message because of an invalid value.
 
 Example:
 
