@@ -294,8 +294,6 @@ Example:
 
 Search error. `get_specific_merchant()` couldn't find a match for the combined `tenant_id` and `merchant_id`.
 
-The given `merchant_id` could not be found.
-
 ### 422
 
 Validation error. The merchant endpoint returned an error message because of an invalid value.
