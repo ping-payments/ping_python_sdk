@@ -23,7 +23,13 @@ payments_api.payment.get_payment()
 
 Initiates a payment for a payment order.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `initiate_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires that you send in a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing data regarding the next step towards completing the payment. If something went wrong you will be returned an error object).
+Using `initiate_payment()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access `initiate_payment()`.
+-   Send in an environment parameter to test your code in a `sandbox` environment. The default value is `production`
+
+`initiate_payment()` takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. `initiate_payment()` returns an error object if the `payment_order_id` or payment object is invalid.
+
 
 ```python
 def initiate_payment(payment_object, payment_order_id)
@@ -31,46 +37,46 @@ def initiate_payment(payment_object, payment_order_id)
 
 | Parameter          | Type     | Description                                                       |
 | ------------------ | -------- | ----------------------------------------------------------------- |
-| `payment_object`   | `object` | An obejct containing all information needed to initiate a payment |
-| `payment_order_id` | `string` | An ID of a specific Payment Order                                 |
+| `payment_object`   | `object` | Object containing all information needed to initiate a payment    |
+| `payment_order_id` | `string` | ID of a specific Payment Order                                    |
 
 ## payment_object
 
 | Containing                   | Type               | Required | Description                                                                                                                                                                                                                                                                |
 | ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                              |
-| `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the Payment                                                                                                                                                                                                |
-| `method`                     | `string`           | Yes      | Enum: `e_commerce`, `m_commerce`, `pis`,`card`,`invoice`,`autogiro`, `dummy` <br>The payment method for this payment                                                                                                                                                       |
-| `order_items`                | `array of objects` | Yes      | An array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency),a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
+| `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the payment                                                                                                                                                                                                |
+| `method`                     | `string`           | Yes      | Enum: `e_commerce`, `m_commerce`, `pis`,`card`,`invoice`,`autogiro`, `dummy` <br>Payment method for this payment                                                                                                                                                           |
+| `order_items`                | `array of objects` | Yes      | Array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency), a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer)   |
 | `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq`, `dummy` <br>The payment method provider                                                                                                                                                      |
-| `provider_method_parameters` | `object`           | Yes      | An object of the required fields for the given payment method provider                                                                                                                                                                                                     |
-| `status_callback_url`        | `string`           | No       | The URL where you want callbacks with the status updates on a payment. Read more under [Callback](/doc/api_resources/payments_api/payment.md##callback)                                                                                                                    |
-| `total_amount`               | `integer`          | Yes      | The total sum of all the payments                                                                                                                                                                                                                                          |
+| `provider_method_parameters` | `object`           | Yes      | Object of the required fields for the given payment method provider                                                                                                                                                                                                        |
+| `status_callback_url`        | `string`           | No       | URL for callbacks requesting status updates on a payment. Read more under [Callback](/doc/api_resources/payments_api/payment.md##Callback)                                                                                                                                 |
+| `total_amount`               | `integer`          | Yes      | Total sum of all intems of purchase                                                                                                                                                                                                                                        |
 
 ## provider_method_parameters
 
-The diffrent `provider_method_parameters` needed for each provider. Remember to write these as objects
+You need `provider_method_parameters` for each provider. Write `provider_method_parameters` in object form.
 
 ### Dummy - method: Dummy
 
-A dummy payment is only for sandbox environment and is used to see that it is possible to make a payment.
+Use dummy payments in the sandbox environment. You can test if a payment is possible with a dummy payment.
 
 | Containing               | Type     | Required | Description                                                                                                                                                           |
 | ------------------------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `desired_payment_status` | `string` | Yes      | The payment status you want to achive with the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CANCELLED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED` |
+| `desired_payment_status` | `string` | Yes      | Desired payment status for the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CANCELLED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED`                 |
 
 ### Swish - method: E_Commerce
 
 | Containing     | Type     | Required | Description                               |
 | -------------- | -------- | -------- | ----------------------------------------- |
-| `message`      | `string` | Yes      | A message associated with the payment.    |
-| `phone_number` | `string` | Yes      | A swish connected phone number of a payer |
+| `message`      | `string` | Yes      | Message associated with the payment       |
+| `phone_number` | `string` | Yes      | Payer's swish-connected phone number      |
 
 ### Swish - method: M_Commerce
 
 | Containing    | Type      | Required | Description                                                                                                                            |
 | ------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `message`     | `string`  | Yes      | A message associated with the payment.                                                                                                 |
+| `message`     | `string`  | Yes      | Message associated with the payment.                                                                                                   |
 | `qr_border`   | `integer` | no       | QR-code image border size in pixels. Default is 0                                                                                      |
 | `qr_format`   | `string`  | no       | QR code image format. Enum: `transparent_svg`, `transparent_png`, `solid_jpg`, `solid_svg`, `solid_png `. Default is `transparent_svg` |
 | `qr_size`     | `integer` | no       | QR code image size in pixels. Default is 300                                                                                           |
@@ -78,38 +84,38 @@ A dummy payment is only for sandbox environment and is used to see that it is po
 
 ### Open Banking - method: pis
 
-| Containing    | Type     | Required | Description                                                                |
-| ------------- | -------- | -------- | -------------------------------------------------------------------------- |
-| `cancel_url`  | `string` | Yes      | An URL to which the user is directed to if the payment gets canceled       |
-| `error_url`   | `string` | Yes      | An URL to which the user is directed to if the payment fails               |
-| `reference`   | `string` | Yes      | Reference visible in the payers and payees bank account log                |
-| `success_url` | `string` | Yes      | An URL to which the user is directed to at the end of a successful payment |
+| Containing    | Type     | Required | Description                                                                  |
+| ------------- | -------- | -------- | ---------------------------------------------------------------------------- |
+| `cancel_url`  | `string` | Yes      | URL to which the user is directed to if the payment gets canceled            |
+| `error_url`   | `string` | Yes      | URL to which the user is directed to if the payment fails                    |
+| `reference`   | `string` | Yes      | Reference visible in the payer's and payee's bank account log                |
+| `success_url` | `string` | Yes      | URL to which the user is directed to upon successful completion of a payment |
 
 ### Verifone - method: card
 
 | Containing    | Type     | Required | Description                                                                     |
 | ------------- | -------- | -------- | ------------------------------------------------------------------------------- |
-| `cancel_url`  | `string` | Yes      | An URL which the payer is directed to when a payment gets canceled              |
-| `email`       | `string` | Yes      | The email address of a payer                                                    |
-| `first_name`  | `string` | Yes      | The first name of a payer                                                       |
-| `last_name`   | `string` | Yes      | The last name of a payer                                                        |
-| `success_url` | `string` | Yes      | An URL to which the payer is directed to when successfully completing a payment |
+| `cancel_url`  | `string` | Yes      | URL to which the payer is directed to when a payment gets canceled              |
+| `email`       | `string` | Yes      | Payer's email address                                                           |
+| `first_name`  | `string` | Yes      | Payer's first name                                                              |
+| `last_name`   | `string` | Yes      | Payer's last name                                                               |
+| `success_url` | `string` | Yes      | URL to which the payer is directed to upon successful completion of a payment   |
 
 ### Billmate - method: invoice
 
 | Containing            | Type      | Required | Description                                                      |
 | --------------------- | --------- | -------- | ---------------------------------------------------------------- |
-| `care_of`             | `string`  | No       | The payers care of (C/O) address                                 |
-| `country`             | `string`  | Yes      | The payers country of residence                                  |
-| `customer_reference`  | `string`  | Yes      | The customer reference                                           |
-| `email`               | `string`  | Yes      | The email address of a payer                                     |
-| `first_name`          | `string`  | Yes      | The first name of a payer                                        |
-| `free_text`           | `string`  | No       | A free text on the invoice                                       |
-| `ip_address`          | `string`  | Yes      | The IP address of the device that the payment is being made from |
-| `is_company_customer` | `boolean` | Yes      | Whether or not the payer is paying as a company                  |
-| `last_name`           | `string`  | Yes      | The last name of a payer                                         |
-| `national_id_number`  | `string`  | Yes      | The payers national ID number                                    |
-| `phone_number`        | `string`  | Yes      | The payers phone number                                          |
+| `care_of`             | `string`  | No       | Payer's care of (C/O) address                                    |
+| `country`             | `string`  | Yes      | Payer's country of residence                                     |
+| `customer_reference`  | `string`  | Yes      | Customer reference                                               |
+| `email`               | `string`  | Yes      | Payer's email address                                            |
+| `first_name`          | `string`  | Yes      | Payer's first name                                               |
+| `free_text`           | `string`  | No       | Free-text field for invoice notes                                |
+| `ip_address`          | `string`  | Yes      | IP address for the device that the payment is being made from    |
+| `is_company_customer` | `boolean` | Yes      | Payer's status as a company or an individual                     |
+| `last_name`           | `string`  | Yes      | Payer's last name                                                |
+| `national_id_number`  | `string`  | Yes      | Payer's national ID number                                       |
+| `phone_number`        | `string`  | Yes      | Payer's phone number                                             |
 
 ### Bankgirot - method: autogiro
 
@@ -121,8 +127,8 @@ A dummy payment is only for sandbox environment and is used to see that it is po
 
 | Containing    | Type     | Required | Description                                                                |
 | ------------- | -------- | -------- | -------------------------------------------------------------------------- |
-| `error_url`   | `string` | Yes      | An URL to which the user is directed to if the payment fails               |
-| `success_url` | `string` | Yes      | An URL to which the user is directed to at the end of a successful payment |
+| `error_url`   | `string` | Yes      | URL to which the user is directed to after a payment failure               |
+| `success_url` | `string` | Yes      | An URL to which the user is directed to after a successful payment         |
 
 ## Response Type
 
@@ -133,7 +139,7 @@ A dummy payment is only for sandbox environment and is used to see that it is po
 
 ### 200
 
-Successfully initiated a payment. A json object containing information on how to procede and the payment id has been returned
+A successful call. `initiate_payment()` initiated a payment. `initiate_payment()` returns a payment id and an object containing data needed to fulfill the next step of a payment.
 
 Example:
 
@@ -146,7 +152,7 @@ Example:
 
 ### 403
 
-API Error
+API error. The payment endpoint returned an error message.
 
 Example:
 
@@ -167,7 +173,7 @@ Payment Order could not be found. the given `payment_order_id` does not match a 
 
 ### 422
 
-Validation Error
+Validation error. The payment endpoint returned an error message because of an invalid value.
 
 Example:
 
@@ -185,7 +191,7 @@ Example:
 
 ## Callback
 
-Once a payment has been initiated, it goes through different stages. The payment status starts as `INITIATED`, then `PENDING` and at last it becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED` depending on what happens during the payment. The payment status is updated through callbacks from the chosen `callback_url` that got set when initiating a payment.
+A payment goes through different stages. The payment status starts as `INITIATED`, continues as `PENDING` and last becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED`. Callbacks from the chosen `callback_url` updates payment status.
 
 | Payment Status | Description                                                                 |
 | -------------- | --------------------------------------------------------------------------- |

@@ -45,7 +45,7 @@ def get_merchants()
 
 ### Code 200
 
- A successful call. The merchant endpoint returned a list of all the merchants objects connected to a tenant ID.
+A successful call. The merchant endpoint returned a list of all the merchants objects connected to a tenant ID.
 
 Example:
 
@@ -220,7 +220,7 @@ merchant_object = {
   }
 }
 
-result = payemnts_api.merchant.create_new_merchant(merchant_object)
+result = payments_api.merchant.create_new_merchant(merchant_object)
 if result.is_success():
     print(result.body)
     print("success")
