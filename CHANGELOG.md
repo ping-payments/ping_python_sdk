@@ -1,3 +1,8 @@
+---
+title: "Changelog"
+excerpt: "A list of changes made to the Ping Python SDK"
+---
+
 # Change Log
 
 ## 3.0.0 (2022-05-11)
