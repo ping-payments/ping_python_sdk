@@ -1,5 +1,5 @@
 ---
-title: "Payout
+title: "Payout"
 excerpt: "A description of the usage of the Payout endpoint"
 ---
 

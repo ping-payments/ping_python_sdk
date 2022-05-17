@@ -2,6 +2,7 @@
 title: "Payment"
 excerpt: "A description of the usage of the Payment endpoint"
 ---
+
 # Payments
 
 The `payment` endpoint exposes several methods dedicated to dealing with payment objects.
