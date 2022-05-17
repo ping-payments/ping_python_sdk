@@ -1,5 +1,5 @@
 ---
-title: "Payment"
+title: "Payments API"
 excerpt: "A general description of the PaymentApi class"
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Payment Order"
+title: "Merchant"
 excerpt: "A description of the usage of the Merchant endpoint"
 ---
 
