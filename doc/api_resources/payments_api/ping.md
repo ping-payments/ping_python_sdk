@@ -1,3 +1,8 @@
+---
+title: "Ping"
+excerpt: "A description of the usage, inputs and outputs of the Ping endpoint"
+---
+
 # Ping
 
 ```python
@@ -15,11 +20,11 @@ payments_api.ping.ping_the_api()
 
 # Ping The API
 
-Call `ping_the_api()` to verify that the payments API is up and can be reached.
+Call `ping_the_api()` to verify that the payments API is up and can be reached with a given tenant ID.
 
-Using `ping_the_api()`:
+Using ping_the_api():
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access `ping_the_api()`.
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access ping_the_api().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 ```python

@@ -33,7 +33,7 @@ An SDK update to support new API changes regarding the date format of a payment 
 
 ## 1.0.0-alpha (2022-03-25)
 
--   The SDK have been updated to support all endpoints of payments API.
+-   The SDK has been updated to support all endpoints of payments API.
 
 -   update_payment_order() now working.
 

@@ -1,4 +1,12 @@
+---
+title: "Payment Order"
+excerpt: "A description of the usage of the Payment Order endpoint"
+---
 # Payment Order
+
+The `payment order` endpoint exposes several methods dedicated to dealing with payment objects.
+
+Example:
 
 ```python
 from ping.payments_api import PaymentsApi
@@ -31,9 +39,15 @@ payments_api.payment_order.settle_payment_order()
 
 # Get Payment Orders
 
-Gets and returns an object of all the payment orders and optionally between dates
+Gets and returns a list of payment order objects connected to a `tenant_id`.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payment_orders()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function can also take two dates as optional parameters if you wish to get all `payment_orders` between two dates. If the tenant_id exists and the optional dates are valid, the function will return an object containing a list of payment orders. Otherwise an error object is returned.
+Using `get_payment_orders()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_orders().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+You can use the optional `date_from` and `date_to` parameters to limit the list of payment order objects get_payment_orders() returns, by date. 
+get_payment_orders() returns an error object if the tenant_id is invalid or if you have provided an invalid date in either the date_from or date_to parameter. 
 
 ```python
 def get_payment_orders(date_from=None, date_to=None)
@@ -55,7 +69,7 @@ The date-time parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:
 
 ### 200
 
-Successfully got payment orders. A json object containing an array of payment orders for the given tenant has been returned.
+A successful call. `get_payment_orders()` returns a list of payment order objects.
 
 Example:
 
@@ -97,7 +111,7 @@ Example:
 
 ### 403
 
-API Error
+API error. The payment order endpoint returned an error message.
 
 Example:
 
@@ -114,7 +128,7 @@ Example:
 
 ### 422
 
-Validation Error
+Validation error. The payment order endpoint returned an error message because of an invalid value.
 
 Example:
 
@@ -152,18 +166,24 @@ elif result.is_error():
 
 # Create New Payment Order
 
-Creates a new payment order connected to a split tree.
+Creates a new payment order connected to a split tree datastructure.
 
-You need to create a PaymentApi object with a `tenant_id` as a parameter to access `create_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `split_tree_id` of a specific split tree and `currency` that determines what type of currency this payment order can handle, as parameters. If all parameters are correct, an object will be returned containing a `payment_order_id`. Otherwise an error object is returned.
+Using `create_payment_order()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access create_payment_order()).
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+create_payment_order() takes a `split_tree_id` and a specified `currency` and returns an object containing a `payment_order_id`. 
+create_payment_order() returns an error object if the split_tree_id or currecy is invalid.
 
 ```python
 def create_payment_order(split_tree_id)
 ```
 
-| Parameter       | Type     | Required | Description                                                                                                |
-| --------------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `split_tree_id` | `string` | Yes      | A string containing the ID of a specific split tree                                                        |
-| `currency`      | `string` | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment order. A payments currency must be the same. |
+| Parameter       | Type     | Required | Description                                                                                                                                                 |
+| --------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `split_tree_id` | `string` | Yes      | String containing the ID of a specific split tree                                                                                                           |
+| `currency`      | `string` | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment order. Payments connected to a payment order must have the same currency as the payment order |
 
 ## Response Type
 
@@ -174,7 +194,7 @@ def create_payment_order(split_tree_id)
 
 ### 200
 
-Successfully created a payment order. A json object containing the id of the created payment order has been returned.
+A successful call. `create_payment_order()` created a payment order. create_payment_order() returns an object containing a new `payment_order_id`.
 
 Example:
 
@@ -186,7 +206,7 @@ Example:
 
 ### 403
 
-API Error
+API error. The payment order endpoint returned an error message.
 
 Example:
 
@@ -203,7 +223,7 @@ Example:
 
 ### 422
 
-Validation Error
+Validation error. The payment order endpoint returned an error message because of an invalid value.
 
 Example:
 
@@ -239,9 +259,15 @@ elif result.is_error():
 
 # Get Specific Payment Order
 
-Gets a specific payment order with a `payment_order_id`.
+Gets a payment order.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `payment_order_id` as a parameter. If the `tenant_id` exists and has a payment order with that `payment_order_id` then an object containing that payment order will be returned. Otherwise an error object is returned.
+Using `get_payment_order()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_order().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+create_payment_order() takes a `payment_order_id` and returns a payment order object. 
+create_payment_order() returns an error object if the payment_order_id is invalid.
 
 ```python
 def get_payment_order(payment_order_id)
@@ -249,7 +275,7 @@ def get_payment_order(payment_order_id)
 
 | Parameter          | Type     | Description                                            |
 | ------------------ | -------- | ------------------------------------------------------ |
-| `payment_order_id` | `string` | A string containing the ID of a specific payment order |
+| `payment_order_id` | `string` | String containing the ID of a specific payment order   |
 
 ## Response Type
 
@@ -260,7 +286,7 @@ def get_payment_order(payment_order_id)
 
 ### 200
 
-Successfully returned a payment order. A json object containing a specific payment order with the given `payment_order_id` has been returned.
+A successful call. `create_payment_order()` returned a payment order.
 
 Example:
 
@@ -284,7 +310,7 @@ Example:
 
 ### 403
 
-API Error
+API error. The payment order endpoint returned an error message.
 
 Example:
 
@@ -301,13 +327,11 @@ Example:
 
 ### 404
 
-Payment Order could not be found.
-
-The given `payment_order_id` could not be found.
+Search error. `create_payment_order()` couldn't match the `payment_order_id` to a payment order object.
 
 ### 422
 
-Validation Error
+Validation error. The payment order endpoint returned an error message because of an invalid value.
 
 Example:
 
@@ -342,9 +366,17 @@ elif result.is_error():
 
 # Update Payment Order
 
-Updates a payment order. Used for updating which split tree to use when splitting.
+Updates a payment order with a new split tree datastructure.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `update_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function can also requires a `payment_order_id` of the payment order you want to update and a new `split_tree_id` as a parameter. If the tenant_id exists and there is a split tree with the given `split_tree_id`, this function will return a successfull response. Otherwise an error object is returned.
+The new split tree datastructure is used for splitting payments in the payment order between payment recipients.
+
+Using `update_payment_order()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_order().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+update_payment_order() takes a `payment_order_id` and a `split_tree_id`, and updates a payment order matching the payment_order_id. 
+create_payment_order() returns an error object if the payment_order_id is invalid.
 
 ```python
 def update_payment_order(payment_order_id, split_tree_id)
@@ -352,8 +384,8 @@ def update_payment_order(payment_order_id, split_tree_id)
 
 | Parameter          | Type     | Description                                            |
 | ------------------ | -------- | ------------------------------------------------------ |
-| `payment_order_id` | `string` | A string containing the ID of a specific payment order |
-| `split_tree_id`    | `string` | A string containing the ID of a specific split tree    |
+| `payment_order_id` | `string` | String containing the ID of a specific payment order   |
+| `split_tree_id`    | `string` | String containing the ID of a specific split tree      |
 
 ## Response Type
 
@@ -364,11 +396,11 @@ def update_payment_order(payment_order_id, split_tree_id)
 
 ### 204
 
-The payment order was successfully updated
+A successful call.
 
 ### 403
 
-API Error
+API error. The payment order endpoint returned an error message.
 
 Example:
 
@@ -385,13 +417,11 @@ Example:
 
 ### 404
 
-Payment order could not be found
-
-`payment_order_id` or `split_tree_id` could not be found
+Search error. `update_payment_order()` couldn't match the `payment_order_id` to a payment order or the `split_tree_id` to an existing split tree datastructure.
 
 ### 422
 
-Validation Error
+Validation error. The payment order endpoint returned an error message because of an invalid value.
 
 Example:
 
@@ -427,9 +457,15 @@ elif result.is_error():
 
 # Close Payment Order
 
-Closes a payment order for further payments
+Closes a payment order and disables the possibility of updating the payment order with further payments.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `close_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to close. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
+Using `close_payment_order()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_order().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+close_payment_order() takes a `payment_order_id` and updates a payment order matching the payment_order_id with a "closed" status.
+close_payment_order() returns an error object if the payment_order_id is invalid.
 
 ```python
 def close_payment_order(payment_order_id)
@@ -437,7 +473,7 @@ def close_payment_order(payment_order_id)
 
 | Parameter          | Type     | Required | Description                                            |
 | ------------------ | -------- | -------- | ------------------------------------------------------ |
-| `payment_order_id` | `string` | Yes      | A string containing the ID of a specific payment order |
+| `payment_order_id` | `string` | Yes      | String containing the ID of a specific payment order   |
 
 ## Response Type
 
@@ -448,11 +484,11 @@ def close_payment_order(payment_order_id)
 
 ### 204
 
-Payment order was successfully closed
+A successful call.
 
 ### 403
 
-API Error
+API error. The payment order endpoint returned an error message.
 
 Example:
 
@@ -469,13 +505,11 @@ Example:
 
 ### 404
 
-Payment order could not be found.
-
-`payment_order_id` does not match a payment order
+Search error. `close_payment_order()` couldn't match the `payment_order_id` to a payment order.
 
 ### 422
 
-Validation Error
+Validation error. The payment order endpoint returned an error message because of an invalid value.
 
 Example:
 
@@ -510,18 +544,26 @@ elif result.is_error():
 
 # Split Payment Order
 
-Executes a split of a payment order. Used when services/goods have been provided/delivered. Can still be partly refunded
+Splits a payment order. Used when when the conditions for some payments in a payment order have been fulfilled.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `split_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to split. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
+A split payment order can still be partly refunded.
+
+Using `split_payment_order()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_order().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+split_payment_order() takes a `payment_order_id` and updates ("splits") a payment order matching the payment_order_id. 
+split_payment_order() returns an error object if the payment_order_id is invalid.
 
 ```python
 def split_payment_order(payment_order_id)
 ```
 
-| Parameter          | Type      | Required | Description                                                                        |
-| ------------------ | --------- | -------- | ---------------------------------------------------------------------------------- |
-| `payment_order_id` | `string`  | Yes      | A string containing the ID of a specific payment order                             |
-| `fast_forward`     | `boolean` | No       | A boolean that closes and splits a payment order when true. Dafault value is false |
+| Parameter          | Type      | Required | Description                                                                             |
+| ------------------ | --------- | -------- | --------------------------------------------------------------------------------------- |
+| `payment_order_id` | `string`  | Yes      | String containing the ID of a specific payment order                                    |
+| `fast_forward`     | `boolean` | No       | Boolean that indicates that a payment order shall be closed and split. Default: `false` |                  |
 
 ## Response Type
 
@@ -532,11 +574,11 @@ def split_payment_order(payment_order_id)
 
 ### 204
 
-Payment order was successfully split
+A successful call.
 
 ### 403
 
-API Error
+API error. The payment order endpoint returned an error message.
 
 Example:
 
@@ -553,13 +595,11 @@ Example:
 
 ### 404
 
-Payment order could not be found.
-
-`payment_order_id` does not match a payment order
+Search error. `split_payment_order()` couldn't match the `payment_order_id` to a payment order.
 
 ### 422
 
-Validation Error
+Validation error. The payment order endpoint returned an error message because of an invalid value.
 
 Example:
 
@@ -594,18 +634,27 @@ elif result.is_error():
 
 # Settle Payment Order
 
-Settles a payment order for future payout. Refunds will no longer be possible.
+Marks a payment order as "settled". A settled payment order is slated for a future payout.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `settle_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to settle. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
+Refunds are not possible on a settled payment order.
+
+Using `settle_payment_order()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_order().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+settle_payment_order() takes a `payment_order_id` and updates a payment order matching the payment_order_id with a "settled" status. 
+settle_payment_order() returns an error object if the payment_order_id is invalid.
+
 
 ```python
 def settle_payment_order(payment_order_id)
 ```
 
-| Parameter          | Type      | Required | Description                                                                                                                            |
-| ------------------ | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `payment_order_id` | `string`  | Yes      | A string containing the ID of a specific payment order                                                                                 |
-| `fast_forward`     | `boolean` | No       | An object containing boolean that closes (if not already closed), splits and settles a payment order when true. Dafault value is false |
+| Parameter          | Type      | Required | Description                                                                                                  |
+| ------------------ | --------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `payment_order_id` | `string`  | Yes      | String containing the ID of a specific payment order                                                         |
+| `fast_forward`     | `boolean` | No       | Boolean that indicates that a payment order shall be closed, split and settled. Default: `false`             |
 
 ## Response Type
 
@@ -616,11 +665,11 @@ def settle_payment_order(payment_order_id)
 
 ### 204
 
-Payment order was successfully settled
+A successful call.
 
 ### 403
 
-API Error
+API error. The payment order endpoint returned an error message.
 
 Example:
 
@@ -637,13 +686,11 @@ Example:
 
 ### 404
 
-Payment order could not be found.
-
-`payment_order_id` does not match a payment order
+Search error. `settle_payment_order()` couldn't match the `payment_order_id` to a payment order.
 
 ### 422
 
-Validation Error
+Validation error. The payment order endpoint returned an error message because of an invalid value.
 
 Example:
 

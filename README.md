@@ -1,18 +1,21 @@
+---
+title: "README"
+excerpt: "A description the Ping Payments Python SDK"
+---
+
 # Ping Payments Python SDK
 
 [![Tests](https://github.com/youcal/ping_python_sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/youcal/ping_python_sdk/actions/workflows/tests.yml)
 [![PyPI version](https://badge.fury.io/py/ping-sdk.svg)](https://badge.fury.io/py/ping-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This Python library manages the Ping Payments API. The Ping Payments Python SDK has endpoints for merchants, payment orders, payments and payouts.
+The `Ping Payments Python SDK` manages the `Ping Payments API`.
 
 ## Table of contents
 
 -   [Requirements](#requirements)
-
 -   [Installation](#installation)
-
--   [Payments API](#payments-api)
+-   [Ping Payments API](#payments-api)
 
 ## Requirements
 
@@ -22,43 +25,44 @@ The Ping Payments Python SDK supports the following versions of Python:
 
 ## Installation
 
-Install the latest SDK using pip:
+Install the latest Ping Payments Python SDK using pip:
 
 ```sh
 pip install ping-sdk
 ```
 
-## Payments API
+## The [Ping Payments API]
 
-### [Payments API]
+The Ping Payments API is implemented as the `PaymentsApi` class. The PaymentsApi contains a number of endpoints.
+### Ping Payments API Endpoints
+
+Available endpoints in the PaymentApi class:
 
 -   [Merchant]
-
 -   [Payment Orders]
-
 -   [Payment]
-
 -   [Payout]
-
 -   [Ping]
+
+You work with the Ping Payments API by calling methods in the PaymentsApi endpoints.
+
+The Ping Payments Python SDK documentation contains lists of available methods for each endpoint, on the page for each endpoint.
 
 ### Usage
 
-First time using Payments API? Here’s how to get started:
+Here’s how to get started with the Ping Payments API:
 
 #### Get a tenant ID
 
-Ping Payments provides you with a tenant ID. The Payments API uses the tenant ID to manage available resources. 
-
-Tenant IDs connect to resource permissions.
+Ping Payments provides you with a `tenant ID`. The Ping Payment API uses tenant IDs for resource permissions.
 
 **Important:** Make sure you store and access the tenant ID securely.
 
-Using the Payments API:
+Using the Ping Payments API:
 
--   Import the PaymentsAPI class
--   Instantiate a PaymentsAPI object
--   Initialize the PaymentsAPI object with the appropriate tenant ID and environment
+-   Import the PaymentsAPI class.
+-   Instantiate a PaymentsAPI object.
+-   Initialize the PaymentsAPI object with the appropriate tenant ID and environment.
 
 Detailed instructions:
 
@@ -72,7 +76,17 @@ from ping.payments_api import PaymentsApi
 
 2. Instantiate a PaymentsApi object and initialize it with the tenant ID and the environment that you want to use.
 
-Initialize the PaymentsApi in sandbox mode:
+Initialize the PaymentsApi in production mode:
+
+```python
+
+payments_api = PaymentsApi(
+		tenant_id = '55555555-5555-5555-5555-555555555555'
+)
+
+```
+
+Initialize the PaymentsApi in sandbox mode, for testing:
 
 ```python
 
@@ -83,18 +97,7 @@ payments_api = PaymentsApi(
 
 ```
 
-Initialize the PaymentsApi in production mode:
-
-```python
-
-payments_api = PaymentsApi(
-		tenant_id = '55555555-5555-5555-5555-555555555555',
-		environment = 'production'
-)
-
-```
-
-You can ping the API connection for testing. A working connection will return `pong`.
+You can ping the API to see if it's accessible. A working response contains the text "pong".
 
 ```python
 
@@ -102,23 +105,20 @@ payments_api.ping.ping_the_api()
 
 ```
 
-#### Get an Instance of an API object and call its methods
+#### Get an Instance of an PaymentsApi Object and Call the Methods of the PaymentsApi class
 
-The API is implemented as a class. You work with an API by calling methods in the PaymentsApi object.
-
-**Work with the API by calling the methods on the API object.** For example, you call get_merchants for a list of all merchants for a tenant:
+**Work with the API by calling the methods on the API object.** For example, you call `get_merchants()` for a list of all merchants connected to a tenant:
 
 ```python
 
 result = payments_api.merchant.get_merchants()
 
 ```
-
-The SDK documentation contains a list of methods for the API class.
-
 #### Handle the response
 
-API calls return an ApiResponse object. Properties of the ApiResponse object describe the request (headers and request) and the response (status_code, reason_phrase, text, errors, body, and cursor). Here’s how to handle the response:
+Calls to the Ping Payments API endpoint methods return an ApiResponse object. Properties of the ApiResponse object describe the request (headers and request) and the response (status_code, reason_phrase, text, errors, body, and cursor).
+
+Using the response:
 
 **Check whether the response succeeded or failed.**  Two helper methods in the ApiResponse object determine the success or failure of a call:
 
@@ -134,7 +134,7 @@ elif result.is_error():
 ```
 
 [//]: # "Link anchor definitions"
-[payments api]: doc/payments_api.md
+[ping payments api]: doc/payments_api.md
 [merchant]: doc/api_resources/payments_api/merchant.md
 [payment orders]: doc/api_resources/payments_api/paymentOrder.md
 [payment]: doc/api_resources/payments_api/payment.md

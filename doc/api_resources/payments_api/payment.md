@@ -1,4 +1,12 @@
+---
+title: "Payment"
+excerpt: "A description of the usage of the Payment endpoint"
+---
 # Payments
+
+The `payment` endpoint exposes several methods dedicated to dealing with payment objects.
+
+Example:
 
 ```python
 from ping.payments_api import PaymentsApi
@@ -25,10 +33,10 @@ Initiates a payment for a payment order.
 
 Using `initiate_payment()`:
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access `initiate_payment()`.
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access initiate_payment().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-`initiate_payment()` takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. `initiate_payment()` returns an error object if the `payment_order_id` or payment object is invalid.
+initiate_payment() takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. initiate_payment() returns an error object if the payment_order_id or payment object is invalid.
 
 
 ```python
@@ -42,20 +50,20 @@ def initiate_payment(payment_object, payment_order_id)
 
 ## payment_object
 
-| Containing                   | Type               | Required | Description                                                                                                                                                                                                                                                                |
-| ---------------------------- | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                              |
-| `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the payment                                                                                                                                                                                                |
-| `method`                     | `string`           | Yes      | Enum: `e_commerce`, `m_commerce`, `pis`,`card`,`invoice`,`autogiro`, `dummy` <br>Payment method for this payment                                                                                                                                                           |
-| `order_items`                | `array of objects` | Yes      | Array of the items of purchase. The object contains an `amount`(an integer in cents of the given currency), a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer)   |
-| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq`, `dummy` <br>The payment method provider                                                                                                                                                      |
-| `provider_method_parameters` | `object`           | Yes      | Object of the required fields for the given payment method provider                                                                                                                                                                                                        |
-| `status_callback_url`        | `string`           | No       | URL for callbacks requesting status updates on a payment. Read more under [Callback](/doc/api_resources/payments_api/payment.md##Callback)                                                                                                                                 |
-| `total_amount`               | `integer`          | Yes      | Total sum of all intems of purchase                                                                                                                                                                                                                                        |
+| Containing                   | Type               | Required | Description                                                                                                                                                                                                                                                                 |
+| ---------------------------- | ------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `currency`                   | `string`           | Yes      | Enum: `SEK`, `NOK` <br>Type of currency used for this payment                                                                                                                                                                                                               |
+| `metadata`                   | `object`           | No       | Set of key-value pairs for storing additional information about the payment                                                                                                                                                                                                 |
+| `method`                     | `string`           | Yes      | Enum: `e_commerce`, `m_commerce`, `pis`,`card`,`invoice`,`autogiro`, `dummy` <br>Payment method for this payment                                                                                                                                                            |
+| `order_items`                | `array of objects` | Yes      | Array of the items of purchase. The object contains an `amount`(an integer representing minor currency units), a string with a `merchant_id` (of the merchant that is paying for that item), a `name`(name of the item) and a `vat_rate`(the vat rate of the item, integer) |
+| `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq`, `dummy` <br>The payment method provider                                                                                                                                                       |
+| `provider_method_parameters` | `object`           | Yes      | Object of the required fields for the given payment method provider                                                                                                                                                                                                         |
+| `status_callback_url`        | `string`           | No       | URL for callbacks containing status updates on a payment. Read more under [Callback](/doc/api_resources/payments_api/payment.md#Callback)                                                                                                                                   |
+| `total_amount`               | `integer`          | Yes      | Total sum of all intems of purchase                                                                                                                                                                                                                                         |
 
 ## provider_method_parameters
 
-You need `provider_method_parameters` for each provider. Write `provider_method_parameters` in object form.
+You need `provider_method_parameters` for each provider. Pass the provider_method_parameters in object form to methods.
 
 ### Dummy - method: Dummy
 
@@ -139,7 +147,7 @@ Use dummy payments in sandbox mode. You can test if a payment is possible with a
 
 ### 200
 
-A successful call. `initiate_payment()` initiated a payment. `initiate_payment()` returns a payment id and an object containing data needed to fulfill the next step of a payment.
+A successful call. `initiate_payment()` initiated a payment. initiate_payment() returns a `payment id` and an object containing data needed to fulfill the next step of a payment.
 
 Example:
 
@@ -195,11 +203,11 @@ A payment goes through different stages.
 
 The payment status starts as `INITIATED`, continues as `PENDING` and last becomes either `COMPLETED`, `DECLINED`, `ABORTED`, `EXPIRED` or `CRASHED`.
 
-Callbacks from the chosen `callback_url` updates payment status.
+Callbacks from Ping to the `callback_url` sends updates containing payment status.
 
 | Payment Status | Description                                                                 |
 | -------------- | --------------------------------------------------------------------------- |
-| `INITIATED`    | Payment is initiated and starts receiving status callbacks                  |
+| `INITIATED`    | Payment is initiated and Ping starts sending status updates                 |
 | `PENDING`      | Payment awaits the next action                                              |
 | `COMPLETED`    | Successful payment                                                          |
 | `DECLINED`     | Payment could not be processed                                              |
@@ -259,11 +267,11 @@ Gets a payment from a payment order.
 
 Using `get_payment()`:
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payment()`
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-`get_payment()` takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object. 
-`get_payment()` returns an error object if the `payment_order_id` or `payment_id` is invalid, or if the `payment_id` doesn't match any payments connected to the payment order matching the `payment_order_id`.
+get_payment() takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object. 
+get_payment() returns an error object if the payment_order_id or payment_id is invalid, or if the payment_id doesn't match any payments connected to the payment order matching the payment_order_id.
 
 ```python
 def get_payment(payment_order_id, payment_id)

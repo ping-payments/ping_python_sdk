@@ -1,11 +1,26 @@
-# Payments API Class Documentation
+---
+title: "Payment"
+excerpt: "A general description of the PaymentApi class"
+---
+
+# Ping Payments API Class Documentation
+
+## The PaymentsApi Class
+
+The `PaymentsApi` class acts as a factory for the Ping Payments API resource endpoints and holds the configuration of the Ping Payments API.
 
 | Parameter     | Type     | Description                                                                   |
 | ------------- | -------- | ----------------------------------------------------------------------------- |
-| `tenant_id`   | `string` | The ID given to the tenant by Ping Payments                                   |
+| `tenant_id`   | `string` | The ID given to a tenant by Ping Payments                                     |
 | `environment` | `string` | The API environment <br><br>Default: `production` <br><br>Optional: `sandbox` |
 
-The Payments API can be initialized as follows:
+Using an endpoint in the PaymentsApi class:
+
+-   Create a PaymentsApi object with a `tenant_id`.
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+-   Use an appropriate endpoint through the PaymentsApi object, for example: `payments_api.merchant`.
+
+Initializing the Ping Payments API:
 
 ```python
 from ping.payments_api import PaymentsApi
@@ -16,7 +31,9 @@ payments_api = PaymentsApi(
 )
 ```
 
-## Make Calls to the Payments API
+## Calls to the Ping Payments API
+
+Example using the merchant resource:
 
 ```python
 from ping.payments_api import PaymentsApi
@@ -34,15 +51,11 @@ elif result.is_error():
     print(result.errors)
 ```
 
-## Ping Payments API
-
-This class acts as a factory for the Payments APIs resources and hold the configuration of that API.
-
 ## API Resources
 
 | Name          | Description                                                          |
 | ------------- | -------------------------------------------------------------------- |
-| merchant      | Gets all merchant endpoints from the `merchants.py` module           |
-| payment_order | Gets all Payment Order endpoints from the `payment_orders.py` module |
-| payment       | Gets all Payment endpoints from the `payments.py` module             |
-| payout        | Gets all Payout endpoints from the `payouts.py` module               |
+| merchant      | Gets all merchant methods from the `merchants.py` module             |
+| payment_order | Gets all payment order methods from the `payment_orders.py` module   |
+| payment       | Gets all payment methods from the `payments.py` module               |
+| payout        | Gets all Payout methods from the `payouts.py` module                 |
