@@ -1,6 +1,6 @@
 ---
 title: "Ping"
-excerpt: "A description of the usage, inputs and outputs of the Ping endpoint"
+excerpt: "A description of the usage of the Ping endpoint"
 ---
 
 # Ping
@@ -26,6 +26,8 @@ Using ping_the_api():
 
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access ping_the_api().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+ping_the_api() returns a response with the text "pong" if the server can be reached and the tenant_id is valid.
 
 ```python
 def ping_the_api()

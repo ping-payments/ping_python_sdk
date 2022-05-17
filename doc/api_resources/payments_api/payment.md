@@ -36,7 +36,7 @@ Using `initiate_payment()`:
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access initiate_payment().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-initiate_payment() takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. initiate_payment() returns an error object if the payment_order_id or payment object is invalid.
+initiate_payment() takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. initiate_payment() returns an error object if the payment_order_id or payment object is invalid, or if the tenant_id is invalid.
 
 
 ```python
@@ -271,7 +271,9 @@ Using `get_payment()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 get_payment() takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object. 
-get_payment() returns an error object if the payment_order_id or payment_id is invalid, or if the payment_id doesn't match any payments connected to the payment order matching the payment_order_id.
+get_payment() returns an error object if the payment_order_id or payment_id is invalid
+get_payment() returns an error object if the payment_id doesn't match any payments connected to the payment order matching the payment_order_id.
+get_payment() returns an error object if the tenant_id is invalid.
 
 ```python
 def get_payment(payment_order_id, payment_id)

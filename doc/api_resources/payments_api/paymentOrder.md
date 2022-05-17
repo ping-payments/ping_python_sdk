@@ -39,7 +39,7 @@ payments_api.payment_order.settle_payment_order()
 
 # Get Payment Orders
 
-Gets and returns a list of payment order objects connected to a `tenant_id`.
+Gets and returns a list of payment order objects for a tenant.
 
 Using `get_payment_orders()`:
 
@@ -47,7 +47,7 @@ Using `get_payment_orders()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 You can use the optional `date_from` and `date_to` parameters to limit the list of payment order objects get_payment_orders() returns, by date. 
-get_payment_orders() returns an error object if the tenant_id is invalid or if you have provided an invalid date in either the date_from or date_to parameter. 
+get_payment_orders() returns an error object if you have provided an invalid date in either the date_from or date_to parameter or if the tenant_id is invalid.
 
 ```python
 def get_payment_orders(date_from=None, date_to=None)
@@ -174,7 +174,7 @@ Using `create_payment_order()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 create_payment_order() takes a `split_tree_id` and a specified `currency` and returns an object containing a `payment_order_id`. 
-create_payment_order() returns an error object if the split_tree_id or currecy is invalid.
+create_payment_order() returns an error object if the split_tree_id or currecy is invalid,  or if the tenant_id is invalid..
 
 ```python
 def create_payment_order(split_tree_id)
@@ -267,7 +267,7 @@ Using `get_payment_order()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 create_payment_order() takes a `payment_order_id` and returns a payment order object. 
-create_payment_order() returns an error object if the payment_order_id is invalid.
+create_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid..
 
 ```python
 def get_payment_order(payment_order_id)
@@ -376,7 +376,7 @@ Using `update_payment_order()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 update_payment_order() takes a `payment_order_id` and a `split_tree_id`, and updates a payment order matching the payment_order_id. 
-create_payment_order() returns an error object if the payment_order_id is invalid.
+create_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid.
 
 ```python
 def update_payment_order(payment_order_id, split_tree_id)
@@ -465,7 +465,7 @@ Using `close_payment_order()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 close_payment_order() takes a `payment_order_id` and updates a payment order matching the payment_order_id with a "closed" status.
-close_payment_order() returns an error object if the payment_order_id is invalid.
+close_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid.
 
 ```python
 def close_payment_order(payment_order_id)
@@ -554,7 +554,7 @@ Using `split_payment_order()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 split_payment_order() takes a `payment_order_id` and updates ("splits") a payment order matching the payment_order_id. 
-split_payment_order() returns an error object if the payment_order_id is invalid.
+split_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid.
 
 ```python
 def split_payment_order(payment_order_id)
@@ -644,7 +644,7 @@ Using `settle_payment_order()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 settle_payment_order() takes a `payment_order_id` and updates a payment order matching the payment_order_id with a "settled" status. 
-settle_payment_order() returns an error object if the payment_order_id is invalid.
+settle_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid.
 
 
 ```python
