@@ -544,7 +544,7 @@ elif result.is_error():
 
 # Split Payment Order
 
-Splits a payment order. Used when when the conditions for some payments in a payment order have been fulfilled.
+Splits a payment order. Used when when some payments in a payment order have been fulfilled.
 
 A split payment order can still be partly refunded.
 
@@ -634,7 +634,7 @@ elif result.is_error():
 
 # Settle Payment Order
 
-Marks a payment order as "settled". A settled payment order is slated for a future payout.
+Marks a payment order as "settled". A settled payment order only contains processed payments.
 
 Refunds are not possible on a settled payment order.
 
