@@ -18,7 +18,7 @@ Use this Python library to manage Ping Payments API regarding merchants, payment
 
 The SDK supports the following versions of Python:
 
--   Python 3 versions 3.6 and later
+-   Python 3 versions 3.7 and later
 
 ## Installation
 

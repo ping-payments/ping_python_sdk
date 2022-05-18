@@ -15,9 +15,7 @@ class TestPayment(unittest.TestCase):
         cls.test_helper = testHelper
         cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID_OPEN")
         cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-
-    def setUp(self):
-        self.dummy_body = self.test_helper.get_payment_body()
+        cls.dummy_body = cls.test_helper.get_payment_body()
 
 # Get Payments Tests
     # gets payment correctly
