@@ -6,13 +6,13 @@ payments_api = PaymentsApi(
   tenant_id = '55555555-5555-5555-5555-555555555555',
   environment = 'sandbox'
 )
-payments_api.payment_order.get_payment_orders()
-payments_api.payment_order.create_payment_order()
-payments_api.payment_order.get_payment_order()
-payments_api.payment_order.update_payment_order()
-payments_api.payment_order.close_payment_order()
-payments_api.payment_order.split_payment_order()
-payments_api.payment_order.settle_payment_order()
+payments_api.paymentOrder.get_payment_orders()
+payments_api.paymentOrder.create_payment_order()
+payments_api.paymentOrder.get_payment_order()
+payments_api.paymentOrder.update_payment_order()
+payments_api.paymentOrder.close_payment_order()
+payments_api.paymentOrder.split_payment_order()
+payments_api.paymentOrder.settle_payment_order()
 ```
 
 ## Module Name
@@ -49,7 +49,7 @@ The date-time parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:
 ## Response Type
 
 ```python
-  result = payments_api.payment_order.get_payment_orders()
+  result = payments_api.paymentOrder.get_payment_orders()
   print(result.status_code)
 ```
 
@@ -138,7 +138,7 @@ payments_api = PaymentsApi(
   environment = 'sandbox'
 )
 
-result = payments_api.payment_order.get_payment_order(
+result = payments_api.paymentOrder.get_payment_order(
   date_to = "2000-03-27T09:42:30Z"
   date_from = "2022-03-27T09:42:30Z"
 )
@@ -168,7 +168,7 @@ def create_payment_order(split_tree_id)
 ## Response Type
 
 ```python
-  result = payments_api.payment_order.create_payment_order(split_tree_id)
+  result = payments_api.paymentOrder.create_payment_order(split_tree_id, currency)
   print(result.status_code)
 ```
 
@@ -254,7 +254,7 @@ def get_payment_order(payment_order_id)
 ## Response Type
 
 ```python
-  result = payments_api.payment_order.get_payment_order(payment_order_id)
+  result = payments_api.paymentOrder.get_payment_order(payment_order_id)
   print(result.status_code)
 ```
 
@@ -332,7 +332,7 @@ payments_api = PaymentsApi(
 )
 payment_order_id = '55555555-5555-5555-5555-555555555555'
 
-result = payments_api.payment_order.get_payment_order(payment_order_id)
+result = payments_api.paymentOrder.get_payment_order(payment_order_id)
 if result.is_success():
     print(result.body)
     print("success")
@@ -358,7 +358,7 @@ def update_payment_order(payment_order_id, split_tree_id)
 ## Response Type
 
 ```python
-  result = payments_api.payment_order.update_payment_order(splut_tree_id)
+  result = payments_api.paymentOrder.update_payment_order(payment_order_id, split_tree_id)
   print(result.status_code)
 ```
 
@@ -417,7 +417,7 @@ payments_api = PaymentsApi(
 payment_order_id = '55555555-5555-5555-5555-555555555555'
 split_tree_id = '55555555-5555-5555-5555-555555555555'
 
-result = payments_api.payment_order.update_payment_order(payment_order_id, split_tree_id)
+result = payments_api.paymentOrder.update_payment_order(payment_order_id, split_tree_id)
 if result.is_success():
     print(result.body)
     print("success")
@@ -442,7 +442,7 @@ def close_payment_order(payment_order_id)
 ## Response Type
 
 ```python
-  result = payments_api.payment_order.close_payment_order(payment_order_id)
+  result = payments_api.paymentOrder.close_payment_order(payment_order_id)
   print(result.status_code)
 ```
 
@@ -500,7 +500,7 @@ payments_api = PaymentsApi(
 )
 payment_order_id = '55555555-5555-5555-5555-555555555555'
 
-result = payments_api.payment_order.close_payment_order(payment_order_id)
+result = payments_api.paymentOrder.close_payment_order(payment_order_id)
 if result.is_success():
     print(result.body)
     print("success")
@@ -515,7 +515,7 @@ Executes a split of a payment order. Used when services/goods have been provided
 You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `split_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to split. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
 
 ```python
-def split_payment_order(payment_order_id)
+def split_payment_order(payment_order_id, fast_forward=False)
 ```
 
 | Parameter          | Type      | Required | Description                                                                        |
@@ -526,7 +526,7 @@ def split_payment_order(payment_order_id)
 ## Response Type
 
 ```python
-  result = payments_api.payment_order.split_payment_order(payment_order_id)
+  result = payments_api.paymentOrder.split_payment_order(payment_order_id, fast_forward=False)
   print(result.status_code)
 ```
 
@@ -584,7 +584,7 @@ payments_api = PaymentsApi(
 )
 payment_order_id = '55555555-5555-5555-5555-555555555555'
 
-result = payments_api.payment_order.split_payment_order(payment_order_id)
+result = payments_api.paymentOrder.split_payment_order(payment_order_id, fast_forward=False)
 if result.is_success():
     print(result.body)
     print("success")
@@ -599,7 +599,7 @@ Settles a payment order for future payout. Refunds will no longer be possible.
 You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `settle_payment_order()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function also requires a `payment_order_id` of the payment order you want to settle. If the `tenant_id` exists and the given `payment_order_id` is connected to a payment order, this function will return a successfull response. Otherwise an error object is returned.
 
 ```python
-def settle_payment_order(payment_order_id)
+def settle_payment_order(payment_order_id, fast_forward=False)
 ```
 
 | Parameter          | Type      | Required | Description                                                                                                                            |
@@ -610,7 +610,7 @@ def settle_payment_order(payment_order_id)
 ## Response Type
 
 ```python
-  result = payments_api.payment_order.settle_payment_order(payment_order_id)
+  result = payments_api.paymentOrder.settle_payment_order(payment_order_id, fast_forward)
   print(result.status_code)
 ```
 
@@ -668,7 +668,7 @@ payments_api = PaymentsApi(
 )
 payment_order_id = '55555555-5555-5555-5555-555555555555'
 
-result = payments_api.payment_order.settle_payment_order(payment_order_id)
+result = payments_api.paymentOrder.settle_payment_order(payment_order_id, fast_forward=False)
 if result.is_success():
     print(result.body)
     print("success")
