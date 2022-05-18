@@ -366,7 +366,7 @@ elif result.is_error():
 
 # Update Payment Order
 
-Updates a payment order with a new split tree datastructure.
+Updates a payment order with a new "split tree" datastructure containing a ruleset for the distribution of funds.
 
 The new split tree datastructure is used for splitting payments in the payment order between payment recipients.
 
