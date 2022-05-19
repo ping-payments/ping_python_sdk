@@ -544,7 +544,7 @@ elif result.is_error():
 
 # Split Payment Order
 
-Splits a payment order. Used when when some payments in a payment order have been fulfilled.
+Splits a payment order. Used when some payments in a payment order have been fulfilled.
 
 A split payment order can still be partly refunded.
 
