@@ -73,7 +73,7 @@ A successful call. `get_payment_orders()` returns a list of payment order object
 
 Example:
 
-```python
+```json
 [
   {
     "created_at": "2021-11-05T10:04:19.275000Z",
@@ -115,7 +115,7 @@ API error. The payment order endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -132,7 +132,7 @@ Validation error. The payment order endpoint returned an error message because o
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -198,7 +198,7 @@ A successful call. `create_payment_order()` created a payment order. create_paym
 
 Example:
 
-```python
+```json
 {
   "id": "55555555-5555-5555-5555-555555555555"
 }
@@ -210,7 +210,7 @@ API error. The payment order endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -227,7 +227,7 @@ Validation error. The payment order endpoint returned an error message because o
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -266,8 +266,8 @@ Using `get_payment_order()`:
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_order().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-create_payment_order() takes a `payment_order_id` and returns a payment order object. 
-create_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid..
+get_payment_order() takes a `payment_order_id` and returns a payment order object. 
+get_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid..
 
 ```python
 def get_payment_order(payment_order_id)
@@ -286,11 +286,11 @@ def get_payment_order(payment_order_id)
 
 ### 200
 
-A successful call. `create_payment_order()` returned a payment order.
+A successful call. `get_payment_order()` returned a payment order.
 
 Example:
 
-```python
+```json
 {
   "created_at": "2021-11-15T09:15:01.400000Z",
   "id": "55555555-5555-5555-5555-555555555555",
@@ -314,7 +314,7 @@ API error. The payment order endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -327,7 +327,7 @@ Example:
 
 ### 404
 
-Search error. `create_payment_order()` couldn't match the `payment_order_id` to a payment order object.
+Search error. `get_payment_order()` couldn't match the `payment_order_id` to a payment order object.
 
 ### 422
 
@@ -335,7 +335,7 @@ Validation error. The payment order endpoint returned an error message because o
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -376,7 +376,7 @@ Using `update_payment_order()`:
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 update_payment_order() takes a `payment_order_id` and a `split_tree_id`, and updates a payment order matching the payment_order_id. 
-create_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid.
+update_payment_order() returns an error object if the payment_order_id is invalid or if the tenant_id is invalid.
 
 ```python
 def update_payment_order(payment_order_id, split_tree_id)
@@ -404,7 +404,7 @@ API error. The payment order endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -425,7 +425,7 @@ Validation error. The payment order endpoint returned an error message because o
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -492,7 +492,7 @@ API error. The payment order endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -513,7 +513,7 @@ Validation error. The payment order endpoint returned an error message because o
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -582,7 +582,7 @@ API error. The payment order endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -603,7 +603,7 @@ Validation error. The payment order endpoint returned an error message because o
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -673,7 +673,7 @@ API error. The payment order endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -694,7 +694,7 @@ Validation error. The payment order endpoint returned an error message because o
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {

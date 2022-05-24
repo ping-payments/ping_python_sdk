@@ -61,7 +61,7 @@ A successful call. `get_payouts()` returns a list of payout objects.
 
 Example:
 
-```python
+```json
 [
   {
     "amount": 0,
@@ -78,7 +78,7 @@ API error. The payout endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -95,7 +95,7 @@ Validation error. The payout endpoint returned an error message because of an in
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -160,7 +160,7 @@ A successful call. `get_payout()` returns a payout object.
 
 Example:
 
-```python
+```json
 {
   "amount": 0,
   "completed_at": "string",
@@ -175,7 +175,7 @@ API error. The payout endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -196,7 +196,7 @@ Validation error. The payout endpoint returned an error message because of an in
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {

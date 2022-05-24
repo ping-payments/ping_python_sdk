@@ -152,7 +152,7 @@ A successful call. `initiate_payment()` initiated a payment. initiate_payment() 
 
 Example:
 
-```python
+```json
 {
   "id": "55555555-5555-5555-5555-555555555555",
   'provider_method_response': {}
@@ -165,7 +165,7 @@ API error. The payment endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -186,7 +186,7 @@ Validation error. The payment endpoint returned an error message because of an i
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -298,7 +298,7 @@ A successful call. `get_payment()` returns a payment object.
 
 Example:
 
-```python
+```json
 {
   "currency": "SEK",
   "id": "55555555-5555-5555-5555-555555555555",
@@ -324,7 +324,7 @@ API error. The payment endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -345,7 +345,7 @@ Validation error. The payment endpoint returned an error message because of an i
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {

@@ -58,7 +58,7 @@ A successful call. The merchant endpoint returned a list of all the merchants ob
 
 Example:
 
-```python
+```json
 [
   {
     "email": "contact@merchant.a.com",
@@ -89,7 +89,7 @@ API error. The merchant endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -106,7 +106,7 @@ Validation error. The merchant endpoint returned an error message because of an 
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -168,7 +168,7 @@ A successful call. A new merchant was created. The merchant endpoint returned th
 
 Example:
 
-```python
+```json
 {
   "name": "Merchant",
   "organization": {
@@ -184,7 +184,7 @@ API error. The merchant endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -201,7 +201,7 @@ Validation error. The merchant endpoint returned an error message because of an 
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -271,7 +271,7 @@ A successful call. The merchant endpoint returned a merchant object matching the
 
 Example:
 
-```python
+```json
 {
   "email": "contact@merchant.com",
   "id": "55555555-5555-5555-5555-555555555555",
@@ -290,7 +290,7 @@ API error. The merchant endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -311,7 +311,7 @@ Validation error. The merchant endpoint returned an error message because of an 
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
