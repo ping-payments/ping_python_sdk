@@ -563,7 +563,7 @@ def split_payment_order(payment_order_id)
 | Parameter          | Type      | Required | Description                                                                             |
 | ------------------ | --------- | -------- | --------------------------------------------------------------------------------------- |
 | `payment_order_id` | `string`  | Yes      | String containing the ID of a specific payment order                                    |
-| `fast_forward`     | `boolean` | No       | Boolean that indicates that a payment order shall be closed and split. Default: `false` |                  |
+| `fast_forward`     | `boolean` | No       | Boolean that indicates that a payment order shall be closed and split. Default: `false` |
 
 ## Response Type
 
