@@ -32,9 +32,6 @@ payments_api.payment.get_payment()
 
 Initiates a payment for a payment order.
 
-<<<<<<< HEAD
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `initiate_payment()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This endpoint requires that you send in a `payment_order_id` and an `object` of data regardning the payment. If everything is sent in correct, you will be returned a json object containing data regarding the next step towards completing the payment. If something went wrong you will be returned an error object.
-=======
 Using `initiate_payment()`:
 
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access initiate_payment().
@@ -42,16 +39,14 @@ Using `initiate_payment()`:
 
 initiate_payment() takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. initiate_payment() returns an error object if the payment_order_id or payment object is invalid, or if the tenant_id is invalid.
 
->>>>>>> 9e4a2e51615cf430586287c7139e227649bdc8a8
-
 ```python
 def initiate_payment(payment_object, payment_order_id)
 ```
 
-| Parameter          | Type     | Description                                                       |
-| ------------------ | -------- | ----------------------------------------------------------------- |
-| `payment_object`   | `object` | Object containing all information needed to initiate a payment    |
-| `payment_order_id` | `string` | ID of a specific Payment Order                                    |
+| Parameter          | Type     | Description                                                    |
+| ------------------ | -------- | -------------------------------------------------------------- |
+| `payment_object`   | `object` | Object containing all information needed to initiate a payment |
+| `payment_order_id` | `string` | ID of a specific Payment Order                                 |
 
 ## payment_object
 
@@ -74,16 +69,16 @@ You need `provider_method_parameters` for each provider. Pass the provider_metho
 
 Use dummy payments in sandbox mode. You can test if a payment is possible with a dummy payment.
 
-| Containing               | Type     | Required | Description                                                                                                                                                           |
-| ------------------------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `desired_payment_status` | `string` | Yes      | Desired payment status for the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CANCELLED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED`                 |
+| Containing               | Type     | Required | Description                                                                                                                                           |
+| ------------------------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `desired_payment_status` | `string` | Yes      | Desired payment status for the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CANCELLED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED` |
 
 ### Swish - method: E_Commerce
 
-| Containing     | Type     | Required | Description                               |
-| -------------- | -------- | -------- | ----------------------------------------- |
-| `message`      | `string` | Yes      | Message associated with the payment       |
-| `phone_number` | `string` | Yes      | Payer's swish-connected phone number      |
+| Containing     | Type     | Required | Description                          |
+| -------------- | -------- | -------- | ------------------------------------ |
+| `message`      | `string` | Yes      | Message associated with the payment  |
+| `phone_number` | `string` | Yes      | Payer's swish-connected phone number |
 
 ### Swish - method: M_Commerce
 
@@ -106,29 +101,29 @@ Use dummy payments in sandbox mode. You can test if a payment is possible with a
 
 ### Verifone - method: card
 
-| Containing    | Type     | Required | Description                                                                     |
-| ------------- | -------- | -------- | ------------------------------------------------------------------------------- |
-| `cancel_url`  | `string` | Yes      | URL to which the payer is directed to when a payment gets canceled              |
-| `email`       | `string` | Yes      | Payer's email address                                                           |
-| `first_name`  | `string` | Yes      | Payer's first name                                                              |
-| `last_name`   | `string` | Yes      | Payer's last name                                                               |
-| `success_url` | `string` | Yes      | URL to which the payer is directed to upon successful completion of a payment   |
+| Containing    | Type     | Required | Description                                                                   |
+| ------------- | -------- | -------- | ----------------------------------------------------------------------------- |
+| `cancel_url`  | `string` | Yes      | URL to which the payer is directed to when a payment gets canceled            |
+| `email`       | `string` | Yes      | Payer's email address                                                         |
+| `first_name`  | `string` | Yes      | Payer's first name                                                            |
+| `last_name`   | `string` | Yes      | Payer's last name                                                             |
+| `success_url` | `string` | Yes      | URL to which the payer is directed to upon successful completion of a payment |
 
 ### Billmate - method: invoice
 
-| Containing            | Type      | Required | Description                                                      |
-| --------------------- | --------- | -------- | ---------------------------------------------------------------- |
-| `care_of`             | `string`  | No       | Payer's care of (C/O) address                                    |
-| `country`             | `string`  | Yes      | Payer's country of residence                                     |
-| `customer_reference`  | `string`  | Yes      | Customer reference                                               |
-| `email`               | `string`  | Yes      | Payer's email address                                            |
-| `first_name`          | `string`  | Yes      | Payer's first name                                               |
-| `free_text`           | `string`  | No       | Free-text field for invoice notes                                |
-| `ip_address`          | `string`  | Yes      | IP address for the device that the payment is being made from    |
-| `is_company_customer` | `boolean` | Yes      | Payer's status as a company or an individual                     |
-| `last_name`           | `string`  | Yes      | Payer's last name                                                |
-| `national_id_number`  | `string`  | Yes      | Payer's national ID number                                       |
-| `phone_number`        | `string`  | Yes      | Payer's phone number                                             |
+| Containing            | Type      | Required | Description                                                   |
+| --------------------- | --------- | -------- | ------------------------------------------------------------- |
+| `care_of`             | `string`  | No       | Payer's care of (C/O) address                                 |
+| `country`             | `string`  | Yes      | Payer's country of residence                                  |
+| `customer_reference`  | `string`  | Yes      | Customer reference                                            |
+| `email`               | `string`  | Yes      | Payer's email address                                         |
+| `first_name`          | `string`  | Yes      | Payer's first name                                            |
+| `free_text`           | `string`  | No       | Free-text field for invoice notes                             |
+| `ip_address`          | `string`  | Yes      | IP address for the device that the payment is being made from |
+| `is_company_customer` | `boolean` | Yes      | Payer's status as a company or an individual                  |
+| `last_name`           | `string`  | Yes      | Payer's last name                                             |
+| `national_id_number`  | `string`  | Yes      | Payer's national ID number                                    |
+| `phone_number`        | `string`  | Yes      | Payer's phone number                                          |
 
 ### Bankgirot - method: autogiro
 
@@ -138,10 +133,10 @@ Use dummy payments in sandbox mode. You can test if a payment is possible with a
 
 ### Payment Iq - method: card
 
-| Containing    | Type     | Required | Description                                                                |
-| ------------- | -------- | -------- | -------------------------------------------------------------------------- |
-| `error_url`   | `string` | Yes      | URL to which the user is directed to after a payment failure               |
-| `success_url` | `string` | Yes      | URL to which the user is directed to after a successful payment            |
+| Containing    | Type     | Required | Description                                                     |
+| ------------- | -------- | -------- | --------------------------------------------------------------- |
+| `error_url`   | `string` | Yes      | URL to which the user is directed to after a payment failure    |
+| `success_url` | `string` | Yes      | URL to which the user is directed to after a successful payment |
 
 ## Response Type
 
@@ -158,8 +153,8 @@ Example:
 
 ```json
 {
-  "id": "55555555-5555-5555-5555-555555555555",
-  'provider_method_response': {}
+	"id": "55555555-5555-5555-5555-555555555555",
+	"provider_method_response": {}
 }
 ```
 
@@ -171,12 +166,12 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "Cannot initiate new Payments when PaymentOrder has been closed",
-      "error": "payment_order_closed"
-    }
-  ]
+	"errors": [
+		{
+			"description": "Cannot initiate new Payments when PaymentOrder has been closed",
+			"error": "payment_order_closed"
+		}
+	]
 }
 ```
 
@@ -192,13 +187,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
@@ -210,15 +205,15 @@ The payment status starts as `INITIATED`, continues as `PENDING` and last become
 
 Callbacks from Ping to the `callback_url` sends updates containing payment status.
 
-| Payment Status | Description                                                                 |
-| -------------- | --------------------------------------------------------------------------- |
-| `INITIATED`    | Payment is initiated and Ping starts sending status updates                 |
-| `PENDING`      | Payment awaits the next action                                              |
-| `COMPLETED`    | Successful payment                                                          |
-| `DECLINED`     | Payment could not be processed                                              |
-| `ABORTED`      | Payment was canceled by payer                                               |
-| `EXPIRED`      | Payment timed out                                                           |
-| `CRASHED`      | Payment caused an unexpected error                                          |
+| Payment Status | Description                                                 |
+| -------------- | ----------------------------------------------------------- |
+| `INITIATED`    | Payment is initiated and Ping starts sending status updates |
+| `PENDING`      | Payment awaits the next action                              |
+| `COMPLETED`    | Successful payment                                          |
+| `DECLINED`     | Payment could not be processed                              |
+| `ABORTED`      | Payment was canceled by payer                               |
+| `EXPIRED`      | Payment timed out                                           |
+| `CRASHED`      | Payment caused an unexpected error                          |
 
 ## Example Usage
 
@@ -275,7 +270,7 @@ Using `get_payment()`:
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-get_payment() takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object. 
+get_payment() takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object.
 get_payment() returns an error object if the payment_order_id or payment_id is invalid
 get_payment() returns an error object if the payment_id doesn't match any payments connected to the payment order matching the payment_order_id.
 get_payment() returns an error object if the tenant_id is invalid.
@@ -284,10 +279,10 @@ get_payment() returns an error object if the tenant_id is invalid.
 def get_payment(payment_order_id, payment_id)
 ```
 
-| Parameter          | Type   | Description                                             |
-| ------------------ | ------ | ------------------------------------------------------- |
-| `payment_order_id` | string | String cointaining the ID of a payment order            |
-| `payment_id`       | string | String cointaining the ID of a payment                  |
+| Parameter          | Type   | Description                                  |
+| ------------------ | ------ | -------------------------------------------- |
+| `payment_order_id` | string | String cointaining the ID of a payment order |
+| `payment_id`       | string | String cointaining the ID of a payment       |
 
 ## Response Type
 
@@ -304,21 +299,21 @@ Example:
 
 ```json
 {
-  "currency": "SEK",
-  "id": "55555555-5555-5555-5555-555555555555",
-  "metadata": {
-    "delivery_id": "230955"
-  },
-  "method": "mobile",
-  "order_items": [
-    {
-      "amount": 850,
-      "name": "Delivery, Pizza",
-      "vat_rate": 12
-    }
-  ],
-  "provider": "swish",
-  "status": "PENDING"
+	"currency": "SEK",
+	"id": "55555555-5555-5555-5555-555555555555",
+	"metadata": {
+		"delivery_id": "230955"
+	},
+	"method": "mobile",
+	"order_items": [
+		{
+			"amount": 850,
+			"name": "Delivery, Pizza",
+			"vat_rate": 12
+		}
+	],
+	"provider": "swish",
+	"status": "PENDING"
 }
 ```
 
@@ -330,12 +325,12 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
+	"errors": [
+		{
+			"description": "This operation cannot be completed under certain conditions",
+			"error": "operation_forbidden"
+		}
+	]
 }
 ```
 
@@ -351,13 +346,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 

@@ -21,11 +21,7 @@ The `Ping Payments Python SDK` manages the `Ping Payments API`.
 
 The Ping Payments Python SDK supports the following versions of Python:
 
-<<<<<<< HEAD
--   Python 3 versions 3.7 and later
-=======
 -   Python 3, versions 3.6 and later
->>>>>>> 9e4a2e51615cf430586287c7139e227649bdc8a8
 
 ## Installation
 
@@ -38,6 +34,7 @@ pip install ping-sdk
 ## The [Ping Payments API]
 
 The Ping Payments API is implemented as the `PaymentsApi` class. The PaymentsApi contains a number of endpoints.
+
 ### Ping Payments API Endpoints
 
 Available endpoints in the PaymentApi class:
@@ -118,13 +115,14 @@ payments_api.ping.ping_the_api()
 result = payments_api.merchant.get_merchants()
 
 ```
+
 #### Handle the response
 
 Calls to the Ping Payments API endpoint methods return an ApiResponse object. Properties of the ApiResponse object describe the request (headers and request) and the response (status_code, reason_phrase, text, errors, body, and cursor).
 
 Using the response:
 
-**Check whether the response succeeded or failed.**  Two helper methods in the ApiResponse object determine the success or failure of a call:
+**Check whether the response succeeded or failed.** Two helper methods in the ApiResponse object determine the success or failure of a call:
 
 ```python
 
