@@ -9,10 +9,10 @@ excerpt: "A general description of the PaymentApi class"
 
 The `PaymentsApi` class acts as a factory for the Ping Payments API resource endpoints and holds the configuration of the Ping Payments API.
 
-| Parameter     | Type     | Description                                                                   |
-| ------------- | -------- | ----------------------------------------------------------------------------- |
-| `tenant_id`   | `string` | The ID given to a tenant by Ping Payments                                     |
-| `environment` | `string` | The API environment <br><br>Default: `production` <br><br>Optional: `sandbox` |
+| Parameter     | Type     | Description                                                               |
+| ------------- | -------- | ------------------------------------------------------------------------- |
+| `tenant_id`   | `string` | ID given to a tenant by Ping Payments                                     |
+| `environment` | `string` | API environment <br><br>Default: `production` <br><br>Optional: `sandbox` |
 
 Using an endpoint in the PaymentsApi class:
 
@@ -53,9 +53,9 @@ elif result.is_error():
 
 ## API Resources
 
-| Name          | Description                                                          |
-| ------------- | -------------------------------------------------------------------- |
-| merchant      | Gets all merchant methods from the `merchants.py` module             |
-| payment_order | Gets all payment order methods from the `payment_orders.py` module   |
-| payment       | Gets all payment methods from the `payments.py` module               |
-| payout        | Gets all Payout methods from the `payouts.py` module                 |
+| Name          | Description                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| merchant      | Gets all merchant functions from the `merchants.py` module          |
+| payment_order | Gets all payment order functions from the `paymentOrders.py` module |
+| payment       | Gets all payment functions from the `payments.py` module            |
+| payout        | Gets all Payout functions from the `payouts.py` module              |

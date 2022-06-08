@@ -39,7 +39,7 @@ Using `get_merchant()`:
 -   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_merchant().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`
 
-get_merchant() returns an object with a list of all merchants for a valid tenant_id. get_merchant() returns an error object if the tenant_id_ is invalid.
+get_merchant() returns an object with a list of all merchants for a valid tenant_id. get_merchant() returns an error object if the tenant_id is invalid.
 
 ```python
 def get_merchants()
@@ -60,26 +60,26 @@ Example:
 
 ```json
 [
-  {
-    "email": "contact@merchant.a.com",
-    "id": "55555555-5555-5555-5555-555555555555",
-    "name": "Merchant A",
-    "organization": {
-      "country": "NO",
-      "no_organization_number": "555555555"
-    },
-    "phone_number": "0731231234"
-  },
-  {
-    "email": "contact@merchant.b.com",
-    "id": "55555555-5555-5555-5555-555555555555",
-    "name": "Merchant B",
-    "organization": {
-      "country": "SE",
-      "se_organization_number": "5555555555"
-    },
-    "phone_number": "0739876543"
-  }
+	{
+		"email": "contact@merchant.a.com",
+		"id": "55555555-5555-5555-5555-555555555555",
+		"name": "Merchant A",
+		"organization": {
+			"country": "NO",
+			"no_organization_number": "555555555"
+		},
+		"phone_number": "0731231234"
+	},
+	{
+		"email": "contact@merchant.b.com",
+		"id": "55555555-5555-5555-5555-555555555555",
+		"name": "Merchant B",
+		"organization": {
+			"country": "SE",
+			"se_organization_number": "5555555555"
+		},
+		"phone_number": "0739876543"
+	}
 ]
 ```
 
@@ -91,12 +91,12 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
+	"errors": [
+		{
+			"description": "This operation cannot be completed under certain conditions",
+			"error": "operation_forbidden"
+		}
+	]
 }
 ```
 
@@ -108,13 +108,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
@@ -151,9 +151,9 @@ create_new_merchant() returns an error object if one or more parameters are inva
 def create_new_merchant(merchant_object)
 ```
 
-| Parameter         | Type     | Containing                                      | Description                                                                                                                                                                             |
-| ----------------- | -------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `merchant_object` | `object` | merchant_name:`string`<br>organisation:`object` | An object containing a name for the new merchant and an organisation object containing `country: String` and `organisation_number: string` for the organisation the merchant is part of |
+| Parameter         | Type     | Containing                                      | Description                                                                                                                                                                          |
+| ----------------- | -------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `merchant_object` | `object` | merchant_name:`string`<br>organisation:`object` | Object containing a name for the new merchant and an organisation object containing `country: String` and `organisation_number: string` for the organisation the merchant is part of |
 
 ## Response Type
 
@@ -170,11 +170,11 @@ Example:
 
 ```json
 {
-  "name": "Merchant",
-  "organization": {
-    "country": "SE",
-    "se_organization_number": "5555555555"
-  }
+	"name": "Merchant",
+	"organization": {
+		"country": "SE",
+		"se_organization_number": "5555555555"
+	}
 }
 ```
 
@@ -186,12 +186,12 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
+	"errors": [
+		{
+			"description": "This operation cannot be completed under certain conditions",
+			"error": "operation_forbidden"
+		}
+	]
 }
 ```
 
@@ -203,13 +203,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
@@ -241,7 +241,7 @@ elif result.is_error():
 
 Get a specific merchant connected to a tenant.
 
-Using `get_specific_merchant()`: 
+Using `get_specific_merchant()`:
 
 -   You need to create a PaymentsApi object with a `tenant_id` as a parameter to access get_specific_merchant().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
@@ -254,9 +254,9 @@ get_specific_merchant() returns an error object if the tenant_id or the merchant
 def get_specific_merchant(merchant_id)
 ```
 
-| Parameter     | Type     | Description                                       |
-| ------------- | -------- | ------------------------------------------------- |
-| `merchant_id` | `string` | A string containing the ID of a specific merchant |
+| Parameter     | Type     | Description                                     |
+| ------------- | -------- | ----------------------------------------------- |
+| `merchant_id` | `string` | String containing the ID of a specific merchant |
 
 ## Response Type
 
@@ -273,14 +273,14 @@ Example:
 
 ```json
 {
-  "email": "contact@merchant.com",
-  "id": "55555555-5555-5555-5555-555555555555",
-  "name": "Merchant",
-  "organization": {
-    "country": "SE",
-    "se_organization_number": "5555555555"
-  },
-  "phone_number": "0705555555"
+	"email": "contact@merchant.com",
+	"id": "55555555-5555-5555-5555-555555555555",
+	"name": "Merchant",
+	"organization": {
+		"country": "SE",
+		"se_organization_number": "5555555555"
+	},
+	"phone_number": "0705555555"
 }
 ```
 
@@ -292,12 +292,12 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
+	"errors": [
+		{
+			"description": "This operation cannot be completed under certain conditions",
+			"error": "operation_forbidden"
+		}
+	]
 }
 ```
 
@@ -313,13 +313,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
