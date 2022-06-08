@@ -1,3 +1,8 @@
+---
+title: "Payout"
+excerpt: "A description of the usage of the Payout endpoint"
+---
+
 # Payout
 
 ```python
@@ -22,20 +27,26 @@ payments_api.payout.get_payout()
 
 # Get Payouts
 
-Gets and returns an object of all the payouts and optionally between dates.
+Gets and returns a list of payout objects for a tenant.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payouts()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. This function can also take two dates as optional parameters if you wish to get all `payouts` between two dates. If the tenant_id exists and the optional dates are valid, the function will return an object containing a list of payouts. Otherwise an error object is returned.
+Using `get_payouts()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_orders().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+You can use the optional `date_from` and `date_to` parameters to limit the list of payout objects get_payouts() returns, by date. 
+get_payouts() returns an error object if you have provided an invalid date in either the date_from or date_to parameter or if the tenant_id is invalid. 
 
 ```python
 def get_payouts(date_from=None, date_to=None)
 ```
 
-The date-time parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:30Z)
+The datetime parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:30Z)
 
 | Parameter   | Type                 | Required | Format   | Description                                |
 | ----------- | -------------------- | -------- | -------- | ------------------------------------------ |
-| `date_from` | `string($date-time)` | No       | ISO 8601 | Start date to find payouts after that date |
-| `date_to`   | `string($date-time)` | No       | ISO 8601 | End date to find payouts before that date  |
+| `date_from` | `string($date-time)` | No       | ISO 8601 | Start date to find payouts in a date range |
+| `date_to`   | `string($date-time)` | No       | ISO 8601 | End date to find payouts in a date range   |
 
 ## Response Type
 
@@ -46,11 +57,11 @@ The date-time parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:
 
 ### 200
 
-Successfully got payouts. A json object containing an array of all the payouts for the given tenant has been returned.
+A successful call. `get_payouts()` returns a list of payout objects.
 
 Example:
 
-```python
+```json
 [
   {
     "amount": 0,
@@ -63,11 +74,11 @@ Example:
 
 ### 403
 
-API Error
+API error. The payout endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -80,11 +91,11 @@ Example:
 
 ### 422
 
-Validation Error
+Validation error. The payout endpoint returned an error message because of an invalid value.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -118,9 +129,15 @@ elif result.is_error():
 
 # Get Specific Payout
 
-Gets a specific payout with a `payout_id`.
+Gets a payout.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_payout()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `payout_id` as a parameter. If the `tenant_id` exists and has a payout with that `payout_id` then an object containing that payout will be returned. Otherwise an error object is returned.
+Using `get_payout()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_orders().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+get_payout() takes a `payout_id` connected to a matching payout and returns a payout object. 
+get_payout() returns an error object if the payout_id or tenant_id is invalid
 
 ```python
 def get_payout(payout_id)
@@ -128,7 +145,7 @@ def get_payout(payout_id)
 
 | Parameter   | Type     | Description                                     |
 | ----------- | -------- | ----------------------------------------------- |
-| `payout_id` | `string` | A string containing the ID of a specific payout |
+| `payout_id` | `string` | String containing the ID of a specific payout |
 
 ## Response Type
 
@@ -139,11 +156,11 @@ def get_payout(payout_id)
 
 ### 200
 
-Successfully returned a payout. A json object containing a specific payout with the given `payout_id` has been returned.
+A successful call. `get_payout()` returns a payout object.
 
 Example:
 
-```python
+```json
 {
   "amount": 0,
   "completed_at": "string",
@@ -154,11 +171,11 @@ Example:
 
 ### 403
 
-API Error
+API error. The payout endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -171,17 +188,15 @@ Example:
 
 ### 404
 
-Payout could not be found.
-
-The given `payout_id` could not be found.
+Search error. `get_payout()` couldn't match the `payout_id` to a payout object.
 
 ### 422
 
-Validation Error
+Validation error. The payout endpoint returned an error message because of an invalid value.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {

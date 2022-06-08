@@ -1,4 +1,13 @@
-# Merchants
+---
+title: "Merchant"
+excerpt: "A description of the usage of the Merchant endpoint"
+---
+
+# Merchant
+
+The `merchant` endpoint exposes several methods dedicated to dealing with merchant objects.
+
+Example:
 
 ```python
 from ping.payments_api import PaymentsApi
@@ -23,9 +32,14 @@ payments_api.merchant.get_specific_merchant()
 
 # Get Merchants
 
-Gets and returns an object of all the merchants from a specific tenant
+Get an list of all the merchant objects connected to a specific tenant.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. If the tenant_id exists, the function will return an object containing a list of all merchants under that specific `tenant_id`. Otherwise an error object is returned.
+Using `get_merchant()`:
+
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_merchant().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`
+
+get_merchant() returns an object with a list of all merchants for a valid tenant_id. get_merchant() returns an error object if the tenant_id_ is invalid.
 
 ```python
 def get_merchants()
@@ -38,13 +52,13 @@ def get_merchants()
   print(result.status_code)
 ```
 
-### 200
+### Code 200
 
-Successfully got merchants. A json object containing an array of all the merchants for the given tenant has been returned.
+A successful call. The merchant endpoint returned a list of all the merchants objects connected to a tenant_id.
 
 Example:
 
-```python
+```json
 [
   {
     "email": "contact@merchant.a.com",
@@ -71,11 +85,11 @@ Example:
 
 ### 403
 
-API Error
+API error. The merchant endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -88,11 +102,11 @@ Example:
 
 ### 422
 
-Validation Error
+Validation error. The merchant endpoint returned an error message because of an invalid value.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -122,9 +136,16 @@ elif result.is_error():
 
 # Create New Merchant
 
-Creates a new merchant for a tenant.
+Create and connect a new merchant to a tenant.
 
-You need to create a PaymentApi object with a `tenant_id` as a parameter to access `create_new_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires an object containing a merchant name and an organisation object containing the `country` and the `organisation_number`. If all parameters are correct, an object will be returned containing an object of the merchant you created. Otherwise an error object is returned.
+Using `create_new_merchant()`:
+
+-   Create a PaymentApi object with a `tenant_id` as a parameter to access create_new_merchant().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+-   Call create_new_merchant() with an object containing a merchant name and an organisation object containing the `country` and the `organisation_number`.
+
+create_new_merchant() returns an object representing the merchant you created if all parameters are correct.
+create_new_merchant() returns an error object if one or more parameters are invalid.
 
 ```python
 def create_new_merchant(merchant_object)
@@ -132,7 +153,7 @@ def create_new_merchant(merchant_object)
 
 | Parameter         | Type     | Containing                                      | Description                                                                                                                                                                             |
 | ----------------- | -------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `merchant_object` | `object` | merchant_name:`string`<br>organisation:`object` | An object containing a name for the new merchant and an organisation object containing `contry: String` and `organisation_number: string` for the organisation that merchant is part of |
+| `merchant_object` | `object` | merchant_name:`string`<br>organisation:`object` | An object containing a name for the new merchant and an organisation object containing `country: String` and `organisation_number: string` for the organisation the merchant is part of |
 
 ## Response Type
 
@@ -143,11 +164,11 @@ def create_new_merchant(merchant_object)
 
 ### 200
 
-Successfully created a merchant. A json object containing that merchants has been returned.
+A successful call. A new merchant was created. The merchant endpoint returned the new merchant object.
 
 Example:
 
-```python
+```json
 {
   "name": "Merchant",
   "organization": {
@@ -159,11 +180,11 @@ Example:
 
 ### 403
 
-API Error
+API error. The merchant endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -176,11 +197,11 @@ Example:
 
 ### 422
 
-Validation Error
+Validation error. The merchant endpoint returned an error message because of an invalid value.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -208,7 +229,7 @@ merchant_object = {
   }
 }
 
-result = payemnts_api.merchant.create_new_merchant(merchant_object)
+result = payments_api.merchant.create_new_merchant(merchant_object)
 if result.is_success():
     print(result.body)
     print("success")
@@ -218,9 +239,16 @@ elif result.is_error():
 
 # Get Specific Merchant
 
-Gets a specific merchant from a tenant.
+Get a specific merchant connected to a tenant.
 
-You need to create a PaymentsApi object with a `tenant_id` as a parameter to access `get_specific_merchant()`. You can also send in an environment parameter if you wish to test your code towards a `sandbox` environment but the default value is `production`. The function itself requires a `merchant_id` as a parameter. If the `tenant_id` exists and has a merchant with the given `merchant_id` then a merchant object containing that specific merchant will be returned. Otherwise an error object is returned.
+Using `get_specific_merchant()`: 
+
+-   You need to create a PaymentsApi object with a `tenant_id` as a parameter to access get_specific_merchant().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+
+get_specific_merchant() needs a `merchant_id` as a parameter.
+get_specific_merchant() returns a merchant object containing a merchant if the tenant_id and merchant_id are valid and connected.
+get_specific_merchant() returns an error object if the tenant_id or the merchant_id is invalid.
 
 ```python
 def get_specific_merchant(merchant_id)
@@ -239,11 +267,11 @@ def get_specific_merchant(merchant_id)
 
 ### 200
 
-Successfully returned a merchant. A json object containing a specific merchant for the given tenant has been returned.
+A successful call. The merchant endpoint returned a merchant object matching the `tenant_id` and `merchant_id`.
 
 Example:
 
-```python
+```json
 {
   "email": "contact@merchant.com",
   "id": "55555555-5555-5555-5555-555555555555",
@@ -258,11 +286,11 @@ Example:
 
 ### 403
 
-API Error
+API error. The merchant endpoint returned an error message.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {
@@ -275,17 +303,15 @@ Example:
 
 ### 404
 
-Merchant could not be found.
-
-The given `merchant_id` could not be found.
+Search error. `get_specific_merchant()` couldn't match the combined `tenant_id` and `merchant_id`.
 
 ### 422
 
-Validation Error
+Validation error. The merchant endpoint returned an error message because of an invalid value.
 
 Example:
 
-```python
+```json
 {
   "errors": [
     {

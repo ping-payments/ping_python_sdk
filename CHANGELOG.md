@@ -1,3 +1,8 @@
+---
+title: "Changelog"
+excerpt: "A list of changes made to the Ping Python SDK"
+---
+
 # Change Log
 
 ## 3.0.0 (2022-05-18)
@@ -34,7 +39,7 @@ An SDK update to support new API changes regarding the date format of a payment 
 
 ## 1.0.0-alpha (2022-03-25)
 
--   The SDK have been updated to support all endpoints of payments API.
+-   The SDK has been updated to support all endpoints of payments API.
 
 -   update_payment_order() now working.
 
