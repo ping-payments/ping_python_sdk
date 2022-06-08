@@ -59,7 +59,7 @@ def initiate_payment(payment_object, payment_order_id)
 | `provider`                   | `string`           | Yes      | Enum: `swish`,`open_banking`,`verifone`,`billmate`,`bankgirot`, `payment_iq`, `dummy` <br>The payment method provider                                                                                                                                                       |
 | `provider_method_parameters` | `object`           | Yes      | Object of the required fields for the given payment method provider                                                                                                                                                                                                         |
 | `status_callback_url`        | `string`           | No       | URL for callbacks containing status updates on a payment. Read more under [Callback](/doc/api_resources/payments_api/payment.md#Callback)                                                                                                                                   |
-| `total_amount`               | `integer`          | Yes      | Total sum of all intems of purchase                                                                                                                                                                                                                                         |
+| `total_amount`               | `integer`          | Yes      | Total sum of all items of purchase                                                                                                                                                                                                                                          |
 
 ## provider_method_parameters
 
