@@ -25,8 +25,8 @@ payments_api.payment.get_payment()
 
 ## Functions
 
--   [Initiate Payment](/doc/api_resources/payments_api/payment.md#initiate-payment)
--   [Get Payment](/doc/api_resources/payments_api/payment.md#get-payment)
+- [Initiate Payment](/doc/api_resources/payments_api/payment.md#initiate-payment)
+- [Get Payment](/doc/api_resources/payments_api/payment.md#get-payment)
 
 # Initiate Payment
 
@@ -34,8 +34,8 @@ Initiates a payment for a payment order.
 
 Using `initiate_payment()`:
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access initiate_payment().
--   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+- Create a PaymentsApi object with a `tenant_id` as a parameter to access initiate_payment().
+- Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 initiate_payment() takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. initiate_payment() returns an error object if the payment_order_id or payment object is invalid, or if the tenant_id is invalid.
 
@@ -69,9 +69,9 @@ You need `provider_method_parameters` for each provider. Pass the provider_metho
 
 Use dummy payments in sandbox mode. You can test if a payment is possible with a dummy payment.
 
-| Containing               | Type     | Required | Description                                                                                                                                           |
-| ------------------------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `desired_payment_status` | `string` | Yes      | Desired payment status for the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CANCELLED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED` |
+| Containing               | Type     | Required | Description                                                                                                                              |
+| ------------------------ | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `desired_payment_status` | `string` | Yes      | Desired payment status for the dummy payment. <br>Enum: `INITIATED`, `PENDING`, `DECLINED`, `CRASHED`, `COMPLETED`, `EXPIRED`, `ABORTED` |
 
 ### Swish - method: E_Commerce
 
@@ -153,8 +153,8 @@ Example:
 
 ```json
 {
-	"id": "55555555-5555-5555-5555-555555555555",
-	"provider_method_response": {}
+  "id": "55555555-5555-5555-5555-555555555555",
+  "provider_method_response": {}
 }
 ```
 
@@ -166,12 +166,12 @@ Example:
 
 ```json
 {
-	"errors": [
-		{
-			"description": "Cannot initiate new Payments when PaymentOrder has been closed",
-			"error": "payment_order_closed"
-		}
-	]
+  "errors": [
+    {
+      "description": "Cannot initiate new Payments when PaymentOrder has been closed",
+      "error": "payment_order_closed"
+    }
+  ]
 }
 ```
 
@@ -187,13 +187,13 @@ Example:
 
 ```json
 {
-	"errors": [
-		{
-			"description": "null value where string expected",
-			"error": "null_value",
-			"property": "open_banking.success_url"
-		}
-	]
+  "errors": [
+    {
+      "description": "null value where string expected",
+      "error": "null_value",
+      "property": "open_banking.success_url"
+    }
+  ]
 }
 ```
 
@@ -267,8 +267,8 @@ Gets a payment from a payment order.
 
 Using `get_payment()`:
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment().
--   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+- Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment().
+- Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
 get_payment() takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object.
 get_payment() returns an error object if the payment_order_id or payment_id is invalid
@@ -299,21 +299,21 @@ Example:
 
 ```json
 {
-	"currency": "SEK",
-	"id": "55555555-5555-5555-5555-555555555555",
-	"metadata": {
-		"delivery_id": "230955"
-	},
-	"method": "mobile",
-	"order_items": [
-		{
-			"amount": 850,
-			"name": "Delivery, Pizza",
-			"vat_rate": 12
-		}
-	],
-	"provider": "swish",
-	"status": "PENDING"
+  "currency": "SEK",
+  "id": "55555555-5555-5555-5555-555555555555",
+  "metadata": {
+    "delivery_id": "230955"
+  },
+  "method": "mobile",
+  "order_items": [
+    {
+      "amount": 850,
+      "name": "Delivery, Pizza",
+      "vat_rate": 12
+    }
+  ],
+  "provider": "swish",
+  "status": "PENDING"
 }
 ```
 
@@ -325,12 +325,12 @@ Example:
 
 ```json
 {
-	"errors": [
-		{
-			"description": "This operation cannot be completed under certain conditions",
-			"error": "operation_forbidden"
-		}
-	]
+  "errors": [
+    {
+      "description": "This operation cannot be completed under certain conditions",
+      "error": "operation_forbidden"
+    }
+  ]
 }
 ```
 
@@ -346,13 +346,13 @@ Example:
 
 ```json
 {
-	"errors": [
-		{
-			"description": "null value where string expected",
-			"error": "null_value",
-			"property": "open_banking.success_url"
-		}
-	]
+  "errors": [
+    {
+      "description": "null value where string expected",
+      "error": "null_value",
+      "property": "open_banking.success_url"
+    }
+  ]
 }
 ```
 
