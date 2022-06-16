@@ -26,23 +26,23 @@ payments_api.merchant.get_specific_merchant()
 
 ## Functions
 
--   [Get Merchants](/doc/api_resources/payments_api/merchant.md#get-merchants)
--   [Create New Merchant](/doc/api_resources/payments_api/merchant.md#create-new-merchant)
--   [Get Specific Merchant](/doc/api_resources/payments_api/merchant.md#get-specific-merchant)
+-   [List](/doc/api_resources/payments_api/merchant.md#list)
+-   [Create](/doc/api_resources/payments_api/merchant.md#create)
+-   [Get](/doc/api_resources/payments_api/merchant.md#get)
 
 # Get Merchants
 
 Get an list of all the merchant objects connected to a specific tenant.
 
-Using `get_merchant()`:
+Using `merchant.list()`:
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_merchant().
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access merchant.get().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`
 
-get_merchant() returns an object with a list of all merchants for a valid tenant_id. get_merchant() returns an error object if the tenant_id is invalid.
+merchant.list() returns an object with a list of all merchants for a valid tenant_id. This function returns an error object if the tenant_id is invalid.
 
 ```python
-def get_merchants()
+def list()
 ```
 
 ## Response Type
