@@ -43,7 +43,7 @@ payments_api = PaymentsApi(
   environment = 'sandbox'
 )
 
-result = payments_api.merchant.get_merchants()
+result = payments_api.merchant.get()
 if result.is_success():
     print(result.body)
     print("success")
