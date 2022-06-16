@@ -114,7 +114,7 @@ class TestPaymentOrder(unittest.TestCase):
 # Split Payment Order Tests
     # splits a payment order correctly (status code 204)
     def test_split_204(self):
-        response = self.payments_api.paymentOrder.split_payment_order(self.payment_order_id)
+        response = self.payments_api.paymentOrder.split(self.payment_order_id)
         self.test_helper.run_tests(self, response, 204)
 
     # fast forwards and splits a payment order correctly (status code 204)
