@@ -15,9 +15,9 @@ payments_api = PaymentsApi(
   tenant_id = '55555555-5555-5555-5555-555555555555',
   environment = 'sandbox'
 )
-payments_api.merchant.get_merchants()
-payments_api.merchant.create_new_merchant()
-payments_api.merchant.get_specific_merchant()
+payments_api.merchant.list()
+payments_api.merchant.create()
+payments_api.merchant.get()
 ```
 
 ## Module Name

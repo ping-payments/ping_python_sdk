@@ -15,8 +15,8 @@ payments_api = PaymentsApi(
   tenant_id = '55555555-5555-5555-5555-555555555555',
   environment = 'sandbox'
 )
-payments_api.payment.initiate_payment()
-payments_api.payment.get_payment()
+payments_api.payment.initiate()
+payments_api.payment.get()
 ```
 
 ## Module Name
@@ -25,22 +25,23 @@ payments_api.payment.get_payment()
 
 ## Functions
 
-- [Initiate Payment](/doc/api_resources/payments_api/payment.md#initiate-payment)
-- [Get Payment](/doc/api_resources/payments_api/payment.md#get-payment)
+-   [Initiate](/doc/api_resources/payments_api/payment.md#initiate-payment)
+-   [Get](/doc/api_resources/payments_api/payment.md#get-payment)
 
 # Initiate Payment
 
 Initiates a payment for a payment order.
 
-Using `initiate_payment()`:
+Using `payment.initiate()`:
 
-- Create a PaymentsApi object with a `tenant_id` as a parameter to access initiate_payment().
-- Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access payment.initiate().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-initiate_payment() takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment. initiate_payment() returns an error object if the payment_order_id or payment object is invalid, or if the tenant_id is invalid.
+payment.initiate() takes a `payment_order_id` and a payment object and returns an object containing data needed to fulfill the next step of a payment.
+This function returns an error object if the payment_order_id or payment object is invalid, or if the tenant_id is invalid.
 
-```python
-def initiate_payment(payment_object, payment_order_id)
+```pythons
+def initiate(payment_object, payment_order_id)
 ```
 
 | Parameter          | Type     | Description                                                    |
@@ -141,20 +142,20 @@ Use dummy payments in sandbox mode. You can test if a payment is possible with a
 ## Response Type
 
 ```python
-  result = payments_api.payment.initiate_payment(payment_object, payment_order_id)
+  result = payments_api.payment.initiate(payment_object, payment_order_id)
   print(result.status_code)
 ```
 
 ### 200
 
-A successful call. `initiate_payment()` initiated a payment. initiate_payment() returns a `payment id` and an object containing data needed to fulfill the next step of a payment.
+A successful call. `initiate()` initiated a payment. This function returns a `payment id` and an object containing data needed to fulfill the next step of a payment.
 
 Example:
 
 ```json
 {
-  "id": "55555555-5555-5555-5555-555555555555",
-  "provider_method_response": {}
+	"id": "55555555-5555-5555-5555-555555555555",
+	"provider_method_response": {}
 }
 ```
 
@@ -166,18 +167,18 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "Cannot initiate new Payments when PaymentOrder has been closed",
-      "error": "payment_order_closed"
-    }
-  ]
+	"errors": [
+		{
+			"description": "Cannot initiate new Payments when PaymentOrder has been closed",
+			"error": "payment_order_closed"
+		}
+	]
 }
 ```
 
 ### 404
 
-Search error. `initiate_payment()` couldn't find a matching Payment order for the given `payment_order_id`.
+Search error. `payment.initiate()` couldn't find a matching Payment order for the given `payment_order_id`.
 
 ### 422
 
@@ -187,13 +188,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
@@ -253,7 +254,7 @@ Callbacks from Ping to the `callback_url` sends updates containing payment statu
     "status_callback_url": "https://somesite.com/callback"
   }
 
-  result = payments_api.payment.initiate_payment(payment_object, payment_order_id)
+  result = payments_api.payment.initiate(payment_object, payment_order_id)
   if result.is_success():
     print(result.body)
     print("success")
@@ -265,18 +266,18 @@ Callbacks from Ping to the `callback_url` sends updates containing payment statu
 
 Gets a payment from a payment order.
 
-Using `get_payment()`:
+Using `payment.get()`:
 
-- Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment().
-- Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access payment.get().
+-   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-get_payment() takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object.
-get_payment() returns an error object if the payment_order_id or payment_id is invalid
-get_payment() returns an error object if the payment_id doesn't match any payments connected to the payment order matching the payment_order_id.
-get_payment() returns an error object if the tenant_id is invalid.
+payment.get() takes a `payment_order_id` and a `payment_id` connected to a matching payment order and returns a payment object.
+payment.get() returns an error object if the payment_order_id or payment_id is invalid
+payment.get() returns an error object if the payment_id doesn't match any payments connected to the payment order matching the payment_order_id.
+payment.get() returns an error object if the tenant_id is invalid.
 
 ```python
-def get_payment(payment_order_id, payment_id)
+def get(payment_order_id, payment_id)
 ```
 
 | Parameter          | Type   | Description                                  |
@@ -287,33 +288,33 @@ def get_payment(payment_order_id, payment_id)
 ## Response Type
 
 ```python
-  result = payments_api.payment.get_payment(payment_order_id, payment_id)
+  result = payments_api.payment.get(payment_order_id, payment_id)
   print(result.status_code)
 ```
 
 ### 200
 
-A successful call. `get_payment()` returns a payment object.
+A successful call. `payment.get()` returns a payment object.
 
 Example:
 
 ```json
 {
-  "currency": "SEK",
-  "id": "55555555-5555-5555-5555-555555555555",
-  "metadata": {
-    "delivery_id": "230955"
-  },
-  "method": "mobile",
-  "order_items": [
-    {
-      "amount": 850,
-      "name": "Delivery, Pizza",
-      "vat_rate": 12
-    }
-  ],
-  "provider": "swish",
-  "status": "PENDING"
+	"currency": "SEK",
+	"id": "55555555-5555-5555-5555-555555555555",
+	"metadata": {
+		"delivery_id": "230955"
+	},
+	"method": "mobile",
+	"order_items": [
+		{
+			"amount": 850,
+			"name": "Delivery, Pizza",
+			"vat_rate": 12
+		}
+	],
+	"provider": "swish",
+	"status": "PENDING"
 }
 ```
 
@@ -325,18 +326,18 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
+	"errors": [
+		{
+			"description": "This operation cannot be completed under certain conditions",
+			"error": "operation_forbidden"
+		}
+	]
 }
 ```
 
 ### 404
 
-Search error. `get_payment()` couldn't match the `payment_id` to the `payment_order_id` or the `payment_order_id` is invalid.
+Search error. `payment.get()` couldn't match the `payment_id` to the `payment_order_id` or the `payment_order_id` is invalid.
 
 ### 422
 
@@ -346,13 +347,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
@@ -366,7 +367,7 @@ Example:
   paymen_order_id = "55555555-5555-5555-5555-555555555555"
   payment_id = "55555555-5555-5555-5555-555555555555"
 
-  result = payments_api.payment.get_payment(paymen_order_id, payment_id)
+  result = payments_api.payment.get(paymen_order_id, payment_id)
   if result.is_success():
     print(result.body)
     print("success")
