@@ -26,11 +26,11 @@ payments_api.merchant.get_specific_merchant()
 
 ## Functions
 
--   [List](/doc/api_resources/payments_api/merchant.md#list)
--   [Create](/doc/api_resources/payments_api/merchant.md#create)
--   [Get](/doc/api_resources/payments_api/merchant.md#get)
+-   [List](/doc/api_resources/payments_api/merchant.md#list-merchants)
+-   [Create](/doc/api_resources/payments_api/merchant.md#create-merchant)
+-   [Get](/doc/api_resources/payments_api/merchant.md#get-merchant)
 
-# Get Merchants
+# List Merchants
 
 Get an list of all the merchant objects connected to a specific tenant.
 
@@ -48,7 +48,7 @@ def list()
 ## Response Type
 
 ```python
-  result = payments_api.merchant.get_merchants()
+  result = payments_api.merchant.list()
   print(result.status_code)
 ```
 
@@ -126,7 +126,7 @@ payments_api = PaymentsApi(
   environment = 'sandbox'
 )
 
-result = payments_api.merchant.get_merchants()
+result = payments_api.merchant.list()
 if result.is_success():
     print(result.body)
     print("success")
@@ -134,21 +134,21 @@ elif result.is_error():
     print(result.errors)
 ```
 
-# Create New Merchant
+# Create Merchant
 
 Create and connect a new merchant to a tenant.
 
-Using `create_new_merchant()`:
+Using `merchant.create()`:
 
--   Create a PaymentApi object with a `tenant_id` as a parameter to access create_new_merchant().
+-   Create a PaymentApi object with a `tenant_id` as a parameter to access merchant.create().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
--   Call create_new_merchant() with an object containing a merchant name and an organisation object containing the `country` and the `organisation_number`.
+-   Call merchant.create() with an object containing a merchant name and an organisation object containing the `country` and the `organisation_number`.
 
-create_new_merchant() returns an object representing the merchant you created if all parameters are correct.
-create_new_merchant() returns an error object if one or more parameters are invalid.
+merchant.create() returns an object representing the merchant you created if all parameters are correct.
+This function returns an error object if one or more parameters are invalid.
 
 ```python
-def create_new_merchant(merchant_object)
+def create(merchant_object)
 ```
 
 | Parameter         | Type     | Containing                                      | Description                                                                                                                                                                          |
@@ -158,7 +158,7 @@ def create_new_merchant(merchant_object)
 ## Response Type
 
 ```python
-  result = payments_api.merchant.create_new_merchant(merchant_object)
+  result = payments_api.merchant.create(merchant_object)
   print(result.status_code)
 ```
 
@@ -229,7 +229,7 @@ merchant_object = {
   }
 }
 
-result = payments_api.merchant.create_new_merchant(merchant_object)
+result = payments_api.merchant.create(merchant_object)
 if result.is_success():
     print(result.body)
     print("success")
@@ -237,21 +237,21 @@ elif result.is_error():
     print(result.errors)
 ```
 
-# Get Specific Merchant
+# Get Merchant
 
 Get a specific merchant connected to a tenant.
 
-Using `get_specific_merchant()`:
+Using `merchant.get()`:
 
--   You need to create a PaymentsApi object with a `tenant_id` as a parameter to access get_specific_merchant().
+-   You need to create a PaymentsApi object with a `tenant_id` as a parameter to access merchant.get().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-get_specific_merchant() needs a `merchant_id` as a parameter.
-get_specific_merchant() returns a merchant object containing a merchant if the tenant_id and merchant_id are valid and connected.
-get_specific_merchant() returns an error object if the tenant_id or the merchant_id is invalid.
+mercahnt.get() needs a `merchant_id` as a parameter.
+merchant.get() returns a merchant object containing a merchant if the tenant_id and merchant_id are valid and connected.
+This function returns an error object if the tenant_id or the merchant_id is invalid.
 
 ```python
-def get_specific_merchant(merchant_id)
+def get(merchant_id)
 ```
 
 | Parameter     | Type     | Description                                     |
@@ -261,7 +261,7 @@ def get_specific_merchant(merchant_id)
 ## Response Type
 
 ```python
-  result = payments_api.merchant.get_specific_merchant(merchant_id)
+  result = payments_api.merchant.get(merchant_id)
   print(result.status_code)
 ```
 
@@ -303,7 +303,7 @@ Example:
 
 ### 404
 
-Search error. `get_specific_merchant()` couldn't match the combined `tenant_id` and `merchant_id`.
+Search error. `merchant.get()` couldn't match the combined `tenant_id` and `merchant_id`.
 
 ### 422
 
@@ -332,7 +332,7 @@ payments_api = PaymentsApi(
 )
 merchant_id = '55555555-5555-5555-5555-555555555555'
 
-result = payments_api.merchant.get_specific_merchant(merchant_id)
+result = payments_api.merchant.get(merchant_id)
 if result.is_success():
     print(result.body)
     print("success")
