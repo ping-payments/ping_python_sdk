@@ -22,20 +22,20 @@ class TestPayment(unittest.TestCase):
     def test_get_payment_200(self):
         payment_id = os.getenv("PAYMENT_ID")
 
-        response = self.payments_api.payment.get_payment(self.payment_order_id, payment_id)
+        response = self.payments_api.payment.get(self.payment_order_id, payment_id)
         self.test_helper.run_tests(self, response, 200)
 
     # gets payment with an incorrect id
     def test_get_payment_404(self):
         payment_id = ""
 
-        response = self.payments_api.payment.get_payment(self.payment_order_id, payment_id)
+        response = self.payments_api.payment.get(self.payment_order_id, payment_id)
         self.test_helper.run_tests(self, response, 404)
 
 # Initiate Payment Tests
     # Initiate a correct payment (status code 200)
     def test_initiate_payment_200(self):
-        response = self.payments_api.payment.initiate_payment(self.dummy_body, self.payment_order_id)
+        response = self.payments_api.payment.initiate(self.dummy_body, self.payment_order_id)
         self.test_helper.run_tests(self, response)
 
     # Initiate a payment with incorrect values inside payment object (status code 422)
@@ -43,14 +43,14 @@ class TestPayment(unittest.TestCase):
         payment_order_id = 0
         self.dummy_body["method"] = 0
 
-        response = self.payments_api.payment.initiate_payment(self.dummy_body, payment_order_id)
+        response = self.payments_api.payment.initiate(self.dummy_body, payment_order_id)
         self.test_helper.run_tests(self, response, 422)
 
     # Initiate a payment on a non-existing payment order (status code 404)
     def test_initiate_payment_404(self):
         error_payment_order_id = uuid.uuid4()
 
-        response = self.payments_api.payment.initiate_payment(self.dummy_body, error_payment_order_id)
+        response = self.payments_api.payment.initiate(self.dummy_body, error_payment_order_id)
         self.test_helper.run_tests(self, response, 404)
 
 

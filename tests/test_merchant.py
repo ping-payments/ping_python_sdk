@@ -19,13 +19,13 @@ class TestMerchant(unittest.TestCase):
 # Get Merchants Tests
     # gets merchants successfully
     def test_get_merchants_200(self):
-        response = self.payments_api.merchant.get_merchants()
+        response = self.payments_api.merchant.list()
         self.test_helper.run_tests(self, response)
 
 # Create New Merchant Tests
     # creates a merchant correctly (status code 200)
     def test_create_new_merchant_200(self):
-        response = self.payments_api.merchant.create_new_merchant(
+        response = self.payments_api.merchant.create(
             {
                 "name": "Company inc",
                 "organization": {
@@ -38,23 +38,23 @@ class TestMerchant(unittest.TestCase):
     
     # creates a merchant with incorrect values inside merchant object (status code 422)
     def test_create_new_merchant_422(self):
-        response = self.payments_api.merchant.create_new_merchant({})
+        response = self.payments_api.merchant.create({})
         self.test_helper.run_tests(self, response, 422)
 
 # Get Specific Merchant Tests
     # get a specific merchant correctly (status code 200)
     def test_get_specific_merchant_200(self):
-        response = self.payments_api.merchant.get_specific_merchant(os.getenv("MERCHANT_ID"))
+        response = self.payments_api.merchant.get(os.getenv("MERCHANT_ID"))
         self.test_helper.run_tests(self, response)
 
     # get a specific merchant with wrong id format (status code 422)
     def test_get_specific_merchant_422(self):
-        response = self.payments_api.merchant.get_specific_merchant(0)
+        response = self.payments_api.merchant.get(0)
         self.test_helper.run_tests(self, response, 422)
     
     # get a specific merchant with a non-existing id (status code 404)
     def test_get_specific_merchant_404(self):
-        response = self.payments_api.merchant.get_specific_merchant(uuid.uuid4())
+        response = self.payments_api.merchant.get(uuid.uuid4())
         self.test_helper.run_tests(self, response, 404)
 
 

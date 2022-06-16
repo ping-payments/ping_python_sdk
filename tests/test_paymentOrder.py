@@ -21,10 +21,10 @@ class TestPaymentOrder(unittest.TestCase):
 
 # Get Payment Orders Tests
     # get payment orders correctly (status code 200)
-    def test_get_payment_orders_200(self): 
+    def test_list_200(self): 
     
-        response_date = self.payments_api.paymentOrder.get_payment_orders("2020-03-27T09:42:30Z", "2022-03-27T09:42:30Z")
-        response = self.payments_api.paymentOrder.get_payment_orders()
+        response_date = self.payments_api.paymentOrder.list("2020-03-27T09:42:30Z", "2022-03-27T09:42:30Z")
+        response = self.payments_api.paymentOrder.list()
 
         # tests with start-end date
         self.test_helper.run_tests(self, response_date)
@@ -33,35 +33,35 @@ class TestPaymentOrder(unittest.TestCase):
         self.test_helper.run_tests(self, response)
 
     # get payment orders with impossible dates (status code 422)
-    def test_get_payment_orders_422(self):
-        response_date = self.payments_api.paymentOrder.get_payment_orders("12/90/2019", "40/10/2020")
+    def test_list_422(self):
+        response_date = self.payments_api.paymentOrder.list("12/90/2019", "40/10/2020")
         self.test_helper.run_tests(self, response_date, 422)
 
 # Create Payment Order Tests
     # creates a payment order correctly (status code 200)
-    def test_create_payment_order_200(self):
-        response = self.payments_api.paymentOrder.create_payment_order(self.split_tree_id, "SEK")
+    def test_create_200(self):
+        response = self.payments_api.paymentOrder.create(self.split_tree_id, "SEK")
         self.test_helper.run_tests(self, response)
 
     # creates a payment orders with incorrect id format (status code 422)
-    def test_create_payment_order_422(self):
-        response = self.payments_api.paymentOrder.create_payment_order(self.split_tree_id, "")
+    def test_create_422(self):
+        response = self.payments_api.paymentOrder.create(self.split_tree_id, "")
         self.test_helper.run_tests(self, response, 422)
 
 # Get Payment Order Tests
     # gets a payment order correctly (status code 200)
-    def test_get_payment_order_200(self):
-        response = self.payments_api.paymentOrder.get_payment_order(self.payment_order_id)
+    def test_get_200(self):
+        response = self.payments_api.paymentOrder.get(self.payment_order_id)
         self.test_helper.run_tests(self, response)
     
     # get a payment order with incorrect id format (status code 422)
-    def test_get_payment_order_422(self):
-        response = self.payments_api.paymentOrder.get_payment_order(0)
+    def test_get_422(self):
+        response = self.payments_api.paymentOrder.get(0)
         self.test_helper.run_tests(self, response, 422)
     
     # get a payment order with a non-existing id (status code 404)
-    def test_get_payment_order_404(self):
-        response = self.payments_api.paymentOrder.get_payment_order(uuid.uuid4())
+    def test_get_404(self):
+        response = self.payments_api.paymentOrder.get(uuid.uuid4())
         self.test_helper.run_tests(self, response, 404)
 
 # Update Payment Order Tests

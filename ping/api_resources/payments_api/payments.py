@@ -2,7 +2,7 @@ import requests
 from ping.helper.apiHelper import json_deserialize, check_errors
 
 
-def initiate_payment(headers, base_url, payment_object, payment_order_id):
+def initiate(headers, base_url, payment_object, payment_order_id):
     #Does a POST request to '/api/v1/payment_orders/{payment_order_id}/payments.
 
     #Initiates a payment for a payment order.
@@ -25,7 +25,7 @@ def initiate_payment(headers, base_url, payment_object, payment_order_id):
     return _result
 
 
-def get_payment(headers, base_url, payment_order_id, payment_id):
+def get(headers, base_url, payment_order_id, payment_id):
     #Does a GET request to /api/v1/payment_orders/{payment_order_id}/payments/{payment_id}.
 
     #Retrieves a payment from a payment order
