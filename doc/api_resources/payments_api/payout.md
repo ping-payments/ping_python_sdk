@@ -22,23 +22,23 @@ payments_api.payout.get_payout()
 
 ## Functions
 
--   [Get Payouts](/doc/api_resources/payments_api//payout.md#get-payouts)
--   [Get Specific Payout](/doc/api_resources/payments_api//payout.md#get-specific-payout)
+-   [List Payouts](/doc/api_resources/payments_api//payout.md#list-payouts)
+-   [Get Payout](/doc/api_resources/payments_api//payout.md#get-payout)
 
-# Get Payouts
+# List Payouts
 
 Gets and returns a list of payout objects for a tenant.
 
-Using `get_payouts()`:
+Using `payout.list()`:
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_orders().
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access payout.list().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-You can use the optional `date_from` and `date_to` parameters to limit the list of payout objects get_payouts() returns, by date. 
-get_payouts() returns an error object if you have provided an invalid date in either the date_from or date_to parameter or if the tenant_id is invalid. 
+You can use the optional `date_from` and `date_to` parameters to limit the list of payout objects payout.list() returns, by date.
+This function returns an error object if you have provided an invalid date in either the date_from or date_to parameter or if the tenant_id is invalid.
 
 ```python
-def get_payouts(date_from=None, date_to=None)
+def list(date_from=None, date_to=None)
 ```
 
 The datetime parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:30Z)
@@ -51,24 +51,24 @@ The datetime parameters follow the ISO Timestamp format (e.g. 2022-03-27T09:42:3
 ## Response Type
 
 ```python
-  result = payments_api.payout.get_payouts()
+  result = payments_api.payout.list()
   print(result.status_code)
 ```
 
 ### 200
 
-A successful call. `get_payouts()` returns a list of payout objects.
+A successful call. `payout.list()` returns a list of payout objects.
 
 Example:
 
 ```json
 [
-  {
-    "amount": 0,
-    "completed_at": "string",
-    "currency": "SEK",
-    "id": "55555555-5555-5555-5555-555555555555"
-  }
+	{
+		"amount": 0,
+		"completed_at": "string",
+		"currency": "SEK",
+		"id": "55555555-5555-5555-5555-555555555555"
+	}
 ]
 ```
 
@@ -80,12 +80,12 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
+	"errors": [
+		{
+			"description": "This operation cannot be completed under certain conditions",
+			"error": "operation_forbidden"
+		}
+	]
 }
 ```
 
@@ -97,13 +97,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
@@ -115,7 +115,7 @@ payments_api = PaymentsApi(
   environment = 'sandbox'
 )
 
-result = payments_api.payout.get_payouts(
+result = payments_api.payout.list(
   date_to = "2000-03-27T09:42:30Z"
   date_from = "2022-03-27T09:42:30Z"
 )
@@ -127,45 +127,45 @@ elif result.is_error():
     print(result.errors)
 ```
 
-# Get Specific Payout
+# Get Payout
 
 Gets a payout.
 
-Using `get_payout()`:
+Using `payout.get()`:
 
--   Create a PaymentsApi object with a `tenant_id` as a parameter to access get_payment_orders().
+-   Create a PaymentsApi object with a `tenant_id` as a parameter to access payout.get().
 -   Send in an environment parameter to test your code in `sandbox` mode. The default value is `production`.
 
-get_payout() takes a `payout_id` connected to a matching payout and returns a payout object. 
-get_payout() returns an error object if the payout_id or tenant_id is invalid
+payout.get() takes a `payout_id` connected to a matching payout and returns a payout object.
+This function returns an error object if the payout_id or tenant_id is invalid
 
 ```python
-def get_payout(payout_id)
+def get(payout_id)
 ```
 
-| Parameter   | Type     | Description                                     |
-| ----------- | -------- | ----------------------------------------------- |
+| Parameter   | Type     | Description                                   |
+| ----------- | -------- | --------------------------------------------- |
 | `payout_id` | `string` | String containing the ID of a specific payout |
 
 ## Response Type
 
 ```python
-  result = payments_api.payout.get_payout(payout_id)
+  result = payments_api.payout.get(payout_id)
   print(result.status_code)
 ```
 
 ### 200
 
-A successful call. `get_payout()` returns a payout object.
+A successful call. `payout.get()` returns a payout object.
 
 Example:
 
 ```json
 {
-  "amount": 0,
-  "completed_at": "string",
-  "currency": "SEK",
-  "id": "55555555-5555-5555-5555-555555555555"
+	"amount": 0,
+	"completed_at": "string",
+	"currency": "SEK",
+	"id": "55555555-5555-5555-5555-555555555555"
 }
 ```
 
@@ -177,18 +177,18 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "This operation cannot be completed under certain conditions",
-      "error": "operation_forbidden"
-    }
-  ]
+	"errors": [
+		{
+			"description": "This operation cannot be completed under certain conditions",
+			"error": "operation_forbidden"
+		}
+	]
 }
 ```
 
 ### 404
 
-Search error. `get_payout()` couldn't match the `payout_id` to a payout object.
+Search error. `payout.get()` couldn't match the `payout_id` to a payout object.
 
 ### 422
 
@@ -198,13 +198,13 @@ Example:
 
 ```json
 {
-  "errors": [
-    {
-      "description": "null value where string expected",
-      "error": "null_value",
-      "property": "open_banking.success_url"
-    }
-  ]
+	"errors": [
+		{
+			"description": "null value where string expected",
+			"error": "null_value",
+			"property": "open_banking.success_url"
+		}
+	]
 }
 ```
 
@@ -217,7 +217,7 @@ payments_api = PaymentsApi(
 )
 payout_id = '55555555-5555-5555-5555-555555555555'
 
-result = payments_api.payout.get_payout(payout_id)
+result = payments_api.payout.get(payout_id)
 if result.is_success():
     print(result.body)
     print("success")
