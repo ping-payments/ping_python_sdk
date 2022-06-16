@@ -48,56 +48,56 @@ class BaseEndpoints:
 
 class Merchant(BaseEndpoints):
     # Endpoint class for merchant endpoints
-    def get_merchants(self):
-        return merchants.get_merchants(self.headers, self.base_url)
+    def list(self):
+        return merchants.list(self.headers, self.base_url)
 
-    def create_new_merchant(self, obj):
-        return merchants.create_new_merchant(self.headers, self.base_url, obj)
+    def create(self, obj):
+        return merchants.create(self.headers, self.base_url, obj)
 
-    def get_specific_merchant(self, merchant_id):
-        return merchants.get_specific_merchant(self.headers, self.base_url, merchant_id)
+    def get(self, merchant_id):
+        return merchants.get(self.headers, self.base_url, merchant_id)
 
 
 class PaymentOrder(BaseEndpoints):
     # Endpoint class for payment order endpoints
-    def get_payment_orders(self, date_from=None, date_to=None):
-        return paymentOrders.get_payment_orders(self.headers, self.base_url, date_from, date_to)
+    def list(self, date_from=None, date_to=None):
+        return paymentOrders.list(self.headers, self.base_url, date_from, date_to)
 
-    def create_payment_order(self, split_tree_id, currency):
-        return paymentOrders.create_payment_order(self.headers, self.base_url, split_tree_id, currency)
+    def create(self, split_tree_id, currency):
+        return paymentOrders.create(self.headers, self.base_url, split_tree_id, currency)
 
-    def get_payment_order(self, payment_order_id):
-        return paymentOrders.get_payment_order(self.headers, self.base_url, payment_order_id)
+    def get(self, payment_order_id):
+        return paymentOrders.get(self.headers, self.base_url, payment_order_id)
 
-    def update_payment_order(self, payment_order_id, split_tree_id):
-        return paymentOrders.update_payment_order(self.headers, self.base_url, payment_order_id, split_tree_id)
+    def update(self, payment_order_id, split_tree_id):
+        return paymentOrders.update(self.headers, self.base_url, payment_order_id, split_tree_id)
 
-    def close_payment_order(self, payment_order_id):
-        return paymentOrders.close_payment_order(self.headers, self.base_url, payment_order_id)
+    def close(self, payment_order_id):
+        return paymentOrders.close(self.headers, self.base_url, payment_order_id)
 
-    def split_payment_order(self, payment_order_id, fast_forward = False):
-        return paymentOrders.split_payment_order(self.headers, self.base_url, payment_order_id, fast_forward)
+    def split(self, payment_order_id, fast_forward = False):
+        return paymentOrders.split(self.headers, self.base_url, payment_order_id, fast_forward)
 
-    def settle_payment_order(self, payment_order_id, fast_forward = False):
-        return paymentOrders.settle_payment_order(self.headers, self.base_url, payment_order_id, fast_forward)
+    def settle(self, payment_order_id, fast_forward = False):
+        return paymentOrders.settle(self.headers, self.base_url, payment_order_id, fast_forward)
 
 
 class Payment(BaseEndpoints):
     # Endpoint class for payment endpoints
-    def initiate_payment(self, obj, payment_order_id):
-        return payments.initiate_payment(self.headers, self.base_url, obj, payment_order_id)
+    def initiate(self, obj, payment_order_id):
+        return payments.initiate(self.headers, self.base_url, obj, payment_order_id)
 
-    def get_payment(self, payment_order_id, payment_id):
-        return payments.get_payment(self.headers, self.base_url, payment_order_id, payment_id)
+    def get(self, payment_order_id, payment_id):
+        return payments.get(self.headers, self.base_url, payment_order_id, payment_id)
 
 
 class Payout(BaseEndpoints):
     # Endpoint class for payout endpoints
-    def get_payouts(self, date_from=None, date_to=None):
-        return payouts.get_payouts(self.headers, self.base_url, date_from, date_to)
+    def list(self, date_from=None, date_to=None):
+        return payouts.list(self.headers, self.base_url, date_from, date_to)
     
-    def get_payout(self, payout_id):
-        return payouts.get_payouts(self.headers, self.base_url, payout_id)
+    def get(self, payout_id):
+        return payouts.get(self.headers, self.base_url, payout_id)
 
 
 class Ping(BaseEndpoints):
