@@ -108,7 +108,7 @@ payments_api.ping.ping_the_api()
 
 #### Get an Instance of an PaymentsApi Object and Call the Methods of the PaymentsApi class
 
-**Work with the API by calling the methods on the API object.** For example, you call `get_merchants()` for a list of all merchants connected to a tenant:
+**Work with the API by calling the methods on the API object.** For example, you call `list()` for a list of all merchants connected to a tenant:
 
 ```python
 
