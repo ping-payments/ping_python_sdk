@@ -112,7 +112,7 @@ payments_api.ping.ping_the_api()
 
 ```python
 
-result = payments_api.merchant.get_merchants()
+result = payments_api.merchant.list()
 
 ```
 
