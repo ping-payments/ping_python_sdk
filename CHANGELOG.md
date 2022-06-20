@@ -9,7 +9,7 @@ excerpt: "A list of changes made to the Ping Python SDK"
 
 A major update regarding the method names for each endpoint.
 
-- The names of the methods have changed to shorter and more concise name for a better DX.
+- The names of each endpoint method have changed to shorter and more concise name for a better developer experience.
 
 ### Merchants
 
@@ -33,10 +33,10 @@ A major update regarding the method names for each endpoint.
 
 ### Payment
 
-| Old name           | New name  |
-| ------------------ | :-------: |
-| initiate_payment() | initate() |
-| get_payment        |   get()   |
+| Old name           |  New name  |
+| ------------------ | :--------: |
+| initiate_payment() | initiate() |
+| get_payment        |   get()    |
 
 ### Payout
 
