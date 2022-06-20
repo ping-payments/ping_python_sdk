@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='ping-sdk',
-    version='3.0.0',
+    version='4.0.0',
     description='Use this Python library to manage Ping Payments API regarding merchants, payment orders, payments and payouts',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -22,8 +22,8 @@ setup(
         'python-dotenv~=0.20.0',
     ],
     tests_require=[
-         'flake8>=3.9',
-         'tox>=3.24'
+        'flake8>=3.9',
+        'tox>=3.24'
     ],
     classifiers=[
         'Intended Audience :: Developers',
