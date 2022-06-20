@@ -69,7 +69,7 @@ class TestPaymentOrder(unittest.TestCase):
     def test_update_204(self):
         
         response = self.payments_api.paymentOrder.update(
-            self.payment_order_id,
+            os.getenv("PAYMENT_ORDER_ID_OPEN"),
             self.split_tree_id
         )
         self.test_helper.run_tests(self, response, 204)
