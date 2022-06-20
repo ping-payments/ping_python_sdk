@@ -27,8 +27,7 @@ payment_object = {
     "provider_method_parameters": {
         "phone_number": "0700000000",
         "message": "example text"
-    },
-    "status_callback_url": "https://somesite.com/callback"
+    }
 }
 
 result = payments_api.payment.initiate(payment_object, payment_order_id)

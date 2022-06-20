@@ -55,7 +55,6 @@ class testHelper(unittest.TestCase):
             "provider_method_parameters": {
                 "desired_payment_status": "COMPLETED"
             },
-            "status_callback_url": "https://somesite.com/callback",
             "total_amount": 2500
         }
         return dummy_body
