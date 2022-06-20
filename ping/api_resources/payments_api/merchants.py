@@ -2,7 +2,7 @@ import requests
 from ping.helper.apiHelper import json_deserialize, check_errors
 
 
-def get_merchants(headers, base_url):
+def list(headers, base_url):
     #Does a GET request to /api/v1/merchants.
 
     #Lists merchants associated with a tenant. The merchant details
@@ -26,7 +26,7 @@ def get_merchants(headers, base_url):
     return _result
 
 
-def create_new_merchant(headers, base_url, merchant_object):
+def create(headers, base_url, merchant_object):
     # Does a POST request to /api/v1/merchants.
 
     # Creates a new merchants for a tenant.
@@ -51,7 +51,7 @@ def create_new_merchant(headers, base_url, merchant_object):
     return _result
 
 
-def get_specific_merchant(headers, base_url, merchant_id):
+def get(headers, base_url, merchant_id):
     # Does a GET request to /api/v1/merchants/{merchant_id}.
 
     # Provides details for a single merchant. The details include email, id,

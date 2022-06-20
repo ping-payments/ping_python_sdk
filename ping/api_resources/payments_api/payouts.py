@@ -2,7 +2,7 @@ import requests
 from ping.helper.apiHelper import json_deserialize, check_errors
 
 
-def get_payouts(headers, base_url, date_from, date_to):
+def list(headers, base_url, date_from, date_to):
     #Does a GET request to /api/v1/payment_orders.
 
     #Retrieves a list of payouts.
@@ -34,7 +34,7 @@ def get_payouts(headers, base_url, date_from, date_to):
     _result = check_errors(response, decoded)
     return _result
 
-def get_payout(headers, base_url, payout_id):
+def get(headers, base_url, payout_id):
     # Does a GET request to /api/v1/payouts/{payout_id}.
 
     # Retrives a specific payout.

@@ -30,9 +30,9 @@ class testHelper(unittest.TestCase):
         #creates a payment order and a payment to that order that now is ready to get closed, split and settled
     def prepare_payment_order_handling():
         payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        payment_order = payments_api.paymentOrder.create_payment_order(os.getenv("SPLIT_TREE_ID"), "SEK")
+        payment_order = payments_api.paymentOrder.create(os.getenv("SPLIT_TREE_ID"), "SEK")
         payment_order_id = payment_order.body["id"]
-        payments_api.payment.initiate_payment(testHelper.get_payment_body(), payment_order_id)
+        payments_api.payment.initiate(testHelper.get_payment_body(), payment_order_id)
 
         return payment_order_id
 
@@ -55,7 +55,6 @@ class testHelper(unittest.TestCase):
             "provider_method_parameters": {
                 "desired_payment_status": "COMPLETED"
             },
-            "status_callback_url": "https://somesite.com/callback",
             "total_amount": 2500
         }
         return dummy_body
