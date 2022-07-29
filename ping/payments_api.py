@@ -3,7 +3,7 @@ from ping.api_resources.payments_api import paymentOrders
 from ping.api_resources.payments_api import payments
 from ping.api_resources.payments_api import payouts
 from ping.api_resources.payments_api import pings
-from ping.helper.apiHelper import get_base_url
+from ping.helper.apiHelper import get_payments_api_base_url
 
 
 class PaymentsApi:
@@ -11,7 +11,7 @@ class PaymentsApi:
     def __init__(self, tenant_id="", environment="sandbox"):
         self.tenant_id = tenant_id
         self.environment = environment
-        self.base_url = get_base_url(environment)
+        self.base_url = get_payments_api_base_url(environment)
         self.headers = {
             "Accept": "application/json",
             "tenant_id": tenant_id

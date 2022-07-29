@@ -38,10 +38,16 @@ def check_errors(response, decoded):
     return result
 
 
-def get_base_url(environment):
+def get_payments_api_base_url(environment):
 
     if environment == "sandbox":
         return "http://sandbox.pingpayments.com/payments"
     elif environment == "production":
         return "http://pingpayments.com/payments"
 
+def get_payment_links_api_base_url(environment):
+
+    if environment == "sandbox":
+        return "http://sandbox.pingpayments.com/payments"
+    elif environment == "production":
+        return "http://pingpayments.com/payments"
