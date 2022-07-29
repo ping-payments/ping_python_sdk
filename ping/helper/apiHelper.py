@@ -48,6 +48,6 @@ def get_payments_api_base_url(environment):
 def get_payment_links_api_base_url(environment):
 
     if environment == "sandbox":
-        return "http://sandbox.pingpayments.com/payments"
+        return "https://sandbox.pingpayments.com/payment_links"
     elif environment == "production":
-        return "http://pingpayments.com/payments"
+        return "https://pingpayments.com/payment_links"

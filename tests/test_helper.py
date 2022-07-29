@@ -1,6 +1,4 @@
-from cgi import test
 import unittest
-from ping.api_resources import payments_api
 from ping.payments_api import PaymentsApi
 import os
 from dotenv import load_dotenv

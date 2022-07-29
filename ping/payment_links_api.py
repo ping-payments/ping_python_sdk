@@ -5,7 +5,7 @@ from ping.api_resources.payment_links_api import pings
 from ping.helper.apiHelper import get_payment_links_api_base_url
 
 
-class PaymentsApi:
+class PaymentLinksApi:
     # A controller to access all endpoints in the API.
     def __init__(self, tenant_id="", environment="sandbox"):
         self.tenant_id = tenant_id
