@@ -43,7 +43,6 @@ def create(headers, base_url, obj):
     # Prepare and execute response
     _path = '/api/v1/payment_links'
     _url = base_url + _path
-    print(headers)
     response = requests.post(_url, headers=headers, json=obj)
 
     # deserialize and check errors

@@ -1,8 +1,6 @@
-
 import os
 from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
-
 
 load_dotenv()
 
@@ -16,4 +14,3 @@ if result.is_success():
 elif result.is_error():
  print(result.errors)
  print("error")
-

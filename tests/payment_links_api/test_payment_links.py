@@ -1,3 +1,4 @@
+import string
 import unittest
 import uuid
 import os
@@ -15,6 +16,38 @@ class TestPayment(unittest.TestCase):
         cls.test_helper = testHelper
         cls.payment_link_id = os.getenv("PAYMENT_LINK_ID")
         cls.payment_links_api = PaymentLinksApi(os.getenv("TENANT_ID"))
+        cls.customer = {
+            "email": "some.email@domain.com",
+            "first_name": "Bertil",
+            "last_name": "Jönsson",
+            "phone": "0700000000"
+        }
+        cls.items =[
+            {
+                "description": "Hawaii Pizza",
+                "merchant_id": os.getenv("MERCHANT_ID"),
+                "price": 7000,
+                "quantity": 2,
+                "vat": 12
+            }
+        ]
+        cls.supplier = {
+            "city": "Örebro",
+            "name": "name",
+            "organization_number": "5555555555",
+            "website": "https://somewebsite.com",
+            "zip": "45133"
+        }
+        cls.swish_parameters = [
+            {
+                "method": "e_commerce",
+                "parameters": {
+                "swish_message": "Tack för din betalning"
+                },
+                "provider": "swish"
+            }
+        ]
+        
 
 # List Payment Links
     # lists all payment links correctly(status code 200)
@@ -42,59 +75,136 @@ class TestPayment(unittest.TestCase):
     # Creates a payment link correctly (status code 200)
     def test_create_payment_link_200(self):
         request = {
-            "customer": {
-                "email": "some.email@domain.com",
-                "first_name": "Bertil",
-                "last_name": "Jönsson",
-                "phone": "0700000000"
-              },
-              "delivery_address": {
-                "city": "Örebro",
-                "street_address": "Nygatan 15",
-                "zip": "702 10"
-              },
-              "due_date": "2022-03-25",
-              "invoice_address": {
-                "city": "Örebro",
-                "street_address": "Nygatan 15",
-                "zip": "702 10"
-              },
-              "items": [
-                {
-                  "description": "Hawaii Pizza",
-                  "merchant_id": os.getenv("MERCHANT_ID"),
-                  "price": 7000,
-                  "quantity": 2,
-                  "vat": 12
-                }
-              ],
-              "locale": "sv-SE",
-              "logo_image_link": "https://someurl.com/some-image.png",
-              "payment_link_status_callback_url": "https://someurl.com/payment_link_callback",
-              "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
-              "payment_provider_methods": [
-                {
-                  "method": "e_commerce",
-                  "parameters": {
-                    "swish_message": "Tack för din betalning"
-                  },
-                  "provider": "swish"
-                }
-              ],
-              "supplier": {
-                "city": "Örebro",
-                "name": "name",
-                "organization_number": "5555555555",
-                "website": "https://somewebsite.com",
-                "zip": "45133"
-              },
-              "currency": "SEK",
-              "total_amount": 14000
+                "customer": self.customer,
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 14000
             }
         response = self.payment_links_api.payment_links.create(request)
         self.test_helper.run_tests(self, response)
 
-    
+    def test_create_payment_link_non_matching_total_amount_422(self):
+        request = {
+                "customer": self.customer,
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 0
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 403)
 
+    def test_create_payment_link_no_customer_422(self):
+        request = {
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 14000
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 422)
+    
+    def test_create_payment_link_no_items(self):
+        request = {
+                "customer": self.customer,
+                "locale": "sv-SE",
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 0
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 422)
+    
+    def test_create_payment_link_no_locale(self):
+        request = {
+                "customer": self.customer,
+                "items": self.items,
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 14000
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 422)
+
+    def test_create_payment_link_no_id_422(self):
+        request = {
+                "customer": self.customer,
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 14000
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 422)
+
+    def test_create_payment_link_id_not_found_403(self):
+        request = {
+                "customer": self.customer,
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_order_id": str(uuid.uuid4()),
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 14000
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 403)
+    
+    def test_create_payment_link_no_provider_method_parameters_422(self):
+        request = {
+                "customer": self.customer,
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "supplier": self.supplier,
+                "currency": "SEK",
+                "total_amount": 14000
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 422)
+
+    def test_create_payment_link_no_supplier_422(self):
+        request = {
+                "customer": self.customer,
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "payment_provider_methods": self.swish_parameters,
+                "currency": "SEK",
+                "total_amount": 14000
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 422)
+    
+    def test_create_payment_link_no_currency_422(self):
+        request = {
+                "customer": self.customer,
+                "items": self.items,
+                "locale": "sv-SE",
+                "payment_order_id": os.getenv("PAYMENT_ORDER_ID"),
+                "payment_provider_methods": self.swish_parameters,
+                "supplier": self.supplier,
+                "total_amount": 14000
+            }
+        response = self.payment_links_api.payment_links.create(request)
+        self.test_helper.run_tests(self, response, 422)
+    
 if __name__ == '__main__':
     unittest.main()
