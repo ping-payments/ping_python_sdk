@@ -63,11 +63,11 @@ class Payment_links(BaseEndpoints):
 
 class Invoice(BaseEndpoints):
     # Endpoint class for payment endpoints
-    def get(self, payment_link_id):
-        return invoice.initiate(self.headers, self.base_url, payment_link_id)
-
     def create(self, payment_link_id, obj):
-        return invoice.get(self.headers, self.base_url, payment_link_id, obj)
+        return invoice.create(self.headers, self.base_url, payment_link_id, obj)
+
+    def get(self, payment_link_id):
+        return invoice.get(self.headers, self.base_url, payment_link_id)
 
 
 class Receipt(BaseEndpoints):
