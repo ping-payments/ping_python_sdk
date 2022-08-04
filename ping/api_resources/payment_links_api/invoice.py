@@ -5,14 +5,14 @@ from ping.helper.apiHelper import check_errors, json_deserialize
 
 def create(headers, base_url, payment_link_id, obj):
    
-    # Does a POST request to /api/v1/payment_orders.
+    # Does a PUT request to /api/v1/payment_links/{payment_link_id}/invoice.
 
-    # Creates a new payment order.
+    # Creates an invoice for a payment link.
     # Args (provided by the tenant):
-    #    split_tree_id (string, required): An string with a valid split tree ID.
+    #   payment_link_id (string, required): Id of a specific payment link.
+    #   obj (object, required): Body for creating a new payment link invoice
     # Returns:
-    #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #   Response: Empty response
     
 
     # Prepare and execute response
@@ -27,13 +27,14 @@ def create(headers, base_url, payment_link_id, obj):
 
 
 def get(headers, base_url, payment_link_id):
-    # Does a GET request to /api/v1/payment_orders/{payment_order_id}.
+    # Does a GET request to /api/v1/payment_links/{payment_link_id}/invoice.
 
-    # Retrives a specific payment order.
+    # Retrives a specific invoice.
     # Args (provided by the tenant):
-    #    payment_order_id (String, required): The ID of the of the payment order to retrive.
+    #   payment_link_id (String, required): Id of a specific payment link.
     # Returns:
-    #    Response: A json object with the response value as well as other
+    #   Response: A json object with a payment link as well as other
+    #   useful information such as status codes, headers and a potention error.
     
 
     # Prepare and execute response

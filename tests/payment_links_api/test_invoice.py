@@ -86,6 +86,5 @@ class TestInvoice(unittest.TestCase):
         self.test_helper.run_tests(self, response, 204)
 
 
-
 if __name__ == '__main__':
     unittest.main()

@@ -27,7 +27,11 @@ class TestReceipt(unittest.TestCase):
         self.test_helper.run_tests(self, response, 404)
     
     # error - gets a receipt with an unfinished payment link
-    def test_get_receipt_invoice_not_completed_403(self):
+    def test_get_receipt_not_completed_403(self):
 
-        response = self.payment_links_api.invoice.get(os.getenv("PAYMENT_LINK_ID"))
+        response = self.payment_links_api.invoice.get(os.getenv("PAYMENT_LINK_ID_NOT_COMPLETED"))
         self.test_helper.run_tests(self, response, 403)
+
+
+if __name__ == '__main__':
+    unittest.main()

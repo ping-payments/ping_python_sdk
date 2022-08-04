@@ -3,7 +3,7 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def list(headers, base_url):
-    #Does a GET request to /api/v1/payment_orders.
+    #Does a GET request to /api/v1/payment_links.
 
     #Retrieves a list of payment orders.
     #Args (provided by the tenant):
@@ -30,7 +30,7 @@ def list(headers, base_url):
 
 
 def create(headers, base_url, obj):
-    # Does a POST request to /api/v1/payment_orders.
+    # Does a POST request to /api/v1/payment_links.
 
     # Creates a new payment order.
     # Args (provided by the tenant):
@@ -52,7 +52,7 @@ def create(headers, base_url, obj):
 
 
 def get(headers, base_url, payment_link_id):
-    # Does a GET request to /api/v1/payment_orders/{payment_order_id}.
+    # Does a GET request to /api/v1/payment_links/{payment_link_id}.
 
     # Retrives a specific payment order.
     # Args (provided by the tenant):
@@ -73,7 +73,7 @@ def get(headers, base_url, payment_link_id):
 
 
 def cancel(headers, base_url, payment_link_id):
-    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}.
+    # Does a PUT request to /api/v1/payment_links/{payment_link_id}/cancel.
 
     # Updates the split tree of a specific payment order.
     # Args (provided by the tenant):
@@ -96,7 +96,7 @@ def cancel(headers, base_url, payment_link_id):
 
 
 def send(headers, base_url, payment_link_id, obj):
-    # Does a PUT request to /api/v1/payment_orders/{payment_order_id}/close'.
+    # Does a PUT request to /api/v1/payment_links/{payment_link_id}/distribute'.
 
     # Closes a specific payment order.
     # Args (provided by the tenant):
