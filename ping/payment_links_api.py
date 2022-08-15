@@ -18,8 +18,8 @@ class PaymentLinksApi:
 
 
     @property
-    def payment_links(self):
-        return Payment_links(self.headers, self.base_url)
+    def payment_link(self):
+        return Payment_link(self.headers, self.base_url)
 
     @property
     def invoice(self):
@@ -42,7 +42,7 @@ class BaseEndpoints:
         self.base_url = base_url
 
 
-class Payment_links(BaseEndpoints):
+class Payment_link(BaseEndpoints):
     # Endpoint class for payment order endpoints
     def list(self):
         return payment_links.list(self.headers, self.base_url)
