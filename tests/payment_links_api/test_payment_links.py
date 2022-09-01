@@ -62,7 +62,7 @@ class TestPaymentLinks(unittest.TestCase):
     # lists all payment links correctly(status code 200)
     def test_list_payment_links_200(self):
 
-        response = self.payment_links_api.payment_links.list()
+        response = self.payment_links_api.payment_link.list()
         self.test_helper.run_tests(self, response, 200)
 
 
@@ -70,21 +70,21 @@ class TestPaymentLinks(unittest.TestCase):
     # gets a payment link correctly
     def test_get_payment_link_200(self):
 
-        response = self.payment_links_api.payment_links.get(self.payment_link_id)
+        response = self.payment_links_api.payment_link.get(self.payment_link_id)
         self.test_helper.run_tests(self, response, 200)
 
     # error - gets a payment link with an incorrect id
     def test_get_payment_link_404(self):
         payment_link_id = uuid.uuid4()
 
-        response = self.payment_links_api.payment_links.get(payment_link_id)
+        response = self.payment_links_api.payment_link.get(payment_link_id)
         self.test_helper.run_tests(self, response, 404)
 
 # Create Payment Link
     # Creates a payment link correctly (status code 200)
     def test_create_payment_link_200(self):
         request = self.complete_create_body
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response)
 
     def test_create_payment_link_non_matching_total_amount_422(self):
@@ -98,7 +98,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 0
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 403)
 
     def test_create_payment_link_no_customer_422(self):
@@ -111,7 +111,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 14000
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 422)
     
     def test_create_payment_link_no_items(self):
@@ -124,7 +124,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 0
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 422)
     
     def test_create_payment_link_no_locale(self):
@@ -137,7 +137,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 14000
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 422)
 
     def test_create_payment_link_no_id_422(self):
@@ -150,7 +150,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 14000
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 422)
 
     def test_create_payment_link_id_not_found_403(self):
@@ -164,7 +164,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 14000
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 403)
     
     def test_create_payment_link_no_provider_method_parameters_422(self):
@@ -177,7 +177,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 14000
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 422)
 
     def test_create_payment_link_no_supplier_422(self):
@@ -190,7 +190,7 @@ class TestPaymentLinks(unittest.TestCase):
                 "currency": "SEK",
                 "total_amount": 14000
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 422)
     
     def test_create_payment_link_no_currency_422(self):
@@ -203,21 +203,21 @@ class TestPaymentLinks(unittest.TestCase):
                 "supplier": self.supplier,
                 "total_amount": 14000
             }
-        response = self.payment_links_api.payment_links.create(request)
+        response = self.payment_links_api.payment_link.create(request)
         self.test_helper.run_tests(self, response, 422)
 
     def test_cancel_payment_link_204(self):
-        payment_link = self.payment_links_api.payment_links.create(self.complete_create_body)
+        payment_link = self.payment_links_api.payment_link.create(self.complete_create_body)
         payment_link_id = payment_link.body["id"]
-        response = self.payment_links_api.payment_links.cancel(payment_link_id)
+        response = self.payment_links_api.payment_link.cancel(payment_link_id)
         self.test_helper.run_tests(self, response, 204 )
     
     def test_cancel_payment_link_id_not_found_404(self):
-        response = self.payment_links_api.payment_links.cancel(uuid.uuid4())
+        response = self.payment_links_api.payment_link.cancel(uuid.uuid4())
         self.test_helper.run_tests(self, response, 404)
 
     def test_cancel_payment_link_already_canceled_403(self):
-        response = self.payment_links_api.payment_links.cancel(os.getenv("PAYMENT_LINK_ID"))
+        response = self.payment_links_api.payment_link.cancel(os.getenv("PAYMENT_LINK_ID"))
         self.test_helper.run_tests(self, response, 403)
 
     def test_send_payment_link_with_sms_204(self):
@@ -225,7 +225,7 @@ class TestPaymentLinks(unittest.TestCase):
             "methods": ["sms"],
             "customer_phone": "0701231212",
         }
-        response = self.payment_links_api.payment_links.send(os.getenv("PAYMENT_LINK_ID"), request)
+        response = self.payment_links_api.payment_link.send(os.getenv("PAYMENT_LINK_ID"), request)
         self.test_helper.run_tests(self, response, 204)
 
     def test_send_payment_link_with_email_204(self):
@@ -233,7 +233,7 @@ class TestPaymentLinks(unittest.TestCase):
             "methods": ["email"],
             "customer_email": "somemail@mail.com",
         }
-        response = self.payment_links_api.payment_links.send(os.getenv("PAYMENT_LINK_ID"), request)
+        response = self.payment_links_api.payment_link.send(os.getenv("PAYMENT_LINK_ID"), request)
         self.test_helper.run_tests(self, response, 204)
     
     def test_send_payment_link_with_sms_and_email_204(self):
@@ -242,15 +242,15 @@ class TestPaymentLinks(unittest.TestCase):
             "customer_phone": "0701231212",
             "customer_email": "somemail@mail.com"
         }
-        response = self.payment_links_api.payment_links.send(os.getenv("PAYMENT_LINK_ID"), request)
+        response = self.payment_links_api.payment_link.send(os.getenv("PAYMENT_LINK_ID"), request)
         self.test_helper.run_tests(self, response, 204)
 
     def test_send_payment_link_with_empty_request_422(self):
-        response = self.payment_links_api.payment_links.send(os.getenv("PAYMENT_LINK_ID"), {})
+        response = self.payment_links_api.payment_link.send(os.getenv("PAYMENT_LINK_ID"), {})
         self.test_helper.run_tests(self, response, 422)
 
     def test_send_payment_link_id_not_found_404(self):
-        response = self.payment_links_api.payment_links.send(uuid.uuid4(), {"methods": ["sms"]})
+        response = self.payment_links_api.payment_link.send(uuid.uuid4(), {"methods": ["sms"]})
         self.test_helper.run_tests(self, response, 404)
 
 
