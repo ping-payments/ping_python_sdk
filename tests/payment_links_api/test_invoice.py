@@ -80,7 +80,7 @@ class TestInvoice(unittest.TestCase):
 # Create an invoice
     # Creates an invoice correctly (status code 200)
     def test_create_invoice_with_OCR_200(self):
-        payment_link = self.payment_links_api.payment_links.create(self.complete_create_body)
+        payment_link = self.payment_links_api.payment_link.create(self.complete_create_body)
         payment_link_id = payment_link.body["id"]
         response = self.payment_links_api.invoice.create(payment_link_id, {"reference_type": "OCR"})
         self.test_helper.run_tests(self, response, 204)
