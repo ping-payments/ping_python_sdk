@@ -3,18 +3,17 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def list(headers, base_url, date_from, date_to):
-    #Does a GET request to /api/v1/payment_orders.
+    # Does a GET request to /api/v1/payment_orders.
 
-    #Retrieves a list of payouts.
-    #Args (provided by the tenant):
+    # Retrieves a list of payouts.
+    # Args (provided by the tenant):
     #  date_from (string, optional): The timestamp for the beginning of
     #    the reporting period, in RFC 3339 format. Default: None
     #  date_to (string, optional): The timestamp for the end of
     #    the reporting period, RFC 3339 format. Default: None
-    #Returns:
+    # Returns:
     #  Response: A json object with the response value as well as other
     #  useful information such as status codes, headers and a potention error.
-    
 
     _path = '/api/v1/payouts'
 
@@ -33,6 +32,7 @@ def list(headers, base_url, date_from, date_to):
     decoded = json_deserialize(response.text)
     _result = check_errors(response, decoded)
     return _result
+
 
 def get(headers, base_url, payout_id):
     # Does a GET request to /api/v1/payouts/{payout_id}.

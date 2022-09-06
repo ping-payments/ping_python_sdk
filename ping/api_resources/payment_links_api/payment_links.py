@@ -3,18 +3,17 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def list(headers, base_url):
-    #Does a GET request to /api/v1/payment_links.
+    # Does a GET request to /api/v1/payment_links.
 
-    #Retrieves a list of payment orders.
-    #Args (provided by the tenant):
+    # Retrieves a list of payment orders.
+    # Args (provided by the tenant):
     #  date_from (string, optional): The timestamp for the beginning of
     #    the reporting period, in RFC 3339 format. Default: None
     #  date_to (string, optional): The timestamp for the end of
     #    the reporting period, RFC 3339 format. Default: None
-    #Returns:
+    # Returns:
     #  Response: A json object with the response value as well as other
     #  useful information such as status codes, headers and a potention error.
-    
 
     _path = '/api/v1/payment_links'
 
@@ -38,7 +37,6 @@ def create(headers, base_url, obj):
     # Returns:
     #    Response: A json object with the response value as well as other
     #    useful information such as status codes, headers and a potention error.
-    
 
     # Prepare and execute response
     _path = '/api/v1/payment_links'
@@ -59,7 +57,6 @@ def get(headers, base_url, payment_link_id):
     #    payment_order_id (String, required): The ID of the of the payment order to retrive.
     # Returns:
     #    Response: A json object with the response value as well as other
-    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_links/{payment_link_id}'
@@ -81,12 +78,11 @@ def cancel(headers, base_url, payment_link_id):
     #    split_tree_id (String, required): An string with a valid split tree ID.
     # Response: A json object with the response value as well as other
     #    useful information such as status codes, headers and a potention error.
-    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_links/{payment_link_id}/cancel'
     _url = base_url + _path
-   
+
     response = requests.put(_url, headers=headers)
 
     # deserialize and check errors
@@ -104,7 +100,6 @@ def send(headers, base_url, payment_link_id, obj):
     # Returns:
     #    Response: A json object with the response value as well as other
     #    useful information such as status codes, headers and a potention error.
-    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_links/{payment_link_id}/distribute'

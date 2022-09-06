@@ -2,9 +2,8 @@ import requests
 from ping.helper.apiHelper import check_errors, json_deserialize
 
 
-
 def create(headers, base_url, payment_link_id, obj):
-   
+
     # Does a PUT request to /api/v1/payment_links/{payment_link_id}/invoice.
 
     # Creates an invoice for a payment link.
@@ -13,7 +12,6 @@ def create(headers, base_url, payment_link_id, obj):
     #   obj (object, required): Body for creating a new payment link invoice
     # Returns:
     #   Response: Empty response
-    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_links/{payment_link_id}/invoice'
@@ -35,7 +33,6 @@ def get(headers, base_url, payment_link_id):
     # Returns:
     #   Response: A json object with a payment link as well as other
     #   useful information such as status codes, headers and a potention error.
-    
 
     # Prepare and execute response
     _path = f'/api/v1/payment_links/{payment_link_id}/invoice'
