@@ -3,10 +3,9 @@ import unittest
 import uuid
 from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
-from tests.test_helper import testHelper
+from tests.test_helper import TestHelper
 
 
-@unittest.skipUnless(testHelper.api_is_connected(), "A connection to the API is needed")
 class TestMerchant(unittest.TestCase):
 
     @classmethod
@@ -14,7 +13,7 @@ class TestMerchant(unittest.TestCase):
         load_dotenv()
 
         cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        cls.test_helper = testHelper
+        cls.test_helper = TestHelper
 
 # Get Merchants Tests
     # gets merchants successfully

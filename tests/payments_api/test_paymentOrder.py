@@ -3,10 +3,9 @@ import uuid
 import os
 from dotenv import load_dotenv
 from ping.payments_api import PaymentsApi
-from tests.test_helper import testHelper
+from tests.test_helper import TestHelper
 
 
-@unittest.skipUnless(testHelper.api_is_connected(), "A connection to the API is needed")
 class TestPaymentOrder(unittest.TestCase):
 
     @classmethod
@@ -14,7 +13,7 @@ class TestPaymentOrder(unittest.TestCase):
         load_dotenv()
         cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
         cls.split_tree_id = os.getenv("SPLIT_TREE_ID")
-        cls.test_helper = testHelper
+        cls.test_helper = TestHelper
 
     def setUp(self):
         self.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
@@ -119,7 +118,10 @@ class TestPaymentOrder(unittest.TestCase):
 
     # fast forwards and splits a payment order correctly (status code 204)
     def test_split_fast_forward_204(self):
-        payment_order_id = self.test_helper.prepare_payment_order_handling()
+        
+        payment_order_id, payment_id= self.test_helper.prepare_payment_order_handling(self)
+        self.test_helper.await_payment_status(self, payment_order_id, payment_id)
+        
         response = self.payments_api.paymentOrder.split(payment_order_id, fast_forward=True)
         self.test_helper.run_tests(self, response, 204)
 
@@ -141,7 +143,10 @@ class TestPaymentOrder(unittest.TestCase):
     
     # fast forwards and settles a payment correctly (status code 204)
     def  test_settle_order_fast_forward_204(self):
-        payment_order_id = self.test_helper.prepare_payment_order_handling()
+        payment_order_id, payment_id= self.test_helper.prepare_payment_order_handling(self)
+
+        self.test_helper.await_payment_status(self, payment_order_id, payment_id)
+
         response = self.payments_api.paymentOrder.settle(payment_order_id, fast_forward=True)
         self.test_helper.run_tests(self, response, 204)
 

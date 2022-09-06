@@ -3,14 +3,14 @@ import uuid
 import os
 from dotenv import load_dotenv
 from ping.payment_links_api import PaymentLinksApi
-from tests.test_helper import testHelper
+from tests.test_helper import TestHelper
 
 class TestReceipt(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         load_dotenv()
-        cls.test_helper = testHelper
+        cls.test_helper = TestHelper
         cls.payment_links_api = PaymentLinksApi(os.getenv("PL_TENANT_ID"))    
 
 # Get Receipt

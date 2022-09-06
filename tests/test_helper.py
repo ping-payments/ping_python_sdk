@@ -3,8 +3,13 @@ from ping.payments_api import PaymentsApi
 import os
 from dotenv import load_dotenv
 
-class testHelper(unittest.TestCase):
-    load_dotenv()
+
+class TestHelper(unittest.TestCase):
+
+    def __init__(self):
+        load_dotenv()
+        self.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
+
     def run_tests(self, response, status = 200):
         self.assertIsNotNone(response)
         if status > 204:
@@ -20,19 +25,31 @@ class testHelper(unittest.TestCase):
             self.assertIsNone(response.errors)
 
 
-    def api_is_connected():
-        payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        ping = payments_api.ping.ping_the_api()
+    def api_is_connected(self):
+        ping = self.payments_api.ping.ping_the_api()
         return True if ping.body == "pong" else False
 
         #creates a payment order and a payment to that order that now is ready to get closed, split and settled
-    def prepare_payment_order_handling():
-        payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        payment_order = payments_api.paymentOrder.create(os.getenv("SPLIT_TREE_ID"), "SEK")
+    def prepare_payment_order_handling(self):
+        
+        payment_order = self.payments_api.paymentOrder.create(os.getenv("SPLIT_TREE_ID"), "SEK")
         payment_order_id = payment_order.body["id"]
-        payments_api.payment.initiate(testHelper.get_payment_body(), payment_order_id)
+       
+        payment_response = self.payments_api.payment.initiate(TestHelper.get_payment_body(), payment_order_id)
+        
+        payment_id = payment_response.body["id"]
 
-        return payment_order_id
+        return payment_order_id, payment_id
+
+    def await_payment_status(self, payment_order_id, payment_id):
+
+        is_completed = False
+        while not is_completed:
+            payment = self.payments_api.payment.get(payment_order_id, payment_id)
+            if payment.is_success():
+                if payment.body["status"] == "COMPLETED": is_completed = True
+            else:
+                break
 
     def get_payment_body():
         dummy_body = {

@@ -3,16 +3,15 @@ import uuid
 import os
 from dotenv import load_dotenv
 from ping.payment_links_api import PaymentLinksApi
-from tests.test_helper import testHelper
+from tests.test_helper import TestHelper
 
 
-# @unittest.skipUnless(testHelper.api_is_connected(), "A connection to the API is needed")
 class TestPaymentLinks(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         load_dotenv()
-        cls.test_helper = testHelper
+        cls.test_helper = TestHelper
         cls.payment_link_id = os.getenv("PAYMENT_LINK_ID")
         cls.payment_links_api = PaymentLinksApi(os.getenv("PL_TENANT_ID"))
         cls.customer = {
