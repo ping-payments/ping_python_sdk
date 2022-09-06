@@ -2,7 +2,7 @@ from ping.api_resources.payment_links_api import payment_links
 from ping.api_resources.payment_links_api import invoice
 from ping.api_resources.payment_links_api import receipt
 from ping.api_resources.payment_links_api import pings
-from ping.helper.apiHelper import get_payment_links_api_base_url
+from ping.helper.apiHelper import get_base_url
 
 
 class PaymentLinksApi:
@@ -10,12 +10,11 @@ class PaymentLinksApi:
     def __init__(self, tenant_id="", environment="sandbox"):
         self.tenant_id = tenant_id
         self.environment = environment
-        self.base_url = get_payment_links_api_base_url(environment)
+        self.base_url = get_base_url("payment_links_api", environment)
         self.headers = {
             "Accept": "application/json",
             "tenant_id": tenant_id
-            }
-
+        }
 
     @property
     def payment_link(self):
@@ -24,7 +23,7 @@ class PaymentLinksApi:
     @property
     def invoice(self):
         return Invoice(self.headers, self.base_url)
-    
+
     @property
     def receipt(self):
         return Receipt(self.headers, self.base_url)
@@ -32,7 +31,6 @@ class PaymentLinksApi:
     @property
     def ping(self):
         return Ping(self.headers, self.base_url)
-
 
 
 class BaseEndpoints:
@@ -60,7 +58,6 @@ class Payment_link(BaseEndpoints):
         return payment_links.send(self.headers, self.base_url, payment_order_id, obj)
 
 
-
 class Invoice(BaseEndpoints):
     # Endpoint class for payment endpoints
     def create(self, payment_link_id, obj):
@@ -72,7 +69,7 @@ class Invoice(BaseEndpoints):
 
 class Receipt(BaseEndpoints):
     # Endpoint class for payout endpoints
-    
+
     def get(self, payment_link_id):
         return receipt.get(self.headers, self.base_url, payment_link_id)
 

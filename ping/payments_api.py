@@ -3,7 +3,7 @@ from ping.api_resources.payments_api import paymentOrders
 from ping.api_resources.payments_api import payments
 from ping.api_resources.payments_api import payouts
 from ping.api_resources.payments_api import pings
-from ping.helper.apiHelper import get_payments_api_base_url
+from ping.helper.apiHelper import get_base_url
 
 
 class PaymentsApi:
@@ -11,11 +11,11 @@ class PaymentsApi:
     def __init__(self, tenant_id="", environment="sandbox"):
         self.tenant_id = tenant_id
         self.environment = environment
-        self.base_url = get_payments_api_base_url(environment)
+        self.base_url = get_base_url("payments_api", environment)
         self.headers = {
             "Accept": "application/json",
             "tenant_id": tenant_id
-            }
+        }
 
     @property
     def merchant(self):
@@ -28,7 +28,7 @@ class PaymentsApi:
     @property
     def payment(self):
         return Payment(self.headers, self.base_url)
-    
+
     @property
     def payout(self):
         return Payout(self.headers, self.base_url)
@@ -36,7 +36,6 @@ class PaymentsApi:
     @property
     def ping(self):
         return Ping(self.headers, self.base_url)
-
 
 
 class BaseEndpoints:
@@ -75,10 +74,10 @@ class PaymentOrder(BaseEndpoints):
     def close(self, payment_order_id):
         return paymentOrders.close(self.headers, self.base_url, payment_order_id)
 
-    def split(self, payment_order_id, fast_forward = False):
+    def split(self, payment_order_id, fast_forward=False):
         return paymentOrders.split(self.headers, self.base_url, payment_order_id, fast_forward)
 
-    def settle(self, payment_order_id, fast_forward = False):
+    def settle(self, payment_order_id, fast_forward=False):
         return paymentOrders.settle(self.headers, self.base_url, payment_order_id, fast_forward)
 
 
@@ -95,7 +94,7 @@ class Payout(BaseEndpoints):
     # Endpoint class for payout endpoints
     def list(self, date_from=None, date_to=None):
         return payouts.list(self.headers, self.base_url, date_from, date_to)
-    
+
     def get(self, payout_id):
         return payouts.get(self.headers, self.base_url, payout_id)
 
