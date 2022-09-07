@@ -34,7 +34,7 @@ class TestMerchant(unittest.TestCase):
             }
         )
         self.test_helper.run_tests(self, response)
-    
+
     # creates a merchant with incorrect values inside merchant object (status code 422)
     def test_create_422(self):
         response = self.payments_api.merchant.create({})
@@ -50,7 +50,7 @@ class TestMerchant(unittest.TestCase):
     def test_get_422(self):
         response = self.payments_api.merchant.get(0)
         self.test_helper.run_tests(self, response, 422)
-    
+
     # get a specific merchant with a non-existing id (status code 404)
     def test_get_404(self):
         response = self.payments_api.merchant.get(uuid.uuid4())
