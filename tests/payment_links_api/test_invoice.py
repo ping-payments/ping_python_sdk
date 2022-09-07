@@ -5,14 +5,17 @@ from dotenv import load_dotenv
 from ping.payment_links_api import PaymentLinksApi
 from tests.test_helper import TestHelper
 
+
 class TestInvoice(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         load_dotenv()
         cls.test_helper = TestHelper
+        cls.payment_links_api = PaymentLinksApi(os.getenv("TENANT_ID"))
+        cls.merchant_id = os.getenv("MERCHANT_ID")
         cls.payment_link_id = os.getenv("PAYMENT_LINK_ID")
-        cls.payment_links_api = PaymentLinksApi(os.getenv("PL_TENANT_ID"))    
+        cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
 
         cls.customer = {
             "email": "some.email@domain.com",
@@ -20,10 +23,10 @@ class TestInvoice(unittest.TestCase):
             "last_name": "Jönsson",
             "phone": "0700000000"
         }
-        cls.items =[
+        cls.items = [
             {
                 "description": "Hawaii Pizza",
-                "merchant_id": os.getenv("PL_MERCHANT_ID"),
+                "merchant_id": cls.merchant_id,
                 "price": 7000,
                 "quantity": 2,
                 "vat": 12
@@ -40,7 +43,7 @@ class TestInvoice(unittest.TestCase):
             {
                 "method": "e_commerce",
                 "parameters": {
-                "swish_message": "Tack för din betalning"
+                    "swish_message": "Tack för din betalning"
                 },
                 "provider": "swish"
             }
@@ -49,7 +52,7 @@ class TestInvoice(unittest.TestCase):
             "customer": cls.customer,
             "items": cls.items,
             "locale": "sv-SE",
-            "payment_order_id": os.getenv("PL_ORDER_ID"),
+            "payment_order_id": cls.payment_order_id,
             "payment_provider_methods": cls.swish_parameters,
             "supplier": cls.supplier,
             "currency": "SEK",
@@ -69,16 +72,18 @@ class TestInvoice(unittest.TestCase):
         payment_link_id = uuid.uuid4()
         response = self.payment_links_api.invoice.get(payment_link_id)
         self.test_helper.run_tests(self, response, 404)
-    
+
     # error - gets a non existing invoice
     def test_get_invoice_no_exisiting_invoice_403(self):
-
-        response = self.payment_links_api.invoice.get(os.getenv("PAYMENT_LINK_ID_NO_INVOICE"))
+        payment_link = self.payment_links_api.payment_link.create(self.complete_create_body)
+        payment_link_id = payment_link.body["id"]
+        response = self.payment_links_api.invoice.get(payment_link_id)
         self.test_helper.run_tests(self, response, 403)
 
 
 # Create an invoice
     # Creates an invoice correctly (status code 200)
+
     def test_create_invoice_with_OCR_200(self):
         payment_link = self.payment_links_api.payment_link.create(self.complete_create_body)
         payment_link_id = payment_link.body["id"]
