@@ -2,18 +2,14 @@ import unittest
 import uuid
 import os
 from dotenv import load_dotenv
-from ping.payment_links_api import PaymentLinksApi
-from tests.test_helper import TestHelper
+from tests.payment_links_api.base_payment_links_test import BasePaymentLinksTest
 
 
-class TestReceipt(unittest.TestCase):
+class TestReceipt(BasePaymentLinksTest):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         load_dotenv()
-        cls.test_helper = TestHelper
-        cls.payment_links_api = PaymentLinksApi(os.getenv("TENANT_ID"))
-        cls.payment_link_id = os.getenv("PAYMENT_LINK_ID")
+        super(TestReceipt, self).setUp()
 
 # Get Receipt
     # get an receipt correctly(status code 200)
@@ -28,8 +24,9 @@ class TestReceipt(unittest.TestCase):
 
     # error - gets a receipt with an unfinished payment link
     def test_get_receipt_not_completed_403(self):
-        # TODO payment_link = self.payment_links_api.payment_link.create()
-        response = self.payment_links_api.invoice.get(os.getenv("PAYMENT_LINK_ID_NOT_COMPLETED"))
+        payment_link = self.payment_links_api.payment_link.create(self.complete_create_body)
+        payment_link_id = payment_link.body["id"]
+        response = self.payment_links_api.invoice.get(payment_link_id)
         self.test_helper.run_tests(self, response, 403)
 
 

@@ -1,94 +1,36 @@
 import unittest
 import uuid
-import os
 from dotenv import load_dotenv
-from ping.payment_links_api import PaymentLinksApi
-from tests.test_helper import TestHelper
+from tests.payment_links_api.base_payment_links_test import BasePaymentLinksTest
 
 
-class TestPaymentLinks(unittest.TestCase):
+class TestPaymentLinks(BasePaymentLinksTest):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         load_dotenv()
-        cls.test_helper = TestHelper
-        cls.payment_links_api = PaymentLinksApi(os.getenv("TENANT_ID"))
-        cls.payment_link_id = os.getenv("PAYMENT_LINK_ID")
-        cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
-        cls.merchant_id = os.getenv("MERCHANT_ID")
-
-        cls.customer = {
-            "email": "some.email@domain.com",
-            "first_name": "Bertil",
-            "last_name": "Jönsson",
-            "phone": "0700000000"
-        }
-        cls.items = [
-            {
-                "description": "Hawaii Pizza",
-                "merchant_id": cls.merchant_id,
-                "price": 7000,
-                "quantity": 2,
-                "vat": 12
-            }
-        ]
-        cls.supplier = {
-            "city": "Örebro",
-            "name": "name",
-            "organization_number": "5555555555",
-            "website": "https://somewebsite.com",
-            "zip": "45133"
-        }
-        cls.swish_parameters = [
-            {
-                "method": "e_commerce",
-                "parameters": {
-                    "swish_message": "Tack för din betalning"
-                },
-                "provider": "swish"
-            }
-        ]
-        cls.complete_create_body = {
-            "customer": cls.customer,
-            "items": cls.items,
-            "locale": "sv-SE",
-            "payment_order_id": cls.payment_order_id,
-            "payment_provider_methods": cls.swish_parameters,
-            "supplier": cls.supplier,
-            "currency": "SEK",
-            "total_amount": 14000
-        }
-
+        super(TestPaymentLinks, self).setUp()
 
 # List Payment Links
     # lists all payment links correctly(status code 200)
-
-
     def test_list_payment_links_200(self):
         response = self.payment_links_api.payment_link.list()
         self.test_helper.run_tests(self, response, 200)
 
-
 # Get Payment Link Tests
     # gets a payment link correctly
-
-
     def test_get_payment_link_200(self):
         response = self.payment_links_api.payment_link.get(self.payment_link_id)
         self.test_helper.run_tests(self, response, 200)
 
     # error - gets a payment link with an incorrect id
     def test_get_payment_link_404(self):
-        payment_link_id = uuid.uuid4()
-
-        response = self.payment_links_api.payment_link.get(payment_link_id)
+        response = self.payment_links_api.payment_link.get(uuid.uuid4())
         self.test_helper.run_tests(self, response, 404)
 
 # Create Payment Link
     # Creates a payment link correctly (status code 200)
     def test_create_payment_link_200(self):
-        request = self.complete_create_body
-        response = self.payment_links_api.payment_link.create(request)
+        response = self.payment_links_api.payment_link.create(self.complete_create_body)
         self.test_helper.run_tests(self, response)
 
     def test_create_payment_link_non_matching_total_amount_422(self):

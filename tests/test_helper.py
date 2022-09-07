@@ -1,6 +1,5 @@
 import unittest
 from ping.payments_api import PaymentsApi
-from ping.payment_links_api import PaymentLinksApi
 import os
 from dotenv import load_dotenv
 
@@ -9,8 +8,8 @@ class TestHelper(unittest.TestCase):
 
     def __init__(self):
         load_dotenv()
+
     payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-    payment_links_api = PaymentLinksApi(os.getenv("TENANT_ID"))
 
     def run_tests(self, response, status=200):
         self.assertIsNotNone(response)
