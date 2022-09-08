@@ -86,13 +86,9 @@ class TestPaymentOrder(BasePaymentsApiTest):
 
     # Close, split and settle Payment Order
     def test_close_split_settle(self):
-        payment_order = self.payments_api.paymentOrder.create(self.split_tree_id, "SEK")
-        payment_order_id = payment_order.body["id"]
-        payment = self.payments_api.payment.initiate(self.dummy_body, payment_order_id)
-        payment_id = payment.body["id"]
-
-        # await payment status
-        self.await_payment_status_completed(payment_order_id, payment_id)
+        payment_order_id = self.create_payment_order_and_return_id()
+        Payment_id = self.create_payment_and_return_id(payment_order_id)
+        self.await_payment_status_completed(payment_order_id, Payment_id)
 
         # close
         close_response = self.payments_api.paymentOrder.close(payment_order_id)
