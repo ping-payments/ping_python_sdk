@@ -1,11 +1,10 @@
 import unittest
 import uuid
-import os
 from dotenv import load_dotenv
-from tests.payment_links_api.base_payment_links_test import BasePaymentLinksTest
+from tests.payment_links_api.base_payment_links_api_test import BasePaymentLinksApiTest
 
 
-class TestReceipt(BasePaymentLinksTest):
+class TestReceipt(BasePaymentLinksApiTest):
 
     def setUp(self):
         load_dotenv()

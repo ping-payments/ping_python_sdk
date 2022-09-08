@@ -1,10 +1,10 @@
 import unittest
 import uuid
 from dotenv import load_dotenv
-from tests.payments_api.base_payments_test import BasePaymentsTest
+from tests.payments_api.base_payments_api_test import BasePaymentsApiTest
 
 
-class TestMerchant(BasePaymentsTest):
+class TestMerchant(BasePaymentsApiTest):
 
     def setUp(self):
         load_dotenv()

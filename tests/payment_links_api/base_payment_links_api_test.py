@@ -4,7 +4,7 @@ from tests.test_helper import TestHelper
 from ping.payment_links_api import PaymentLinksApi
 
 
-class BasePaymentLinksTest(unittest.TestCase):
+class BasePaymentLinksApiTest(unittest.TestCase):
 
     def setUp(self):
         self.test_helper = TestHelper
