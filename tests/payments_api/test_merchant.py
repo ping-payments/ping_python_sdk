@@ -1,19 +1,14 @@
-import os
 import unittest
 import uuid
 from dotenv import load_dotenv
-from ping.payments_api import PaymentsApi
-from tests.test_helper import TestHelper
+from tests.payments_api.base_payments_test import BasePaymentsTest
 
 
-class TestMerchant(unittest.TestCase):
+class TestMerchant(BasePaymentsTest):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         load_dotenv()
-
-        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        cls.test_helper = TestHelper
+        super(TestMerchant, self).setUp()
 
 # Get Merchants Tests
     # gets merchants successfully
@@ -43,7 +38,7 @@ class TestMerchant(unittest.TestCase):
 # Get Specific Merchant Tests
     # get a specific merchant correctly (status code 200)
     def test_get_200(self):
-        response = self.payments_api.merchant.get(os.getenv("MERCHANT_ID"))
+        response = self.payments_api.merchant.get(self.merchant_id)
         self.test_helper.run_tests(self, response)
 
     # get a specific merchant with wrong id format (status code 422)

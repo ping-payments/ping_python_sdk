@@ -1,25 +1,19 @@
 import unittest
 import uuid
-import os
 from dotenv import load_dotenv
-from ping.payments_api import PaymentsApi
-from tests.test_helper import TestHelper
+from tests.payments_api.base_payments_test import BasePaymentsTest
 
 
-class TestPaymentOrder(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
+class TestPaymentOrder(BasePaymentsTest):
+    def setUp(self):
         load_dotenv()
-        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        cls.split_tree_id = os.getenv("SPLIT_TREE_ID")
-        cls.payment_order_id = os.getenv("PAYMENT_ORDER_ID")
-        cls.test_helper = TestHelper
+        super(TestPaymentOrder, self).setUp()
 
-# Get Payment Orders Tests
+
+# List Payment Orders Tests
     # get payment orders correctly (status code 200)
-    def test_list_200(self):
 
+    def test_list_200(self):
         response_date = self.payments_api.paymentOrder.list("2020-03-27T09:42:30Z", "2022-03-27T09:42:30Z")
         response = self.payments_api.paymentOrder.list()
 
@@ -76,7 +70,6 @@ class TestPaymentOrder(unittest.TestCase):
     # updates a payment order with incorrect id format (status code 422)
 
     def test_update_422(self):
-
         response = self.payments_api.paymentOrder.update(
             0,
             self.split_tree_id
@@ -85,7 +78,6 @@ class TestPaymentOrder(unittest.TestCase):
 
     # updates a payment order with a non-existing id (status code 404)
     def test_update_404(self):
-
         response = self.payments_api.paymentOrder.update(
             "",
             self.split_tree_id
@@ -96,24 +88,22 @@ class TestPaymentOrder(unittest.TestCase):
     def test_close_split_settle(self):
         payment_order = self.payments_api.paymentOrder.create(self.split_tree_id, "SEK")
         payment_order_id = payment_order.body["id"]
-        payment = self.payments_api.payment.initiate(self.test_helper.get_payment_body(), payment_order_id)
+        payment = self.payments_api.payment.initiate(self.dummy_body, payment_order_id)
         payment_id = payment.body["id"]
 
         # await payment status
-        self.test_helper.await_payment_status(self, payment_order_id, payment_id)
+        self.await_payment_status(payment_order_id, payment_id)
 
-        self.payments_api.paymentOrder.close(payment_order_id)
-        self.payments_api.paymentOrder.split(payment_order_id)
-        self.payments_api.paymentOrder.settle(payment_order_id)
+        close_response = self.payments_api.paymentOrder.close(payment_order_id)
+        self.test_helper.run_tests(self, close_response, 204)
 
+        split_response = self.payments_api.paymentOrder.split(payment_order_id)
+        self.test_helper.run_tests(self, split_response, 204)
+
+        settle_response = self.payments_api.paymentOrder.settle(payment_order_id)
+        self.test_helper.run_tests(self, settle_response, 204)
 
 # Close Payment Order Tests
-    # closes a payment order correctly (status code 204)
-
-    """def test_close_204(self):
-        response = self.payments_api.paymentOrder.close(self.payment_order_id)
-        self.test_helper.run_tests(self, response, 204)"""
-
     # closes a payment order with an incorrect id format (status code 422)
     def test_close_422(self):
         response = self.payments_api.paymentOrder.close(0)
@@ -125,16 +115,10 @@ class TestPaymentOrder(unittest.TestCase):
         self.test_helper.run_tests(self, response, 404)
 
 # Split Payment Order Tests
-    # splits a payment order correctly (status code 204)
-    """def test_split_204(self):
-        response = self.payments_api.paymentOrder.split(self.payment_order_id)
-        self.test_helper.run_tests(self, response, 204)"""
-
     # fast forwards and splits a payment order correctly (status code 204)
     def test_split_fast_forward_204(self):
-
-        payment_order_id, payment_id = self.test_helper.prepare_payment_order_handling(self)
-        self.test_helper.await_payment_status(self, payment_order_id, payment_id)
+        payment_order_id, payment_id = self.prepare_payment_order_handling()
+        self.await_payment_status(payment_order_id, payment_id)
 
         response = self.payments_api.paymentOrder.split(payment_order_id, fast_forward=True)
         self.test_helper.run_tests(self, response, 204)
@@ -150,16 +134,11 @@ class TestPaymentOrder(unittest.TestCase):
         self.test_helper.run_tests(self, response, 404)
 
 # Settle Payment Order Tests
-    # settles a payment correctly (status code 204)
-    """def test_settle_204(self):
-        response = self.payments_api.paymentOrder.settle(self.payment_order_id)
-        self.test_helper.run_tests(self, response, 204)"""
-
     # fast forwards and settles a payment correctly (status code 204)
     def test_settle_order_fast_forward_204(self):
-        payment_order_id, payment_id = self.test_helper.prepare_payment_order_handling(self)
+        payment_order_id, payment_id = self.prepare_payment_order_handling()
 
-        self.test_helper.await_payment_status(self, payment_order_id, payment_id)
+        self.await_payment_status(payment_order_id, payment_id)
 
         response = self.payments_api.paymentOrder.settle(payment_order_id, fast_forward=True)
         self.test_helper.run_tests(self, response, 204)

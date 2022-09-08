@@ -5,6 +5,7 @@ from ping.payment_links_api import PaymentLinksApi
 
 
 class BasePaymentLinksTest(unittest.TestCase):
+
     def setUp(self):
         self.test_helper = TestHelper
         self.payment_links_api = PaymentLinksApi(os.getenv("TENANT_ID"))
