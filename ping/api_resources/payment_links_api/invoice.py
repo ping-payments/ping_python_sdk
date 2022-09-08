@@ -9,7 +9,8 @@ def create(headers, base_url, payment_link_id, obj):
     # Creates an invoice for a payment link.
     # Args (provided by the tenant):
     #   payment_link_id (string, required): Id of a specific payment link.
-    #   obj (object, required): Body for creating a new payment link invoice
+    #   obj (json, required): json for creating a new payment link invoice.
+    #   To obtain the necessary information, use the documentation.
     # Returns:
     #   Response: Empty response
 
@@ -27,12 +28,12 @@ def create(headers, base_url, payment_link_id, obj):
 def get(headers, base_url, payment_link_id):
     # Does a GET request to /api/v1/payment_links/{payment_link_id}/invoice.
 
-    # Retrives a specific invoice.
+    # Retrieves a specific invoice.
     # Args (provided by the tenant):
     #   payment_link_id (String, required): Id of a specific payment link.
     # Returns:
     #   Response: A json object with a payment link as well as other
-    #   useful information such as status codes, headers and a potention error.
+    #   useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payment_links/{payment_link_id}/invoice'
