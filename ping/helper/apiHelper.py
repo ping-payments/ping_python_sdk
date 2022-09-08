@@ -9,7 +9,7 @@ def json_deserialize(json, unboxing_function=None, as_dict=False):
     # Returns:
     #    dict: A dictionary representing the data contained in the
     #        JSON serialized string.
-    
+
     if json is None:
         return None
 
@@ -38,10 +38,14 @@ def check_errors(response, decoded):
     return result
 
 
-def get_base_url(environment):
-
-    if environment == "sandbox":
-        return "http://sandbox.pingpayments.com/payments"
-    elif environment == "production":
-        return "http://pingpayments.com/payments"
-
+def get_base_url(api, environment):
+    return {
+        'payments_api': {
+            'sandbox': "https://sandbox.pingpayments.com/payments",
+            'production': "https://pingpayments.com/payments"
+        },
+        'payment_links_api': {
+            'sandbox': "https://sandbox.pingpayments.com/payment_links",
+            'production': "https://pingpayments.com/payment_links"
+        }
+    }[api][environment]

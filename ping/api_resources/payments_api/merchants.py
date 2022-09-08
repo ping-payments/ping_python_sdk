@@ -3,17 +3,16 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def list(headers, base_url):
-    #Does a GET request to /api/v1/merchants.
+    # Does a GET request to /api/v1/merchants.
 
-    #Lists merchants associated with a tenant. The merchant details
-    #include email, id, name, organization number and phone number.
+    # Lists merchants associated with a tenant. The merchant details
+    # include email, id, name, organization number and phone number.
 
-    #Args:
+    # Args:
     #    None arguments.
-    #Returns:
+    # Returns:
     #    Response: A json object with the response value as well as other
     #    useful information such as status codes, headers and a potention error.
-    
 
     # Prepare and execute response
     _path = '/api/v1/merchants'
@@ -38,7 +37,6 @@ def create(headers, base_url, merchant_object):
     # Returns:
     #    Response: A json object with the response value as well as other
     #    useful information such as status codes, headers and a potention error.
-    
 
     # Prepare and execute response
     _path = '/api/v1/merchants'
@@ -55,14 +53,13 @@ def get(headers, base_url, merchant_id):
     # Does a GET request to /api/v1/merchants/{merchant_id}.
 
     # Provides details for a single merchant. The details include email, id,
-    #name, organization name, organization number, phone number and status.
+    # name, organization name, organization number, phone number and status.
 
     # Args:
     #    merchant_id (string, required). The ID of the of the merchant to retrive.
     # Returns:
     #    Response: A json object with the response value as well as other
     #    useful information such as status codes, headers and a potention error.
-    
 
     # Prepare and execute response
     _path = f'/api/v1/merchants/{merchant_id}'

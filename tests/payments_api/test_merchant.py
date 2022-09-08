@@ -1,20 +1,14 @@
-import os
 import unittest
 import uuid
 from dotenv import load_dotenv
-from ping.payments_api import PaymentsApi
-from test_helper import testHelper
+from tests.payments_api.base_payments_api_test import BasePaymentsApiTest
 
 
-@unittest.skipUnless(testHelper.api_is_connected(), "A connection to the API is needed")
-class TestMerchant(unittest.TestCase):
+class TestMerchant(BasePaymentsApiTest):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         load_dotenv()
-
-        cls.payments_api = PaymentsApi(os.getenv("TENANT_ID"))
-        cls.test_helper = testHelper
+        super(TestMerchant, self).setUp()
 
 # Get Merchants Tests
     # gets merchants successfully
@@ -35,7 +29,7 @@ class TestMerchant(unittest.TestCase):
             }
         )
         self.test_helper.run_tests(self, response)
-    
+
     # creates a merchant with incorrect values inside merchant object (status code 422)
     def test_create_422(self):
         response = self.payments_api.merchant.create({})
@@ -44,14 +38,14 @@ class TestMerchant(unittest.TestCase):
 # Get Specific Merchant Tests
     # get a specific merchant correctly (status code 200)
     def test_get_200(self):
-        response = self.payments_api.merchant.get(os.getenv("MERCHANT_ID"))
+        response = self.payments_api.merchant.get(self.merchant_id)
         self.test_helper.run_tests(self, response)
 
     # get a specific merchant with wrong id format (status code 422)
     def test_get_422(self):
         response = self.payments_api.merchant.get(0)
         self.test_helper.run_tests(self, response, 422)
-    
+
     # get a specific merchant with a non-existing id (status code 404)
     def test_get_404(self):
         response = self.payments_api.merchant.get(uuid.uuid4())
