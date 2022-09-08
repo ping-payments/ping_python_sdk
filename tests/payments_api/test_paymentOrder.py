@@ -84,7 +84,7 @@ class TestPaymentOrder(BasePaymentsTest):
         )
         self.test_helper.run_tests(self, response, 404)
 
-# Close, split and settle Payment Order
+    # Close, split and settle Payment Order
     def test_close_split_settle(self):
         payment_order = self.payments_api.paymentOrder.create(self.split_tree_id, "SEK")
         payment_order_id = payment_order.body["id"]
@@ -92,14 +92,17 @@ class TestPaymentOrder(BasePaymentsTest):
         payment_id = payment.body["id"]
 
         # await payment status
-        self.await_payment_status(payment_order_id, payment_id)
+        self.await_payment_status_completed(payment_order_id, payment_id)
 
+        # close
         close_response = self.payments_api.paymentOrder.close(payment_order_id)
         self.test_helper.run_tests(self, close_response, 204)
 
+        # split
         split_response = self.payments_api.paymentOrder.split(payment_order_id)
         self.test_helper.run_tests(self, split_response, 204)
 
+        # settle
         settle_response = self.payments_api.paymentOrder.settle(payment_order_id)
         self.test_helper.run_tests(self, settle_response, 204)
 
@@ -117,8 +120,9 @@ class TestPaymentOrder(BasePaymentsTest):
 # Split Payment Order Tests
     # fast forwards and splits a payment order correctly (status code 204)
     def test_split_fast_forward_204(self):
-        payment_order_id, payment_id = self.prepare_payment_order_handling()
-        self.await_payment_status(payment_order_id, payment_id)
+        payment_order_id = self.create_payment_order_and_return_id()
+        Payment_id = self.create_payment_and_return_id(payment_order_id)
+        self.await_payment_status_completed(payment_order_id, Payment_id)
 
         response = self.payments_api.paymentOrder.split(payment_order_id, fast_forward=True)
         self.test_helper.run_tests(self, response, 204)
@@ -136,9 +140,9 @@ class TestPaymentOrder(BasePaymentsTest):
 # Settle Payment Order Tests
     # fast forwards and settles a payment correctly (status code 204)
     def test_settle_order_fast_forward_204(self):
-        payment_order_id, payment_id = self.prepare_payment_order_handling()
-
-        self.await_payment_status(payment_order_id, payment_id)
+        payment_order_id = self.create_payment_order_and_return_id()
+        Payment_id = self.create_payment_and_return_id(payment_order_id)
+        self.await_payment_status_completed(payment_order_id, Payment_id)
 
         response = self.payments_api.paymentOrder.settle(payment_order_id, fast_forward=True)
         self.test_helper.run_tests(self, response, 204)

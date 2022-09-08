@@ -22,7 +22,3 @@ class TestHelper(unittest.TestCase):
             self.assertTrue(response.is_success())
             self.assertIsNotNone(response.body)
             self.assertIsNone(response.errors)
-
-    def api_is_connected(self):
-        ping = self.payments_api.ping.ping_the_api()
-        return True if ping.body == "pong" else False

@@ -23,7 +23,7 @@ class BasePaymentsTest(unittest.TestCase):
             "order_items": [
                 {
                     "amount": 2500,
-                    "merchant_id": os.getenv("MERCHANT_ID"),
+                    "merchant_id": self.merchant_id,
                     "name": "Delivery, Marios Pasta (Pasta La Vista)",
                     "vat_rate": 12
                 },
@@ -35,7 +35,7 @@ class BasePaymentsTest(unittest.TestCase):
             "total_amount": 2500
         }
 
-    def await_payment_status(self, payment_order_id, payment_id):
+    def await_payment_status_completed(self, payment_order_id, payment_id):
         is_completed = False
         while not is_completed:
             payment = self.payments_api.payment.get(payment_order_id, payment_id)
@@ -45,13 +45,10 @@ class BasePaymentsTest(unittest.TestCase):
             else:
                 break
 
-    def prepare_payment_order_handling(self):
+    def create_payment_order_and_return_id(self):
+        payment_order = self.payments_api.paymentOrder.create(self.split_tree_id, "SEK")
+        return payment_order.body["id"]
 
-        payment_order = self.payments_api.paymentOrder.create(os.getenv("SPLIT_TREE_ID"), "SEK")
-        payment_order_id = payment_order.body["id"]
-
+    def create_payment_and_return_id(self, payment_order_id):
         payment_response = self.payments_api.payment.initiate(self.dummy_body, payment_order_id)
-
-        payment_id = payment_response.body["id"]
-
-        return payment_order_id, payment_id
+        return payment_response.body["id"]
