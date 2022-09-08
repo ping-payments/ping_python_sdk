@@ -1,8 +1,3 @@
----
-title: "README"
-excerpt: "A description the Ping Payments Python SDK"
----
-
 # Ping Payments Python SDK
 
 [![Tests](https://github.com/youcal/ping_python_sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/youcal/ping_python_sdk/actions/workflows/tests.yml)
@@ -65,7 +60,41 @@ Using the Ping Payments API:
 -   Instantiate a PaymentsAPI object.
 -   Initialize the PaymentsAPI object with the appropriate tenant ID and environment.
 
-Detailed instructions:
+
+## The [Ping Payments API]
+
+The Ping Payments API is implemented as the `PaymentLinksApi` class. The PaymentLinksApi contains a number of endpoints.
+
+### Ping Payment Links API Endpoints
+
+Available endpoints in the PaymentApi class:
+
+-   [Payment Link]
+-   [Invoice]
+-   [Receipt]
+
+You work with the Ping Payment Links API by calling methods in the PaymentLinksApi endpoints.
+
+The Ping Payments Python SDK documentation contains lists of available methods for each endpoint, on the page for each endpoint.
+
+### Usage
+
+Here’s how to get started with the Ping Payment Links API:
+
+#### Get a tenant ID
+
+Ping Payments provides you with a `tenant ID`. The Ping Payment Links API uses tenant IDs for resource permissions.
+
+**Important:** Make sure you store and access the tenant ID securely.
+
+Using the Ping Payment Links API:
+
+-   Import the PaymentLinksAPI class.
+-   Instantiate a PaymentLinksAPI object.
+-   Initialize the PaymentLinksAPI object with the appropriate tenant ID and environment.
+
+
+## Detailed instructions:
 
 1. Import the PaymentsApi class from the Ping Python SDK module:
 
@@ -142,3 +171,6 @@ elif result.is_error():
 [payment]: doc/api_resources/payments_api/payment.md
 [payout]: doc/api_resources/payments_api/payout.md
 [ping]: doc/api_resources/payments_api/ping.md
+[Payment Link]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint
+[Invoice]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint-1
+[Receipt]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint-2
