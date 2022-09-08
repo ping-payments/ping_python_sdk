@@ -9,13 +9,13 @@ payments_api = PaymentsApi(tenant_id)
 
 payment_order_id = os.getenv("PAYMENT_ORDER_ID_OPEN")
 payment_object = {
-  "currency": "SEK",
-  "metadata": {
-    "delivery_id": "368745"
-  },
-  "total_amount": 2500,
-  "method": "e_commerce",
-  "order_items": [
+    "currency": "SEK",
+    "metadata": {
+        "delivery_id": "368745"
+    },
+    "total_amount": 2500,
+    "method": "e_commerce",
+    "order_items": [
         {
             "amount": 2500,
             "merchant_id": os.getenv("MERCHANT_ID"),
