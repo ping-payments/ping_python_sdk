@@ -13,7 +13,10 @@ class TestPayment(BasePaymentsApiTest):
 # Get Payments Tests
     # gets payment correctly
     def test_get_payment_200(self):
-        response = self.payments_api.payment.get(self.payment_order_id, self.payment_id)
+        payment_id = self.create_payment_and_return_id(self.payment_order_id)
+        self.await_payment_status_completed(self.payment_order_id, payment_id)
+
+        response = self.payments_api.payment.get(self.payment_order_id, payment_id)
         self.test_helper.run_tests(self, response, 200)
 
     # gets payment with an incorrect id

@@ -20,6 +20,7 @@ setup(
         'jsonpickle~=1.4, >= 1.4.1',
         'requests~=2.25',
         'python-dotenv~=0.20.0',
+        'faker~=14.2.0'
     ],
     tests_require=[
         'flake8>=3.9',

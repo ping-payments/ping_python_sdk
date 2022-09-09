@@ -1,7 +1,11 @@
 import unittest
 import os
+import random
+from faker import Faker
 from tests.test_helper import TestHelper
 from ping.payments_api import PaymentsApi
+
+fake = Faker(['no_NO', 'sv_SE', 'en_US'])
 
 
 class BasePaymentsApiTest(unittest.TestCase):
@@ -25,7 +29,7 @@ class BasePaymentsApiTest(unittest.TestCase):
                     "amount": 2500,
                     "merchant_id": self.merchant_id,
                     "name": "Delivery, Marios Pasta (Pasta La Vista)",
-                    "vat_rate": 12
+                    "vat_rate": random.choice([0, 6, 12, 25])
                 },
             ],
             "provider": "dummy",
@@ -33,6 +37,15 @@ class BasePaymentsApiTest(unittest.TestCase):
                 "desired_payment_status": "COMPLETED"
             },
             "total_amount": 2500
+        }
+        self.create_merchant_body = {
+            "name": fake.company(),
+            "organization":
+                random.choice
+                ([
+                    {"country": "SE", "se_organization_number": str(random.randint(0000000000, 9999999999))},
+                    {"country": "NO", "no_organization_number": str(random.randint(000000000, 999999999))}
+                ])
         }
 
     def await_payment_status_completed(self, payment_order_id, payment_id):
