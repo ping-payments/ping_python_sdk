@@ -21,7 +21,7 @@ class BasePaymentsApiTest(unittest.TestCase):
         self.dummy_body = {
             "currency": "SEK",
             "metadata": {
-                "delivery_id": "368745"
+                "delivery_id": str(random.randint(00000, 99999))
             },
             "method": "dummy",
             "order_items": [
