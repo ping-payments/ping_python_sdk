@@ -12,7 +12,7 @@ def list(headers, base_url):
     #    None arguments.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = '/api/v1/merchants'
@@ -36,7 +36,7 @@ def create(headers, base_url, merchant_object):
     #   merchant_object (object, required): An object containing required merchant data.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = '/api/v1/merchants'
@@ -56,10 +56,10 @@ def get(headers, base_url, merchant_id):
     # name, organization name, organization number, phone number and status.
 
     # Args:
-    #    merchant_id (string, required). The ID of the of the merchant to retrive.
+    #    merchant_id (string, required). The ID of the of the merchant to retrieve.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/merchants/{merchant_id}'

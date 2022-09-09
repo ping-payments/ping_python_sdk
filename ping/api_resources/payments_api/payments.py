@@ -11,7 +11,7 @@ def initiate(headers, base_url, payment_object, payment_order_id):
     #  payment_order_id (string, required): An ID of a specific Payment Order
     # Returns:
     #  Response: A json object with the response value as well as other
-    #  useful information such as status codes, headers and a potention error.
+    #  useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/payments'
@@ -29,11 +29,11 @@ def get(headers, base_url, payment_order_id, payment_id):
 
     # Retrieves a payment from a payment order
     # Args (provided by the tenant):
-    #  payment_order_id (string, required): A string cointaining the ID of a specific payment order
-    #  payment_id (string, required): A string cointaining the ID of a specific payment
+    #  payment_order_id (string, required): A string containing the ID of a specific payment order
+    #  payment_id (string, required): A string containing the ID of a specific payment
     # Returns:
     #  Response: A json object with the response value as well as other
-    #  useful information such as status codes, headers and a potention error.
+    #  useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/payments/{payment_id}'
