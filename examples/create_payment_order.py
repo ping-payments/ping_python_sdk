@@ -11,8 +11,6 @@ split_tree_id = os.getenv("SPLIT_TREE_ID")
 result = payments_api.paymentOrder.create(split_tree_id, "SEK")
 
 if result.is_success():
-    print(result.body)
-    print("success")
+    print(f"Success: \n {result.body}")
 elif result.is_error():
-    print(result.errors)
-    print("error")
+    print(f"Error: {result.status_code} \n {result.errors}")
