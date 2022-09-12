@@ -3,7 +3,7 @@ from ping.helper.apiHelper import json_deserialize, check_errors
 
 
 def list(headers, base_url, date_from, date_to):
-    # Does a GET request to /api/v1/payment_orders.
+    # Does a GET request to /api/v1/payouts.
 
     # Retrieves a list of payouts.
     # Args (provided by the tenant):
@@ -13,7 +13,7 @@ def list(headers, base_url, date_from, date_to):
     #    the reporting period, RFC 3339 format. Default: None
     # Returns:
     #  Response: A json object with the response value as well as other
-    #  useful information such as status codes, headers and a potention error.
+    #  useful information such as status codes, headers and a potential errors.
 
     _path = '/api/v1/payouts'
 
@@ -37,12 +37,12 @@ def list(headers, base_url, date_from, date_to):
 def get(headers, base_url, payout_id):
     # Does a GET request to /api/v1/payouts/{payout_id}.
 
-    # Retrives a specific payout.
+    # Retrieves a specific payout.
     # Args (provided by the tenant):
-    #    payout_id (String, required): The ID of the of the payout to retrive.
+    #    payout_id (String, required): The ID of the of the payout to retrieve.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #  useful information such as status codes, headers and a potention error.
+    #  useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payouts/{payout_id}'

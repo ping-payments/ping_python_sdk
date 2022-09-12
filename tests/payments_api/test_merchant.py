@@ -19,15 +19,7 @@ class TestMerchant(BasePaymentsApiTest):
 # Create New Merchant Tests
     # creates a merchant correctly (status code 200)
     def test_create_200(self):
-        response = self.payments_api.merchant.create(
-            {
-                "name": "Company inc",
-                "organization": {
-                    "country": "SE",
-                    "se_organization_number": "5555555555"
-                }
-            }
-        )
+        response = self.payments_api.merchant.create(self.create_merchant_body)
         self.test_helper.run_tests(self, response)
 
     # creates a merchant with incorrect values inside merchant object (status code 422)

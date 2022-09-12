@@ -7,7 +7,7 @@ load_dotenv()
 tenant_id = os.getenv("TENANT_ID")
 payments_api = PaymentsApi(tenant_id)
 
-payment_order_id = os.getenv("PAYMENT_ORDER_ID_OPEN")
+payment_order_id = os.getenv("PAYMENT_ORDER_ID")
 payment_object = {
     "currency": "SEK",
     "metadata": {
@@ -33,9 +33,6 @@ payment_object = {
 result = payments_api.payment.initiate(payment_object, payment_order_id)
 
 if result.is_success():
-    print(result.body)
-    print("success")
+    print(f"Success: \n {result.body}")
 elif result.is_error():
-    print(result.status_code)
-    print(result.errors)
-    print("error")
+    print(f"Error: {result.status_code} \n {result.errors}")

@@ -13,7 +13,7 @@ def list(headers, base_url, date_from, date_to):
     #    the reporting period, RFC 3339 format. Default: None
     # Returns:
     #  Response: A json object with the response value as well as other
-    #  useful information such as status codes, headers and a potention error.
+    #  useful information such as status codes, headers and a potential errors.
 
     _path = '/api/v1/payment_orders'
 
@@ -42,7 +42,7 @@ def create(headers, base_url, split_tree_id, currency):
     #    split_tree_id (string, required): An string with a valid split tree ID.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = '/api/v1/payment_orders'
@@ -62,9 +62,9 @@ def create(headers, base_url, split_tree_id, currency):
 def get(headers, base_url, payment_order_id):
     # Does a GET request to /api/v1/payment_orders/{payment_order_id}.
 
-    # Retrives a specific payment order.
+    # Retrieves a specific payment order.
     # Args (provided by the tenant):
-    #    payment_order_id (String, required): The ID of the of the payment order to retrive.
+    #    payment_order_id (String, required): The ID of the of the payment order to retrieve.
     # Returns:
     #    Response: A json object with the response value as well as other
 
@@ -87,7 +87,7 @@ def update(headers, base_url, payment_order_id, split_tree_id):
     #    payment_order_id (String, required): The ID of the of the payment order to update.
     #    split_tree_id (String, required): An string with a valid split tree ID.
     # Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}'
@@ -111,7 +111,7 @@ def close(headers, base_url, payment_order_id):
     #    payment_order_id (String, required): The ID of the of the payment order to close.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/close'
@@ -132,7 +132,7 @@ def split(headers, base_url, payment_order_id, fast_forward):
     #    payment_order_id (String, required): The ID of the of the payment order to split.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/split'
@@ -160,7 +160,7 @@ def settle(headers, base_url, payment_order_id, fast_forward):
     #    payment_order_id (String, required): The ID of the of the payment order to settle.
     # Returns:
     #    Response: A json object with the response value as well as other
-    #    useful information such as status codes, headers and a potention error.
+    #    useful information such as status codes, headers and a potential errors.
 
     # Prepare and execute response
     _path = f'/api/v1/payment_orders/{payment_order_id}/settle'
