@@ -1,9 +1,10 @@
----
-title: "Changelog"
-excerpt: "A list of changes made to the Ping Python SDK"
----
-
 # Change Log
+
+## 4.1.0 (2022-09-12)
+
+A minor update with new functionality added.
+
+- The Payment Links API has been added to the SDK.
 
 ## 4.0.0 (2022-06-20)
 

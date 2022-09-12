@@ -4,19 +4,21 @@
 [![PyPI version](https://badge.fury.io/py/ping-sdk.svg)](https://badge.fury.io/py/ping-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The `Ping Payments Python SDK` manages the `Ping Payments API`.
+The Ping Payments Python SDK manages the [Ping Payments API](#payments-api) and [Ping Payment Links API](#payments-api).
 
 ## Table of contents
 
--   [Requirements](#requirements)
--   [Installation](#installation)
--   [Ping Payments API](#payments-api)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Ping Payments API](#payments-api)
+- [Ping Payment Links API](#payments-api)
 
 ## Requirements
 
 The Ping Payments Python SDK supports the following versions of Python:
 
--   Python 3, versions 3.7 and later
+- Python 3, versions 3.7 and later
 
 ## Installation
 
@@ -26,82 +28,46 @@ Install the latest Ping Payments Python SDK using pip:
 pip install ping-sdk
 ```
 
-## The [Ping Payments API]
+## Documentation
 
-The Ping Payments API is implemented as the `PaymentsApi` class. The PaymentsApi contains a number of endpoints.
+The Ping Payments Python SDK documentation contains complete information to be able to work with the SDK. Go to [Python SDK documentation](https://docs.pingpayments.com/docs/the-ping-payments-python-sdk) for the full documentation.
 
-### Ping Payments API Endpoints
+## [Ping Payments API]
 
-Available endpoints in the PaymentApi class:
+The Ping Payments API is implemented as the `PaymentsApi` class contains a number of endpoints.
 
--   [Merchant]
--   [Payment Orders]
--   [Payment]
--   [Payout]
--   [Ping]
+**Ping Payments API Endpoints**
 
-You work with the Ping Payments API by calling methods in the PaymentsApi endpoints.
+- [Merchant]
+- [Payment Orders]
+- [Payment]
+- [Payout]
+- [Ping]
 
-The Ping Payments Python SDK documentation contains lists of available methods for each endpoint, on the page for each endpoint.
+## [Ping Payment Links API]
 
-### Usage
+The Ping Payments API is implemented as the `PaymentLinksApi` contains a number of endpoints.
 
-Here’s how to get started with the Ping Payments API:
+**Ping Payment Links API Endpoints**
 
-#### Get a tenant ID
+- [Payment Link]
+- [Invoice]
+- [Receipt]
 
-Ping Payments provides you with a `tenant ID`. The Ping Payment API uses tenant IDs for resource permissions.
-
-**Important:** Make sure you store and access the tenant ID securely.
-
-Using the Ping Payments API:
-
--   Import the PaymentsAPI class.
--   Instantiate a PaymentsAPI object.
--   Initialize the PaymentsAPI object with the appropriate tenant ID and environment.
-
-
-## The [Ping Payments API]
-
-The Ping Payments API is implemented as the `PaymentLinksApi` class. The PaymentLinksApi contains a number of endpoints.
-
-### Ping Payment Links API Endpoints
-
-Available endpoints in the PaymentApi class:
-
--   [Payment Link]
--   [Invoice]
--   [Receipt]
-
-You work with the Ping Payment Links API by calling methods in the PaymentLinksApi endpoints.
-
-The Ping Payments Python SDK documentation contains lists of available methods for each endpoint, on the page for each endpoint.
-
-### Usage
-
-Here’s how to get started with the Ping Payment Links API:
+## Usage
 
 #### Get a tenant ID
 
-Ping Payments provides you with a `tenant ID`. The Ping Payment Links API uses tenant IDs for resource permissions.
+Ping Payments provides you with a `tenant ID` and are used for resource permissions.
 
 **Important:** Make sure you store and access the tenant ID securely.
 
-Using the Ping Payment Links API:
+#### Instructions
 
--   Import the PaymentLinksAPI class.
--   Instantiate a PaymentLinksAPI object.
--   Initialize the PaymentLinksAPI object with the appropriate tenant ID and environment.
-
-
-## Detailed instructions:
-
-1. Import the PaymentsApi class from the Ping Python SDK module:
+1. Import the PaymentsApi class from the Ping module:
 
 ```python
-
 from ping.payments_api import PaymentsApi
-
 ```
 
 2. Instantiate a PaymentsApi object and initialize it with the tenant ID and the environment that you want to use.
@@ -109,68 +75,53 @@ from ping.payments_api import PaymentsApi
 Initialize the PaymentsApi in production mode:
 
 ```python
-
 payments_api = PaymentsApi(
 		tenant_id = '55555555-5555-5555-5555-555555555555'
 )
-
 ```
 
 Initialize the PaymentsApi in sandbox mode, for testing:
 
 ```python
-
 payments_api = PaymentsApi(
 		tenant_id = '55555555-5555-5555-5555-555555555555',
 		environment = 'sandbox'
 )
-
 ```
 
-You can ping the API to see if it's accessible. A working response contains the text "pong".
+#### Make calls
+
+**Work with the API by by choosing a Endpoint and calling it´s methods.** For example, you can choose the endpoint `merchants` and call the method `list()` to a list of all merchants connected to a tenant:
 
 ```python
-
-payments_api.ping.ping_the_api()
-
-```
-
-#### Get an Instance of an PaymentsApi Object and Call the Methods of the PaymentsApi class
-
-**Work with the API by calling the methods on the API object.** For example, you call `list()` for a list of all merchants connected to a tenant:
-
-```python
-
 result = payments_api.merchant.list()
-
 ```
 
 #### Handle the response
 
-Calls to the Ping Payments API endpoint methods return an ApiResponse object. Properties of the ApiResponse object describe the request (headers and request) and the response (status_code, reason_phrase, text, errors, body, and cursor).
+Calls to the Ping Payments API endpoint methods returns an ApiResponse object. Properties of the ApiResponse object contains information regarding request _(headers and request)_ and the response _(status_code, reason_phrase, text, errors, body, and cursor)_.
 
-Using the response:
+**Using the response:**
 
-**Check whether the response succeeded or failed.** Two helper methods in the ApiResponse object determine the success or failure of a call:
+Check whether the response succeeded or failed. Two helper methods `is_success()`and `is_error()` in the ApiResponse object determine the success or failure of a call:
 
 ```python
-
 if result.is_success():
-	# Display the response as text
+	# Display the successful response as text
 	print(result.text)
-# Call the error method to see if the call failed
 elif result.is_error():
+	# Display the error response
 	print(f"Errors: {result.errors}")
-
 ```
 
 [//]: # "Link anchor definitions"
-[ping payments api]: doc/payments_api.md
-[merchant]: doc/api_resources/payments_api/merchant.md
-[payment orders]: doc/api_resources/payments_api/paymentOrder.md
-[payment]: doc/api_resources/payments_api/payment.md
-[payout]: doc/api_resources/payments_api/payout.md
-[ping]: doc/api_resources/payments_api/ping.md
-[Payment Link]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint
-[Invoice]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint-1
-[Receipt]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint-2
+[ping payments api]: https://docs.pingpayments.com/docs/payments-api-1
+[ping payment links api]: https://docs.pingpayments.com/docs/payment-links-api-1
+[merchant]: https://docs.pingpayments.com/docs/payments-api-1#endpoint
+[payment orders]: https://docs.pingpayments.com/docs/payments-api-1#endpoint-1
+[payment]: https://docs.pingpayments.com/docs/payments-api-1#payment--endpoint
+[payout]: https://docs.pingpayments.com/docs/payments-api-1#payout-endpoint
+[ping]: https://docs.pingpayments.com/docs/verify-api-connection
+[payment link]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint
+[invoice]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint-1
+[receipt]: https://docs.pingpayments.com/docs/payment-links-api-1#endpoint-2
