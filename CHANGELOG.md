@@ -1,6 +1,6 @@
 # Change Log
 
-## 4.1.0 (2022-09-12)
+## 4.1.0 (2022-09-20)
 
 A minor update with new functionality added.
 

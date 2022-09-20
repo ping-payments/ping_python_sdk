@@ -22,11 +22,6 @@ class TestMerchant(BasePaymentsApiTest):
         response = self.payments_api.merchant.create(self.create_merchant_body)
         self.test_helper.run_tests(self, response)
 
-    # creates a merchant with incorrect values inside merchant object (status code 422)
-    def test_create_422(self):
-        response = self.payments_api.merchant.create({})
-        self.test_helper.run_tests(self, response, 422)
-
 # Get Specific Merchant Tests
     # get a specific merchant correctly (status code 200)
     def test_get_200(self):
