@@ -13,6 +13,7 @@ The Ping Payments Python SDK manages the [Ping Payments API](#payments-api) and 
 - [Documentation](#documentation)
 - [Ping Payments API](#payments-api)
 - [Ping Payment Links API](#payments-api)
+- [Usage](#usage)
 
 ## Requirements
 

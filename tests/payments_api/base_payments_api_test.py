@@ -43,8 +43,8 @@ class BasePaymentsApiTest(unittest.TestCase):
             "organization":
                 random.choice
                 ([
-                    {"country": "SE", "se_organization_number": str(random.randint(0000000000, 9999999999))},
-                    {"country": "NO", "no_organization_number": str(random.randint(000000000, 999999999))}
+                    {"country": "SE", "se_organization_number": str(random.randint(1000000000, 9999999999))},
+                    {"country": "NO", "no_organization_number": str(random.randint(100000000, 999999999))}
                 ])
         }
 
