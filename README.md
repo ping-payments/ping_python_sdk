@@ -19,7 +19,7 @@ The Ping Payments Python SDK manages the [Ping Payments API](#payments-api) and 
 
 The Ping Payments Python SDK supports the following versions of Python:
 
-- Python 3, versions 3.7 and later
+- Python 3, versions 3.7 and later.
 
 ## Installation
 
