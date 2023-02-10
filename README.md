@@ -15,6 +15,10 @@ The Ping Payments Python SDK manages the [Ping Payments API](#payments-api) and 
 - [Ping Payment Links API](#payments-api)
 - [Usage](#usage)
 
+
+## Project Status
+**Please note that this repository is no longer actively developed and will not receive updates.** The code provided here are still available for use, but  may contain bugs or be missing certain features.
+
 ## Requirements
 
 The Ping Payments Python SDK supports the following versions of Python:
